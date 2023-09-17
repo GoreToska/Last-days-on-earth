@@ -19,7 +19,6 @@ public class PlayerAnimationManager : MonoBehaviour
 
     private void UpdateAnimation()
     {
-        Debug.Log(PlayerInputManager.Instance.MoveAmount);
         animator.SetFloat("Speed", PlayerInputManager.Instance.MoveAmount, 0.1f, Time.deltaTime);
     }
 }
