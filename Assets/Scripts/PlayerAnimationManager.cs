@@ -1,0 +1,25 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[RequireComponent(typeof(Animator))]
+public class PlayerAnimationManager : MonoBehaviour
+{
+    private Animator animator;
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
+
+    private void Update()
+    {
+        UpdateAnimation();
+    }
+
+    private void UpdateAnimation()
+    {
+        Debug.Log(PlayerInputManager.Instance.MoveAmount);
+        animator.SetFloat("Speed", PlayerInputManager.Instance.MoveAmount, 0.1f, Time.deltaTime);
+    }
+}
