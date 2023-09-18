@@ -17,11 +17,13 @@ public class PlayerMovementManager : MonoBehaviour
     private CharacterController characterController;
     private Camera camera;
     private PlayerInputManager inputManager;
+    private PlayerStatusManager playerStatusManager;
 
     [Header("Movement Settings")]
     [SerializeField] private float crouchingSpeed;
     [SerializeField] private float movementSpeed;
     [SerializeField] private float sprintingSpeed;
+    [SerializeField] private float sprintStaminaCost;
     [SerializeField] private float rotationSpeed;
     [SerializeField] private float aimMovementSpeed;
     [SerializeField] private float aimRotationSpeed;
@@ -47,6 +49,7 @@ public class PlayerMovementManager : MonoBehaviour
 
         characterController = GetComponent<CharacterController>();
         inputManager = GetComponent<PlayerInputManager>();
+        playerStatusManager = GetComponent<PlayerStatusManager>();
         camera = Camera.main;
     }
 
@@ -61,7 +64,6 @@ public class PlayerMovementManager : MonoBehaviour
 
         //aimRig.weight = Mathf.Lerp(aimRig.weight, aimRigWeight, aimSmoothTime * Time.deltaTime);
         aimRig.weight = Mathf.SmoothDamp(aimRig.weight, aimRigWeight, ref aimSmoothVelocity, aimSmoothTime);
-        
     }
 
     public void HandleAllMovement()
@@ -99,6 +101,7 @@ public class PlayerMovementManager : MonoBehaviour
 
         if (PlayerInputManager.Instance.IsSprinting)
         {
+            playerStatusManager.TakeStaminaDamage(sprintStaminaCost * Time.deltaTime);
             characterController.Move(moveDirection * sprintingSpeed * Time.deltaTime);
             return;
         }
