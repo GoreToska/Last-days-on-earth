@@ -21,5 +21,8 @@ public class PlayerAnimationManager : MonoBehaviour
     {
         animator.SetFloat("Speed", PlayerInputManager.Instance.MoveAmount, 0.1f, Time.deltaTime);
         animator.SetBool("IsCrouching", PlayerInputManager.Instance.IsCrouching);
+        animator.SetBool("IsAiming", PlayerInputManager.Instance.IsAiming);
+        animator.SetFloat("HorizontalSpeed", PlayerMovementManager.Instance.HorizontalSpeed, 0.1f, Time.deltaTime);
+        animator.SetFloat("VerticalSpeed", PlayerMovementManager.Instance.VerticalSpeed, 0.1f, Time.deltaTime);
     }
 }

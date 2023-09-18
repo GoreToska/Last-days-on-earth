@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UIElements;
 
 //  Summary
 //  This class provides movement based on PlayerInputManager
@@ -21,6 +22,8 @@ public class PlayerMovementManager : MonoBehaviour
     [SerializeField] private float movementSpeed;
     [SerializeField] private float sprintingSpeed;
     [SerializeField] private float rotationSpeed;
+    [SerializeField] private float aimMovementSpeed;
+    [SerializeField] private float aimRotationSpeed;
 
     private Vector3 moveDirection;
 
@@ -52,7 +55,14 @@ public class PlayerMovementManager : MonoBehaviour
 
     public void HandleAllMovement()
     {
-        HandleGroundMovement();
+        if (PlayerInputManager.Instance.IsAiming)
+        {
+            HandleAimingMovement();
+        }
+        else
+        {
+            HandleGroundMovement();
+        }
     }
 
     //  Basic movement
@@ -70,7 +80,7 @@ public class PlayerMovementManager : MonoBehaviour
     private void StandMovement()
     {
         CalculateMovementAxis();
-        CalculateRotation();
+        CalculateMovementRotation();
 
         moveDirection.y = Physics.gravity.y / 2;
 
@@ -83,7 +93,7 @@ public class PlayerMovementManager : MonoBehaviour
         characterController.Move(moveDirection * movementSpeed * Time.deltaTime);
     }
 
-    private void CalculateRotation()
+    private void CalculateMovementRotation()
     {
         //  Rotate towards the movement direction
         if (moveDirection != Vector3.zero)
@@ -106,7 +116,7 @@ public class PlayerMovementManager : MonoBehaviour
     private void CrouchMovement()
     {
         CalculateMovementAxis();
-        CalculateRotation();
+        CalculateMovementRotation();
 
         moveDirection.y = Physics.gravity.y / 2;
 
@@ -117,5 +127,54 @@ public class PlayerMovementManager : MonoBehaviour
         }
 
         characterController.Move(moveDirection * crouchingSpeed * Time.deltaTime);
+    }
+
+    //  Aim movement
+
+    private void HandleAimingMovement()
+    {
+        Aim();
+        AimMovement();
+    }
+
+    private void Aim()
+    {
+        var (success, position) = PlayerInputManager.Instance.GetMousePosition();
+
+        if (success)
+        {
+            //  Calculate direction
+            var direction = position - transform.position;
+            //  Ignore y rotation
+            direction.y = 0;
+
+            //  Rotate
+            Quaternion aimRotation = Quaternion.LookRotation(direction, Vector3.up);
+
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, aimRotation, aimRotationSpeed * Time.deltaTime);
+        }
+    }
+
+    private void AimMovement()
+    {
+        CalculateMovementAxis();
+        characterController.Move(moveDirection * aimMovementSpeed * Time.deltaTime);
+    }
+
+    public float HorizontalSpeed
+    {
+        get
+        {
+            return transform.InverseTransformDirection(moveDirection).normalized.x;
+        }
+    }
+
+    public float VerticalSpeed
+    {
+        get 
+        {
+            return transform.InverseTransformDirection(moveDirection).normalized.z;
+
+        }
     }
 }

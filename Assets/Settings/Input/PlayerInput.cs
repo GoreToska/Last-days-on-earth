@@ -170,6 +170,34 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""PlayerCombat"",
+            ""id"": ""718fb365-3462-414f-ae00-2c74a524e35b"",
+            ""actions"": [
+                {
+                    ""name"": ""Aim"",
+                    ""type"": ""Button"",
+                    ""id"": ""109d4ebd-c755-4edd-98a5-0e41e5b9c728"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""9985d6f7-556a-420d-b098-5c48b4844077"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -184,6 +212,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         // PlayerActions
         m_PlayerActions = asset.FindActionMap("PlayerActions", throwIfNotFound: true);
         m_PlayerActions_Crouch = m_PlayerActions.FindAction("Crouch", throwIfNotFound: true);
+        // PlayerCombat
+        m_PlayerCombat = asset.FindActionMap("PlayerCombat", throwIfNotFound: true);
+        m_PlayerCombat_Aim = m_PlayerCombat.FindAction("Aim", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -387,6 +418,52 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         }
     }
     public PlayerActionsActions @PlayerActions => new PlayerActionsActions(this);
+
+    // PlayerCombat
+    private readonly InputActionMap m_PlayerCombat;
+    private List<IPlayerCombatActions> m_PlayerCombatActionsCallbackInterfaces = new List<IPlayerCombatActions>();
+    private readonly InputAction m_PlayerCombat_Aim;
+    public struct PlayerCombatActions
+    {
+        private @PlayerInput m_Wrapper;
+        public PlayerCombatActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Aim => m_Wrapper.m_PlayerCombat_Aim;
+        public InputActionMap Get() { return m_Wrapper.m_PlayerCombat; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PlayerCombatActions set) { return set.Get(); }
+        public void AddCallbacks(IPlayerCombatActions instance)
+        {
+            if (instance == null || m_Wrapper.m_PlayerCombatActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_PlayerCombatActionsCallbackInterfaces.Add(instance);
+            @Aim.started += instance.OnAim;
+            @Aim.performed += instance.OnAim;
+            @Aim.canceled += instance.OnAim;
+        }
+
+        private void UnregisterCallbacks(IPlayerCombatActions instance)
+        {
+            @Aim.started -= instance.OnAim;
+            @Aim.performed -= instance.OnAim;
+            @Aim.canceled -= instance.OnAim;
+        }
+
+        public void RemoveCallbacks(IPlayerCombatActions instance)
+        {
+            if (m_Wrapper.m_PlayerCombatActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IPlayerCombatActions instance)
+        {
+            foreach (var item in m_Wrapper.m_PlayerCombatActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_PlayerCombatActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public PlayerCombatActions @PlayerCombat => new PlayerCombatActions(this);
     public interface IPlayerMovementActions
     {
         void OnMovement(InputAction.CallbackContext context);
@@ -399,5 +476,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     public interface IPlayerActionsActions
     {
         void OnCrouch(InputAction.CallbackContext context);
+    }
+    public interface IPlayerCombatActions
+    {
+        void OnAim(InputAction.CallbackContext context);
     }
 }
