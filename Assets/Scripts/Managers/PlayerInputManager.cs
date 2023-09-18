@@ -35,7 +35,7 @@ public class PlayerInputManager : MonoBehaviour
 
     //  Aiming
     private bool isAiming = false;
-    [SerializeField] private LayerMask aimMask;
+    [SerializeField] public LayerMask aimMask;
     public RaycastHit hitInfo;
 
     public event UnityAction AttackEvent = delegate { };
