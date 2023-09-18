@@ -4103,6 +4103,7 @@ MonoBehaviour:
   movementSpeed: 2.6
   sprintingSpeed: 4
   rotationSpeed: 720
+  aimMovementSpeed: 1.5
   aimRotationSpeed: 720
 --- !u!114 &5361517959888282042
 MonoBehaviour:
