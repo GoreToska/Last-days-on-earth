@@ -17,15 +17,16 @@ public class PlayerMovementManager : MonoBehaviour
     private PlayerInputManager inputManager;
 
     [Header("Movement Settings")]
+    [SerializeField] private float crouchingSpeed;
     [SerializeField] private float movementSpeed;
-    [SerializeField] private float sprintSpeed;
+    [SerializeField] private float sprintingSpeed;
     [SerializeField] private float rotationSpeed;
 
     private Vector3 moveDirection;
 
     private void Awake()
     {
-        if(Instance == null)
+        if (Instance == null)
         {
             Instance = this;
         }
@@ -57,14 +58,33 @@ public class PlayerMovementManager : MonoBehaviour
     //  Basic movement
     private void HandleGroundMovement()
     {
-        moveDirection =
-            new Vector3(camera.transform.forward.x, 0, camera.transform.forward.z) * inputManager.VerticalInput;
-        moveDirection = moveDirection +
-            new Vector3(camera.transform.right.x, 0, camera.transform.right.z) * inputManager.HorizontalInput;
-        moveDirection.Normalize();
+        if (PlayerInputManager.Instance.IsCrouching)
+        {
+            CrouchMovement();
+            return;
+        }
 
+        StandMovement();
+    }
 
+    private void StandMovement()
+    {
+        CalculateMovementAxis();
+        CalculateRotation();
 
+        moveDirection.y = Physics.gravity.y / 2;
+
+        if (PlayerInputManager.Instance.IsSprinting)
+        {
+            characterController.Move(moveDirection * sprintingSpeed * Time.deltaTime);
+            return;
+        }
+
+        characterController.Move(moveDirection * movementSpeed * Time.deltaTime);
+    }
+
+    private void CalculateRotation()
+    {
         //  Rotate towards the movement direction
         if (moveDirection != Vector3.zero)
         {
@@ -72,8 +92,30 @@ public class PlayerMovementManager : MonoBehaviour
 
             transform.rotation = Quaternion.RotateTowards(transform.rotation, movementRotation, rotationSpeed * Time.deltaTime);
         }
+    }
+
+    private void CalculateMovementAxis()
+    {
+        moveDirection =
+                            new Vector3(camera.transform.forward.x, 0, camera.transform.forward.z) * inputManager.VerticalInput;
+        moveDirection = moveDirection +
+            new Vector3(camera.transform.right.x, 0, camera.transform.right.z) * inputManager.HorizontalInput;
+        moveDirection.Normalize();
+    }
+
+    private void CrouchMovement()
+    {
+        CalculateMovementAxis();
+        CalculateRotation();
 
         moveDirection.y = Physics.gravity.y / 2;
-        characterController.Move(moveDirection * movementSpeed * Time.deltaTime);
+
+        if (PlayerInputManager.Instance.IsSprinting)
+        {
+            PlayerInputManager.Instance.IsCrouching = false;
+            return;
+        }
+
+        characterController.Move(moveDirection * crouchingSpeed * Time.deltaTime);
     }
 }

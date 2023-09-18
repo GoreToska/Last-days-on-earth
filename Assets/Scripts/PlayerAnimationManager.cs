@@ -20,5 +20,6 @@ public class PlayerAnimationManager : MonoBehaviour
     private void UpdateAnimation()
     {
         animator.SetFloat("Speed", PlayerInputManager.Instance.MoveAmount, 0.1f, Time.deltaTime);
+        animator.SetBool("IsCrouching", PlayerInputManager.Instance.IsCrouching);
     }
 }
