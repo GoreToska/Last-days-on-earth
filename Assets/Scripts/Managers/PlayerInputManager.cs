@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 //  Summary
@@ -35,6 +36,9 @@ public class PlayerInputManager : MonoBehaviour
     //  Aiming
     private bool isAiming = false;
     [SerializeField] private LayerMask aimMask;
+    public RaycastHit hitInfo;
+
+    public event UnityAction AttackEvent = delegate { };
 
     private void Awake()
     {
@@ -73,6 +77,8 @@ public class PlayerInputManager : MonoBehaviour
             playerInput.PlayerActions.Crouch.performed += i => isCrouching = !isCrouching;
 
             playerInput.PlayerCombat.Aim.performed += i => isAiming = !isAiming;
+
+            playerInput.PlayerCombat.Attack.performed += i => AttackEvent.Invoke();
         }
 
         playerInput.Enable();
@@ -106,7 +112,7 @@ public class PlayerInputManager : MonoBehaviour
     {
         var ray = camera.ScreenPointToRay(Mouse.current.position.value);
 
-        if (Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity, aimMask))
+        if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity, aimMask))
         {
             crosshair.transform.position = hitInfo.point;
             //  If raycact hit something, return true and hit point

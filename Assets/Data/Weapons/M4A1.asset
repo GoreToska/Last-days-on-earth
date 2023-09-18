@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: M4A1
   m_EditorClassIdentifier: 
   weaponModel: {fileID: 0}
+  weaponType: 0
   weaponName: 
   weaponDescription: 
-  damage: 0
-  fireRate: 0
-  recoil: 0
-  magazineSize: 0
+  damage: 25
+  fireRate: 10
+  recoil: 10
+  magazineSize: 10
   reloadAnimationName: 
   shotVolumeRadius: 0
   isAuto: 0
