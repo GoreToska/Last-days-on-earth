@@ -40,6 +40,9 @@ public class PlayerInputManager : MonoBehaviour
 
     public event UnityAction AttackEvent = delegate { };
 
+    //  Inventory
+    public event UnityAction OpenInventoryEvent = delegate { };
+
     private void Awake()
     {
         if (Instance == null)
@@ -79,6 +82,8 @@ public class PlayerInputManager : MonoBehaviour
             playerInput.PlayerCombat.Aim.performed += i => isAiming = !isAiming;
 
             playerInput.PlayerCombat.Attack.performed += i => AttackEvent.Invoke();
+
+            playerInput.PlayerActions.OpenInventory.performed += i => OpenInventoryEvent.Invoke();
         }
 
         playerInput.Enable();
