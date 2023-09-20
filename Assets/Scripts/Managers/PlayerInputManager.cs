@@ -42,6 +42,8 @@ public class PlayerInputManager : MonoBehaviour
 
     //  Inventory
     public event UnityAction OpenInventoryEvent = delegate { };
+    public event UnityAction CloseInventoryEvent = delegate { };
+    public event UnityAction RotateItem = delegate { };
 
     private void Awake()
     {
@@ -71,6 +73,7 @@ public class PlayerInputManager : MonoBehaviour
 
             //  All the input actions should be evented here
             playerInput.PlayerMovement.Movement.performed += i => movement = i.ReadValue<Vector2>();
+            playerInput.PlayerMovement.Movement.canceled += i => movement = i.ReadValue<Vector2>();
 
             playerInput.CameraMovement.Zoom.performed += i => scroll = i.ReadValue<float>();
 
@@ -84,9 +87,14 @@ public class PlayerInputManager : MonoBehaviour
             playerInput.PlayerCombat.Attack.performed += i => AttackEvent.Invoke();
 
             playerInput.PlayerActions.OpenInventory.performed += i => OpenInventoryEvent.Invoke();
+            playerInput.Inventory.CloseInventory.performed += i => CloseInventoryEvent.Invoke();
+            playerInput.Inventory.Rotate.performed += i => RotateItem.Invoke();
+
+            OpenInventoryEvent += () => { DisablePlayerControls(); EnableInventoryControls(); };
+            CloseInventoryEvent += () => { EnablePlayerControls(); DisableInventoryControls(); };
         }
 
-        playerInput.Enable();
+        EnablePlayerControls();
     }
 
     private void OnDisable()
@@ -138,6 +146,36 @@ public class PlayerInputManager : MonoBehaviour
     public void EnableInput()
     {
         playerInput.Enable();
+    }
+
+    public void DisablePlayerControls()
+    {
+        playerInput.PlayerMovement.Disable();
+        playerInput.PlayerCombat.Disable();
+        playerInput.PlayerActions.Disable();
+        playerInput.CameraMovement.Disable();
+
+        movement = Vector2.zero;
+        Debug.Log("Disable" + verticalInput + " " + horizontalInput);
+
+    }
+
+    public void EnablePlayerControls()
+    {
+        playerInput.PlayerMovement.Enable();
+        playerInput.PlayerCombat.Enable();
+        playerInput.PlayerActions.Enable();
+        playerInput.CameraMovement.Enable();
+    }
+
+    public void DisableInventoryControls()
+    {
+        playerInput.Inventory.Disable();
+    }
+
+    public void EnableInventoryControls()
+    {
+        playerInput.Inventory.Enable();
     }
 
     public float VerticalInput { get { return verticalInput; } }

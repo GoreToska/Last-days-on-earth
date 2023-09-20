@@ -22,7 +22,7 @@ public class ItemVisual : VisualElement
             PlayerInventory.SlotDimension.Height;
         style.width = m_Item.slotDimension.Width *
             PlayerInventory.SlotDimension.Width;
-        style.visibility = Visibility.Hidden;
+        //style.visibility = Visibility.Visible;
 
         //   creating a new child VisualElement called Icon
         //   and setting the background image to the same one set in the ItemDefinition asset

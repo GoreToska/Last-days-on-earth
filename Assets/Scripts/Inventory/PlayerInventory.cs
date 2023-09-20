@@ -30,6 +30,7 @@ public sealed class PlayerInventory : MonoBehaviour
             Instance = this;
 
             Configure();
+            ConfigureInventoryTelegraph();
         }
         else
         {
@@ -60,7 +61,6 @@ public sealed class PlayerInventory : MonoBehaviour
 
         //  Calculates the size of a single slot item. The calculated value was used by ItemVisual
         ConfigureSlotDimensions();
-        ConfigureInventoryTelegraph();
 
         //  Sets m_IsInventoryReady as true, which is a value used by the LOAD INVENTORY method
         m_IsInventoryReady = true;
@@ -107,6 +107,7 @@ public sealed class PlayerInventory : MonoBehaviour
     private async void LoadInventory()
     {
         await UniTask.WaitUntil(() => m_IsInventoryReady);
+
         foreach (StoredItem loadedItem in StoredItems)
         {
             ItemVisual inventoryItemVisual = new ItemVisual(loadedItem.Details);
@@ -131,6 +132,7 @@ public sealed class PlayerInventory : MonoBehaviour
     private void AddItemToInventoryGrid(VisualElement item)
     {
         m_InventoryGrid.Add(item);
+        //m_InventoryGrid.hierarchy.Add(item);
     }
 
     private void RemoveItemFromInventoryGrid(VisualElement item)
@@ -141,7 +143,7 @@ public sealed class PlayerInventory : MonoBehaviour
     private static void ConfigureInventoryItem(StoredItem item, ItemVisual visual)
     {
         item.RootVisual = visual;
-        visual.style.visibility = Visibility.Visible;
+        //visual.style.visibility = Visibility.Hidden;
     }
 
     private static void SetItemPosition(VisualElement element, Vector2 vector)
@@ -204,5 +206,15 @@ public sealed class PlayerInventory : MonoBehaviour
         m_ItemDetailHeader.text = item.friendlyName;
         m_ItemDetailBody.text = item.description;
         m_ItemDetailPrice.text = item.sellPrice.ToString();
+    }
+
+    public void TelegraphVisibility(Visibility visibility)
+    {
+        m_Telegraph.style.visibility = visibility;
+    }
+
+    public void InventoryVisibility(Visibility visibility)
+    {
+        m_Root.style.visibility = visibility;
     }
 }
