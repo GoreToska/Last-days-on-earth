@@ -91,10 +91,10 @@ public sealed class PlayerInventory : MonoBehaviour
 
                 //check for overlap inventory size
                 if (SlotDimension.Width * (x + item.Details.slotDimension.Width) >
-                    SlotDimension.Width * InventoryDimensions.Width )
-                {
-                    continue;
-                }
+                    SlotDimension.Width * InventoryDimensions.Width)
+                    {
+                        continue;
+                    }
 
                 SetItemPosition(newItem, new Vector2(SlotDimension.Width * x, SlotDimension.Height * y));
 
