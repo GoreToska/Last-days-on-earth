@@ -9,6 +9,7 @@ VisualElement {
     background-color: rgba(14, 14, 14, 0.5);
     border-width: 2px;
     border-color: rgb(171, 171, 171);
+    transform-origin: 0,0;
 }
 
 .visual-icon {

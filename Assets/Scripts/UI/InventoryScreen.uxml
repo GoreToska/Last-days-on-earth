@@ -14,7 +14,7 @@
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="Container_Currency" style="flex-grow: 1; flex-direction: row; align-items: center; justify-content: center; padding-top: 10px;">
-                <ui:VisualElement name="Icon" style="width: 60px; height: 60px; margin-right: 10px; background-image: url(&apos;project://database/Assets/Plugins/Pixel%20Crushers/Dialogue%20System/Prefabs/Art/Textures/UnityUI/Button%20-%20Trimmed.psd?fileID=2800000&amp;guid=522f0b9508ec7c54aaf42647ef91b918&amp;type=3#Button - Trimmed&apos;);" />
+                <ui:VisualElement name="Icon" style="width: 60px; height: 60px; margin-right: 10px; background-image: url(&apos;project://database/Assets/Plugins/Pixel%20Crushers/Dialogue%20System/Prefabs/Art/Textures/Runic/Window%20Background.png?fileID=21300000&amp;guid=a550b21819b5b564291269f3ba072ef5&amp;type=3#Window Background&apos;); flex-direction: row-reverse; -unity-slice-bottom: 0; transform-origin: center; rotate: 0;" />
                 <ui:Label text="403" display-tooltip-when-elided="true" name="Value" class="header-main" />
             </ui:VisualElement>
             <ui:VisualElement name="Container_Weight" style="flex-grow: 1; flex-direction: row; align-items: center; justify-content: flex-end; padding-top: 10px;">

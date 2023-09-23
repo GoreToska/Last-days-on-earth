@@ -11,7 +11,7 @@ public sealed class PlayerInventory : MonoBehaviour
     [HideInInspector] public static PlayerInventory Instance;
 
     private VisualElement m_Root;
-    private VisualElement m_InventoryGrid;
+    public VisualElement inventoryGrid;
     private static Label m_ItemDetailHeader;
     private static Label m_ItemDetailBody;
     private static Label m_ItemDetailPrice;
@@ -50,7 +50,7 @@ public sealed class PlayerInventory : MonoBehaviour
     {
         //  Sets the references to key VisualElements
         m_Root = GetComponentInChildren<UIDocument>().rootVisualElement;
-        m_InventoryGrid = m_Root.Q<VisualElement>("Grid");
+        inventoryGrid = m_Root.Q<VisualElement>("Grid");
         VisualElement itemDetails = m_Root.Q<VisualElement>("ItemDetails");
         m_ItemDetailHeader = itemDetails.Q<Label>("FriendlyName");
         m_ItemDetailBody = itemDetails.Q<Label>("Body");
@@ -69,23 +69,37 @@ public sealed class PlayerInventory : MonoBehaviour
     //  Grabs the first child of m_InventoryGrid and sets SlotDimensions variable to the width/height of it
     private void ConfigureSlotDimensions()
     {
-        VisualElement firstSlot = m_InventoryGrid.Children().First();
+        VisualElement firstSlot = inventoryGrid.Children().First();
 
         SlotDimension = new Dimensions
         {
             Width = Mathf.RoundToInt(firstSlot.worldBound.width),
             Height = Mathf.RoundToInt(firstSlot.worldBound.height)
         };
+
+        Debug.Log(SlotDimension.Width);
+        Debug.Log(SlotDimension.Height);
     }
 
-    private async Task<bool> GetPositionForItem(VisualElement newItem)
+    private async Task<bool> GetPositionForItem(VisualElement newItem, StoredItem item)
     {
         for (int y = 0; y < InventoryDimensions.Height; y++)
         {
             for (int x = 0; x < InventoryDimensions.Width; x++)
             {
                 //try position
+
+                //check for overlap inventory size
+                if (SlotDimension.Width * (x + item.Details.slotDimension.Width) >
+                    SlotDimension.Width * InventoryDimensions.Width )
+                {
+                    continue;
+                }
+
                 SetItemPosition(newItem, new Vector2(SlotDimension.Width * x, SlotDimension.Height * y));
+
+                //new Vector2(SlotDimension.Width * (x + item.Details.slotDimension.Width), 
+                //  SlotDimension.Height * (y + item.Details.slotDimension.Height)));
 
                 await UniTask.WaitForEndOfFrame();
 
@@ -115,7 +129,7 @@ public sealed class PlayerInventory : MonoBehaviour
             AddItemToInventoryGrid(inventoryItemVisual);
 
             //  Waits until m_IsInventory is true before proceeding
-            bool inventoryHasSpace = await GetPositionForItem(inventoryItemVisual);
+            bool inventoryHasSpace = await GetPositionForItem(inventoryItemVisual, loadedItem);
 
             if (!inventoryHasSpace)
             {
@@ -129,15 +143,38 @@ public sealed class PlayerInventory : MonoBehaviour
         }
     }
 
+    public async Task<bool> AddNewItem(ItemDefinition item)
+    {
+        ItemVisual inventoryItemVisual = new ItemVisual(item);
+        StoredItem storedItem = new StoredItem(item);
+        AddItemToInventoryGrid(inventoryItemVisual);
+
+        //  Waits until m_IsInventory is true before proceeding
+        bool inventoryHasSpace = await GetPositionForItem(inventoryItemVisual, storedItem);
+
+        if (!inventoryHasSpace)
+        {
+            Debug.Log("No space - Cannot pick up the item");
+            RemoveItemFromInventoryGrid(inventoryItemVisual);
+            return false;
+        }
+
+        StoredItems.Add(storedItem);
+
+        //  Creates a new VisualElement of type ItemVisual and adds it as a child of InventoryGrid
+        ConfigureInventoryItem(storedItem, inventoryItemVisual);
+        return true;
+    }
+
     private void AddItemToInventoryGrid(VisualElement item)
     {
-        m_InventoryGrid.Add(item);
+        inventoryGrid.Add(item);
         //m_InventoryGrid.hierarchy.Add(item);
     }
 
     private void RemoveItemFromInventoryGrid(VisualElement item)
     {
-        m_InventoryGrid.Remove(item);
+        inventoryGrid.Remove(item);
     }
 
     private static void ConfigureInventoryItem(StoredItem item, ItemVisual visual)
@@ -146,10 +183,10 @@ public sealed class PlayerInventory : MonoBehaviour
         //visual.style.visibility = Visibility.Hidden;
     }
 
-    private static void SetItemPosition(VisualElement element, Vector2 vector)
+    private static void SetItemPosition(VisualElement element, Vector2 start)
     {
-        element.style.left = vector.x;
-        element.style.top = vector.y;
+        element.style.left = start.x;
+        element.style.top = start.y;
     }
 
     private void ConfigureInventoryTelegraph()
@@ -170,20 +207,19 @@ public sealed class PlayerInventory : MonoBehaviour
 
     public (bool canPlace, Vector2 position) ShowPlacementTarget(ItemVisual draggedItem)
     {
-        if (!m_InventoryGrid.layout.Contains(new Vector2(draggedItem.localBound.xMax,
+        if (!inventoryGrid.layout.Contains(new Vector2(draggedItem.localBound.xMax,
             draggedItem.localBound.yMax)))
         {
             m_Telegraph.style.visibility = Visibility.Hidden;
             return (canPlace: false, position: Vector2.zero);
         }
 
-        VisualElement targetSlot = m_InventoryGrid.Children().Where(x =>
+        VisualElement targetSlot = inventoryGrid.Children().Where(x =>
             x.layout.Overlaps(draggedItem.layout) && x != draggedItem).OrderBy(x =>
             Vector2.Distance(x.worldBound.position,
             draggedItem.worldBound.position)).First();
 
-        m_Telegraph.style.width = draggedItem.style.width;
-        m_Telegraph.style.height = draggedItem.style.height;
+        UpdateTelegraphSize(draggedItem);
 
         SetItemPosition(m_Telegraph, new Vector2(targetSlot.layout.position.x, targetSlot.layout.position.y));
 
@@ -201,6 +237,21 @@ public sealed class PlayerInventory : MonoBehaviour
         return (canPlace: true, targetSlot.worldBound.position);
     }
 
+    public void UpdateTelegraphSize(ItemVisual draggedItem)
+    {
+        if (draggedItem.isRotated)
+        {
+            m_Telegraph.style.width = draggedItem.style.height;
+            m_Telegraph.style.height = draggedItem.style.width;
+        }
+        else
+        {
+            m_Telegraph.style.width = draggedItem.style.width;
+            m_Telegraph.style.height = draggedItem.style.height;
+        }
+
+    }
+
     public static void UpdateItemDetails(ItemDefinition item)
     {
         m_ItemDetailHeader.text = item.friendlyName;
@@ -216,5 +267,12 @@ public sealed class PlayerInventory : MonoBehaviour
     public void InventoryVisibility(Visibility visibility)
     {
         m_Root.style.visibility = visibility;
+        //m_Root.style.opacity = 0.5f; <- it works
+    }
+
+    public (StyleLength, StyleLength) PositionToPlace()
+    {
+        return (m_Telegraph.style.left, m_Telegraph.style.top);
+        //return new Vector2(m_Telegraph.resolvedStyle.left, m_Telegraph.resolvedStyle.top);
     }
 }

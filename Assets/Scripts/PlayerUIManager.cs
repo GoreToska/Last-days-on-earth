@@ -50,7 +50,7 @@ public class PlayerUIManager : MonoBehaviour
 
     public void SetStamina(float value)
     {
-        staminaBar.SetStatus(value);
+        //staminaBar.SetStatus(value);
     }
 
     private void OnOpenInventory()

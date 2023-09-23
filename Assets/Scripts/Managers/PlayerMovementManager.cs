@@ -126,7 +126,7 @@ public class PlayerMovementManager : MonoBehaviour
                             new Vector3(camera.transform.forward.x, 0, camera.transform.forward.z) * inputManager.VerticalInput;
         moveDirection = moveDirection +
             new Vector3(camera.transform.right.x, 0, camera.transform.right.z) * inputManager.HorizontalInput;
-        Debug.Log(moveDirection);
+        
         moveDirection.Normalize();
     }
 

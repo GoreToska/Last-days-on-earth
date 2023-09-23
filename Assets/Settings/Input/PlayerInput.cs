@@ -164,6 +164,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PickUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""33f5b08c-7b8c-46e1-9cea-8b0fa16da809"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -186,6 +195,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""OpenInventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""00e0ea42-81e1-4d30-8954-ef6b3d19b251"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PickUp"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -301,6 +321,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_PlayerActions = asset.FindActionMap("PlayerActions", throwIfNotFound: true);
         m_PlayerActions_Crouch = m_PlayerActions.FindAction("Crouch", throwIfNotFound: true);
         m_PlayerActions_OpenInventory = m_PlayerActions.FindAction("OpenInventory", throwIfNotFound: true);
+        m_PlayerActions_PickUp = m_PlayerActions.FindAction("PickUp", throwIfNotFound: true);
         // PlayerCombat
         m_PlayerCombat = asset.FindActionMap("PlayerCombat", throwIfNotFound: true);
         m_PlayerCombat_Aim = m_PlayerCombat.FindAction("Aim", throwIfNotFound: true);
@@ -472,12 +493,14 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private List<IPlayerActionsActions> m_PlayerActionsActionsCallbackInterfaces = new List<IPlayerActionsActions>();
     private readonly InputAction m_PlayerActions_Crouch;
     private readonly InputAction m_PlayerActions_OpenInventory;
+    private readonly InputAction m_PlayerActions_PickUp;
     public struct PlayerActionsActions
     {
         private @PlayerInput m_Wrapper;
         public PlayerActionsActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Crouch => m_Wrapper.m_PlayerActions_Crouch;
         public InputAction @OpenInventory => m_Wrapper.m_PlayerActions_OpenInventory;
+        public InputAction @PickUp => m_Wrapper.m_PlayerActions_PickUp;
         public InputActionMap Get() { return m_Wrapper.m_PlayerActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -493,6 +516,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @OpenInventory.started += instance.OnOpenInventory;
             @OpenInventory.performed += instance.OnOpenInventory;
             @OpenInventory.canceled += instance.OnOpenInventory;
+            @PickUp.started += instance.OnPickUp;
+            @PickUp.performed += instance.OnPickUp;
+            @PickUp.canceled += instance.OnPickUp;
         }
 
         private void UnregisterCallbacks(IPlayerActionsActions instance)
@@ -503,6 +529,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @OpenInventory.started -= instance.OnOpenInventory;
             @OpenInventory.performed -= instance.OnOpenInventory;
             @OpenInventory.canceled -= instance.OnOpenInventory;
+            @PickUp.started -= instance.OnPickUp;
+            @PickUp.performed -= instance.OnPickUp;
+            @PickUp.canceled -= instance.OnPickUp;
         }
 
         public void RemoveCallbacks(IPlayerActionsActions instance)
@@ -641,6 +670,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     {
         void OnCrouch(InputAction.CallbackContext context);
         void OnOpenInventory(InputAction.CallbackContext context);
+        void OnPickUp(InputAction.CallbackContext context);
     }
     public interface IPlayerCombatActions
     {

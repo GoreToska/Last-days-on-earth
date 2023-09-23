@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -11,6 +12,9 @@ public class ItemVisual : VisualElement
     private Vector2 m_OriginalPosition;
     private bool m_IsDragging;
     private (bool canPlace, Vector2 position) m_PlacementResults;
+    private (StyleLength left, StyleLength top) m_Placement;
+    public bool isRotated = false;
+    public bool wasRotated = false;
 
     public ItemVisual(ItemDefinition item)
     {
@@ -39,6 +43,7 @@ public class ItemVisual : VisualElement
 
         RegisterCallback<MouseMoveEvent>(OnMouseMoveEvent);
         RegisterCallback<MouseUpEvent>(OnMouseUpEvent);
+        Debug.Log(style.width.value.ToString());
     }
 
     //  Unregister events
@@ -55,6 +60,14 @@ public class ItemVisual : VisualElement
         style.top = pos.y;
     }
 
+    public void SetPosition(StyleLength left, StyleLength top)
+    {
+        style.left = left;
+        style.top = top;
+
+        Debug.Log("Item " + style.left + " " + style.top);
+    }
+
     private void OnMouseUpEvent(MouseUpEvent mouseEvent)
     {
         if (!m_IsDragging && mouseEvent.button == 1)
@@ -66,18 +79,39 @@ public class ItemVisual : VisualElement
         if (!m_IsDragging && mouseEvent.button == 0)
         {
             StartDrag();
+            //PlayerInputManager.Instance.RotateItem += RotateItem;
             return;
         }
         m_IsDragging = false;
 
         if (m_PlacementResults.canPlace && mouseEvent.button == 0)
         {
-            SetPosition(new Vector2(
-                m_PlacementResults.position.x - parent.worldBound.position.x,
-                m_PlacementResults.position.y - parent.worldBound.position.y));
+            //SetRotation(isRotated);
+            //PlayerInputManager.Instance.RotateItem -= RotateItem;
+
+            m_Placement = PlayerInventory.Instance.PositionToPlace();
+            SetPosition(m_Placement.left, m_Placement.top);
+
+            //if (isRotated)
+            //{
+            //    SetPosition(new Vector2(targetSlot.layout.position.x, targetSlot.layout.position.y));
+
+            //    //SetPosition(new Vector2(
+            //    //m_PlacementResults.position.x - parent.worldBound.position.x - (1 - m_Item.slotDimension.Width) * 25,
+            //    //m_PlacementResults.position.y - parent.worldBound.position.y + (1 - m_Item.slotDimension.Height) * 25)); // sell size = 100
+            //}
+            //else
+            //{
+            //    SetPosition(new Vector2(
+            //    m_PlacementResults.position.x - parent.worldBound.position.x,
+            //    m_PlacementResults.position.y - parent.worldBound.position.y));
+            //}
+
             return;
         }
 
+        //SetRotation(wasRotated);
+        //PlayerInputManager.Instance.RotateItem -= RotateItem;
         SetPosition(new Vector2(m_OriginalPosition.x, m_OriginalPosition.y));
     }
     public void StartDrag()
@@ -95,8 +129,10 @@ public class ItemVisual : VisualElement
         }
 
         SetPosition(GetMousePosition(mouseEvent.mousePosition));
+
         m_PlacementResults = PlayerInventory.Instance.ShowPlacementTarget(this);
     }
+
     public Vector2 GetMousePosition(Vector2 mousePosition)
     {
         return new Vector2(mousePosition.x - (layout.width / 2) -
@@ -104,4 +140,48 @@ public class ItemVisual : VisualElement
          parent.worldBound.position.y);
     }
 
+    //public void RotateItem()
+    //{
+    //    if (resolvedStyle.width != m_Item.slotDimension.Width * 100) // cell size
+    //    {
+    //        style.width = m_Item.slotDimension.Width * 100;
+    //        style.height = m_Item.slotDimension.Height * 100;
+    //        PlayerInventory.Instance.UpdateTelegraphSize(this);
+    //    }
+    //    else
+    //    {
+    //        style.width = m_Item.slotDimension.Height * 100;
+    //        style.height = m_Item.slotDimension.Width * 100;
+    //        PlayerInventory.Instance.UpdateTelegraphSize(this);
+    //    }
+
+    //    //if (style.rotate == new Rotate(90))
+    //    //{
+    //    //    isRotated = false;
+    //    //    style.rotate = StyleKeyword.Initial;
+    //    //    PlayerInventory.Instance.UpdateTelegraphSize(this);
+    //    //}
+    //    //else
+    //    //{
+    //    //    isRotated = true;
+    //    //    style.rotate = new Rotate(90);
+    //    //    PlayerInventory.Instance.UpdateTelegraphSize(this);
+    //    //}
+    //}
+
+    private void SetRotation(bool wasRotated)
+    {
+        if (!wasRotated)
+        {
+            isRotated = false;
+            style.rotate = StyleKeyword.Initial;
+            PlayerInventory.Instance.UpdateTelegraphSize(this);
+        }
+        else
+        {
+            isRotated = true;
+            style.rotate = new Rotate(90);
+            PlayerInventory.Instance.UpdateTelegraphSize(this);
+        }
+    }
 }
