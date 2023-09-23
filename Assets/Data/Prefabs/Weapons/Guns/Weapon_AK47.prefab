@@ -110,7 +110,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2579492733345702338}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: -0.801}
+  m_LocalPosition: {x: -0, y: 0, z: -0.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -185,6 +185,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponData: {fileID: 11400000, guid: 00ac4c289b4958943b8e5950d7585b57, type: 2}
   burrel: {fileID: 7614745045170426337}
+  itemPrefab: {fileID: 2875812395047982583, guid: 281162aed16288c4d8afcb442eb56772,
+    type: 3}
 --- !u!1 &2580116869321669320
 GameObject:
   m_ObjectHideFlags: 0

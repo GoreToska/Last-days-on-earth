@@ -1,16 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerEquipmentManager : MonoBehaviour
 {
     [HideInInspector] public static PlayerEquipmentManager Instance;
 
-    [SerializeField] public List<Item> itemsToPickUp;
+    [SerializeField] private Transform MainWeaponSocket;
+
+    public List<Item> itemsToPickUp;
 
     //  Handle weapon change
-    [SerializeField] private MainWeapon mainWeapon;
+    [SerializeField] public MainWeapon mainWeapon;
 
     private void Awake()
     {
@@ -28,13 +32,14 @@ public class PlayerEquipmentManager : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
 
-        PlayerInputManager.Instance.AttackEvent += TryToPerformAttack;
         PlayerInputManager.Instance.PickUpEvent += TryToPickUp;
+        PlayerInputManager.Instance.AttackEvent += TryToPerformAttack;
     }
 
     private void OnEnable()
     {
-
+        //PlayerInputManager.Instance.PickUpEvent += TryToPickUp;
+        //PlayerInputManager.Instance.AttackEvent += TryToPerformAttack;
     }
 
     private void OnDisable()
@@ -64,5 +69,27 @@ public class PlayerEquipmentManager : MonoBehaviour
             itemsToPickUp.RemoveAt(0);
             return;
         }
+    }
+
+    public void OnMainWeaponEquip(Item weapon, StoredItem item)
+    {
+        Debug.Log("Drop");
+
+        if (mainWeapon != null)
+        {
+            //  just do nothing in future
+            DropCurrentMainWeapon(mainWeapon);
+        }
+
+        mainWeapon = Instantiate(weapon.itemPrefab, MainWeaponSocket).GetComponent<MainWeapon>();
+        mainWeapon.storedItem = item;
+        PlayerAnimationManager.Instance.SetWeaponAnimationPattern(weapon.weaponData.weaponType);
+    }
+
+    private void DropCurrentMainWeapon(MainWeapon item)
+    {
+        PlayerInventory.Instance.RemoveItemFromInventoryGrid(item.storedItem);
+        var a = Instantiate(item.itemPrefab, this.transform.position, Quaternion.Euler(0, 0, 90), null);
+        Destroy(item.gameObject);
     }
 }

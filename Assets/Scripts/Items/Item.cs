@@ -25,16 +25,22 @@ public class Item : MonoBehaviour
 
     public async Task<bool> PickUpItem()
     {
-        Debug.Log("PickUp");
+        var item = await PlayerInventory.Instance.AddNewItem(itemDefinition);
 
-        if (await PlayerInventory.Instance.AddNewItem(itemDefinition))
+        if (item != null)
         {
             Destroy(gameObject);
+
+            // UI popup "YOU TAKE ITEM_NAME"
+            if (weaponData != null && weaponData.weaponType == WeaponType.Primary)
+            {
+                PlayerEquipmentManager.Instance.OnMainWeaponEquip(this, item);
+            }
+
             return true;
         }
 
-        //  UI popup
-        Debug.Log("Didnt pick up");
+        //  UI popup "YOU CANT PICK UP"
         return false;
     }
 }

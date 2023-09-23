@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2863287876403315465}
   - component: {fileID: 298577723587408947}
   - component: {fileID: 298577723587408944}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Item_AK47
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,7 +115,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemDefinition: {fileID: 11400000, guid: ccc752cd13a51b64fba5ce92d60e96d5, type: 2}
-  itemPrefab: {fileID: 2875812395047982583}
+  itemPrefab: {fileID: 2579492733345702338, guid: daf1ba62192361245a97edf51f16692a,
+    type: 3}
   weaponData: {fileID: 11400000, guid: 00ac4c289b4958943b8e5950d7585b57, type: 2}
 --- !u!1 &2876296326112120573
 GameObject:
@@ -128,7 +129,7 @@ GameObject:
   - component: {fileID: 2881800528601742959}
   - component: {fileID: 2854150526402976727}
   - component: {fileID: 2862635676258057089}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SM_Wep_AssaultRifle_01_Slide_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -211,7 +212,7 @@ GameObject:
   - component: {fileID: 2873840200819786761}
   - component: {fileID: 2853032814569444319}
   - component: {fileID: 2863413116392997951}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SM_Wep_AssaultRifle_01_Magazine_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -294,7 +295,7 @@ GameObject:
   - component: {fileID: 2882127007004861211}
   - component: {fileID: 2853301534659679169}
   - component: {fileID: 2862665353852502237}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SM_Wep_AssaultRifle_01_Trigger_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -375,7 +376,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7893051605451875797}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Burrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}

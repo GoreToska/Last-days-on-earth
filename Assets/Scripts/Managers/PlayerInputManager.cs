@@ -58,14 +58,14 @@ public class PlayerInputManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        camera = Camera.main;
-        crosshair = GameObject.FindGameObjectWithTag("Crosshair").transform;
     }
 
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
+
+        camera = Camera.main;
+        crosshair = GameObject.FindGameObjectWithTag("Crosshair").transform;
     }
 
     private void OnEnable()

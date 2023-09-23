@@ -92,9 +92,9 @@ public sealed class PlayerInventory : MonoBehaviour
                 //check for overlap inventory size
                 if (SlotDimension.Width * (x + item.Details.slotDimension.Width) >
                     SlotDimension.Width * InventoryDimensions.Width)
-                    {
-                        continue;
-                    }
+                {
+                    continue;
+                }
 
                 SetItemPosition(newItem, new Vector2(SlotDimension.Width * x, SlotDimension.Height * y));
 
@@ -134,7 +134,7 @@ public sealed class PlayerInventory : MonoBehaviour
             if (!inventoryHasSpace)
             {
                 Debug.Log("No space - Cannot pick up the item");
-                RemoveItemFromInventoryGrid(inventoryItemVisual);
+                RemoveItemFromInventoryGrid(loadedItem);
                 continue;
             }
 
@@ -143,7 +143,7 @@ public sealed class PlayerInventory : MonoBehaviour
         }
     }
 
-    public async Task<bool> AddNewItem(ItemDefinition item)
+    public async Task<StoredItem> AddNewItem(ItemDefinition item)
     {
         ItemVisual inventoryItemVisual = new ItemVisual(item);
         StoredItem storedItem = new StoredItem(item);
@@ -155,15 +155,15 @@ public sealed class PlayerInventory : MonoBehaviour
         if (!inventoryHasSpace)
         {
             Debug.Log("No space - Cannot pick up the item");
-            RemoveItemFromInventoryGrid(inventoryItemVisual);
-            return false;
+            RemoveItemFromInventoryGrid(storedItem);
+            return null;
         }
 
         StoredItems.Add(storedItem);
 
         //  Creates a new VisualElement of type ItemVisual and adds it as a child of InventoryGrid
         ConfigureInventoryItem(storedItem, inventoryItemVisual);
-        return true;
+        return storedItem;
     }
 
     private void AddItemToInventoryGrid(VisualElement item)
@@ -172,9 +172,10 @@ public sealed class PlayerInventory : MonoBehaviour
         //m_InventoryGrid.hierarchy.Add(item);
     }
 
-    private void RemoveItemFromInventoryGrid(VisualElement item)
+    public void RemoveItemFromInventoryGrid(StoredItem item)
     {
-        inventoryGrid.Remove(item);
+        inventoryGrid.Remove(item.RootVisual);
+        StoredItems.Remove(item);
     }
 
     private static void ConfigureInventoryItem(StoredItem item, ItemVisual visual)

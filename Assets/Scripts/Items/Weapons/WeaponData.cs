@@ -22,7 +22,6 @@ public class WeaponData : ScriptableObject
 
 public enum WeaponType
 {
-    Rifle,
-    Pistol,
-    Shotgun
+    Primary,
+    Secondary
 }

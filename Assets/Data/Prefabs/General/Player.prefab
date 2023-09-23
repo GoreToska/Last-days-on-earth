@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 636213937}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SecondHandGrabWeapon_target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 830465334}
   - component: {fileID: 830465335}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Rig 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1144189207}
   - component: {fileID: 1144189208}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SecondHandGrabWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,7 +146,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1290189564}
   - component: {fileID: 1290189565}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Rig 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -193,7 +193,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1452008124}
   - component: {fileID: 1452008125}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BodyAim
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -279,7 +279,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1706642987}
   - component: {fileID: 1706642988}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Aim
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -382,8 +382,7 @@ Transform:
   m_LocalPosition: {x: 0.936, y: 0.015, z: -0.035}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 5362022270691627213}
+  m_Children: []
   m_Father: {fileID: 5365654528913297587}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: -90}
@@ -396,7 +395,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1872827970}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SecondHandGrabWeapon_hint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -428,7 +427,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2143914264}
   - component: {fileID: 2143914265}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SecondHandGrabWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4622,7 +4621,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5360372287496317087}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b2d8418b0b9634b1892b0268dd9c2743, type: 3}
   m_Name: 
@@ -4733,8 +4732,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f872ab7959f65cd4b9902bb03dda6b18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MainWeaponSocket: {fileID: 1790448302}
   itemsToPickUp: []
-  mainWeapon: {fileID: 676939356}
+  mainWeapon: {fileID: 0}
 --- !u!1 &5360388984784684093
 GameObject:
   m_ObjectHideFlags: 0
@@ -6574,90 +6574,3 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.00015497208, y: 0.84392405, z: -0.06279197}
     m_Extent: {x: 1.027087, y: 0.9440826, z: 0.2701872}
   m_DirtyAABB: 0
---- !u!1001 &7614745044759176393
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1790448302}
-    m_Modifications:
-    - target: {fileID: 2577387878095500292, guid: daf1ba62192361245a97edf51f16692a,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2577387878095500292, guid: daf1ba62192361245a97edf51f16692a,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2577387878095500292, guid: daf1ba62192361245a97edf51f16692a,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2577387878095500292, guid: daf1ba62192361245a97edf51f16692a,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.801
-      objectReference: {fileID: 0}
-    - target: {fileID: 2577387878095500292, guid: daf1ba62192361245a97edf51f16692a,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2577387878095500292, guid: daf1ba62192361245a97edf51f16692a,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2577387878095500292, guid: daf1ba62192361245a97edf51f16692a,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2577387878095500292, guid: daf1ba62192361245a97edf51f16692a,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2577387878095500292, guid: daf1ba62192361245a97edf51f16692a,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2577387878095500292, guid: daf1ba62192361245a97edf51f16692a,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2577387878095500292, guid: daf1ba62192361245a97edf51f16692a,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2579492733345702338, guid: daf1ba62192361245a97edf51f16692a,
-        type: 3}
-      propertyPath: m_Name
-      value: SM_Wep_AssaultRifle_01
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: daf1ba62192361245a97edf51f16692a, type: 3}
---- !u!114 &676939356 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7614745045166465685, guid: daf1ba62192361245a97edf51f16692a,
-    type: 3}
-  m_PrefabInstance: {fileID: 7614745044759176393}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6755c51d48331ed49b7950b3b8ba5784, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &5362022270691627213 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2577387878095500292, guid: daf1ba62192361245a97edf51f16692a,
-    type: 3}
-  m_PrefabInstance: {fileID: 7614745044759176393}
-  m_PrefabAsset: {fileID: 0}

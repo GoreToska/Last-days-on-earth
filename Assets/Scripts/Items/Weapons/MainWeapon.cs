@@ -9,6 +9,11 @@ public class MainWeapon : MonoBehaviour, IWeapon, IReloadableWeapon
     [SerializeField] private WeaponData weaponData;
     [SerializeField] protected GameObject burrel;
 
+    [Header("Prefab of this weapon for dropping it on ground")]
+    [SerializeField] public GameObject itemPrefab;
+
+    public StoredItem storedItem;
+
     public void PerformAttack()
     {
         var (success, position) = PlayerInputManager.Instance.GetMousePosition();

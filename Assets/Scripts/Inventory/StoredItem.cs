@@ -8,7 +8,6 @@ public class StoredItem
         Details = itemDefinition;
     }
 
-
     public ItemDefinition Details;
     public ItemVisual RootVisual;
 }

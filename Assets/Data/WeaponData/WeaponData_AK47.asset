@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: badacccb6bcb0ba498ba245506d5a14c, type: 3}
   m_Name: WeaponData_AK47
   m_EditorClassIdentifier: 
-  weaponModel: {fileID: 0}
+  weaponModel: {fileID: 2875812395047982583, guid: 281162aed16288c4d8afcb442eb56772,
+    type: 3}
   weaponType: 0
   weaponName: 
   weaponDescription: 
