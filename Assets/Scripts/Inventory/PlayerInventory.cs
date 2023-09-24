@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Unity.VisualScripting;
+using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -10,16 +11,20 @@ public sealed class PlayerInventory : MonoBehaviour
 {
     [HideInInspector] public static PlayerInventory Instance;
 
-    private VisualElement m_Root;
-    public VisualElement inventoryGrid;
-    private static Label m_ItemDetailHeader;
-    private static Label m_ItemDetailBody;
-    private static Label m_ItemDetailPrice;
-    private bool m_IsInventoryReady;
-    public static Dimensions SlotDimension { get; private set; }
+    private VisualElement root;
+    private VisualElement inventoryGrid;
+    private static Button buttonDrop;
+    private static VisualElement details;
+    private static Label itemDetailHeader;
+    private static Label itemDetailDescription;
+    private static Label itemDetailPrice;
+    private bool isInventoryReady;
+    private StoredItem currentItem;
+
+    public static ItemCharacteristic SlotDimension { get; private set; }
 
     public List<StoredItem> StoredItems = new List<StoredItem>();   // List of stored items
-    public Dimensions InventoryDimensions;  // The number of columns and rows that the inventory has
+    public ItemCharacteristic InventoryDimensions;  // The number of columns and rows that the inventory has
 
     private VisualElement m_Telegraph; // Used for highlighting slots in wich you are dragging in
 
@@ -45,25 +50,37 @@ public sealed class PlayerInventory : MonoBehaviour
         LoadInventory();
     }
 
+    private void OnEnable()
+    {
+        buttonDrop.clicked += () => PlayerEquipmentManager.Instance.DropStoredItem(currentItem);
+    }
+
+    private void OnDisable()
+    {
+        buttonDrop.clicked -= () => PlayerEquipmentManager.Instance.DropStoredItem(currentItem);
+    }
+
     //  find all references and set any initial values needed
     private async void Configure()
     {
         //  Sets the references to key VisualElements
-        m_Root = GetComponentInChildren<UIDocument>().rootVisualElement;
-        inventoryGrid = m_Root.Q<VisualElement>("Grid");
-        VisualElement itemDetails = m_Root.Q<VisualElement>("ItemDetails");
-        m_ItemDetailHeader = itemDetails.Q<Label>("FriendlyName");
-        m_ItemDetailBody = itemDetails.Q<Label>("Body");
-        m_ItemDetailPrice = itemDetails.Q<Label>("SellPrice");
+        root = GetComponentInChildren<UIDocument>().rootVisualElement;
+        inventoryGrid = root.Q<VisualElement>("Grid");
+        VisualElement itemDetails = root.Q<VisualElement>("ItemDetails");
+        details = itemDetails;
+        itemDetailHeader = itemDetails.Q<Label>("FriendlyName");
+        itemDetailDescription = itemDetails.Q<Label>("Body");
+        itemDetailPrice = itemDetails.Q<Label>("SellPrice");
+        buttonDrop = itemDetails.Q<Button>("btn_Drop");
 
         //  Pauses until the end of the frame
         await UniTask.WaitForEndOfFrame();
 
         //  Calculates the size of a single slot item. The calculated value was used by ItemVisual
         ConfigureSlotDimensions();
-
+        ItemDetailsVisibility(Visibility.Hidden);
         //  Sets m_IsInventoryReady as true, which is a value used by the LOAD INVENTORY method
-        m_IsInventoryReady = true;
+        isInventoryReady = true;
     }
 
     //  Grabs the first child of m_InventoryGrid and sets SlotDimensions variable to the width/height of it
@@ -71,7 +88,7 @@ public sealed class PlayerInventory : MonoBehaviour
     {
         VisualElement firstSlot = inventoryGrid.Children().First();
 
-        SlotDimension = new Dimensions
+        SlotDimension = new ItemCharacteristic
         {
             Width = Mathf.RoundToInt(firstSlot.worldBound.width),
             Height = Mathf.RoundToInt(firstSlot.worldBound.height)
@@ -90,7 +107,7 @@ public sealed class PlayerInventory : MonoBehaviour
                 //try position
 
                 //check for overlap inventory size
-                if (SlotDimension.Width * (x + item.Details.slotDimension.Width) >
+                if (SlotDimension.Width * (x + item.Details.itemCharacteristics.Width) >
                     SlotDimension.Width * InventoryDimensions.Width)
                 {
                     continue;
@@ -120,11 +137,11 @@ public sealed class PlayerInventory : MonoBehaviour
 
     private async void LoadInventory()
     {
-        await UniTask.WaitUntil(() => m_IsInventoryReady);
+        await UniTask.WaitUntil(() => isInventoryReady);
 
         foreach (StoredItem loadedItem in StoredItems)
         {
-            ItemVisual inventoryItemVisual = new ItemVisual(loadedItem.Details);
+            ItemVisual inventoryItemVisual = new ItemVisual(loadedItem);
 
             AddItemToInventoryGrid(inventoryItemVisual);
 
@@ -145,8 +162,8 @@ public sealed class PlayerInventory : MonoBehaviour
 
     public async Task<StoredItem> AddNewItem(ItemDefinition item)
     {
-        ItemVisual inventoryItemVisual = new ItemVisual(item);
         StoredItem storedItem = new StoredItem(item);
+        ItemVisual inventoryItemVisual = new ItemVisual(storedItem);
         AddItemToInventoryGrid(inventoryItemVisual);
 
         //  Waits until m_IsInventory is true before proceeding
@@ -253,11 +270,17 @@ public sealed class PlayerInventory : MonoBehaviour
 
     }
 
-    public static void UpdateItemDetails(ItemDefinition item)
+    public void UpdateItemDetails(StoredItem item)
     {
-        m_ItemDetailHeader.text = item.friendlyName;
-        m_ItemDetailBody.text = item.description;
-        m_ItemDetailPrice.text = item.sellPrice.ToString();
+        itemDetailHeader.text = item.Details.friendlyName;
+        itemDetailDescription.text = item.Details.description;
+        itemDetailPrice.text = item.Details.sellPrice.ToString();
+        currentItem = item;
+    }
+
+    public static void ItemDetailsVisibility(Visibility visibility)
+    {
+        details.style.visibility = visibility;
     }
 
     public void TelegraphVisibility(Visibility visibility)
@@ -267,7 +290,12 @@ public sealed class PlayerInventory : MonoBehaviour
 
     public void InventoryVisibility(Visibility visibility)
     {
-        m_Root.style.visibility = visibility;
+        root.style.visibility = visibility;
+
+        if (visibility == Visibility.Hidden)
+        {
+            ItemDetailsVisibility(visibility);
+        }
         //m_Root.style.opacity = 0.5f; <- it works
     }
 

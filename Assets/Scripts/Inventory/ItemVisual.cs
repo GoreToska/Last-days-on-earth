@@ -7,7 +7,8 @@ using UnityEngine.UIElements;
 //  Summary
 public class ItemVisual : VisualElement
 {
-    private readonly ItemDefinition m_Item;
+    private readonly ItemDefinition item;
+    private readonly StoredItem storedItem;
 
     private Vector2 m_OriginalPosition;
     private bool m_IsDragging;
@@ -16,15 +17,16 @@ public class ItemVisual : VisualElement
     public bool isRotated = false;
     public bool wasRotated = false;
 
-    public ItemVisual(ItemDefinition item)
+    public ItemVisual(StoredItem item)
     {
-        m_Item = item;
+        this.item = item.Details;
+        this.storedItem = item;
 
         //  setting the properties of the root VisualElement (the parent in the reference above)
-        name = $"{m_Item.friendlyName}";
-        style.height = m_Item.slotDimension.Height *
+        name = $"{this.item.friendlyName}";
+        style.height = this.item.itemCharacteristics.Height *
             PlayerInventory.SlotDimension.Height;
-        style.width = m_Item.slotDimension.Width *
+        style.width = this.item.itemCharacteristics.Width *
             PlayerInventory.SlotDimension.Width;
         //style.visibility = Visibility.Visible;
 
@@ -32,7 +34,7 @@ public class ItemVisual : VisualElement
         //   and setting the background image to the same one set in the ItemDefinition asset
         VisualElement icon = new VisualElement
         {
-            style = { backgroundImage = m_Item.icon.texture }
+            style = { backgroundImage = this.item.icon.texture }
         };
 
         Add(icon);
@@ -72,7 +74,8 @@ public class ItemVisual : VisualElement
     {
         if (!m_IsDragging && mouseEvent.button == 1)
         {
-            PlayerInventory.UpdateItemDetails(m_Item);
+            PlayerInventory.Instance.UpdateItemDetails(storedItem);
+            PlayerInventory.ItemDetailsVisibility(Visibility.Visible);
             return;
         }
 

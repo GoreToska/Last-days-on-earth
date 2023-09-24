@@ -22,6 +22,7 @@ public class WeaponData : ScriptableObject
 
 public enum WeaponType
 {
+    None,
     Primary,
     Secondary
 }

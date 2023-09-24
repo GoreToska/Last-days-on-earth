@@ -23,6 +23,8 @@ MonoBehaviour:
   sellPrice: 150
   wheight: 1
   icon: {fileID: 21300000, guid: 99d414ff54d4e684dbf2769b60686fe3, type: 3}
-  slotDimension:
+  itemCharacteristics:
     Height: 1
     Width: 1
+    itemPrefab: {fileID: 1835224929256552, guid: df170dcae36ee024c81fa2300892e7e5,
+      type: 3}

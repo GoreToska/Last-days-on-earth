@@ -55,9 +55,11 @@ public class PlayerAnimationManager : MonoBehaviour
                 break;
             case WeaponType.Secondary:
                 break;
-            default:
+            case WeaponType.None:
                 animator.Play("Walk Blend Tree", 0);
                 SetDefaultRig();
+                break;
+            default:
                 break;
         }
     }

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponModel: {fileID: 2875812395047982583, guid: 281162aed16288c4d8afcb442eb56772,
     type: 3}
-  weaponType: 0
+  weaponType: 1
   weaponName: 
   weaponDescription: 
   damage: 50

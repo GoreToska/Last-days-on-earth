@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UIElements;
 
 public class PlayerEquipmentManager : MonoBehaviour
 {
@@ -78,6 +79,7 @@ public class PlayerEquipmentManager : MonoBehaviour
         if (mainWeapon != null)
         {
             //  just do nothing in future
+            Debug.Log(weapon.ToString());
             DropCurrentMainWeapon(mainWeapon);
         }
 
@@ -89,7 +91,24 @@ public class PlayerEquipmentManager : MonoBehaviour
     private void DropCurrentMainWeapon(MainWeapon item)
     {
         PlayerInventory.Instance.RemoveItemFromInventoryGrid(item.storedItem);
-        var a = Instantiate(item.itemPrefab, this.transform.position, Quaternion.Euler(0, 0, 90), null);
+        Instantiate(item.itemPrefab, this.transform.position, Quaternion.Euler(0, 0, 90), null);
+        PlayerAnimationManager.Instance.SetWeaponAnimationPattern(WeaponType.None);
         Destroy(item.gameObject);
+    }
+
+    public void DropStoredItem(StoredItem item)
+    {
+        if (mainWeapon != null && mainWeapon.storedItem == item)
+        {
+            DropCurrentMainWeapon(mainWeapon);
+        }
+        else
+        {
+            Debug.Log(item.Details.itemCharacteristics.itemPrefab);
+            Instantiate(item.Details.itemCharacteristics.itemPrefab, this.transform.position, Quaternion.Euler(0, 0, 0), null);
+            PlayerInventory.Instance.RemoveItemFromInventoryGrid(item);
+        }
+
+        PlayerInventory.ItemDetailsVisibility(Visibility.Hidden);
     }
 }
