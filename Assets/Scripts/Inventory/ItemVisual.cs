@@ -1,5 +1,6 @@
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UIElements;
 
 //  Summary
@@ -7,7 +8,7 @@ using UnityEngine.UIElements;
 //  Summary
 public class ItemVisual : VisualElement
 {
-    private readonly ItemDefinition item;
+    private readonly ItemData item;
     private readonly StoredItem storedItem;
 
     private Vector2 m_OriginalPosition;
@@ -17,13 +18,15 @@ public class ItemVisual : VisualElement
     public bool isRotated = false;
     public bool wasRotated = false;
 
+    private Label count = new Label();
+
     public ItemVisual(StoredItem item)
     {
-        this.item = item.Details;
+        this.item = item.Data;
         this.storedItem = item;
 
         //  setting the properties of the root VisualElement (the parent in the reference above)
-        name = $"{this.item.friendlyName}";
+        name = $"{this.item.name}";
         style.height = this.item.itemCharacteristics.Height *
             PlayerInventory.SlotDimension.Height;
         style.width = this.item.itemCharacteristics.Width *
@@ -34,10 +37,18 @@ public class ItemVisual : VisualElement
         //   and setting the background image to the same one set in the ItemDefinition asset
         VisualElement icon = new VisualElement
         {
-            style = { backgroundImage = this.item.icon.texture }
+            style = { backgroundImage = this.item.image.texture }
         };
 
         Add(icon);
+
+        if (item.Data.count > 0)
+        {
+            count.text = item.Count.ToString();
+            icon.Add(count);
+            count.AddToClassList("visual-icon-count");
+        }
+
 
         //  adding two new styles to the parent and children.
         icon.AddToClassList("visual-icon");
@@ -45,7 +56,6 @@ public class ItemVisual : VisualElement
 
         RegisterCallback<MouseMoveEvent>(OnMouseMoveEvent);
         RegisterCallback<MouseUpEvent>(OnMouseUpEvent);
-        Debug.Log(style.width.value.ToString());
     }
 
     //  Unregister events
@@ -66,8 +76,11 @@ public class ItemVisual : VisualElement
     {
         style.left = left;
         style.top = top;
+    }
 
-        Debug.Log("Item " + style.left + " " + style.top);
+    public void SetCount(int value)
+    {
+        count.text = value.ToString();
     }
 
     private void OnMouseUpEvent(MouseUpEvent mouseEvent)
@@ -117,6 +130,7 @@ public class ItemVisual : VisualElement
         //PlayerInputManager.Instance.RotateItem -= RotateItem;
         SetPosition(new Vector2(m_OriginalPosition.x, m_OriginalPosition.y));
     }
+
     public void StartDrag()
     {
         m_IsDragging = true;

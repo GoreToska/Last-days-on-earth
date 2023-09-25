@@ -20,7 +20,10 @@ MonoBehaviour:
     \u0432\u043E\u0439\u043D\u044B."
   sellPrice: 250
   wheight: 1.2
+  count: 0
+  maxStack: 0
   icon: {fileID: 21300000, guid: 09706c49e2557b343ba2a56efef6e9cf, type: 3}
+  ammoType: 5
   itemCharacteristics:
     Height: 1
     Width: 1

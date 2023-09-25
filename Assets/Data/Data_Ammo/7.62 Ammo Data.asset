@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba47075450e5b4b4aba91c033dc62150, type: 3}
+  m_Name: 7.62 Ammo Data
+  m_EditorClassIdentifier: 
+  ID: 1
+  name: "\u041F\u0430\u0442\u0440\u043E\u043D 7.62"
+  description: "\u041F\u0440\u043E\u0441\u0442\u043E\u0439 \u0430\u0440\u043C\u0435\u0439\u0441\u043A\u0438\u0439
+    \u043F\u0430\u0442\u0440\u043E\u043D 7.62. \u0412\u044B\u0441\u043E\u043A\u0430\u044F
+    \u0443\u0431\u043E\u0439\u043D\u0430\u044F \u0441\u0438\u043B\u0430, \u0441\u0438\u043B\u044C\u043D\u0430\u044F
+    \u043E\u0442\u0434\u0430\u0447\u0430."
+  wheight: 0.1
+  sellPrice: 45
+  image: {fileID: 21300000, guid: 9a9029abb4c4e2a409c2863c7bd58142, type: 3}
+  itemCharacteristics:
+    Height: 1
+    Width: 1
+    itemPrefab: {fileID: 6668571378133427106, guid: 05b20be3a8d259c4285b9a649c3905e3,
+      type: 3}
+  count: 20
+  ammoType: 1
+  maxStack: 90

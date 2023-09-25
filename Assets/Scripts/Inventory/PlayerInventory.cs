@@ -21,10 +21,17 @@ public sealed class PlayerInventory : MonoBehaviour
     private bool isInventoryReady;
     private StoredItem currentItem;
 
-    public static ItemCharacteristic SlotDimension { get; private set; }
+    //  Move to its own scriptable object
+    [SerializeField] public int LightRifleAmmoCount = 0;
+    [SerializeField] public int HeavyRifleAmmoCount = 0;
+    [SerializeField] private int PistolAmmoCount { get; set; } = 0;
+    [SerializeField] private int SniperAmmoCount { get; set; } = 0;
+    [SerializeField] private int ShotgunAmmoCount { get; set; } = 0;
+
+    public static ItemData.ItemCharacteristic SlotDimension { get; private set; }
 
     public List<StoredItem> StoredItems = new List<StoredItem>();   // List of stored items
-    public ItemCharacteristic InventoryDimensions;  // The number of columns and rows that the inventory has
+    public ItemData.ItemCharacteristic InventoryDimensions;  // The number of columns and rows that the inventory has
 
     private VisualElement m_Telegraph; // Used for highlighting slots in wich you are dragging in
 
@@ -60,6 +67,11 @@ public sealed class PlayerInventory : MonoBehaviour
         buttonDrop.clicked -= () => PlayerEquipmentManager.Instance.DropStoredItem(currentItem);
     }
 
+    private void FixedUpdate()
+    {
+        Debug.Log(PlayerEquipmentManager.Instance.itemsToPickUp.Count);
+    }
+
     //  find all references and set any initial values needed
     private async void Configure()
     {
@@ -88,14 +100,11 @@ public sealed class PlayerInventory : MonoBehaviour
     {
         VisualElement firstSlot = inventoryGrid.Children().First();
 
-        SlotDimension = new ItemCharacteristic
+        SlotDimension = new ItemData.ItemCharacteristic
         {
             Width = Mathf.RoundToInt(firstSlot.worldBound.width),
             Height = Mathf.RoundToInt(firstSlot.worldBound.height)
         };
-
-        Debug.Log(SlotDimension.Width);
-        Debug.Log(SlotDimension.Height);
     }
 
     private async Task<bool> GetPositionForItem(VisualElement newItem, StoredItem item)
@@ -107,7 +116,7 @@ public sealed class PlayerInventory : MonoBehaviour
                 //try position
 
                 //check for overlap inventory size
-                if (SlotDimension.Width * (x + item.Details.itemCharacteristics.Width) >
+                if (SlotDimension.Width * (x + item.Data.itemCharacteristics.Width) >
                     SlotDimension.Width * InventoryDimensions.Width)
                 {
                     continue;
@@ -160,9 +169,90 @@ public sealed class PlayerInventory : MonoBehaviour
         }
     }
 
-    public async Task<StoredItem> AddNewItem(ItemDefinition item)
+    public async Task<StoredItem> AddNewAmmoItem(AmmoData item)
     {
-        StoredItem storedItem = new StoredItem(item);
+        switch (item.ammoType)
+        {
+            case AmmoTypes.RifleLight:
+                //validation on how many ammo you already have
+                if (LightRifleAmmoCount != 0)
+                {
+                    LightRifleAmmoCount += item.count;
+
+                    foreach (var i in StoredItems)
+                    {
+                        if (i.Data.ID == item.ID)
+                        {
+                            Debug.Log("item id is it");
+                            i.Count = LightRifleAmmoCount;
+                            i.RootVisual.SetCount(LightRifleAmmoCount);
+                            return i;
+                        }
+                    }
+                    return null;
+                }
+                else
+                {
+                    var stored = await AddNewItem(item, ItemType.Ammo, AmmoTypes.RifleLight);
+                    LightRifleAmmoCount += item.count;
+                    stored.RootVisual.SetCount(LightRifleAmmoCount);
+                    return stored;
+                }
+            case AmmoTypes.RifleHeavy:
+                if (HeavyRifleAmmoCount != 0)
+                {
+                    HeavyRifleAmmoCount += item.count;
+
+                    foreach (var i in StoredItems)
+                    {
+                        if (i.Data.ID == item.ID)
+                        {
+                            Debug.Log("item id is it");
+                            i.Count = HeavyRifleAmmoCount;
+                            i.RootVisual.SetCount(HeavyRifleAmmoCount);
+                            return i;
+                        }
+                    }
+                    return null;
+                }
+                else
+                {
+                    var stored = await AddNewItem(item, ItemType.Ammo, AmmoTypes.RifleHeavy);
+                    HeavyRifleAmmoCount += item.count;
+                    stored.RootVisual.SetCount(HeavyRifleAmmoCount);
+                    return stored;
+                }
+            case AmmoTypes.Pistol:
+                return null;
+            case AmmoTypes.Sniper:
+                return null;
+            case AmmoTypes.Shotgun:
+                return null;
+            case AmmoTypes.None:
+                return null;
+            default:
+                return null;
+        }
+    }
+
+    public async Task<bool> AddNewWeaponItem(WeaponItem weapon)
+    {
+        if (PlayerEquipmentManager.Instance.mainWeapon == null)
+        {
+            var item = await AddNewItem(weapon.data, ItemType.Weapon, AmmoTypes.None);
+            if (item != null)
+            {
+                PlayerEquipmentManager.Instance.OnMainWeaponEquip(weapon, item);
+                return true;
+            }
+        }
+
+        return true;
+    }
+
+    public async Task<StoredItem> AddNewItem(ItemData item, ItemType itemType, AmmoTypes ammoType)
+    {
+        StoredItem storedItem = new StoredItem(item, itemType, ammoType);
         ItemVisual inventoryItemVisual = new ItemVisual(storedItem);
         AddItemToInventoryGrid(inventoryItemVisual);
 
@@ -186,11 +276,31 @@ public sealed class PlayerInventory : MonoBehaviour
     private void AddItemToInventoryGrid(VisualElement item)
     {
         inventoryGrid.Add(item);
-        //m_InventoryGrid.hierarchy.Add(item);
     }
 
     public void RemoveItemFromInventoryGrid(StoredItem item)
     {
+        if (item.ammoType == AmmoTypes.RifleHeavy)
+        {
+            HeavyRifleAmmoCount = 0;
+        }
+        if (item.ammoType == AmmoTypes.RifleLight)
+        {
+            LightRifleAmmoCount = 0;
+        }
+        if (item.ammoType == AmmoTypes.Sniper)
+        {
+            SniperAmmoCount = 0;
+        }
+        if (item.ammoType == AmmoTypes.Pistol)
+        {
+            PistolAmmoCount = 0;
+        }
+        if (item.ammoType == AmmoTypes.Shotgun)
+        {
+            ShotgunAmmoCount = 0;
+        }
+
         inventoryGrid.Remove(item.RootVisual);
         StoredItems.Remove(item);
     }
@@ -272,9 +382,9 @@ public sealed class PlayerInventory : MonoBehaviour
 
     public void UpdateItemDetails(StoredItem item)
     {
-        itemDetailHeader.text = item.Details.friendlyName;
-        itemDetailDescription.text = item.Details.description;
-        itemDetailPrice.text = item.Details.sellPrice.ToString();
+        itemDetailHeader.text = item.Data.name;
+        itemDetailDescription.text = item.Data.description;
+        itemDetailPrice.text = item.Data.sellPrice.ToString();
         currentItem = item;
     }
 

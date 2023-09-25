@@ -5,17 +5,24 @@ VisualElement {
     height: 100%;
     width: 100%;
     position: absolute;
-    padding: 15px;
+    padding: 5px;
     background-color: rgba(14, 14, 14, 0.5);
     border-width: 2px;
     border-color: rgb(171, 171, 171);
-    transform-origin: 0,0;
+}
+
+.visual-icon-count {
+    font-size: 18px;   
+    color: rgb(255,255,255);
+    align-self: flex-end;
 }
 
 .visual-icon {
     height: 100%;
     width: 100%;
     -unity-background-scale-mode: scale-to-fit;
+    align-items: flex-end;
+    justify-content: flex-end;
 }
 
 .header-main {

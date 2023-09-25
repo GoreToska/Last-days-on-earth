@@ -72,10 +72,8 @@ public class PlayerEquipmentManager : MonoBehaviour
         }
     }
 
-    public void OnMainWeaponEquip(Item weapon, StoredItem item)
+    public void OnMainWeaponEquip(WeaponItem weapon, StoredItem storedItem)
     {
-        Debug.Log("Drop");
-
         if (mainWeapon != null)
         {
             //  just do nothing in future
@@ -83,9 +81,9 @@ public class PlayerEquipmentManager : MonoBehaviour
             DropCurrentMainWeapon(mainWeapon);
         }
 
-        mainWeapon = Instantiate(weapon.itemPrefab, MainWeaponSocket).GetComponent<MainWeapon>();
-        mainWeapon.storedItem = item;
-        PlayerAnimationManager.Instance.SetWeaponAnimationPattern(weapon.weaponData.weaponType);
+        mainWeapon = Instantiate(weapon.data.weaponModel, MainWeaponSocket).GetComponent<MainWeapon>();
+        PlayerAnimationManager.Instance.SetWeaponAnimationPattern(weapon.data.weaponType);
+        mainWeapon.storedItem = storedItem;
     }
 
     private void DropCurrentMainWeapon(MainWeapon item)
@@ -104,8 +102,12 @@ public class PlayerEquipmentManager : MonoBehaviour
         }
         else
         {
-            Debug.Log(item.Details.itemCharacteristics.itemPrefab);
-            Instantiate(item.Details.itemCharacteristics.itemPrefab, this.transform.position, Quaternion.Euler(0, 0, 0), null);
+            var droppedItem = Instantiate(item.Data.itemCharacteristics.itemPrefab, this.transform.position, Quaternion.Euler(0, 0, 0), null);
+
+            if (item.ammoType == AmmoTypes.RifleLight)
+            {
+            }
+
             PlayerInventory.Instance.RemoveItemFromInventoryGrid(item);
         }
 

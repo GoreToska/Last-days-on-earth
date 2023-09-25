@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using UnityEditor.Animations;
 using UnityEngine;
 
-[CreateAssetMenu(fileName ="Weapon Data",menuName = "Epidemic/Data/Weapon Data")]
-public class WeaponData : ScriptableObject
+[CreateAssetMenu(fileName = "Weapon Data", menuName = "Epidemic/Data/Weapon Data")]
+public class WeaponData : ItemData
 {
     [SerializeField] public GameObject weaponModel;
     [SerializeField] public WeaponType weaponType;
-    [SerializeField] public string weaponName;
-    [SerializeField] public string weaponDescription;
+    [SerializeField] public AmmoTypes ammoType;
     [SerializeField] public float damage;
     [SerializeField] public float fireRate;
     [SerializeField] public float recoil;
@@ -26,3 +25,4 @@ public enum WeaponType
     Primary,
     Secondary
 }
+
