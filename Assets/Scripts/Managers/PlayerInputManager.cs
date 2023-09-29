@@ -48,6 +48,9 @@ public class PlayerInputManager : MonoBehaviour
     //  Pickup
     public event UnityAction PickUpEvent = delegate { };
 
+    // reload
+    public event UnityAction ReloadEvent = delegate { };
+
     private void Awake()
     {
         if (Instance == null)
@@ -97,6 +100,8 @@ public class PlayerInputManager : MonoBehaviour
             CloseInventoryEvent += () => { EnablePlayerControls(); DisableInventoryControls(); };
 
             playerInput.PlayerActions.PickUp.performed += i => PickUpEvent.Invoke();
+
+            playerInput.PlayerActions.Reload.performed += i => ReloadEvent.Invoke();
         }
 
         EnablePlayerControls();

@@ -178,18 +178,7 @@ public sealed class PlayerInventory : MonoBehaviour
                 if (LightRifleAmmoCount != 0)
                 {
                     LightRifleAmmoCount += item.count;
-
-                    foreach (var i in StoredItems)
-                    {
-                        if (i.Data.ID == item.ID)
-                        {
-                            Debug.Log("item id is it");
-                            i.Count = LightRifleAmmoCount;
-                            i.RootVisual.SetCount(LightRifleAmmoCount);
-                            return i;
-                        }
-                    }
-                    return null;
+                    return FindStoredAmmo(item);
                 }
                 else
                 {
@@ -202,18 +191,7 @@ public sealed class PlayerInventory : MonoBehaviour
                 if (HeavyRifleAmmoCount != 0)
                 {
                     HeavyRifleAmmoCount += item.count;
-
-                    foreach (var i in StoredItems)
-                    {
-                        if (i.Data.ID == item.ID)
-                        {
-                            Debug.Log("item id is it");
-                            i.Count = HeavyRifleAmmoCount;
-                            i.RootVisual.SetCount(HeavyRifleAmmoCount);
-                            return i;
-                        }
-                    }
-                    return null;
+                    return FindStoredAmmo(item);
                 }
                 else
                 {
@@ -233,6 +211,48 @@ public sealed class PlayerInventory : MonoBehaviour
             default:
                 return null;
         }
+    }
+
+    private StoredItem FindStoredAmmo(AmmoData item)
+    {
+        foreach (var i in StoredItems)
+        {
+            if (i.Data.ID == item.ID)
+            {
+                if (item.ammoType == AmmoTypes.RifleHeavy)
+                {
+                    i.Count = HeavyRifleAmmoCount;
+                    i.RootVisual.SetCount(HeavyRifleAmmoCount);
+                }
+
+                if (item.ammoType == AmmoTypes.RifleLight)
+                {
+                    i.Count = LightRifleAmmoCount;
+                    i.RootVisual.SetCount(LightRifleAmmoCount);
+                }
+
+                if (item.ammoType == AmmoTypes.Pistol)
+                {
+                    i.Count = PistolAmmoCount;
+                    i.RootVisual.SetCount(PistolAmmoCount);
+                }
+
+                if (item.ammoType == AmmoTypes.Sniper)
+                {
+                    i.Count = SniperAmmoCount;
+                    i.RootVisual.SetCount(SniperAmmoCount);
+                }
+
+                if (item.ammoType == AmmoTypes.Shotgun)
+                {
+                    i.Count = ShotgunAmmoCount;
+                    i.RootVisual.SetCount(ShotgunAmmoCount);
+                }
+
+                return i;
+            }
+        }
+        return null;
     }
 
     public async Task<bool> AddNewWeaponItem(WeaponItem weapon)
@@ -303,6 +323,111 @@ public sealed class PlayerInventory : MonoBehaviour
 
         inventoryGrid.Remove(item.RootVisual);
         StoredItems.Remove(item);
+    }
+
+    public int SubtractHeavyRifleAmmo(int value)
+    {
+        HeavyRifleAmmoCount -= value;
+
+        foreach (var item in StoredItems)
+        {
+            if (item.ammoType == AmmoTypes.RifleHeavy)
+            {
+                if (HeavyRifleAmmoCount == 0)
+                {
+                    RemoveItemFromInventoryGrid(item);
+                    return HeavyRifleAmmoCount;
+                }
+
+                item.RootVisual.SetCount(HeavyRifleAmmoCount);
+            }
+        }
+
+        return HeavyRifleAmmoCount;
+    }
+
+    public int SubtractLightRifleAmmo(int value)
+    {
+        LightRifleAmmoCount -= value;
+
+        foreach (var item in StoredItems)
+        {
+            if (item.ammoType == AmmoTypes.RifleLight)
+            {
+                if (LightRifleAmmoCount == 0)
+                {
+                    RemoveItemFromInventoryGrid(item);
+                    return LightRifleAmmoCount;
+                }
+
+                item.RootVisual.SetCount(LightRifleAmmoCount);
+            }
+        }
+
+        return LightRifleAmmoCount;
+    }
+
+    public int SubtractPistolAmmo(int value)
+    {
+        PistolAmmoCount -= value;
+
+        foreach (var item in StoredItems)
+        {
+            if (item.ammoType == AmmoTypes.Pistol)
+            {
+                if (PistolAmmoCount == 0)
+                {
+                    RemoveItemFromInventoryGrid(item);
+                    return PistolAmmoCount;
+                }
+
+                item.RootVisual.SetCount(PistolAmmoCount);
+            }
+        }
+
+        return PistolAmmoCount;
+    }
+
+    public int SubtractSniperAmmo(int value)
+    {
+        SniperAmmoCount -= value;
+
+        foreach (var item in StoredItems)
+        {
+            if (item.ammoType == AmmoTypes.Sniper)
+            {
+                if (SniperAmmoCount == 0)
+                {
+                    RemoveItemFromInventoryGrid(item);
+                    return SniperAmmoCount;
+                }
+
+                item.RootVisual.SetCount(SniperAmmoCount);
+            }
+        }
+
+        return SniperAmmoCount;
+    }
+
+    public int SubtractShotgunAmmo(int value)
+    {
+        ShotgunAmmoCount -= value;
+
+        foreach (var item in StoredItems)
+        {
+            if (item.ammoType == AmmoTypes.Shotgun)
+            {
+                if (ShotgunAmmoCount == 0)
+                {
+                    RemoveItemFromInventoryGrid(item);
+                    return ShotgunAmmoCount;
+                }
+
+                item.RootVisual.SetCount(ShotgunAmmoCount);
+            }
+        }
+
+        return ShotgunAmmoCount;
     }
 
     private static void ConfigureInventoryItem(StoredItem item, ItemVisual visual)

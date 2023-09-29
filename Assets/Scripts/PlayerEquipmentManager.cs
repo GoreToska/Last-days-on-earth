@@ -35,6 +35,7 @@ public class PlayerEquipmentManager : MonoBehaviour
 
         PlayerInputManager.Instance.PickUpEvent += TryToPickUp;
         PlayerInputManager.Instance.AttackEvent += TryToPerformAttack;
+        PlayerInputManager.Instance.ReloadEvent += TryToPerformReload;
     }
 
     private void OnEnable()
@@ -47,6 +48,7 @@ public class PlayerEquipmentManager : MonoBehaviour
     {
         PlayerInputManager.Instance.AttackEvent -= TryToPerformAttack;
         PlayerInputManager.Instance.PickUpEvent -= TryToPickUp;
+        PlayerInputManager.Instance.ReloadEvent -= TryToPerformReload;
     }
 
     private void TryToPerformAttack()
@@ -54,6 +56,14 @@ public class PlayerEquipmentManager : MonoBehaviour
         if (mainWeapon && PlayerInputManager.Instance.IsAiming)
         {
             mainWeapon.PerformAttack();
+        }
+    }
+
+    private void TryToPerformReload()
+    {
+        if(mainWeapon)
+        {
+            mainWeapon.PerformReload();
         }
     }
 

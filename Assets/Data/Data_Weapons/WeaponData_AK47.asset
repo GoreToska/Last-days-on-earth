@@ -32,7 +32,7 @@ MonoBehaviour:
   damage: 50
   fireRate: 0
   recoil: 0
-  magazineSize: 0
+  magazineSize: 30
   reloadAnimationName: 
   shotVolumeRadius: 0
   isAuto: 1

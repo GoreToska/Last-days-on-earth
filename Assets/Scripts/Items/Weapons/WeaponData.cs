@@ -12,7 +12,7 @@ public class WeaponData : ItemData
     [SerializeField] public float damage;
     [SerializeField] public float fireRate;
     [SerializeField] public float recoil;
-    [SerializeField] public float magazineSize;
+    [SerializeField] public int magazineSize;
     [SerializeField] public string reloadAnimationName;
     [SerializeField] public float shotVolumeRadius;
     [SerializeField] public bool isAuto;
