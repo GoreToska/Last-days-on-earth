@@ -9,6 +9,7 @@ public class PlayerUIManager : MonoBehaviour
 
     [Header("UI Windows")]
     [SerializeField] private UIDocument inventory;
+    [SerializeField] private UIDocument HUD;
 
     [Header("Status Bars")]
     [SerializeField] private StatusBar hpBar;

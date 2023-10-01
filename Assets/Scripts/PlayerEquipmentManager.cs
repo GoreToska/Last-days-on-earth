@@ -94,6 +94,7 @@ public class PlayerEquipmentManager : MonoBehaviour
         mainWeapon = Instantiate(weapon.data.weaponModel, MainWeaponSocket).GetComponent<MainWeapon>();
         PlayerAnimationManager.Instance.SetWeaponAnimationPattern(weapon.data.weaponType);
         mainWeapon.storedItem = storedItem;
+        mainWeapon.SetBulletStatus();
     }
 
     private void DropCurrentMainWeapon(MainWeapon item)

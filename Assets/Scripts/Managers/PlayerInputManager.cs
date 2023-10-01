@@ -38,6 +38,7 @@ public class PlayerInputManager : MonoBehaviour
     [SerializeField] public LayerMask aimMask;
     public RaycastHit hitInfo;
 
+    public bool isShooting = false;
     public event UnityAction AttackEvent = delegate { };
 
     //  Inventory

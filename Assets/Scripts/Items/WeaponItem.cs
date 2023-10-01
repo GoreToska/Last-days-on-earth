@@ -16,7 +16,6 @@ public class WeaponItem : Item
             Destroy(gameObject);
             
             // UI popup "YOU TAKE ITEM_NAME"
-
             return true;
         }
 

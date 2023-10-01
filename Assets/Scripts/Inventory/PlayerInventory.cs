@@ -24,9 +24,9 @@ public sealed class PlayerInventory : MonoBehaviour
     //  Move to its own scriptable object
     [SerializeField] public int LightRifleAmmoCount = 0;
     [SerializeField] public int HeavyRifleAmmoCount = 0;
-    [SerializeField] private int PistolAmmoCount { get; set; } = 0;
-    [SerializeField] private int SniperAmmoCount { get; set; } = 0;
-    [SerializeField] private int ShotgunAmmoCount { get; set; } = 0;
+    [SerializeField] public int PistolAmmoCount = 0;
+    [SerializeField] public int SniperAmmoCount = 0;
+    [SerializeField] public int ShotgunAmmoCount = 0;
 
     public static ItemData.ItemCharacteristic SlotDimension { get; private set; }
 
@@ -65,11 +65,6 @@ public sealed class PlayerInventory : MonoBehaviour
     private void OnDisable()
     {
         buttonDrop.clicked -= () => PlayerEquipmentManager.Instance.DropStoredItem(currentItem);
-    }
-
-    private void FixedUpdate()
-    {
-        Debug.Log(PlayerEquipmentManager.Instance.itemsToPickUp.Count);
     }
 
     //  find all references and set any initial values needed

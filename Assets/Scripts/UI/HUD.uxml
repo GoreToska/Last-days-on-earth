@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Scripts/UI/InventoryStyleSheet.uss?fileID=7433441132597879392&amp;guid=78be7916bbff29f4b984524a62b2205f&amp;type=3#InventoryStyleSheet" />
+    <ui:VisualElement name="Ammo_Info_Container" style="flex-grow: 0; height: 10%; left: 40px; top: 939px; right: 1532px; bottom: 40px; position: absolute; width: 20%; flex-direction: row; justify-content: flex-start; align-items: center;">
+        <ui:VisualElement name="Bullet_Icon" style="flex-grow: 0; width: 100px; height: 100px; justify-content: flex-start; background-image: url(&apos;project://database/Assets/Art/Images/UI/pngwing.com%20(3).png?fileID=2800000&amp;guid=d5591b2a405fabf49b14117a8c98fcfe&amp;type=3#pngwing.com (3)&apos;); -unity-background-image-tint-color: rgb(255, 255, 255); background-color: rgba(0, 0, 0, 0);" />
+        <ui:Label text="0" display-tooltip-when-elided="true" name="Bullets_Status" enable-rich-text="true" class="header-main" />
+    </ui:VisualElement>
+</ui:UXML>

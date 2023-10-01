@@ -37,3 +37,4 @@ MonoBehaviour:
   shotVolumeRadius: 0
   isAuto: 1
   drawSight: 0
+  trailRenderer: {fileID: 11400000, guid: 802ef637ed22cea458f99beaf4209c1a, type: 2}

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Animations;
 using UnityEngine;
+using UnityEngine.Pool;
 
 [CreateAssetMenu(fileName = "Weapon Data", menuName = "Epidemic/Data/Weapon Data")]
 public class WeaponData : ItemData
@@ -17,6 +18,7 @@ public class WeaponData : ItemData
     [SerializeField] public float shotVolumeRadius;
     [SerializeField] public bool isAuto;
     [SerializeField] public bool drawSight;
+    [SerializeField] public BulletTrailData trailRenderer;
 }
 
 public enum WeaponType
