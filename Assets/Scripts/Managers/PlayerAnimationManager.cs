@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 
@@ -9,6 +8,10 @@ public class PlayerAnimationManager : MonoBehaviour
     [HideInInspector] public static PlayerAnimationManager Instance;
 
     [SerializeField] private Rig rifleRig;
+
+    [Header("Animations")]
+    [SerializeField] private AnimationClip rifleReloadingAnimation;
+    [SerializeField] private float rifleReloadingAnimationOffset = 0.75f;
 
     private Animator animator;
 
@@ -64,13 +67,33 @@ public class PlayerAnimationManager : MonoBehaviour
         }
     }
 
-    private void SetRifleRig()
+    public void PlayRifleReloadAnimation()
+    {
+        //SetDefaultRig();
+        //animator.Play("Rifle_Reload_01");
+
+        StartCoroutine(PlayRifleReloadAnimationCoroutine());
+    }
+
+    private IEnumerator PlayRifleReloadAnimationCoroutine()
+    {
+        SetDefaultRig();
+        animator.Play("Rifle_Reload_01");
+
+        yield return new WaitForSeconds(rifleReloadingAnimation.length - rifleReloadingAnimationOffset);
+
+        SetRifleRig();
+
+        yield return null;
+    }
+
+    public void SetRifleRig()
     {
         // other rigs too
         rifleRig.weight = 1f;
     }
 
-    private void SetDefaultRig()
+    public void SetDefaultRig()
     {
         // other rigs too
         rifleRig.weight = 0f;

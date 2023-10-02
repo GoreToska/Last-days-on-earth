@@ -63,7 +63,7 @@ public class MainWeapon : MonoBehaviour, IWeapon, IReloadableWeapon
         var ray = Physics.Raycast(burrel.transform.position, burrel.transform.forward, out var hit, Mathf.Infinity, PlayerInputManager.Instance.aimMask);
         Debug.DrawRay(burrel.transform.position, burrel.transform.forward * 100f, Color.green, 2);
 
-        StartCoroutine(PlayTrail(burrel.transform.position, hit.point, hit ));
+        StartCoroutine(PlayTrail(burrel.transform.position, hit.point, hit));
 
         if (ray && hit.collider.tag == "Damagable")
         {
@@ -83,19 +83,19 @@ public class MainWeapon : MonoBehaviour, IWeapon, IReloadableWeapon
 
         float distance = Vector3.Distance(startPoint, endPoint);
         float remainingDistance = distance;
-       
+
         while (remainingDistance > 0)
         {
-            instance.transform.position = Vector3.Lerp(startPoint, endPoint, 
+            instance.transform.position = Vector3.Lerp(startPoint, endPoint,
                 Mathf.Clamp01(1 - (remainingDistance / distance)));
             remainingDistance -= weaponData.trailRenderer.SimulationSpeed * Time.deltaTime;
-            
+
             yield return null;
         }
 
         instance.transform.position = endPoint;
 
-        if(hit.collider != null)
+        if (hit.collider != null)
         {
             //  impact
         }
@@ -113,8 +113,11 @@ public class MainWeapon : MonoBehaviour, IWeapon, IReloadableWeapon
         {
             if (PlayerInventory.Instance.HeavyRifleAmmoCount > 0 && bullets < weaponData.magazineSize)
             {
+                PlayerAnimationManager.Instance.PlayRifleReloadAnimation();
+
                 int ammoToLoad = weaponData.magazineSize - bullets;
-                //  perform animation
+
+
                 if (PlayerInventory.Instance.HeavyRifleAmmoCount / ammoToLoad >= 1)
                 {
                     PlayerInventory.Instance.SubtractHeavyRifleAmmo(ammoToLoad);
