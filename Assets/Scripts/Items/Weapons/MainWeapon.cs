@@ -114,27 +114,29 @@ public class MainWeapon : MonoBehaviour, IWeapon, IReloadableWeapon
             if (PlayerInventory.Instance.HeavyRifleAmmoCount > 0 && bullets < weaponData.magazineSize)
             {
                 PlayerAnimationManager.Instance.PlayRifleReloadAnimation();
-
-                int ammoToLoad = weaponData.magazineSize - bullets;
-
-
-                if (PlayerInventory.Instance.HeavyRifleAmmoCount / ammoToLoad >= 1)
-                {
-                    PlayerInventory.Instance.SubtractHeavyRifleAmmo(ammoToLoad);
-                    bullets += ammoToLoad;
-                }
-                else
-                {
-                    ammoToLoad = PlayerInventory.Instance.HeavyRifleAmmoCount;
-                    PlayerInventory.Instance.SubtractHeavyRifleAmmo(ammoToLoad);
-                    bullets += ammoToLoad;
-                }
-
-                Debug.Log("Loaded " + ammoToLoad);
-                HUDManager.Instance.UpdateBulletsStatus(bullets);
             }
-
         }
+    }
+
+    public void LoadMagazine()
+    {
+        int ammoToLoad = weaponData.magazineSize - bullets;
+
+
+        if (PlayerInventory.Instance.HeavyRifleAmmoCount / ammoToLoad >= 1)
+        {
+            PlayerInventory.Instance.SubtractHeavyRifleAmmo(ammoToLoad);
+            bullets += ammoToLoad;
+        }
+        else
+        {
+            ammoToLoad = PlayerInventory.Instance.HeavyRifleAmmoCount;
+            PlayerInventory.Instance.SubtractHeavyRifleAmmo(ammoToLoad);
+            bullets += ammoToLoad;
+        }
+
+        Debug.Log("Loaded " + ammoToLoad);
+        HUDManager.Instance.UpdateBulletsStatus(bullets);
     }
 
     private TrailRenderer CreateTrail()

@@ -78,10 +78,13 @@ public class PlayerAnimationManager : MonoBehaviour
     private IEnumerator PlayRifleReloadAnimationCoroutine()
     {
         SetDefaultRig();
+        PlayerInputManager.Instance.DisableCombatControls();
         animator.Play("Rifle_Reload_01");
-
+        
         yield return new WaitForSeconds(rifleReloadingAnimation.length - rifleReloadingAnimationOffset);
 
+        PlayerEquipmentManager.Instance.mainWeapon.LoadMagazine();
+        PlayerInputManager.Instance.EnableCombatControls();
         SetRifleRig();
 
         yield return null;

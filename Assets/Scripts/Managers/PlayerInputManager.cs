@@ -189,6 +189,17 @@ public class PlayerInputManager : MonoBehaviour
         playerInput.Inventory.Enable();
     }
 
+    public void DisableCombatControls()
+    {
+        isAiming = false;
+        playerInput.PlayerCombat.Disable();
+    }
+
+    public void EnableCombatControls()
+    {
+        playerInput.PlayerCombat.Enable();
+    }
+
     public float VerticalInput { get { return verticalInput; } }
 
     public float HorizontalInput { get { return horizontalInput; } }
