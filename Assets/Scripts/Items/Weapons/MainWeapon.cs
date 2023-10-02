@@ -8,7 +8,8 @@ using UnityEngine.Pool;
 public class MainWeapon : MonoBehaviour, IWeapon, IReloadableWeapon
 {
     [SerializeField] private WeaponData weaponData;
-    [SerializeField] protected GameObject burrel;
+    [SerializeField] private GameObject burrel;
+    [SerializeField] private ParticleSystem muzzleFlash; 
 
     [Header("Prefab of this weapon for dropping it on ground")]
     [SerializeField] public GameObject itemPrefab;
@@ -73,6 +74,7 @@ public class MainWeapon : MonoBehaviour, IWeapon, IReloadableWeapon
 
     private IEnumerator PlayTrail(Vector3 startPoint, Vector3 endPoint, RaycastHit hit)
     {
+        muzzleFlash.Play();
         TrailRenderer instance = trailRendererPool.Get();
         instance.gameObject.SetActive(true);
         instance.transform.position = startPoint;

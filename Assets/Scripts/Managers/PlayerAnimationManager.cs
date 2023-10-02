@@ -79,8 +79,8 @@ public class PlayerAnimationManager : MonoBehaviour
     {
         SetDefaultRig();
         PlayerInputManager.Instance.DisableCombatControls();
-        animator.Play("Rifle_Reload_01");
-        
+        animator.CrossFade("Rifle_Reload_01", 0.1f);
+
         yield return new WaitForSeconds(rifleReloadingAnimation.length - rifleReloadingAnimationOffset);
 
         PlayerEquipmentManager.Instance.mainWeapon.LoadMagazine();

@@ -83,3 +83,23 @@ VisualElement {
     position: absolute;
     visibility: hidden;
 }
+
+.hp-bar .unity-progress-bar__progress {
+    background-color: rgb(178,34,34);
+    border-radius: 10px;
+    border-width: 0px;
+    margin: 0;
+} 
+
+.hp-bar .unity-progress-bar__container {
+    background-color: rgba(0,0,0,0);
+    border-radius: 10px;
+    border-width: 0px;
+} 
+
+.hp-bar .unity-progress-bar__background {
+    background-color: rgba(255,255,255,0);
+    border-radius: 13px;
+    border-width: 2px;
+    border-color: rgb(178,34,34);
+} 
