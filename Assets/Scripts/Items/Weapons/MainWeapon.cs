@@ -9,7 +9,7 @@ public class MainWeapon : MonoBehaviour, IWeapon, IReloadableWeapon
 {
     [SerializeField] private WeaponData weaponData;
     [SerializeField] private GameObject burrel;
-    [SerializeField] private ParticleSystem muzzleFlash; 
+    [SerializeField] private ParticleSystem muzzleFlash;
 
     [Header("Prefab of this weapon for dropping it on ground")]
     [SerializeField] public GameObject itemPrefab;
@@ -36,6 +36,7 @@ public class MainWeapon : MonoBehaviour, IWeapon, IReloadableWeapon
         }
 
         bullets--;
+        PlayerAnimationManager.Instance.PlayRifleMediumShot();
 
         #region Ammo Status Update (refactor)
         if (weaponData.ammoType == AmmoTypes.RifleLight)

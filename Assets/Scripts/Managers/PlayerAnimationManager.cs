@@ -67,6 +67,21 @@ public class PlayerAnimationManager : MonoBehaviour
         }
     }
 
+    public void PlayRifleLightShot()
+    {
+        animator.SetTrigger("RifleLightShot");
+    }
+
+    public void PlayRifleMediumShot()
+    {
+        animator.SetTrigger("RifleMediumShot");
+    }
+
+    public void PlayRifleHeavyShot()
+    {
+        animator.SetTrigger("RifleHeavyShot");
+    }
+
     public void PlayRifleReloadAnimation()
     {
         //SetDefaultRig();
