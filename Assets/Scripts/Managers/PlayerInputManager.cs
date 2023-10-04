@@ -91,6 +91,8 @@ public class PlayerInputManager : MonoBehaviour
 
             playerInput.PlayerCombat.Aim.performed += i => isAiming = !isAiming;
 
+            playerInput.PlayerCombat.Attack.performed += i => isShooting = true;
+            playerInput.PlayerCombat.Attack.canceled += i => isShooting = false;
             playerInput.PlayerCombat.Attack.performed += i => AttackEvent.Invoke();
 
             playerInput.PlayerActions.OpenInventory.performed += i => OpenInventoryEvent.Invoke();

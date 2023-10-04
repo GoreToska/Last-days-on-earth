@@ -29,12 +29,49 @@ public class MainWeapon : MonoBehaviour, IWeapon, IReloadableWeapon
 
     public void PerformAttack()
     {
-        if (bullets == 0)
+        if (!PlayerInputManager.Instance.isShooting)
         {
-            // sound click of empty magazine
             return;
         }
 
+        StartCoroutine(PerformShot());
+    }
+
+    private IEnumerator PerformShot()
+    {
+        if (weaponData.isAuto)
+        {
+            while (PlayerInputManager.Instance.isShooting)
+            {
+                if (bullets == 0)
+                {
+                    // sound click of empty magazine
+                    yield break;
+                }
+
+                ShotLogic();
+
+                yield return new WaitForSeconds(60f / weaponData.fireRate);
+            }
+
+            yield break;
+        }
+        else
+        {
+            if (bullets == 0)
+            {
+                // sound click of empty magazine
+                yield break;
+            }
+
+            ShotLogic();
+            PlayerInputManager.Instance.isShooting = false;
+        }
+
+    }
+
+    private void ShotLogic()
+    {
         bullets--;
         PlayerAnimationManager.Instance.PlayRifleMediumShot();
 

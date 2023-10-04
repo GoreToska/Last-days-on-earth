@@ -33,8 +33,8 @@ public class PlayerEquipmentManager : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
 
-        PlayerInputManager.Instance.PickUpEvent += TryToPickUp;
         PlayerInputManager.Instance.AttackEvent += TryToPerformAttack;
+        PlayerInputManager.Instance.PickUpEvent += TryToPickUp;
         PlayerInputManager.Instance.ReloadEvent += TryToPerformReload;
     }
 

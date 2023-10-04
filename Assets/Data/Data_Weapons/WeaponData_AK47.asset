@@ -30,7 +30,7 @@ MonoBehaviour:
   weaponType: 1
   ammoType: 1
   damage: 50
-  fireRate: 0
+  fireRate: 600
   recoil: 0
   magazineSize: 30
   reloadAnimationName: 
