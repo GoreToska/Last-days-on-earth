@@ -61,9 +61,19 @@ public class PlayerEquipmentManager : MonoBehaviour
 
     private void TryToPerformReload()
     {
-        if(mainWeapon)
+        if (mainWeapon)
         {
-            mainWeapon.PerformReload();
+            if (mainWeapon is HeavyRifleWeapon)
+            {
+                var a = mainWeapon as HeavyRifleWeapon;
+                a.PerformReload();
+            }
+            else if (mainWeapon is LightRifleWeapon)
+            {
+                var a = mainWeapon as LightRifleWeapon;
+                a.PerformReload();
+            }
+            //else if(mainWeapon) other weapon types
         }
     }
 
@@ -88,7 +98,7 @@ public class PlayerEquipmentManager : MonoBehaviour
         {
             //  just do nothing in future
             Debug.Log(weapon.ToString());
-            DropCurrentMainWeapon(mainWeapon);
+            DropCurrentMainWeapon(mainWeapon, false);
         }
 
         mainWeapon = Instantiate(weapon.data.weaponModel, MainWeaponSocket).GetComponent<MainWeapon>();
@@ -97,12 +107,16 @@ public class PlayerEquipmentManager : MonoBehaviour
         mainWeapon.SetBulletStatus();
     }
 
-    private void DropCurrentMainWeapon(MainWeapon item)
+    private void DropCurrentMainWeapon(MainWeapon item, bool setDefaultRig = true)
     {
         PlayerInventory.Instance.RemoveItemFromInventoryGrid(item.storedItem);
         Instantiate(item.itemPrefab, this.transform.position, Quaternion.Euler(0, 0, 90), null);
-        PlayerAnimationManager.Instance.SetWeaponAnimationPattern(WeaponType.None);
         Destroy(item.gameObject);
+
+        if (setDefaultRig)
+        {
+            PlayerAnimationManager.Instance.SetWeaponAnimationPattern(WeaponType.None);
+        }
     }
 
     public void DropStoredItem(StoredItem item)

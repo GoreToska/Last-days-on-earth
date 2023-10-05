@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 2577387878095500292}
   - component: {fileID: 2572340140226302000}
   - component: {fileID: 2564997885568907068}
-  - component: {fileID: 7614745045166465685}
+  - component: {fileID: 4058779978080920016}
   m_Layer: 0
   m_Name: Weapon_AK47
   m_TagString: Untagged
@@ -171,7 +171,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &7614745045166465685
+--- !u!114 &4058779978080920016
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -180,7 +180,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2579492733345702338}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6755c51d48331ed49b7950b3b8ba5784, type: 3}
+  m_Script: {fileID: 11500000, guid: 34416c179df498849ac2d348c695acdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   weaponData: {fileID: 11400000, guid: 00ac4c289b4958943b8e5950d7585b57, type: 2}
@@ -190,10 +190,10 @@ MonoBehaviour:
     type: 3}
   bullets: 0
   storedItem:
-    Data: {fileID: 0}
+    Data: {fileID: 11400000, guid: 00ac4c289b4958943b8e5950d7585b57, type: 2}
     Count: 0
     ItemType: 0
-    ammoType: 0
+    ammoType: 1
 --- !u!1 &2580116869321669320
 GameObject:
   m_ObjectHideFlags: 0

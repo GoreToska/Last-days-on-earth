@@ -9,7 +9,6 @@ public class DamagableCharacter : MonoBehaviour, IDamagable
     public void TakeDamage(float damage)
     {
         HP -= damage;
-        Debug.Log(HP);
 
         if (HP <= 0)
         {

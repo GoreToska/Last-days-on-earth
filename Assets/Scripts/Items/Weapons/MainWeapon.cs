@@ -7,27 +7,27 @@ using UnityEngine.Pool;
 
 public class MainWeapon : MonoBehaviour, IWeapon, IReloadableWeapon
 {
-    [SerializeField] private WeaponData weaponData;
-    [SerializeField] private GameObject burrel;
-    [SerializeField] private ParticleSystem muzzleFlash;
+    [SerializeField] protected WeaponData weaponData;
+    [SerializeField] protected GameObject burrel;
+    [SerializeField] protected ParticleSystem muzzleFlash;
 
     [Header("Prefab of this weapon for dropping it on ground")]
     [SerializeField] public GameObject itemPrefab;
 
-    [SerializeField] public int bullets = 0;
+    [SerializeField] protected int bullets = 0;
 
-    private ParticleSystem particleSystem;
-    private ObjectPool<TrailRenderer> trailRendererPool;
+    protected ParticleSystem particleSystem;
+    protected ObjectPool<TrailRenderer> trailRendererPool;
 
     public StoredItem storedItem;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         particleSystem = GetComponentInChildren<ParticleSystem>();
         trailRendererPool = new ObjectPool<TrailRenderer>(CreateTrail);
     }
 
-    public void PerformAttack()
+    public virtual void PerformAttack()
     {
         if (!PlayerInputManager.Instance.isShooting)
         {
@@ -37,7 +37,7 @@ public class MainWeapon : MonoBehaviour, IWeapon, IReloadableWeapon
         StartCoroutine(PerformShot());
     }
 
-    private IEnumerator PerformShot()
+    protected virtual IEnumerator PerformShot()
     {
         if (weaponData.isAuto)
         {
@@ -70,39 +70,40 @@ public class MainWeapon : MonoBehaviour, IWeapon, IReloadableWeapon
 
     }
 
-    private void ShotLogic()
+    protected virtual void ShotLogic()
     {
         bullets--;
-        PlayerAnimationManager.Instance.PlayRifleMediumShot();
 
-        #region Ammo Status Update (refactor)
-        if (weaponData.ammoType == AmmoTypes.RifleLight)
-        {
-            HUDManager.Instance.UpdateBulletsStatus(bullets);
-        }
+        //#region Ammo Status Update (refactor)
+        //if (weaponData.ammoType == AmmoTypes.RifleLight)
+        //{
+        //    HUDManager.Instance.UpdateBulletsStatus(bullets);
+        //}
 
-        if (weaponData.ammoType == AmmoTypes.RifleHeavy)
-        {
-            HUDManager.Instance.UpdateBulletsStatus(bullets);
-        }
+        //if (weaponData.ammoType == AmmoTypes.Sniper)
+        //{
+        //    HUDManager.Instance.UpdateBulletsStatus(bullets);
+        //}
 
-        if (weaponData.ammoType == AmmoTypes.Sniper)
-        {
-            HUDManager.Instance.UpdateBulletsStatus(bullets);
-        }
-
-        if (weaponData.ammoType == AmmoTypes.Shotgun)
-        {
-            HUDManager.Instance.UpdateBulletsStatus(bullets);
-        }
-        #endregion
+        //if (weaponData.ammoType == AmmoTypes.Shotgun)
+        //{
+        //    HUDManager.Instance.UpdateBulletsStatus(bullets);
+        //}
+        //#endregion
 
         var (success, position) = PlayerInputManager.Instance.GetMousePosition();
 
-        var ray = Physics.Raycast(burrel.transform.position, burrel.transform.forward, out var hit, Mathf.Infinity, PlayerInputManager.Instance.aimMask);
-        Debug.DrawRay(burrel.transform.position, burrel.transform.forward * 100f, Color.green, 2);
+        var ray = Physics.SphereCast(burrel.transform.position, 0.15f, burrel.transform.forward, out var hit, Mathf.Infinity, PlayerInputManager.Instance.aimMask);
+        Debug.DrawRay(burrel.transform.position, hit.point, Color.green, 2);
 
-        StartCoroutine(PlayTrail(burrel.transform.position, hit.point, hit));
+        if (hit.point != Vector3.zero)
+        {
+            StartCoroutine(PlayTrail(burrel.transform.position, hit.point, hit));
+        }
+        else
+        {
+            StartCoroutine(PlayTrail(burrel.transform.position, position, hit));
+        }
 
         if (ray && hit.collider.tag == "Damagable")
         {
@@ -110,7 +111,7 @@ public class MainWeapon : MonoBehaviour, IWeapon, IReloadableWeapon
         }
     }
 
-    private IEnumerator PlayTrail(Vector3 startPoint, Vector3 endPoint, RaycastHit hit)
+    protected virtual IEnumerator PlayTrail(Vector3 startPoint, Vector3 endPoint, RaycastHit hit)
     {
         muzzleFlash.Play();
         TrailRenderer instance = trailRendererPool.Get();
@@ -147,39 +148,18 @@ public class MainWeapon : MonoBehaviour, IWeapon, IReloadableWeapon
         trailRendererPool.Release(instance);
     }
 
-    public void PerformReload()
+    public virtual void PerformReload()
     {
-        if (weaponData.ammoType == AmmoTypes.RifleHeavy)
-        {
-            if (PlayerInventory.Instance.HeavyRifleAmmoCount > 0 && bullets < weaponData.magazineSize)
-            {
-                PlayerAnimationManager.Instance.PlayRifleReloadAnimation();
-            }
-        }
+        Debug.Log("Reload");
     }
 
-    public void LoadMagazine()
+    public virtual void LoadMagazine()
     {
-        int ammoToLoad = weaponData.magazineSize - bullets;
-
-
-        if (PlayerInventory.Instance.HeavyRifleAmmoCount / ammoToLoad >= 1)
-        {
-            PlayerInventory.Instance.SubtractHeavyRifleAmmo(ammoToLoad);
-            bullets += ammoToLoad;
-        }
-        else
-        {
-            ammoToLoad = PlayerInventory.Instance.HeavyRifleAmmoCount;
-            PlayerInventory.Instance.SubtractHeavyRifleAmmo(ammoToLoad);
-            bullets += ammoToLoad;
-        }
-
-        Debug.Log("Loaded " + ammoToLoad);
         HUDManager.Instance.UpdateBulletsStatus(bullets);
+        Debug.Log("Loaded " + bullets);
     }
 
-    private TrailRenderer CreateTrail()
+    protected virtual TrailRenderer CreateTrail()
     {
         GameObject instance = new GameObject("Bullet Trail");
         TrailRenderer trail = instance.AddComponent<TrailRenderer>();
@@ -195,28 +175,7 @@ public class MainWeapon : MonoBehaviour, IWeapon, IReloadableWeapon
         return trail;
     }
 
-    public void SetBulletStatus()
+    public virtual void SetBulletStatus()
     {
-        #region Ammo Status Update (refactor)
-        if (weaponData.ammoType == AmmoTypes.RifleLight)
-        {
-            HUDManager.Instance.UpdateBulletsStatus(bullets);
-        }
-
-        if (weaponData.ammoType == AmmoTypes.RifleHeavy)
-        {
-            HUDManager.Instance.UpdateBulletsStatus(bullets);
-        }
-
-        if (weaponData.ammoType == AmmoTypes.Sniper)
-        {
-            HUDManager.Instance.UpdateBulletsStatus(bullets);
-        }
-
-        if (weaponData.ammoType == AmmoTypes.Shotgun)
-        {
-            HUDManager.Instance.UpdateBulletsStatus(bullets);
-        }
-        #endregion
     }
 }
