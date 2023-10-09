@@ -11,6 +11,7 @@ namespace TheKiwiCoder {
     // Feel free to extend this class 
     public class Context {
         public GameObject gameObject;
+        public GameObject characterReference;
         public Transform transform;
         public Animator animator;
         public Rigidbody physics;
