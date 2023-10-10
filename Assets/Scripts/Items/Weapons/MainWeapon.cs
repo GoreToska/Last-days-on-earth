@@ -107,7 +107,7 @@ public class MainWeapon : MonoBehaviour, IWeapon, IReloadableWeapon
 
         if (ray && hit.collider.tag == "Damagable")
         {
-            hit.collider.GetComponent<DamagableCharacter>().TakeDamage(weaponData.damage);
+            hit.collider.GetComponent<HitBox>().GetDamage(weaponData.damage);
         }
     }
 
