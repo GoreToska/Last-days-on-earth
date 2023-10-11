@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Pool;
 
-public class MainWeapon : MonoBehaviour, IWeapon, IReloadableWeapon
+public class MainWeapon : RangeWeapon
 {
     [SerializeField] protected WeaponData weaponData;
     [SerializeField] protected GameObject burrel;
@@ -21,13 +21,13 @@ public class MainWeapon : MonoBehaviour, IWeapon, IReloadableWeapon
 
     public StoredItem storedItem;
 
-    protected virtual void Awake()
+    protected override void Awake()
     {
         particleSystem = GetComponentInChildren<ParticleSystem>();
         trailRendererPool = new ObjectPool<TrailRenderer>(CreateTrail);
     }
 
-    public virtual void PerformAttack()
+    public override void PerformAttack()
     {
         if (!PlayerInputManager.Instance.isShooting)
         {
@@ -37,7 +37,7 @@ public class MainWeapon : MonoBehaviour, IWeapon, IReloadableWeapon
         StartCoroutine(PerformShot());
     }
 
-    protected virtual IEnumerator PerformShot()
+    protected override IEnumerator PerformShot()
     {
         if (weaponData.isAuto)
         {
@@ -70,7 +70,7 @@ public class MainWeapon : MonoBehaviour, IWeapon, IReloadableWeapon
 
     }
 
-    protected virtual void ShotLogic()
+    protected override void ShotLogic()
     {
         bullets--;
 
@@ -111,7 +111,7 @@ public class MainWeapon : MonoBehaviour, IWeapon, IReloadableWeapon
         }
     }
 
-    protected virtual IEnumerator PlayTrail(Vector3 startPoint, Vector3 endPoint, RaycastHit hit)
+    protected override IEnumerator PlayTrail(Vector3 startPoint, Vector3 endPoint, RaycastHit hit)
     {
         muzzleFlash.Play();
         TrailRenderer instance = trailRendererPool.Get();
@@ -148,18 +148,18 @@ public class MainWeapon : MonoBehaviour, IWeapon, IReloadableWeapon
         trailRendererPool.Release(instance);
     }
 
-    public virtual void PerformReload()
+    public override void PerformReload()
     {
         Debug.Log("Reload");
     }
 
-    public virtual void LoadMagazine()
+    public override void LoadMagazine()
     {
         HUDManager.Instance.UpdateBulletsStatus(bullets);
         Debug.Log("Loaded " + bullets);
     }
 
-    protected virtual TrailRenderer CreateTrail()
+    protected override TrailRenderer CreateTrail()
     {
         GameObject instance = new GameObject("Bullet Trail");
         TrailRenderer trail = instance.AddComponent<TrailRenderer>();
@@ -175,7 +175,7 @@ public class MainWeapon : MonoBehaviour, IWeapon, IReloadableWeapon
         return trail;
     }
 
-    public virtual void SetBulletStatus()
+    public override void SetBulletStatus()
     {
     }
 }

@@ -63,16 +63,17 @@ public class PlayerEquipmentManager : MonoBehaviour
     {
         if (mainWeapon)
         {
-            if (mainWeapon is HeavyRifleWeapon)
-            {
-                var a = mainWeapon as HeavyRifleWeapon;
-                a.PerformReload();
-            }
-            else if (mainWeapon is LightRifleWeapon)
-            {
-                var a = mainWeapon as LightRifleWeapon;
-                a.PerformReload();
-            }
+            mainWeapon.PerformReload();
+            //if (mainWeapon is HeavyRifleWeapon)
+            //{
+            //    var a = mainWeapon as HeavyRifleWeapon;
+            //    a.PerformReload();
+            //}
+            //else if (mainWeapon is LightRifleWeapon)
+            //{
+            //    var a = mainWeapon as LightRifleWeapon;
+            //    a.PerformReload();
+            //}
             //else if(mainWeapon) other weapon types
         }
     }
