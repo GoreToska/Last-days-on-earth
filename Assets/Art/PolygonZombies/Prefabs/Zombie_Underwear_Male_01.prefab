@@ -8999,11 +8999,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4378302944070100}
   - component: {fileID: 95791246582969478}
-  - component: {fileID: 652092357}
   - component: {fileID: 652092358}
   - component: {fileID: 7941019007364334733}
-  - component: {fileID: 652092351}
+  - component: {fileID: 1459665509349020881}
   - component: {fileID: 652092354}
+  - component: {fileID: 587791636}
   m_Layer: 0
   m_Name: Zombie_Underwear_Male_01
   m_TagString: Damagable
@@ -9098,28 +9098,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &652092357
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1965423065467750}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3825e4d5d308e97448bcdee3d7d1ac7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  angle: 90
-  radius: 18
-  updateDelay: 0.2
-  targetsMask:
-    serializedVersion: 2
-    m_Bits: 64
-  obstaclesMask:
-    serializedVersion: 2
-    m_Bits: 1
-  canSeePlayer: 0
 --- !u!114 &652092358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9132,7 +9110,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec916e9a80ece4243ad4493359c1d868, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetTransform: {fileID: 0}
 --- !u!114 &7941019007364334733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9145,7 +9122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 532dc35b5f5cdcc4eb5083dd22b1c998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &652092351
+--- !u!114 &1459665509349020881
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9154,10 +9131,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1965423065467750}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00e847c3ffbc7b64499fb102553608df, type: 3}
+  m_Script: {fileID: 11500000, guid: 9be43bcb0812a504e9c0ebae12f4625f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 100
+  config: {fileID: 11400000, guid: 553a50df333da904890695ee29dc19ad, type: 2}
+  targetTransform: {fileID: 0}
+  initialStateID: 2
+  navMeshAgent: {fileID: 0}
+  ragdoll: {fileID: 0}
 --- !u!195 &652092354
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -9180,6 +9161,19 @@ NavMeshAgent:
   m_BaseOffset: -0.025
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &587791636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1965423065467750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60b1139a2b2b0cc4f9d2bb693a5f51a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HP: 100
 --- !u!1 &1965466310304604
 GameObject:
   m_ObjectHideFlags: 0

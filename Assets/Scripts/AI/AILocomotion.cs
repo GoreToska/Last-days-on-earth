@@ -6,7 +6,6 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent), typeof(Animator))]
 public class AILocomotion : MonoBehaviour
 {
-    public Transform TargetTransform;
     private NavMeshAgent navMeshAgent;
     private Animator animator;
 
@@ -20,7 +19,6 @@ public class AILocomotion : MonoBehaviour
     {
         if (navMeshAgent != null && navMeshAgent.enabled)
         {
-            navMeshAgent.destination = TargetTransform.position;
             animator.SetFloat("Speed", navMeshAgent.velocity.magnitude, 0.2f, Time.deltaTime);
         }
     }

@@ -98,17 +98,7 @@ public class PlayerAnimationManager : MonoBehaviour
 
         yield return new WaitForSeconds(rifleReloadingAnimation.length - rifleReloadingAnimationOffset);
 
-        if (PlayerEquipmentManager.Instance.mainWeapon is HeavyRifleWeapon)
-        {
-            var a = PlayerEquipmentManager.Instance.mainWeapon as HeavyRifleWeapon;
-            a.LoadMagazine();
-        }
-        else if (PlayerEquipmentManager.Instance.mainWeapon is LightRifleWeapon)
-        {
-            var a = PlayerEquipmentManager.Instance.mainWeapon as LightRifleWeapon;
-            a.LoadMagazine();
-        }
-
+        PlayerEquipmentManager.Instance.mainWeapon.LoadMagazine();
         PlayerInputManager.Instance.EnableCombatControls();
         SetRifleRig();
 

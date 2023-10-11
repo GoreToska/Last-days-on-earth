@@ -74,23 +74,6 @@ public class MainWeapon : RangeWeapon
     {
         bullets--;
 
-        //#region Ammo Status Update (refactor)
-        //if (weaponData.ammoType == AmmoTypes.RifleLight)
-        //{
-        //    HUDManager.Instance.UpdateBulletsStatus(bullets);
-        //}
-
-        //if (weaponData.ammoType == AmmoTypes.Sniper)
-        //{
-        //    HUDManager.Instance.UpdateBulletsStatus(bullets);
-        //}
-
-        //if (weaponData.ammoType == AmmoTypes.Shotgun)
-        //{
-        //    HUDManager.Instance.UpdateBulletsStatus(bullets);
-        //}
-        //#endregion
-
         var (success, position) = PlayerInputManager.Instance.GetMousePosition();
 
         var ray = Physics.SphereCast(burrel.transform.position, 0.15f, burrel.transform.forward, out var hit, Mathf.Infinity, PlayerInputManager.Instance.aimMask);

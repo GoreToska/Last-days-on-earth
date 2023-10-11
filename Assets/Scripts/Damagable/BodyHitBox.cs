@@ -6,11 +6,11 @@ public class BodyHitBox : HitBox
 {
     [SerializeField] private float damageMultiplier = 1f;
 
-    private DamagableCharacter damagableCharacter;
+    private DamagableZombie damagableCharacter;
 
     protected override void Start()
     {
-        damagableCharacter = transform.root.GetComponent<DamagableCharacter>();
+        damagableCharacter = transform.root.GetComponent<DamagableZombie>();
     }
 
     public override void GetDamage(float damage)
