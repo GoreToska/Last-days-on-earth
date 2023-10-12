@@ -65,6 +65,22 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.4589455
+        functionName: EndMeleeAttack
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 80d17598a0ca37c45a6936d2fe082941,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.34226444
+        functionName: PerformMeleeAttack
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 80d17598a0ca37c45a6936d2fe082941,
+          type: 3}
+        floatParameter: 25
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}

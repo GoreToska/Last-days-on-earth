@@ -13,16 +13,16 @@ public class AmmoItem : Item
 
         if (item != null)
         {
-            Destroy(gameObject);
-
-            // UI popup "YOU TAKE ITEM_NAME"
-
+            if (gameObject)
+            {
+                Destroy(gameObject);
+                // UI popup "YOU TAKE ITEM_NAME"
+                return true;
+            }
             //if (weaponData != null && weaponData.weaponType == WeaponType.Primary)
             //{
             //    PlayerEquipmentManager.Instance.OnMainWeaponEquip(this, item);
             //}
-
-            return true;
         }
 
         //  UI popup "YOU CANT PICK UP"

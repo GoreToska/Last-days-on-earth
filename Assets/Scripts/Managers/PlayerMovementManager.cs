@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 using UnityEngine.Animations.Rigging;
+using PixelCrushers;
 
 //  Summary
 //  This class provides movement based on PlayerInputManager
@@ -99,7 +100,7 @@ public class PlayerMovementManager : MonoBehaviour
 
         moveDirection.y = Physics.gravity.y / 2;
 
-        if (PlayerInputManager.Instance.IsSprinting)
+        if (PlayerInputManager.Instance.IsSprinting && PlayerStatusManager.Instance.stamina >= 0)
         {
             playerStatusManager.TakeStaminaDamage(sprintStaminaCost * Time.deltaTime);
             characterController.Move(moveDirection * sprintingSpeed * Time.deltaTime);
@@ -126,7 +127,7 @@ public class PlayerMovementManager : MonoBehaviour
                             new Vector3(camera.transform.forward.x, 0, camera.transform.forward.z) * inputManager.VerticalInput;
         moveDirection = moveDirection +
             new Vector3(camera.transform.right.x, 0, camera.transform.right.z) * inputManager.HorizontalInput;
-        
+
         moveDirection.Normalize();
     }
 

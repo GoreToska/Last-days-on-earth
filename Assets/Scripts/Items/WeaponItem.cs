@@ -9,12 +9,15 @@ public class WeaponItem : Item
 
     public override async Task<bool> PickUpItem()
     {
-        var success = await PlayerInventory.Instance.AddNewWeaponItem(this);
+        var success = PlayerInventory.Instance.AddNewWeaponItem(this);
 
-        if (success)
+        if (success != null)
         {
-            Destroy(gameObject);
-            
+            if(gameObject)
+            {
+                Destroy(gameObject);
+            }
+
             // UI popup "YOU TAKE ITEM_NAME"
             return true;
         }

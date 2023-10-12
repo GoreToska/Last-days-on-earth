@@ -250,18 +250,18 @@ public sealed class PlayerInventory : MonoBehaviour
         return null;
     }
 
-    public async Task<bool> AddNewWeaponItem(WeaponItem weapon)
+    public async Task<StoredItem> AddNewWeaponItem(WeaponItem weapon)
     {
         var item = await AddNewItem(weapon.data, ItemType.Weapon, AmmoTypes.None);
 
         if (item != null)
         {
             PlayerEquipmentManager.Instance.OnMainWeaponEquip(weapon, item);
-            return true;
+            return item;
         }
         else
         {
-            return false;
+            return null;
         }
     }
 

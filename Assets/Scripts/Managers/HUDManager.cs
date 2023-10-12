@@ -10,6 +10,8 @@ public class HUDManager : MonoBehaviour
     private VisualElement root;
     private static VisualElement bulletsStatusContainer;
     private static Label bulletsStatusLabel;
+    private static ProgressBar hpBar;
+    private static ProgressBar staminaBar;
 
     private int currentBullets = 0;
 
@@ -37,6 +39,8 @@ public class HUDManager : MonoBehaviour
         root = GetComponentInChildren<UIDocument>().rootVisualElement;
         bulletsStatusContainer = root.Q<VisualElement>("Ammo_Info_Container");
         bulletsStatusLabel = bulletsStatusContainer.Q<Label>("Bullets_Status");
+        hpBar = root.Q<VisualElement>("Status_Container").Q<ProgressBar>("Hp_bar");
+        staminaBar = root.Q<VisualElement>("Status_Container").Q<ProgressBar>("Stamina_bar");
     }
 
     //public void UpdateBulletsStatus(int currentBullets, int remainingBullets)
@@ -45,6 +49,16 @@ public class HUDManager : MonoBehaviour
     //    bulletsStatusLabel.text = bulletString;
     //    this.currentBullets = currentBullets;
     //}
+
+    public void UpdateHP(float newValue)
+    {
+        hpBar.value = newValue;
+    }
+
+    public void UpdateStamina(float newValue)
+    {
+        staminaBar.value = newValue;
+    }
 
     public void UpdateBulletsStatus(int currentBullets)
     {

@@ -6,8 +6,8 @@ public class PlayerStatusManager : MonoBehaviour
     [HideInInspector] public static PlayerStatusManager Instance;
 
     [Header("Player status")]
-    [SerializeField] private float hp = 100f;
-    [SerializeField] private float stamina = 100f;
+    [SerializeField] public float hp = 100f;
+    [SerializeField] public float stamina = 100f;
 
     [SerializeField] private float staminaRegeneration = 4f;
     [SerializeField] private float staminaTimeToRegen = 4f;
@@ -31,6 +31,9 @@ public class PlayerStatusManager : MonoBehaviour
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
+
+        SetHP(hp);
+        SetStamina(stamina);
     }
 
     private void Update()
@@ -45,12 +48,34 @@ public class PlayerStatusManager : MonoBehaviour
         }
     }
 
+    public void SetHP(float value)
+    {
+        if (value > 100)
+        {
+            value = 100;
+        }
+
+        hp = value;
+        HUDManager.Instance.UpdateHP(hp);
+    }
+
+    public void SetStamina(float value)
+    {
+        if(value > 100)
+        {
+            value = 100;
+        }
+
+        stamina = value;
+        HUDManager.Instance.UpdateStamina(stamina);
+    }
+
     public void RegenHP(float value)
     {
         hp += value;
 
         //  Update UI
-        PlayerUIManager.Instance.SetHP(hp);
+        HUDManager.Instance.UpdateHP(hp);
 
         if (hp >= 100f)
         {
@@ -63,7 +88,7 @@ public class PlayerStatusManager : MonoBehaviour
         stamina += value;
 
         // update UI
-        //PlayerUIManager.Instance.SetStamina(stamina);
+        HUDManager.Instance.UpdateStamina(stamina);
 
         if (stamina >= 100f)
         {
@@ -76,8 +101,8 @@ public class PlayerStatusManager : MonoBehaviour
         hp -= damage;
 
         //  Update UI
-        PlayerUIManager.Instance.SetHP(hp);
-
+        HUDManager.Instance.UpdateHP(hp);
+        Debug.Log(damage);
         if (hp <= 0)
         {
             hp = 0;
@@ -87,15 +112,18 @@ public class PlayerStatusManager : MonoBehaviour
 
     public void TakeStaminaDamage(float damage)
     {
+        if (stamina == 0)
+        {
+            stamina = 0;
+            fatigueEvent.Invoke();
+            Debug.Log("Fatigue");
+            return;
+        }
+
         stamina -= damage;
         staminaRegenTimer = 0f;
 
         // update UI
-        PlayerUIManager.Instance.SetStamina(stamina);
-
-        if (stamina <= 0)
-        {
-            fatigueEvent.Invoke();
-        }
+        HUDManager.Instance.UpdateStamina(stamina);
     }
 }
