@@ -9,7 +9,7 @@ public class AmmoItem : Item
 
     public override async Task<bool> PickUpItem()
     {
-        var item = await PlayerInventory.Instance.AddNewAmmoItem(data);
+        var item = PlayerInventory.Instance.AddNewAmmoItem(data);
 
         if (item != null)
         {
