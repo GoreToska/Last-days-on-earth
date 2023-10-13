@@ -21,7 +21,7 @@ public class Item : MonoBehaviour
         PlayerEquipmentManager.Instance.itemsToPickUp.Remove(this);
     }
 
-    public virtual async Task<bool> PickUpItem()
+    public virtual bool PickUpItem()
     {
         return false;
     }

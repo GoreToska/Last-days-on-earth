@@ -7,7 +7,7 @@ public class WeaponItem : Item
 {
     [SerializeField] public WeaponData data;
 
-    public override async Task<bool> PickUpItem()
+    public override bool PickUpItem()
     {
         var success = PlayerInventory.Instance.AddNewWeaponItem(this);
 

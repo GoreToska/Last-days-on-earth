@@ -69,13 +69,13 @@ public class PlayerEquipmentManager : MonoBehaviour
 
     public async void TryToPickUp()
     {
-        if (itemsToPickUp.Count == 0)
+        if (itemsToPickUp.Count < 1)
         {
             Debug.Log("Nothing to pickup");
             return;
         }
 
-        if (await itemsToPickUp[0].PickUpItem())
+        if (itemsToPickUp[0].PickUpItem())
         {
             itemsToPickUp.RemoveAt(0);
             return;

@@ -7,7 +7,7 @@ public class AmmoItem : Item
 {
     public AmmoData data;
 
-    public override async Task<bool> PickUpItem()
+    public override  bool PickUpItem()
     {
         var item = PlayerInventory.Instance.AddNewAmmoItem(data);
 
