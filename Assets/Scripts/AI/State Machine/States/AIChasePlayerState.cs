@@ -24,11 +24,17 @@ public class AIChasePlayerState : AIState
     {
         if (Vector3.Distance(agent.transform.position, agent.targetTransform.position) <= agent.navMeshAgent.stoppingDistance)
         {
-            Debug.Log("Can Attack");
             agent.stateMachine.ChangeState(AIStateID.Attack);
         }
         else
         {
+            if(agent.sensor.Objects.Count < 1 && !agent.navMeshAgent.pathPending)
+            {
+                agent.stateMachine.ChangeState(AIStateID.Idle);
+                return;
+            }
+
+            agent.targetTransform = agent.sensor.Objects[0].transform;
             agent.navMeshAgent.destination = agent.targetTransform.position;
         }
     }

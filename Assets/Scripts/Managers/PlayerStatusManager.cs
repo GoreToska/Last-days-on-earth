@@ -102,6 +102,7 @@ public class PlayerStatusManager : MonoBehaviour
 
         //  Update UI
         HUDManager.Instance.UpdateHP(hp);
+        
         Debug.Log(damage);
         if (hp <= 0)
         {

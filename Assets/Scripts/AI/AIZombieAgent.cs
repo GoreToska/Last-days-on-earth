@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem;
 
 public class AIZombieAgent : MonoBehaviour
-{
-    public AIAgentConfig config;
-    public Transform targetTransform;
-    public AIZombieStateMachine stateMachine;
+{  
     public AIStateID initialStateID;
-    public NavMeshAgent navMeshAgent;
-    public Ragdoll ragdoll;
-    public Animator animator;
-    public bool isAttacking = false;
+    public AIAgentConfig config;
+    
+    [HideInInspector] public Transform targetTransform;
+    [HideInInspector] public AIZombieStateMachine stateMachine;
+    [HideInInspector] public NavMeshAgent navMeshAgent;
+    [HideInInspector] public Ragdoll ragdoll;
+    [HideInInspector] public Animator animator;
+    [HideInInspector] public AISensor sensor;
+    [HideInInspector] public bool isAttacking = false;
 
     private void Start()
     {
@@ -20,6 +23,7 @@ public class AIZombieAgent : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         ragdoll = GetComponent<Ragdoll>();
         animator = GetComponent<Animator>();
+        sensor = GetComponent<AISensor>();
         targetTransform = GameObject.FindGameObjectWithTag("Player").transform;
 
         // register all needed states

@@ -40,15 +40,25 @@ public class MeleeDamageCollider : MonoBehaviour
             return;
         }
 
-        if (other.transform.root.gameObject.layer != LayerMask.NameToLayer(playerMaskName) &&
-            other.transform.root.gameObject.layer != LayerMask.NameToLayer(raiderMaskName))
+        if (other.transform.root.gameObject.layer == LayerMask.NameToLayer(playerMaskName))
         {
+            AddCharacterToDamageList(other.transform.root.gameObject);
+            other.transform.root.gameObject.GetComponent<PlayerStatusManager>().TakeDamage(damage);
+
             return;
         }
+        else if(other.transform.root.gameObject.layer != LayerMask.NameToLayer(raiderMaskName))
+        {
+            AddCharacterToDamageList(other.transform.root.gameObject);
+            // apply damage to raider
 
-        charactersToDamage.Add(other.transform.root.gameObject);
+            return;
+        }
+    }
 
-        Debug.Log(damage);
-        other.transform.root.gameObject.GetComponent<PlayerStatusManager>().TakeDamage(damage);
+    private void AddCharacterToDamageList(GameObject character)
+    {
+        charactersToDamage.Add(character);
+        // play sfx, impact, effect etc
     }
 }
