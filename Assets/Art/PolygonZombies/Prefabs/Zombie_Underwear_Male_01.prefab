@@ -9165,12 +9165,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9be43bcb0812a504e9c0ebae12f4625f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialStateID: 2
   config: {fileID: 11400000, guid: 553a50df333da904890695ee29dc19ad, type: 2}
   targetTransform: {fileID: 0}
-  initialStateID: 2
   navMeshAgent: {fileID: 0}
   ragdoll: {fileID: 0}
   animator: {fileID: 0}
+  sensor: {fileID: 0}
   isAttacking: 0
 --- !u!195 &652092354
 NavMeshAgent:
@@ -9186,11 +9187,11 @@ NavMeshAgent:
   m_Acceleration: 40
   avoidancePriority: 50
   m_AngularSpeed: 1200
-  m_StoppingDistance: 1.8
+  m_StoppingDistance: 1.4
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2
+  m_Height: 1.75
   m_BaseOffset: -0.025
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
@@ -9236,10 +9237,14 @@ MonoBehaviour:
   distance: 10
   angle: 45
   height: 1
-  scanFrequency: 30
-  layers:
+  scanFrequency: 20
+  targetLayers:
     serializedVersion: 2
     m_Bits: 64
+  obstaclesLayer:
+    serializedVersion: 2
+    m_Bits: 1
+  objects: []
 --- !u!1 &1965466310304604
 GameObject:
   m_ObjectHideFlags: 0
