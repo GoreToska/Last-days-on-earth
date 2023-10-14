@@ -6,6 +6,7 @@ public class PlayerStatusManager : MonoBehaviour
     [HideInInspector] public static PlayerStatusManager Instance;
 
     [Header("Player status")]
+    [SerializeField] public bool isDead = false;
     [SerializeField] public float hp = 100f;
     [SerializeField] public float stamina = 100f;
 
@@ -103,11 +104,11 @@ public class PlayerStatusManager : MonoBehaviour
         //  Update UI
         HUDManager.Instance.UpdateHP(hp);
         
-        Debug.Log(damage);
         if (hp <= 0)
         {
             hp = 0;
             deathEvent.Invoke();
+            isDead = true;
         }
     }
 

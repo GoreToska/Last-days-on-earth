@@ -6789,8 +6789,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 2
-  m_Radius: 0.3
-  m_Center: {x: -0.03, y: 0, z: 0}
+  m_Radius: 0.3623903
+  m_Center: {x: 0.0323903, y: 0.0000000015847392, z: -4.8914567e-10}
 --- !u!114 &1944874907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6803,7 +6803,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2980e6f617f779c47a2d1dd04c1468e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMaskName: Player
+  playerMaskName: Character
   raiderMaskName: Raider
 --- !u!1 &1788231499050580
 GameObject:
@@ -9027,14 +9027,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4378302944070100}
+  - component: {fileID: 652092354}
   - component: {fileID: 95791246582969478}
   - component: {fileID: 652092358}
   - component: {fileID: 7941019007364334733}
   - component: {fileID: 1459665509349020881}
-  - component: {fileID: 652092354}
   - component: {fileID: 587791636}
   - component: {fileID: 1517960439}
   - component: {fileID: 1629728310067480616}
+  - component: {fileID: 1316148189926809860}
   m_Layer: 3
   m_Name: Zombie_Underwear_Male_01
   m_TagString: Damagable
@@ -9108,6 +9109,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!195 &652092354
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1965423065467750}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 1
+  m_Acceleration: 40
+  avoidancePriority: 50
+  m_AngularSpeed: 1200
+  m_StoppingDistance: 1.4
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1.75
+  m_BaseOffset: -0.025
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!95 &95791246582969478
 Animator:
   serializedVersion: 5
@@ -9167,34 +9190,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialStateID: 2
   config: {fileID: 11400000, guid: 553a50df333da904890695ee29dc19ad, type: 2}
-  targetTransform: {fileID: 0}
+  timeToStartRoaming: 5
+  roamingRadius: 5
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 0
   navMeshAgent: {fileID: 0}
   ragdoll: {fileID: 0}
   animator: {fileID: 0}
   sensor: {fileID: 0}
+  targetSystem: {fileID: 0}
   isAttacking: 0
---- !u!195 &652092354
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1965423065467750}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 1
-  m_Acceleration: 40
-  avoidancePriority: 50
-  m_AngularSpeed: 1200
-  m_StoppingDistance: 1.4
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 1.75
-  m_BaseOffset: -0.025
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
 --- !u!114 &587791636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9234,17 +9240,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshColor: {r: 1, g: 0, b: 0, a: 0.21960784}
-  distance: 5
+  distance: 15
   angle: 45
-  height: 1
-  scanFrequency: 50
+  height: 2
+  scanFrequency: 1
   targetLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 1024
   obstaclesLayer:
     serializedVersion: 2
     m_Bits: 1
   objects: []
+--- !u!114 &1316148189926809860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1965423065467750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0666203301eda55478435b0bd0535887, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  memorySpan: 10
+  distanceWeight: 3
+  angleWeight: 0.5
+  ageWeight: 3
 --- !u!1 &1965466310304604
 GameObject:
   m_ObjectHideFlags: 0

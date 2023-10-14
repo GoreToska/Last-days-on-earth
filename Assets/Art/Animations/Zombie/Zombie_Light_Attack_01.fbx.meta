@@ -57,12 +57,12 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.6318386
-        functionName: SetAttackToFalse
+      - time: 0.34226444
+        functionName: PerformMeleeAttack
         data: 
-        objectReferenceParameter: {fileID: 11500000, guid: 9be43bcb0812a504e9c0ebae12f4625f,
+        objectReferenceParameter: {fileID: 11500000, guid: 80d17598a0ca37c45a6936d2fe082941,
           type: 3}
-        floatParameter: 0
+        floatParameter: 25
         intParameter: 0
         messageOptions: 0
       - time: 0.4589455
@@ -73,12 +73,12 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.34226444
-        functionName: PerformMeleeAttack
+      - time: 0.66973954
+        functionName: SetAttackToFalse
         data: 
-        objectReferenceParameter: {fileID: 11500000, guid: 80d17598a0ca37c45a6936d2fe082941,
+        objectReferenceParameter: {fileID: 11500000, guid: 9be43bcb0812a504e9c0ebae12f4625f,
           type: 3}
-        floatParameter: 25
+        floatParameter: 0
         intParameter: 0
         messageOptions: 0
       transformMask: []

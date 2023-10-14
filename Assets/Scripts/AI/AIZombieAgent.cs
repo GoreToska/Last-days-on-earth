@@ -8,13 +8,17 @@ public class AIZombieAgent : MonoBehaviour
 {  
     public AIStateID initialStateID;
     public AIAgentConfig config;
-    
-    [HideInInspector] public Transform targetTransform;
+    public float timeToStartRoaming = 5f;
+    public float roamingRadius = 5f;
+    public LayerMask groundMask;
+
+    //[HideInInspector] public Transform targetTransform;
     [HideInInspector] public AIZombieStateMachine stateMachine;
     [HideInInspector] public NavMeshAgent navMeshAgent;
     [HideInInspector] public Ragdoll ragdoll;
     [HideInInspector] public Animator animator;
     [HideInInspector] public AISensor sensor;
+    [HideInInspector] public AITargetingSystem targetSystem;
     [HideInInspector] public bool isAttacking = false;
 
     private void Start()
@@ -23,14 +27,15 @@ public class AIZombieAgent : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         ragdoll = GetComponent<Ragdoll>();
         animator = GetComponent<Animator>();
+        targetSystem = GetComponent<AITargetingSystem>();
         sensor = GetComponent<AISensor>();
-        targetTransform = GameObject.FindGameObjectWithTag("Player").transform;
-
+        
         // register all needed states
         stateMachine.RegisterState(new AIChasePlayerState());
         stateMachine.RegisterState(new AIDeadState());
         stateMachine.RegisterState(new AIIdleState());
         stateMachine.RegisterState(new AIAttackState());
+        stateMachine.RegisterState(new AIRoamingState());
 
         stateMachine.ChangeState(initialStateID);
     }

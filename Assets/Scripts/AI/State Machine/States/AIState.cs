@@ -8,6 +8,7 @@ public enum AIStateID
     Dead = 1,
     Idle = 2,
     Attack = 3,
+    Roaming = 4,
 }
 
 public interface AIState

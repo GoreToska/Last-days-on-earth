@@ -128,9 +128,13 @@ public class PlayerInputManager : MonoBehaviour
         //  absolute movement amount
         moveAmount = Mathf.Clamp01(Mathf.Abs(verticalInput) + Mathf.Abs(horizontalInput));
 
-        if (IsSprinting)
+        if (isSprinting && PlayerStatusManager.Instance.stamina > 1)
         {
             moveAmount *= 2;
+        }
+        else
+        {
+            isSprinting = false;
         }
     }
 

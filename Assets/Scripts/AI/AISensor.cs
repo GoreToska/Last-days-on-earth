@@ -34,13 +34,15 @@ public class AISensor : MonoBehaviour
 
     private void Update()
     {
-        scanTimer -= Time.deltaTime;
+        //scanTimer -= Time.deltaTime;
 
-        if (scanTimer < 0)
-        {
-            scanTimer += scanInterval;
-            Scan();
-        }
+        //if (scanTimer < 0)
+        //{
+        //    scanTimer += scanInterval;
+        //    Scan();
+        //}
+
+        Scan();
     }
 
     private void Scan()
@@ -51,7 +53,7 @@ public class AISensor : MonoBehaviour
         for (int i = 0; i < count; ++i)
         {
             GameObject obj = colliders[i].gameObject;
-            if (IsInside(obj))
+            if (IsInside(obj) && !objects.Contains(obj))
             {
                 objects.Add(obj);
             }
@@ -84,6 +86,26 @@ public class AISensor : MonoBehaviour
         }
 
         return true;
+    }
+
+    public int Filter(GameObject[] buffer, string layerName)
+    {
+        int layer = LayerMask.NameToLayer(layerName);
+        int count = 0;
+        foreach (var obj in Objects)
+        {
+            if(obj.layer == layer)
+            {
+                buffer[count++] = obj;
+            }
+
+            if(buffer.Length == count)
+            {
+                break; // buffer is full
+            }
+        }
+
+        return count;
     }
 
     private Mesh CreateWedgeMesh()
@@ -184,10 +206,10 @@ public class AISensor : MonoBehaviour
 
         Gizmos.DrawWireSphere(transform.position, distance);
 
-        Gizmos.color = Color.green;
-        foreach (var obj in Objects)
-        {
-            Gizmos.DrawSphere(obj.transform.position, 0.2f);
-        }
+        //Gizmos.color = Color.green;
+        //foreach (var obj in Objects)
+        //{
+        //    Gizmos.DrawSphere(obj.transform.position, 0.2f);
+        //}
     }
 }

@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class AIIdleState : AIState
 {
+    private float timer;
     public void Enter(AIZombieAgent agent)
     {
-
+        timer = 0f;
     }
 
     public void Exit(AIZombieAgent agent)
@@ -20,11 +21,20 @@ public class AIIdleState : AIState
 
     public void Update(AIZombieAgent agent)
     {
-        if (agent.sensor.Objects.Count < 1)
+        if (agent.sensor.Objects.Count > 0)
         {
-            return;
+            agent.stateMachine.ChangeState(AIStateID.ChasePlayer);
         }
 
-        agent.stateMachine.ChangeState(AIStateID.ChasePlayer);
+
+        timer += Time.deltaTime;
+        Debug.Log(timer);
+
+        if(timer > agent.timeToStartRoaming) 
+        {
+            agent.stateMachine.ChangeState(AIStateID.Roaming);
+        }
+
+
     }
 }
