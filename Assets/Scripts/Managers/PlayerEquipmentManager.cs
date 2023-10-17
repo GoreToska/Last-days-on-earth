@@ -15,7 +15,7 @@ public class PlayerEquipmentManager : MonoBehaviour
     public List<Item> itemsToPickUp;
 
     //  Handle weapon change
-    [SerializeField] public MainWeapon mainWeapon;
+    [SerializeField] public RangeWeapon rangeMainWeapon;
 
     private void Awake()
     {
@@ -53,17 +53,17 @@ public class PlayerEquipmentManager : MonoBehaviour
 
     private void TryToPerformAttack()
     {
-        if (mainWeapon && PlayerInputManager.Instance.IsAiming)
+        if (rangeMainWeapon && PlayerInputManager.Instance.IsAiming)
         {
-            mainWeapon.PerformAttack();
+            rangeMainWeapon.PerformAttack();
         }
     }
 
     private void TryToPerformReload()
     {
-        if (mainWeapon)
+        if (rangeMainWeapon)
         {
-            mainWeapon.PerformReload();
+            rangeMainWeapon.PerformReload();
         }
     }
 
@@ -84,20 +84,20 @@ public class PlayerEquipmentManager : MonoBehaviour
 
     public void OnMainWeaponEquip(WeaponItem weapon, StoredItem storedItem)
     {
-        if (mainWeapon != null)
+        if (rangeMainWeapon != null)
         {
             //  just do nothing in future
             Debug.Log(weapon.ToString());
-            DropCurrentMainWeapon(mainWeapon, false);
+            DropCurrentMainWeapon(rangeMainWeapon, false);
         }
 
-        mainWeapon = Instantiate(weapon.data.weaponModel, MainWeaponSocket).GetComponent<MainWeapon>();
+        rangeMainWeapon = Instantiate(weapon.data.weaponModel, MainWeaponSocket).GetComponent<RangeWeapon>();
         PlayerAnimationManager.Instance.SetWeaponAnimationPattern(weapon.data.weaponType);
-        mainWeapon.storedItem = storedItem;
-        mainWeapon.SetBulletStatus();
+        rangeMainWeapon.storedItem = storedItem;
+        rangeMainWeapon.SetBulletStatus();
     }
 
-    private void DropCurrentMainWeapon(MainWeapon item, bool setDefaultRig = true)
+    private void DropCurrentMainWeapon(RangeWeapon item, bool setDefaultRig = true)
     {
         PlayerInventory.Instance.RemoveItemFromInventoryGrid(item.storedItem);
         Instantiate(item.itemPrefab, this.transform.position, Quaternion.Euler(0, 0, 90), null);
@@ -111,9 +111,9 @@ public class PlayerEquipmentManager : MonoBehaviour
 
     public void DropStoredItem(StoredItem item)
     {
-        if (mainWeapon != null && mainWeapon.storedItem == item)
+        if (rangeMainWeapon != null && rangeMainWeapon.storedItem == item)
         {
-            DropCurrentMainWeapon(mainWeapon);
+            DropCurrentMainWeapon(rangeMainWeapon);
         }
         else
         {

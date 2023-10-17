@@ -53,13 +53,13 @@ public class PlayerAnimationManager : MonoBehaviour
         switch (type)
         {
             case WeaponType.Primary:
-                animator.Play("Walk Rifle Blend Tree", 0);
+                animator.CrossFade("Walk Rifle Blend Tree", 0.1f);
                 SetRifleRig();
                 break;
             case WeaponType.Secondary:
                 break;
             case WeaponType.None:
-                animator.Play("Walk Blend Tree", 0);
+                animator.CrossFade("Walk Blend Tree", 0.1f);
                 SetDefaultRig();
                 break;
             default:
@@ -98,7 +98,7 @@ public class PlayerAnimationManager : MonoBehaviour
 
         yield return new WaitForSeconds(rifleReloadingAnimation.length - rifleReloadingAnimationOffset);
 
-        PlayerEquipmentManager.Instance.mainWeapon.LoadMagazine();
+        PlayerEquipmentManager.Instance.rangeMainWeapon.LoadMagazine();
         PlayerInputManager.Instance.EnableCombatControls();
         SetRifleRig();
 

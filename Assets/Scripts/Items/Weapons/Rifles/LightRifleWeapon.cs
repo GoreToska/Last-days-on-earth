@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LightRifleWeapon : MainWeapon
+public class LightRifleWeapon : RangeWeapon
 {
     protected override void ShotLogic()
     {

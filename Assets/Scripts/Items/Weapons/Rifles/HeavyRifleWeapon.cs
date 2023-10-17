@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HeavyRifleWeapon : MainWeapon
+public class HeavyRifleWeapon : RangeWeapon
 {
     protected override void ShotLogic()
     {
