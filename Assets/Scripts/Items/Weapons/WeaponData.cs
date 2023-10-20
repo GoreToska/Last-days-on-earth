@@ -24,7 +24,9 @@ public class WeaponData : ItemData
 public enum WeaponType
 {
     None,
-    Primary,
-    Secondary
+    Range_Primary,
+    Range_Secondary,
+    Melee_Primary,
+    Melee_Secondary,
 }
 
