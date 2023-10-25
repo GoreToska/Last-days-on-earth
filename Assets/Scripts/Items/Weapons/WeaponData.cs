@@ -14,7 +14,9 @@ public class WeaponData : ItemData
     [SerializeField] public float fireRate;
     [Range(0.001f, 0.1f)]
     [SerializeField] public float recoil;
+    [Range(0.1f, 1f)]
     [SerializeField] public float recoilTime;
+    [SerializeField] public int recoilStopShot;
     [SerializeField] public int magazineSize;
     [SerializeField] public string reloadAnimationName;
     [SerializeField] public float shotVolumeRadius;

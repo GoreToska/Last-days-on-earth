@@ -23,6 +23,7 @@ public abstract class RangeWeapon : MainWeapon, IWeapon, IReloadableWeapon
 
     private float shotTimer = 0f;
     private float currentRecoil = 0f;
+    private float recoilStop;
 
     private void Update()
     {
@@ -45,6 +46,7 @@ public abstract class RangeWeapon : MainWeapon, IWeapon, IReloadableWeapon
     {
         particleSystem = GetComponentInChildren<ParticleSystem>();
         trailRendererPool = new ObjectPool<TrailRenderer>(CreateTrail);
+        recoilStop = weaponData.recoilStopShot * weaponData.recoil;
     }
 
     public override void PerformAttack()
@@ -100,8 +102,8 @@ public abstract class RangeWeapon : MainWeapon, IWeapon, IReloadableWeapon
         Vector3 direction = new Vector3(0, 0, burrel.transform.localPosition.z) * 100f;
 
         Vector3 recoiledPosition = position + new Vector3(
-            Random.Range(-currentRecoil, currentRecoil), 
-            Random.Range(-currentRecoil, currentRecoil), 
+            Random.Range(-currentRecoil, currentRecoil),
+            Random.Range(-currentRecoil, currentRecoil),
             Random.Range(-currentRecoil, currentRecoil));
 
         Ray ray = new Ray(burrel.transform.position, recoiledPosition - burrel.transform.position);
@@ -116,7 +118,11 @@ public abstract class RangeWeapon : MainWeapon, IWeapon, IReloadableWeapon
             Debug.Log("Damagable");
         }
 
-        currentRecoil += weaponData.recoil;
+        if (currentRecoil <= recoilStop)
+        {
+            currentRecoil += weaponData.recoil;
+        }
+
         shotTimer = weaponData.recoilTime;
     }
 
