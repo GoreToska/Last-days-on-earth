@@ -31,7 +31,8 @@ MonoBehaviour:
   ammoType: 1
   damage: 50
   fireRate: 600
-  recoil: 0
+  recoil: 0.0466
+  recoilTime: 2
   magazineSize: 30
   reloadAnimationName: 
   shotVolumeRadius: 0

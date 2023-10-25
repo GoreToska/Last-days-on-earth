@@ -16,6 +16,7 @@ public class PlayerEquipmentManager : MonoBehaviour
 
     //  Handle weapon change
     [SerializeField] public RangeWeapon rangeMainWeapon;
+    [SerializeField] public MeleeWeapon meleeWeapon;
 
     private void Awake()
     {
@@ -56,6 +57,13 @@ public class PlayerEquipmentManager : MonoBehaviour
         if (rangeMainWeapon && PlayerInputManager.Instance.IsAiming)
         {
             rangeMainWeapon.PerformAttack();
+            return;
+        }
+
+        if(meleeWeapon && PlayerInputManager.Instance.IsAiming)
+        {
+            meleeWeapon.PerformAttack();
+            return;
         }
     }
 
@@ -87,17 +95,43 @@ public class PlayerEquipmentManager : MonoBehaviour
         if (rangeMainWeapon != null)
         {
             //  just do nothing in future
-            Debug.Log(weapon.ToString());
             DropCurrentMainWeapon(rangeMainWeapon, false);
         }
+        if(meleeWeapon != null)
+        {
+            Debug.Log("Drop melee");
+            DropCurrentMainWeapon(meleeWeapon, false);
+        }
 
-        rangeMainWeapon = Instantiate(weapon.data.weaponModel, MainWeaponSocket).GetComponent<RangeWeapon>();
+        if(weapon.data.weaponType == WeaponType.Range_Primary)
+        {
+            rangeMainWeapon = Instantiate(weapon.data.weaponModel, MainWeaponSocket).GetComponent<RangeWeapon>();
+            rangeMainWeapon.storedItem = storedItem;
+            rangeMainWeapon.SetBulletStatus();
+        }
+        if(weapon.data.weaponType == WeaponType.Melee_Primary)
+        {
+            meleeWeapon = Instantiate(weapon.data.weaponModel, MainWeaponSocket).GetComponent<MeleeWeapon>();
+            meleeWeapon.storedItem = storedItem;
+            //rangeMainWeapon.SetBulletStatus();
+        }
+
         PlayerAnimationManager.Instance.SetWeaponAnimationPattern(weapon.data.weaponType);
-        rangeMainWeapon.storedItem = storedItem;
-        rangeMainWeapon.SetBulletStatus();
     }
 
     private void DropCurrentMainWeapon(RangeWeapon item, bool setDefaultRig = true)
+    {
+        PlayerInventory.Instance.RemoveItemFromInventoryGrid(item.storedItem);
+        Instantiate(item.itemPrefab, this.transform.position, Quaternion.Euler(0, 0, 90), null);
+        Destroy(item.gameObject);
+
+        if (setDefaultRig)
+        {
+            PlayerAnimationManager.Instance.SetWeaponAnimationPattern(WeaponType.None);
+        }
+    }
+
+    private void DropCurrentMainWeapon(MeleeWeapon item, bool setDefaultRig = true)
     {
         PlayerInventory.Instance.RemoveItemFromInventoryGrid(item.storedItem);
         Instantiate(item.itemPrefab, this.transform.position, Quaternion.Euler(0, 0, 90), null);

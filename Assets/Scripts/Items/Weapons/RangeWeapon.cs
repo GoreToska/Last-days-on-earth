@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
+using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
 
 public abstract class RangeWeapon : MainWeapon, IWeapon, IReloadableWeapon
 {
+    [Header("Weapon options")]
     [SerializeField] protected WeaponData weaponData;
     [SerializeField] protected GameObject burrel;
     [SerializeField] protected ParticleSystem muzzleFlash;
@@ -18,6 +20,26 @@ public abstract class RangeWeapon : MainWeapon, IWeapon, IReloadableWeapon
     protected ObjectPool<TrailRenderer> trailRendererPool;
 
     public StoredItem storedItem;
+
+    private float shotTimer = 0f;
+    private float currentRecoil = 0f;
+
+    private void Update()
+    {
+        if (PlayerInputManager.Instance.isShooting)
+            return;
+
+        if (shotTimer <= 0f)
+        {
+            if (currentRecoil <= 0f)
+                return;
+
+            currentRecoil -= weaponData.recoil;
+            return;
+        }
+
+        shotTimer -= Time.deltaTime;
+    }
 
     protected virtual void Awake()
     {
@@ -64,6 +86,7 @@ public abstract class RangeWeapon : MainWeapon, IWeapon, IReloadableWeapon
 
             ShotLogic();
             PlayerInputManager.Instance.isShooting = false;
+            yield return null;
         }
 
     }
@@ -74,22 +97,27 @@ public abstract class RangeWeapon : MainWeapon, IWeapon, IReloadableWeapon
 
         var (success, position) = PlayerInputManager.Instance.GetMousePosition();
 
-        var ray = Physics.SphereCast(burrel.transform.position, 0.15f, burrel.transform.forward, out var hit, Mathf.Infinity, PlayerInputManager.Instance.aimMask);
-        Debug.DrawRay(burrel.transform.position, hit.point, Color.green, 2);
+        Vector3 direction = new Vector3(0, 0, burrel.transform.localPosition.z) * 100f;
 
-        if (hit.point != Vector3.zero)
-        {
-            StartCoroutine(PlayTrail(burrel.transform.position, hit.point, hit));
-        }
-        else
-        {
-            StartCoroutine(PlayTrail(burrel.transform.position, position, hit));
-        }
+        Vector3 recoiledPosition = position + new Vector3(
+            Random.Range(-currentRecoil, currentRecoil), 
+            Random.Range(-currentRecoil, currentRecoil), 
+            Random.Range(-currentRecoil, currentRecoil));
 
-        if (ray && hit.collider.tag == "Damagable")
+        Ray ray = new Ray(burrel.transform.position, recoiledPosition - burrel.transform.position);
+        var sphere = Physics.SphereCast(ray, 0.15f, out var hit, Mathf.Infinity, PlayerInputManager.Instance.aimMask);
+
+        Debug.DrawRay(burrel.transform.position, recoiledPosition - burrel.transform.position, Color.blue, 2);
+        StartCoroutine(PlayTrail(burrel.transform.position, recoiledPosition, hit));
+
+        if (sphere && hit.collider.tag == "Damagable")
         {
             hit.collider.GetComponent<HitBox>().GetDamage(weaponData.damage);
+            Debug.Log("Damagable");
         }
+
+        currentRecoil += weaponData.recoil;
+        shotTimer = weaponData.recoilTime;
     }
 
     protected virtual IEnumerator PlayTrail(Vector3 startPoint, Vector3 endPoint, RaycastHit hit)

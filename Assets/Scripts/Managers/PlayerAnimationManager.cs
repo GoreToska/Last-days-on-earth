@@ -8,6 +8,7 @@ public class PlayerAnimationManager : MonoBehaviour
     [HideInInspector] public static PlayerAnimationManager Instance;
 
     [SerializeField] private Rig rifleRig;
+    [SerializeField] private Rig twoHandedMeleeRig;
 
     [Header("Animations")]
     [SerializeField] private AnimationClip rifleReloadingAnimation;
@@ -63,8 +64,9 @@ public class PlayerAnimationManager : MonoBehaviour
                 SetDefaultRig();
                 break;
             case WeaponType.Melee_Primary:
-                animator.CrossFade("Walk Rifle Blend Tree", 0.1f);
-                animator.CrossFade("Melee_2hand_Idle_01", 0.1f);
+                //animator.CrossFade("Walk Rifle Blend Tree", 0.1f);
+                SetTwoHandedMeleeRig();
+                //animator.CrossFade("Melee_2hand_Idle_01", 0.1f);
                 break;
             case WeaponType.Melee_Secondary:
                 break;
@@ -96,6 +98,11 @@ public class PlayerAnimationManager : MonoBehaviour
         StartCoroutine(PlayRifleReloadAnimationCoroutine());
     }
 
+    public void PlayHeavyAttackAnimation()
+    {
+        animator.Play("Stable Sword Inward Slash (1)");
+    }
+
     private IEnumerator PlayRifleReloadAnimationCoroutine()
     {
         SetDefaultRig();
@@ -114,12 +121,20 @@ public class PlayerAnimationManager : MonoBehaviour
     public void SetRifleRig()
     {
         // other rigs too
+        SetDefaultRig();
         rifleRig.weight = 1f;
+    }
+
+    public void SetTwoHandedMeleeRig()
+    {
+        SetDefaultRig();
+        //twoHandedMeleeRig.weight = 1f;
     }
 
     public void SetDefaultRig()
     {
         // other rigs too
+        twoHandedMeleeRig.weight = 0f;
         rifleRig.weight = 0f;
     }
 }

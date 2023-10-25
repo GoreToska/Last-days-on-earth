@@ -12,10 +12,16 @@ public class MeleeWeapon : MainWeapon
     public override void PerformAttack()
     {
         Debug.Log("Melee attack");
+        AttackLogic();
     }
 
     public override void PerformReload()
     {
         Debug.Log("Reload or something idk");
+    }
+
+    protected virtual void AttackLogic()
+    {
+        return;
     }
 }

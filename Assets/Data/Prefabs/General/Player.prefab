@@ -1,5 +1,83 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &464800038
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 464800039}
+  - component: {fileID: 464800040}
+  m_Layer: 0
+  m_Name: TwoHandedMeleeRig
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &464800039
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 464800038}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -78.67, y: -0.228, z: -8.39}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1016996284}
+  m_Father: {fileID: 5361630504463845421}
+  m_RootOrder: 33
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &464800040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 464800038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b342d8ce5c2fd48b8fa3147d48d1d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Weight: 0
+  m_Effectors: []
+--- !u!1 &484773060
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 484773061}
+  m_Layer: 10
+  m_Name: SecondHandGrabMelee_hint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &484773061
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 484773060}
+  m_LocalRotation: {x: -0.8593298, y: -0.001209887, z: -0.0033767219, w: 0.5114093}
+  m_LocalPosition: {x: 0.248, y: 0.175, z: 0.115}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5365654528913297587}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: -118.484, y: -0.54901123, z: 0.16499329}
 --- !u!1 &636213936
 GameObject:
   m_ObjectHideFlags: 0
@@ -80,6 +158,62 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Weight: 0
   m_Effectors: []
+--- !u!1 &1016996283
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1016996284}
+  - component: {fileID: 1016996285}
+  m_Layer: 0
+  m_Name: SecondHandGrabWeapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1016996284
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1016996283}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 464800039}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1016996285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1016996283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeda7bfbf984f2a4da5ab4b8967b115d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Weight: 1
+  m_Data:
+    m_Root: {fileID: 5365908901786792037}
+    m_Mid: {fileID: 5365610118260306989}
+    m_Tip: {fileID: 5365602727425253179}
+    m_Target: {fileID: 2034496980}
+    m_Hint: {fileID: 484773061}
+    m_TargetPositionWeight: 1
+    m_TargetRotationWeight: 1
+    m_HintWeight: 0
+    m_MaintainTargetPositionOffset: 0
+    m_MaintainTargetRotationOffset: 0
 --- !u!1 &1144189206
 GameObject:
   m_ObjectHideFlags: 0
@@ -417,6 +551,37 @@ Transform:
   m_Father: {fileID: 5365654528913297587}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: -118.484, y: -0.54901123, z: 0.16499329}
+--- !u!1 &2034496979
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2034496980}
+  m_Layer: 10
+  m_Name: SecondHandGrabMelee_target
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2034496980
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2034496979}
+  m_LocalRotation: {x: 0.26134184, y: 0.8149047, z: 0.4363422, w: 0.27791417}
+  m_LocalPosition: {x: 0.2877, y: 0.1058, z: -0.0334}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5365654528913297587}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: -145.536, y: -55.690002, z: 234.172}
 --- !u!1 &2143914263
 GameObject:
   m_ObjectHideFlags: 0
@@ -4524,6 +4689,7 @@ Transform:
   - {fileID: 5361740719058899793}
   - {fileID: 830465334}
   - {fileID: 1290189564}
+  - {fileID: 464800039}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4601,7 +4767,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aimMask:
     serializedVersion: 2
-    m_Bits: 585
+    m_Bits: 1609
   isShooting: 0
 --- !u!114 &5361517959888282040
 MonoBehaviour:
@@ -4616,6 +4782,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rifleRig: {fileID: 1290189565}
+  twoHandedMeleeRig: {fileID: 464800040}
   rifleReloadingAnimation: {fileID: -203655887218126122, guid: 9e65a8ec216d3b44080464716ee6c056,
     type: 3}
   rifleReloadingAnimationOffset: 0.8
@@ -4708,6 +4875,8 @@ MonoBehaviour:
     m_Active: 1
   - m_Rig: {fileID: 1290189565}
     m_Active: 1
+  - m_Rig: {fileID: 464800040}
+    m_Active: 1
   m_Effectors: []
 --- !u!114 &95938485048938443
 MonoBehaviour:
@@ -4721,6 +4890,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad089de71ecf7554c9ab6434613bae7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDead: 0
   hp: 100
   stamina: 100
   staminaRegeneration: 2
@@ -4739,7 +4909,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MainWeaponSocket: {fileID: 1790448302}
   itemsToPickUp: []
-  mainWeapon: {fileID: 0}
+  rangeMainWeapon: {fileID: 0}
 --- !u!1 &5360388984784684093
 GameObject:
   m_ObjectHideFlags: 0
@@ -5577,6 +5747,8 @@ Transform:
   - {fileID: 1790448302}
   - {fileID: 636213937}
   - {fileID: 1872827970}
+  - {fileID: 2034496980}
+  - {fileID: 484773061}
   m_Father: {fileID: 5365568756382866537}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

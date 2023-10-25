@@ -28,7 +28,6 @@ public class AIIdleState : AIState
 
 
         timer += Time.deltaTime;
-        Debug.Log(timer);
 
         if(timer > agent.timeToStartRoaming) 
         {

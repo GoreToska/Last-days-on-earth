@@ -63,7 +63,6 @@ public class PlayerMovementManager : MonoBehaviour
     {
         HandleAllMovement();
 
-        //aimRig.weight = Mathf.Lerp(aimRig.weight, aimRigWeight, aimSmoothTime * Time.deltaTime);
         aimRig.weight = Mathf.SmoothDamp(aimRig.weight, aimRigWeight, ref aimSmoothVelocity, aimSmoothTime);
     }
 
@@ -124,7 +123,7 @@ public class PlayerMovementManager : MonoBehaviour
     private void CalculateMovementAxis()
     {
         moveDirection =
-                            new Vector3(camera.transform.forward.x, 0, camera.transform.forward.z) * inputManager.VerticalInput;
+            new Vector3(camera.transform.forward.x, 0, camera.transform.forward.z) * inputManager.VerticalInput;
         moveDirection = moveDirection +
             new Vector3(camera.transform.right.x, 0, camera.transform.right.z) * inputManager.HorizontalInput;
 
