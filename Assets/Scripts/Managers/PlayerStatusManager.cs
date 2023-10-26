@@ -10,6 +10,8 @@ public class PlayerStatusManager : MonoBehaviour
     [SerializeField] public float hp = 100f;
     [SerializeField] public float stamina = 100f;
 
+    [SerializeField] private float cameraShakeDuration;
+
     [SerializeField] private float staminaRegeneration = 4f;
     [SerializeField] private float staminaTimeToRegen = 4f;
     private float staminaRegenTimer = 0f;
@@ -103,7 +105,8 @@ public class PlayerStatusManager : MonoBehaviour
 
         //  Update UI
         HUDManager.Instance.UpdateHP(hp);
-        
+        CameraActions.Instance.ImpactShake(cameraShakeDuration, damage/10);
+
         if (hp <= 0)
         {
             hp = 0;
