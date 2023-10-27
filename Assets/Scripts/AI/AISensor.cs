@@ -55,6 +55,7 @@ public class AISensor : MonoBehaviour
             GameObject obj = colliders[i].gameObject;
             if (IsInside(obj) && !objects.Contains(obj))
             {
+                if(obj.TryGetComponent<CharacterStatusManager>(out var status) && !status.IsDead)
                 objects.Add(obj);
             }
         }
@@ -94,7 +95,7 @@ public class AISensor : MonoBehaviour
         int count = 0;
         foreach (var obj in Objects)
         {
-            if(obj.layer == layer)
+            if(obj.layer == layer && obj.TryGetComponent<CharacterStatusManager>(out var status) && !status.IsDead)
             {
                 buffer[count++] = obj;
             }

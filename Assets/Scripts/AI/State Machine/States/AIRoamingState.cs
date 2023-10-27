@@ -24,7 +24,6 @@ public class AIRoamingState : AIState
         if (agent.sensor.Objects.Count > 0)
         {
             agent.stateMachine.ChangeState(AIStateID.ChasePlayer);
-
         }
 
         if (agent.navMeshAgent.pathStatus == NavMeshPathStatus.PathComplete)

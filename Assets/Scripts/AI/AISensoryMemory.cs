@@ -65,4 +65,9 @@ public class AISensoryMemory
         memories.RemoveAll(x => !x.gameObject);
         memories.RemoveAll(x => !x.gameObject.TryGetComponent<CharacterStatusManager>(out var status) || status.IsDead);
     }
+
+    public void ForgetTarget(GameObject gameObject)
+    {
+        memories.RemoveAll(x => x.gameObject == gameObject);
+    }
 }

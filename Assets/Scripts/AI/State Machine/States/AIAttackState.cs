@@ -38,6 +38,7 @@ public class AIAttackState : AIState
 
         if (!agent.targetSystem.Target.TryGetComponent<CharacterStatusManager>(out var status) || status.IsDead)
         {
+            agent.targetSystem.ForgetTarget(agent.targetSystem.Target);
             agent.stateMachine.ChangeState(AIStateID.Idle);
             return;
         }

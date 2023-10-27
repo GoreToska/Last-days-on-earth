@@ -31,6 +31,11 @@ public class AITargetingSystem : MonoBehaviour
         EvaluateScores();
     }
 
+    public void ForgetTarget(GameObject target)
+    {
+        memory.ForgetTarget(target);
+    }
+
     private void EvaluateScores()
     {
         bestMemory = null;
