@@ -33,7 +33,6 @@ public class AIIdleState : AIState
         if(timer > agent.timeToStartRoaming) 
         {
             agent.stateMachine.ChangeState(AIStateID.Roaming);
-            Debug.Log("Roam");
         }
     }
 }
