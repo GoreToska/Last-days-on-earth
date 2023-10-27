@@ -63,7 +63,6 @@ public class AISensoryMemory
     {
         memories.RemoveAll(x => x.Age > olderThan);
         memories.RemoveAll(x => !x.gameObject);
-        memories.RemoveAll(x => x.gameObject.tag == "Player" && x.gameObject.GetComponent<PlayerStatusManager>().isDead);
-        // for npc health too
+        memories.RemoveAll(x => !x.gameObject.TryGetComponent<CharacterStatusManager>(out var status) || status.IsDead);
     }
 }

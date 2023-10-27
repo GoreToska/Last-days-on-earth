@@ -14,7 +14,7 @@ public class Ragdoll : MonoBehaviour
     {
         rigidbodies = GetComponentsInChildren<Rigidbody>();
         animator = GetComponent<Animator>();
-        navMeshAgent = GetComponent<NavMeshAgent>();
+        TryGetComponent<NavMeshAgent>(out navMeshAgent);
 
         DisableRagdoll();
     }
@@ -27,7 +27,10 @@ public class Ragdoll : MonoBehaviour
         }
 
         animator.enabled = true;
-        navMeshAgent.enabled = true;
+        if (navMeshAgent)
+        {
+            navMeshAgent.enabled = true;
+        }
     }
 
     public void EnableRagdoll()
@@ -38,6 +41,9 @@ public class Ragdoll : MonoBehaviour
         }
 
         animator.enabled = false;
-        navMeshAgent.enabled = false;
+        if(navMeshAgent)
+        {
+            navMeshAgent.enabled = false;
+        }
     }
 }

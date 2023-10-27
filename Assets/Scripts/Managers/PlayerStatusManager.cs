@@ -1,12 +1,11 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
-public class PlayerStatusManager : MonoBehaviour
+public class PlayerStatusManager : CharacterStatusManager
 {
-    [HideInInspector] public static PlayerStatusManager Instance;
-
     [Header("Player status")]
-    [SerializeField] public bool isDead = false;
+    [SerializeField] private bool isDead = false;
     [SerializeField] public float hp = 100f;
     [SerializeField] public float stamina = 100f;
 
@@ -19,24 +18,21 @@ public class PlayerStatusManager : MonoBehaviour
     public event UnityAction deathEvent = delegate { };
     public event UnityAction fatigueEvent = delegate { };
 
-    private void Awake()
+    public override void Start()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-
-    private void Start()
-    {
-        DontDestroyOnLoad(gameObject);
-
         SetHP(hp);
         SetStamina(stamina);
+
+        deathEvent += GetComponent<Ragdoll>().EnableRagdoll;
+        deathEvent += PlayerInputManager.Instance.DisableInput;
+        deathEvent += () => GetComponent<CharacterController>().enabled = false;
+    }
+
+    public override void OnDisable()
+    {
+        deathEvent -= GetComponent<Ragdoll>().EnableRagdoll;
+        deathEvent -= PlayerInputManager.Instance.DisableInput;
+        deathEvent += () => GetComponent<CharacterController>().enabled = false;
     }
 
     private void Update()
@@ -51,7 +47,7 @@ public class PlayerStatusManager : MonoBehaviour
         }
     }
 
-    public void SetHP(float value)
+    public override void SetHP(float value)
     {
         if (value > 100)
         {
@@ -62,9 +58,9 @@ public class PlayerStatusManager : MonoBehaviour
         HUDManager.Instance.UpdateHP(hp);
     }
 
-    public void SetStamina(float value)
+    public override void SetStamina(float value)
     {
-        if(value > 100)
+        if (value > 100)
         {
             value = 100;
         }
@@ -73,7 +69,7 @@ public class PlayerStatusManager : MonoBehaviour
         HUDManager.Instance.UpdateStamina(stamina);
     }
 
-    public void RegenHP(float value)
+    public override void RegenHP(float value)
     {
         hp += value;
 
@@ -86,7 +82,7 @@ public class PlayerStatusManager : MonoBehaviour
         }
     }
 
-    public void RegenStamina(float value)
+    public override void RegenStamina(float value)
     {
         stamina += value;
 
@@ -99,13 +95,13 @@ public class PlayerStatusManager : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float damage)
+    public override void TakeDamage(float damage)
     {
         hp -= damage;
 
         //  Update UI
         HUDManager.Instance.UpdateHP(hp);
-        CameraActions.Instance.ImpactShake(cameraShakeDuration, damage/10);
+        CameraActions.Instance.ImpactShake(cameraShakeDuration, damage / 10);
 
         if (hp <= 0)
         {
@@ -115,7 +111,7 @@ public class PlayerStatusManager : MonoBehaviour
         }
     }
 
-    public void TakeStaminaDamage(float damage)
+    public override void TakeStaminaDamage(float damage)
     {
         if (stamina == 0)
         {
@@ -131,4 +127,6 @@ public class PlayerStatusManager : MonoBehaviour
         // update UI
         HUDManager.Instance.UpdateStamina(stamina);
     }
+
+    public override bool IsDead { get => isDead; set => isDead = value; }
 }

@@ -26,6 +26,8 @@ public class PlayerAnimationManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        
     }
 
     private void Start()

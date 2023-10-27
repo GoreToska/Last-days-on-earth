@@ -99,7 +99,7 @@ public class PlayerMovementManager : MonoBehaviour
 
         moveDirection.y = Physics.gravity.y / 2;
 
-        if (PlayerInputManager.Instance.IsSprinting && PlayerStatusManager.Instance.stamina > 1)
+        if (PlayerInputManager.Instance.IsSprinting && playerStatusManager.stamina > 1)
         {
             playerStatusManager.TakeStaminaDamage(sprintStaminaCost * Time.deltaTime);
             characterController.Move(moveDirection * sprintingSpeed * Time.deltaTime);

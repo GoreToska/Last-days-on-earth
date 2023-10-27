@@ -13,6 +13,8 @@ public class AIAttackState : AIState
     public void Exit(AIZombieAgent agent)
     {
         agent.isAttacking = false;
+        agent.animator.CrossFade("Blend Tree", 0.1f);
+        Debug.Log("Exit Attack state");
     }
 
     public AIStateID GetStateID()
@@ -22,12 +24,18 @@ public class AIAttackState : AIState
 
     public void Update(AIZombieAgent agent)
     {
-        if(agent.isAttacking)
+        if (agent.isAttacking)
         {
             return;
         }
 
-        if (agent.targetSystem.HasTarget && agent.targetSystem.Target.tag == "Player" && agent.targetSystem.Target.GetComponent<PlayerStatusManager>().isDead)
+        if (!agent.targetSystem.HasTarget)
+        {
+            agent.stateMachine.ChangeState(AIStateID.Idle);
+            return;
+        }
+
+        if (!agent.targetSystem.Target.TryGetComponent<CharacterStatusManager>(out var status) || status.IsDead)
         {
             agent.stateMachine.ChangeState(AIStateID.Idle);
             return;
@@ -47,8 +55,10 @@ public class AIAttackState : AIState
                 return;
             }
         }
+
+        agent.stateMachine.ChangeState(AIStateID.Idle);
     }
-    
+
     private void Attack(AIZombieAgent agent)
     {
         agent.isAttacking = true;

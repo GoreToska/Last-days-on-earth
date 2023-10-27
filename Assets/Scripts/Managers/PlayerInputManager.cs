@@ -14,6 +14,7 @@ public class PlayerInputManager : MonoBehaviour
     [HideInInspector] public static PlayerInputManager Instance;
 
     private PlayerInput playerInput;
+    private PlayerStatusManager playerStatusManager;
     private Camera camera;
 
     private Transform crosshair;
@@ -70,6 +71,7 @@ public class PlayerInputManager : MonoBehaviour
 
         camera = Camera.main;
         crosshair = GameObject.FindGameObjectWithTag("Crosshair").transform;
+        playerStatusManager = GetComponent<PlayerStatusManager>();
     }
 
     private void OnEnable()
@@ -128,7 +130,7 @@ public class PlayerInputManager : MonoBehaviour
         //  absolute movement amount
         moveAmount = Mathf.Clamp01(Mathf.Abs(verticalInput) + Mathf.Abs(horizontalInput));
 
-        if (isSprinting && PlayerStatusManager.Instance.stamina > 1)
+        if (isSprinting && playerStatusManager.stamina > 1)
         {
             moveAmount *= 2;
         }

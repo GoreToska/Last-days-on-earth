@@ -7,6 +7,7 @@ public class AIIdleState : AIState
     private float timer;
     public void Enter(AIZombieAgent agent)
     {
+        Debug.Log("Enter Idle State");
         timer = 0f;
     }
 
@@ -25,7 +26,6 @@ public class AIIdleState : AIState
         {
             agent.stateMachine.ChangeState(AIStateID.ChasePlayer);
         }
-
 
         timer += Time.deltaTime;
 
