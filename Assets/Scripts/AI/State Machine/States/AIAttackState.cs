@@ -31,6 +31,7 @@ public class AIAttackState : AIState
 
         if (!agent.targetSystem.HasTarget)
         {
+            Debug.Log("Exit Attack state to Idle state");
             agent.stateMachine.ChangeState(AIStateID.Idle);
             return;
         }
@@ -55,8 +56,6 @@ public class AIAttackState : AIState
                 return;
             }
         }
-
-        agent.stateMachine.ChangeState(AIStateID.Idle);
     }
 
     private void Attack(AIZombieAgent agent)
