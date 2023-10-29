@@ -12,7 +12,7 @@ public class PlayerEquipmentManager : MonoBehaviour
 
     [SerializeField] private Transform MainWeaponSocket;
 
-    public List<Item> itemsToPickUp;
+    [SerializeField] private List<Item> itemsToPickUp;
 
     //  Handle weapon change
     [SerializeField] public RangeWeapon rangeMainWeapon;
@@ -52,6 +52,27 @@ public class PlayerEquipmentManager : MonoBehaviour
         PlayerInputManager.Instance.ReloadEvent -= TryToPerformReload;
     }
 
+    public List<Item> GetItemsToPickUp()
+    {
+        itemsToPickUp.RemoveAll(item => !item);
+        return itemsToPickUp;
+    }
+
+    public void AddItemToPickUps(Item item)
+    {
+        itemsToPickUp.Add(item);
+    }
+
+    public void RemoveItemFromPickUps(int number)
+    {
+        itemsToPickUp.RemoveAt(number);
+    }
+
+    public void RemoveItemFromPickUps(Item item)
+    {
+        itemsToPickUp.Remove(item);
+    }
+
     private void TryToPerformAttack()
     {
         if (rangeMainWeapon && PlayerInputManager.Instance.IsAiming)
@@ -60,7 +81,7 @@ public class PlayerEquipmentManager : MonoBehaviour
             return;
         }
 
-        if(meleeWeapon && PlayerInputManager.Instance.IsAiming)
+        if (meleeWeapon && PlayerInputManager.Instance.IsAiming)
         {
             meleeWeapon.PerformAttack();
             return;
@@ -77,15 +98,15 @@ public class PlayerEquipmentManager : MonoBehaviour
 
     public async void TryToPickUp()
     {
-        if (itemsToPickUp.Count < 1)
+        if (GetItemsToPickUp().Count < 1)
         {
             Debug.Log("Nothing to pickup");
             return;
         }
 
-        if (itemsToPickUp[0].PickUpItem())
+        if (GetItemsToPickUp()[0].PickUpItem())
         {
-            itemsToPickUp.RemoveAt(0);
+            RemoveItemFromPickUps(0);
             return;
         }
     }
@@ -97,19 +118,19 @@ public class PlayerEquipmentManager : MonoBehaviour
             //  just do nothing in future
             DropCurrentMainWeapon(rangeMainWeapon, false);
         }
-        if(meleeWeapon != null)
+        if (meleeWeapon != null)
         {
             Debug.Log("Drop melee");
             DropCurrentMainWeapon(meleeWeapon, false);
         }
 
-        if(weapon.data.weaponType == WeaponType.Range_Primary)
+        if (weapon.data.weaponType == WeaponType.Range_Primary)
         {
             rangeMainWeapon = Instantiate(weapon.data.weaponModel, MainWeaponSocket).GetComponent<RangeWeapon>();
             rangeMainWeapon.storedItem = storedItem;
             rangeMainWeapon.SetBulletStatus();
         }
-        if(weapon.data.weaponType == WeaponType.Melee_Primary)
+        if (weapon.data.weaponType == WeaponType.Melee_Primary)
         {
             meleeWeapon = Instantiate(weapon.data.weaponModel, MainWeaponSocket).GetComponent<MeleeWeapon>();
             meleeWeapon.storedItem = storedItem;

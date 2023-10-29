@@ -12,9 +12,12 @@ public sealed class PlayerInventory : MonoBehaviour
     [HideInInspector] public static PlayerInventory Instance;
 
     private VisualElement root;
+    private VisualElement inventoryRoot;
     private VisualElement inventoryGrid;
+    private VisualElement equiped;
     private static Button buttonDrop;
     private static VisualElement details;
+    private static VisualElement mainWeaponSlot;
     private static Label itemDetailHeader;
     private static Label itemDetailDescription;
     private static Label itemDetailPrice;
@@ -73,12 +76,15 @@ public sealed class PlayerInventory : MonoBehaviour
         //  Sets the references to key VisualElements
         root = GetComponentInChildren<UIDocument>().rootVisualElement;
         inventoryGrid = root.Q<VisualElement>("Grid");
+        inventoryRoot = root.Q<VisualElement>("Inventory");
+        equiped = root.Q<VisualElement>("Equiped");
         VisualElement itemDetails = root.Q<VisualElement>("ItemDetails");
         details = itemDetails;
         itemDetailHeader = itemDetails.Q<Label>("FriendlyName");
         itemDetailDescription = itemDetails.Q<Label>("Body");
         itemDetailPrice = itemDetails.Q<Label>("SellPrice");
         buttonDrop = itemDetails.Q<Button>("btn_Drop");
+        mainWeaponSlot = root.Q<VisualElement>("MainWeaponSlot");
 
         //  Pauses until the end of the frame
         await UniTask.WaitForEndOfFrame();
@@ -256,7 +262,7 @@ public sealed class PlayerInventory : MonoBehaviour
 
         if (item != null)
         {
-            PlayerEquipmentManager.Instance.OnMainWeaponEquip(weapon, item);
+            //PlayerEquipmentManager.Instance.OnMainWeaponEquip(weapon, item);
             return item;
         }
         else
@@ -455,20 +461,21 @@ public sealed class PlayerInventory : MonoBehaviour
 
     public (bool canPlace, Vector2 position) ShowPlacementTarget(ItemVisual draggedItem)
     {
-        if (!inventoryGrid.layout.Contains(new Vector2(draggedItem.localBound.xMax,
+        if (!inventoryRoot.layout.Contains(new Vector2(draggedItem.localBound.xMax,
             draggedItem.localBound.yMax)))
         {
             m_Telegraph.style.visibility = Visibility.Hidden;
             return (canPlace: false, position: Vector2.zero);
         }
 
-        VisualElement targetSlot = inventoryGrid.Children().Where(x =>
-            x.layout.Overlaps(draggedItem.layout) && x != draggedItem).OrderBy(x =>
+        var together = inventoryGrid.Children().Concat(equiped.Children());
+        VisualElement targetSlot = together.Where(x =>
+            //x.layout.Overlaps(draggedItem.layout) &&  // idk why is it working without this code
+            x != draggedItem).OrderBy(x =>
             Vector2.Distance(x.worldBound.position,
             draggedItem.worldBound.position)).First();
 
         UpdateTelegraphSize(draggedItem);
-
         SetItemPosition(m_Telegraph, new Vector2(targetSlot.layout.position.x, targetSlot.layout.position.y));
 
         m_Telegraph.style.visibility = Visibility.Visible;

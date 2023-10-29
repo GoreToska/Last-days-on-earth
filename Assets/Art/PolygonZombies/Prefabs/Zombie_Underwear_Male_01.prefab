@@ -2583,7 +2583,7 @@ CharacterJoint:
     spring: 0
     damper: 0
   m_Swing1Limit:
-    limit: 25
+    limit: 5
     bounciness: 0
     contactDistance: 0
   m_Swing2Limit:
@@ -9251,7 +9251,8 @@ MonoBehaviour:
   obstaclesLayer:
     serializedVersion: 2
     m_Bits: 1
-  objects: []
+  objects:
+  - {fileID: 0}
 --- !u!114 &1316148189926809860
 MonoBehaviour:
   m_ObjectHideFlags: 0

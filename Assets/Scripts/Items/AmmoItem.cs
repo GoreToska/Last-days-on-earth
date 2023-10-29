@@ -13,7 +13,7 @@ public class AmmoItem : Item
 
         if (item != null)
         {
-            if (gameObject)
+            if (gameObject != null)
             {
                 Destroy(gameObject);
                 // UI popup "YOU TAKE ITEM_NAME"

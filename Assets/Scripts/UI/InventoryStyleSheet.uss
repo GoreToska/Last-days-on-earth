@@ -2,13 +2,15 @@ VisualElement {
 }
 
 .visual-icon-container {
-    height: 100%;
-    width: 100%;
+    height: width;
+    height: 95px;
+    width: 95px;
     position: absolute;
     padding: 5px;
     background-color: rgba(14, 14, 14, 0.5);
-    border-width: 2px;
+    border-width: 0px;
     border-color: rgb(171, 171, 171);
+    align-content: center;
 }
 
 .visual-icon-count {
@@ -21,7 +23,7 @@ VisualElement {
     height: 100%;
     width: 100%;
     -unity-background-scale-mode: scale-to-fit;
-    align-items: flex-end;
+    align-items: center;
     justify-content: flex-end;
 }
 
@@ -77,7 +79,7 @@ VisualElement {
 }
 
 .slot-icon-highlighted {
-    border-width: 2px;
+    border-width: 1px;
     border-color: rgb(202, 158, 0);
     transform-origin: center;
     position: absolute;

@@ -13,12 +13,12 @@ public class Item : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        PlayerEquipmentManager.Instance.itemsToPickUp.Add(this);
+        PlayerEquipmentManager.Instance.AddItemToPickUps(this);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        PlayerEquipmentManager.Instance.itemsToPickUp.Remove(this);
+        PlayerEquipmentManager.Instance.RemoveItemFromPickUps(this);
     }
 
     public virtual bool PickUpItem()

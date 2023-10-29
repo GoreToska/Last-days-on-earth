@@ -1,6 +1,5 @@
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 using UnityEngine.UIElements;
 
 //  Summary
@@ -28,9 +27,9 @@ public class ItemVisual : VisualElement
         //  setting the properties of the root VisualElement (the parent in the reference above)
         name = $"{this.item.name}";
         style.height = this.item.itemCharacteristics.Height *
-            PlayerInventory.SlotDimension.Height;
+            PlayerInventory.SlotDimension.Height - 1;
         style.width = this.item.itemCharacteristics.Width *
-            PlayerInventory.SlotDimension.Width;
+            PlayerInventory.SlotDimension.Width - 1;
         //style.visibility = Visibility.Visible;
 
         //   creating a new child VisualElement called Icon
@@ -68,14 +67,14 @@ public class ItemVisual : VisualElement
     //  set position of item
     public void SetPosition(Vector2 pos)
     {
-        style.left = pos.x;
-        style.top = pos.y;
+        style.left = Mathf.Round(pos.x);
+        style.top = Mathf.Round(pos.y);
     }
 
     public void SetPosition(StyleLength left, StyleLength top)
     {
-        style.left = left;
-        style.top = top;
+        style.left = Mathf.Round(left.value.value);
+        style.top = Mathf.Round(top.value.value);
     }
 
     public void SetCount(int value)
@@ -98,6 +97,7 @@ public class ItemVisual : VisualElement
             //PlayerInputManager.Instance.RotateItem += RotateItem;
             return;
         }
+
         m_IsDragging = false;
 
         if (m_PlacementResults.canPlace && mouseEvent.button == 0)
@@ -105,8 +105,15 @@ public class ItemVisual : VisualElement
             //SetRotation(isRotated);
             //PlayerInputManager.Instance.RotateItem -= RotateItem;
 
-            m_Placement = PlayerInventory.Instance.PositionToPlace();
-            SetPosition(m_Placement.left, m_Placement.top);
+            //m_Placement = PlayerInventory.Instance.PositionToPlace();
+            //SetPosition(m_Placement.left, m_Placement.top);
+            
+            SetPosition(new Vector2(
+            m_PlacementResults.position.x - parent.worldBound.position.x,
+            m_PlacementResults.position.y - parent.worldBound.position.y));
+
+            #region rotation commented
+            //SetPosition(new Vector2(m_PlacementResults.position.x, m_PlacementResults.position.y));
 
             //if (isRotated)
             //{
@@ -122,12 +129,14 @@ public class ItemVisual : VisualElement
             //    m_PlacementResults.position.x - parent.worldBound.position.x,
             //    m_PlacementResults.position.y - parent.worldBound.position.y));
             //}
+            #endregion
 
             return;
         }
 
         //SetRotation(wasRotated);
         //PlayerInputManager.Instance.RotateItem -= RotateItem;
+        
         SetPosition(new Vector2(m_OriginalPosition.x, m_OriginalPosition.y));
     }
 
