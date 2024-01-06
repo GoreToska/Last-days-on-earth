@@ -1,4 +1,3 @@
-using InventorySystem;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -8,7 +7,7 @@ public class WeaponItem : Item
 {
     public override void PickUpItem()
     {
-        InventoryController.instance.AddItem("Main", data.GetItemType());
+        Debug.Log("Pickup");
         Destroy(gameObject);
     }
 }

@@ -1,4 +1,3 @@
-using InventorySystem;
 using UnityEngine;
 
 public class AmmoItem : Item
@@ -7,7 +6,7 @@ public class AmmoItem : Item
 
     public override void PickUpItem()
     {
-        InventoryController.instance.AddItem("Main", data.GetItemType(), _count);
+        Debug.Log("Pickup");
         Destroy(gameObject);
     }
 }

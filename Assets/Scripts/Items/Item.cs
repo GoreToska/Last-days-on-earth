@@ -1,4 +1,3 @@
-using InventorySystem;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -11,7 +10,6 @@ public class Item : MonoBehaviour
 
     //[Header("If this item is weapon")]
     //[SerializeField] public WeaponData weaponData;
-    [SerializeField] protected ItemInitializer data;
 
     private void OnTriggerEnter(Collider other)
     {
