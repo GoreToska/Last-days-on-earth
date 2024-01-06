@@ -45,96 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amount: 0
-  items:
-  - itemType: Sword
-    itemImage: {fileID: 21300000, guid: fd6b75e8395793443bfa3ba6cff24271, type: 3}
-    maxStackAmount: 1
-    displayItemAmount: 0
-    draggable: 1
-    pressable: 0
-    RelatedGameObject: {fileID: 0}
-    itemAction:
-      m_PersistentCalls:
-        m_Calls: []
-    isNull: 0
-  - itemType: Hammer
-    itemImage: {fileID: 21300000, guid: d7d6957a2747321478c7312a163b699b, type: 3}
-    maxStackAmount: 1
-    displayItemAmount: 0
-    draggable: 1
-    pressable: 0
-    RelatedGameObject: {fileID: 0}
-    itemAction:
-      m_PersistentCalls:
-        m_Calls: []
-    isNull: 0
-  - itemType: Axe
-    itemImage: {fileID: 21300000, guid: 92dd810545194704cbb1a50583840689, type: 3}
-    maxStackAmount: 1
-    displayItemAmount: 0
-    draggable: 1
-    pressable: 0
-    RelatedGameObject: {fileID: 0}
-    itemAction:
-      m_PersistentCalls:
-        m_Calls: []
-    isNull: 0
-  - itemType: SilverBar
-    itemImage: {fileID: 21300000, guid: 966211303761bd44eaea68aba4bbc52b, type: 3}
-    maxStackAmount: 64
-    displayItemAmount: 1
-    draggable: 1
-    pressable: 0
-    RelatedGameObject: {fileID: 0}
-    itemAction:
-      m_PersistentCalls:
-        m_Calls: []
-    isNull: 0
-  - itemType: Potion
-    itemImage: {fileID: 21300000, guid: 3a2cf91b31b50e945ac1fff5a72d028a, type: 3}
-    maxStackAmount: 10
-    displayItemAmount: 1
-    draggable: 1
-    pressable: 0
-    RelatedGameObject: {fileID: 0}
-    itemAction:
-      m_PersistentCalls:
-        m_Calls: []
-    isNull: 0
-  - itemType: Ruby
-    itemImage: {fileID: 21300000, guid: 1f287a624d371eb4cbf999c8784dd88a, type: 3}
-    maxStackAmount: 5
-    displayItemAmount: 1
-    draggable: 1
-    pressable: 0
-    RelatedGameObject: {fileID: 0}
-    itemAction:
-      m_PersistentCalls:
-        m_Calls: []
-    isNull: 0
-  inventories:
-  - inventoryName: HotBar
-    rows: 1
-    cols: 9
-    initialized: 1
-  - inventoryName: Inventory
-    rows: 3
-    cols: 9
-    initialized: 1
   selectedItemIndex: 0
   SelectedInventoryIndex: 0
-  item:
-    itemType: Sword
-    itemImage: {fileID: 21300000, guid: fd6b75e8395793443bfa3ba6cff24271, type: 3}
-    maxStackAmount: 1
-    displayItemAmount: 0
-    draggable: 1
-    pressable: 0
-    RelatedGameObject: {fileID: 0}
-    itemAction:
-      m_PersistentCalls:
-        m_Calls: []
-    isNull: 0
+  item: {fileID: 11400000, guid: 53a9b04823e4b044ea02d03dfb1d9d30, type: 2}
   inventory:
     inventoryName: HotBar
     rows: 1

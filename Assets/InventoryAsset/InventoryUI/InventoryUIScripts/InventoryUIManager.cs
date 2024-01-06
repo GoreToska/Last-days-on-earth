@@ -197,7 +197,7 @@ namespace InventorySystem
         /// </summary>
         private void OnEnable()
         {
-            if(background!=null&&activeBackground)
+            if (background != null && activeBackground)
             {
                 background.SetActive(true);
 
@@ -221,6 +221,7 @@ namespace InventorySystem
             InventoryUIManager manager = InventoryController.instance.GetInventoryManagerPrefab().GetComponent<InventoryUIManager>();
 
             SlotImage.regular = manager.GetSlotImage();
+            SlotImage.regularColor = manager.GetSlotImageColor();
             slotSize = manager.GetSlotSize();
             slotGap = manager.GetSlotGap();
 
@@ -329,6 +330,7 @@ namespace InventorySystem
                     slotObjectInstance.GetComponent<RectTransform>().localPosition = placeMentPos;
                     slotObjectInstance.GetComponent<RectTransform>().sizeDelta = slotSize;
                     slotObjectInstance.GetComponent<Image>().sprite = SlotImage.regular;
+                    slotObjectInstance.GetComponent<Image>().color = SlotImage.regularColor;
                     Slot slotInstance = slotObjectInstance.GetComponent<Slot>();
                     slotInstance.GetItemHolder().GetComponent<DragItem>().Initiailize();
                     slotInstance.SetChildImageSize(new Vector2(slotSize.x * ItemImageSizeFactor.x, slotSize.y * ItemImageSizeFactor.y));
@@ -495,11 +497,12 @@ namespace InventorySystem
 
                 if (SlotImage.selected == null)
                 {
-                    prevSlotInstance.GetSlotImage().color = prevSlotInstance.GetColor();
+                    prevSlotInstance.GetSlotImage().color = SlotImage.regularColor;
                 }
                 else
                 {
                     slot.GetComponent<Image>().sprite = SlotImage.regular;
+                    slot.GetComponent<Image>().color = SlotImage.regularColor;
                 }
 
             }
@@ -537,7 +540,7 @@ namespace InventorySystem
         {
             if (Input.GetKey(KeyCode.LeftShift))
             {
-                MoveOnPressHelper(KeyCode.LeftShift,slot);
+                MoveOnPressHelper(KeyCode.LeftShift, slot);
 
             }
             else if (Input.GetKey(KeyCode.LeftControl))
@@ -774,6 +777,9 @@ namespace InventorySystem
             public Sprite regular;
             [Tooltip("OPTIONAL: Displays slot Image when selected.")]
             public Sprite selected;
+
+            public Color regularColor;
+            public Color selectedColor;
         }
 
         /// <summary>
@@ -829,7 +835,7 @@ namespace InventorySystem
 
         public bool InvokeMissOverSlot(InventoryItem item1, InventoryItem item2)
         {
-            if(invokeOnMiss.missOverSlotAction!=null && !(invokeOnMiss.missOverSlotAction.GetPersistentEventCount()==0))
+            if (invokeOnMiss.missOverSlotAction != null && !(invokeOnMiss.missOverSlotAction.GetPersistentEventCount() == 0))
             {
                 invokeOnMiss.missOverSlotAction.Invoke(item1, item2);
                 return true;
@@ -938,6 +944,10 @@ namespace InventorySystem
         public Sprite GetSlotImage()
         {
             return SlotImage.regular;
+        }
+        public Color GetSlotImageColor()
+        {
+            return SlotImage.regularColor;
         }
         private enum StartPositions
         {
