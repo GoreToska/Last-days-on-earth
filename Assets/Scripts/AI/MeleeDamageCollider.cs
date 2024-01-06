@@ -23,7 +23,6 @@ public class MeleeDamageCollider : MonoBehaviour
     public void EnableCollider(float damage)
     {
         this.damage = damage;
-        Debug.Log(damage);
         damageCollider.enabled = true;
     }
 

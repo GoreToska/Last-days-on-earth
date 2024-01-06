@@ -14,7 +14,6 @@ public class AIAttackState : AIState
     {
         agent.isAttacking = false;
         agent.animator.CrossFade("Blend Tree", 0.1f);
-        Debug.Log("Exit Attack state");
     }
 
     public AIStateID GetStateID()
@@ -31,7 +30,6 @@ public class AIAttackState : AIState
 
         if (!agent.targetSystem.HasTarget)
         {
-            Debug.Log("Exit Attack state to Idle state");
             agent.stateMachine.ChangeState(AIStateID.Idle);
             return;
         }
@@ -45,7 +43,6 @@ public class AIAttackState : AIState
 
         if (agent.targetSystem.HasTarget && Vector3.Distance(agent.transform.position, agent.targetSystem.TargetPosition) > agent.navMeshAgent.stoppingDistance)
         {
-            Debug.Log("Change to Chase");
             agent.stateMachine.ChangeState(AIStateID.ChasePlayer);
         }
         else

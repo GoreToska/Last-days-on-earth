@@ -1,31 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using InventorySystem;
 using UnityEngine;
 
 public class AmmoItem : Item
 {
-    public AmmoData data;
+    [SerializeField] private int _count;
 
-    public override  bool PickUpItem()
+    public override void PickUpItem()
     {
-        var item = PlayerInventory.Instance.AddNewAmmoItem(data);
-
-        if (item != null)
-        {
-            if (gameObject != null)
-            {
-                Destroy(gameObject);
-                // UI popup "YOU TAKE ITEM_NAME"
-                return true;
-            }
-            //if (weaponData != null && weaponData.weaponType == WeaponType.Primary)
-            //{
-            //    PlayerEquipmentManager.Instance.OnMainWeaponEquip(this, item);
-            //}
-        }
-
-        //  UI popup "YOU CANT PICK UP"
-        return false;
+        InventoryController.instance.AddItem("Main", data.GetItemType(), _count);
+        Destroy(gameObject);
     }
 }

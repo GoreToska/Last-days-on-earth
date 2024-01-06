@@ -56,13 +56,14 @@ public class PlayerUIManager : MonoBehaviour
 
     private void OnOpenInventory()
     {
-        Debug.Log("Open");
-        PlayerInventory.Instance.InventoryVisibility(Visibility.Visible);
+        Debug.Log("Заглушка 2");
+        //PlayerInventory.Instance.InventoryVisibility(Visibility.Visible);
     }
 
     private void OnCloseInventory()
     {
-        PlayerInventory.Instance.InventoryVisibility(Visibility.Hidden);
-        PlayerInventory.Instance.TelegraphVisibility(Visibility.Hidden);
+        Debug.Log("Заглушка");
+        //PlayerInventory.Instance.InventoryVisibility(Visibility.Hidden);
+        //PlayerInventory.Instance.TelegraphVisibility(Visibility.Hidden);
     }
 }

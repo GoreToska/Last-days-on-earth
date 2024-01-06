@@ -256,20 +256,20 @@ public sealed class PlayerInventory : MonoBehaviour
         return null;
     }
 
-    public async Task<StoredItem> AddNewWeaponItem(WeaponItem weapon)
-    {
-        var item = await AddNewItem(weapon.data, ItemType.Weapon, AmmoTypes.None);
+    //public async Task<StoredItem> AddNewWeaponItem(WeaponItem weapon)
+    //{
+    //    var item = await AddNewItem(weapon.data, ItemType.Weapon, AmmoTypes.None);
 
-        if (item != null)
-        {
-            //PlayerEquipmentManager.Instance.OnMainWeaponEquip(weapon, item);
-            return item;
-        }
-        else
-        {
-            return null;
-        }
-    }
+    //    if (item != null)
+    //    {
+    //        //PlayerEquipmentManager.Instance.OnMainWeaponEquip(weapon, item);
+    //        return item;
+    //    }
+    //    else
+    //    {
+    //        return null;
+    //    }
+    //}
 
     public async Task<StoredItem> AddNewItem(ItemData item, ItemType itemType, AmmoTypes ammoType)
     {

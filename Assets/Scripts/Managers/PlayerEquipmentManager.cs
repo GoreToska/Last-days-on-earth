@@ -104,11 +104,15 @@ public class PlayerEquipmentManager : MonoBehaviour
             return;
         }
 
-        if (GetItemsToPickUp()[0].PickUpItem())
-        {
-            RemoveItemFromPickUps(0);
-            return;
-        }
+        GetItemsToPickUp()[0].PickUpItem();
+        RemoveItemFromPickUps(0);
+        return;
+        // TODO
+        //if (GetItemsToPickUp()[0].PickUpItem())
+        //{
+        //    RemoveItemFromPickUps(0);
+        //    return;
+        //}
     }
 
     public void OnMainWeaponEquip(WeaponItem weapon, StoredItem storedItem)
@@ -124,20 +128,21 @@ public class PlayerEquipmentManager : MonoBehaviour
             DropCurrentMainWeapon(meleeWeapon, false);
         }
 
-        if (weapon.data.weaponType == WeaponType.Range_Primary)
-        {
-            rangeMainWeapon = Instantiate(weapon.data.weaponModel, MainWeaponSocket).GetComponent<RangeWeapon>();
-            rangeMainWeapon.storedItem = storedItem;
-            rangeMainWeapon.SetBulletStatus();
-        }
-        if (weapon.data.weaponType == WeaponType.Melee_Primary)
-        {
-            meleeWeapon = Instantiate(weapon.data.weaponModel, MainWeaponSocket).GetComponent<MeleeWeapon>();
-            meleeWeapon.storedItem = storedItem;
-            //rangeMainWeapon.SetBulletStatus();
-        }
+        //if (weapon.data.weaponType == WeaponType.Range_Primary)
+        //{
+        //    rangeMainWeapon = Instantiate(weapon.data.weaponModel, MainWeaponSocket).GetComponent<RangeWeapon>();
+        //    rangeMainWeapon.storedItem = storedItem;
+        //    rangeMainWeapon.SetBulletStatus();
+        //}
+        //if (weapon.data.weaponType == WeaponType.Melee_Primary)
+        //{
+        //    meleeWeapon = Instantiate(weapon.data.weaponModel, MainWeaponSocket).GetComponent<MeleeWeapon>();
+        //    meleeWeapon.storedItem = storedItem;
+        //    //rangeMainWeapon.SetBulletStatus();
+        //}
 
-        PlayerAnimationManager.Instance.SetWeaponAnimationPattern(weapon.data.weaponType);
+        // TODO 
+        //PlayerAnimationManager.Instance.SetWeaponAnimationPattern(weapon.data.weaponType);
     }
 
     private void DropCurrentMainWeapon(RangeWeapon item, bool setDefaultRig = true)

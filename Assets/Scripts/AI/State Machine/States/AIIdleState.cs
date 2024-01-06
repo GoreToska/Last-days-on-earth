@@ -7,7 +7,6 @@ public class AIIdleState : AIState
     private float timer = 0f;
     public void Enter(AIZombieAgent agent)
     {
-        Debug.Log("Enter Idle State");
     }
 
     public void Exit(AIZombieAgent agent)
