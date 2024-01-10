@@ -11,9 +11,12 @@ public class PlayerUIManager : MonoBehaviour
     [SerializeField] private UIDocument inventory;
     [SerializeField] private UIDocument HUD;
 
+    [Header("UI Managers")]
+    [SerializeField] private InventoryUIController _inventoryUIController;
+
     [Header("Status Bars")]
-    [SerializeField] private StatusBar hpBar;
-    [SerializeField] private StatusBar staminaBar;
+    [SerializeField] private StatusBar _hpBar;
+    [SerializeField] private StatusBar _staminaBar;
 
     private void Awake()
     {
@@ -41,12 +44,13 @@ public class PlayerUIManager : MonoBehaviour
 
     private void OnDisable()
     {
-
+        PlayerInputManager.Instance.OpenInventoryEvent -= OnOpenInventory;
+        PlayerInputManager.Instance.CloseInventoryEvent -= OnCloseInventory;
     }
 
     public void SetHP(float value)
     {
-        hpBar.SetStatus(value);
+        _hpBar.SetStatus(value);
     }
 
     public void SetStamina(float value)
