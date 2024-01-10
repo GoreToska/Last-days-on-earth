@@ -7,6 +7,6 @@ using UnityEngine.Events;
 public interface IInteractable
 {
     public UnityAction<IInteractable> OnInteractionComplete { get; set; }
-    public void Interact(Interactor interactor, out bool result);
+    public void Interact(Interactor interactor, out bool result, IInputController inputController = null);
     public void EndInteraction();
 }

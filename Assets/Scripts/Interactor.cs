@@ -10,28 +10,34 @@ public class Interactor : MonoBehaviour
     public float InteractionPointRadius = 1f;
     public bool IsInteracting { get; private set; }
 
-    private void Update()
+    private void InteractWithItems()
     {
-        // add ui reaction
         var colliders = Physics.OverlapSphere(InteractionPoint.position, InteractionPointRadius, InteractionLayer);
 
-        if (Keyboard.current.fKey.wasPressedThisFrame)
+        for (int i = 0; i < colliders.Length; i++)
         {
-            for (int i = 0; i < colliders.Length; i++)
-            {
-                var interactable = colliders[i].GetComponent<IInteractable>();
+            var interactable = colliders[i].GetComponent<IInteractable>();
 
-                if (interactable != null)
-                {
-                    StartInteraction(interactable);
-                }
+            if (interactable != null)
+            {
+                StartInteraction(interactable);
             }
         }
     }
 
+    private void OnEnable()
+    {
+        PlayerInputManager.Instance.PickUpEvent += InteractWithItems;
+    }
+
+    private void OnDisable()
+    {
+        PlayerInputManager.Instance.PickUpEvent -= InteractWithItems;
+    }
+
     private void StartInteraction(IInteractable interactable)
     {
-        interactable.Interact(this, out bool result);
+        interactable.Interact(this, out bool result, PlayerInputManager.Instance);
         IsInteracting = result;
     }
 

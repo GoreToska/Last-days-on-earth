@@ -5,11 +5,19 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
+public interface IInputController
+{
+    public void DisablePlayerControls();
+    public void EnablePlayerControls();
+    public void EnableInventoryControls();
+    public void DisableInventoryControls();
+}
+
 //  Summary
 //  This class is reading input from the input devices
 //  Summary
 [RequireComponent(typeof(PlayerMovementManager))]
-public class PlayerInputManager : MonoBehaviour
+public class PlayerInputManager : MonoBehaviour, IInputController
 {
     [HideInInspector] public static PlayerInputManager Instance;
 
@@ -44,6 +52,7 @@ public class PlayerInputManager : MonoBehaviour
 
     //  Inventory
     public event UnityAction OpenInventoryEvent = delegate { };
+    public event UnityAction AlternativeCloseInventoryEvent = delegate { };
     public event UnityAction CloseInventoryEvent = delegate { };
     public event UnityAction RotateItem = delegate { };
 
@@ -95,18 +104,20 @@ public class PlayerInputManager : MonoBehaviour
 
             playerInput.PlayerCombat.Attack.performed += i => isShooting = true;
             playerInput.PlayerCombat.Attack.canceled += i => isShooting = false;
-            playerInput.PlayerCombat.Attack.performed += i => AttackEvent.Invoke();
+            playerInput.PlayerCombat.Attack.performed += i => AttackEvent?.Invoke();
 
-            playerInput.PlayerActions.OpenInventory.performed += i => OpenInventoryEvent.Invoke();
-            playerInput.Inventory.CloseInventory.performed += i => CloseInventoryEvent.Invoke();
-            playerInput.Inventory.Rotate.performed += i => RotateItem.Invoke();
+            playerInput.PlayerActions.OpenInventory.performed += i => OpenInventoryEvent?.Invoke();
+            playerInput.PlayerActions.CloseInventory.performed += i => AlternativeCloseInventoryEvent?.Invoke();
+            playerInput.Inventory.CloseInventory.performed += i => CloseInventoryEvent?.Invoke();
+            playerInput.Inventory.Rotate.performed += i => RotateItem?.Invoke();
 
             OpenInventoryEvent += () => { DisablePlayerControls(); EnableInventoryControls(); };
             CloseInventoryEvent += () => { EnablePlayerControls(); DisableInventoryControls(); };
+            AlternativeCloseInventoryEvent += () => { EnablePlayerControls(); DisableInventoryControls(); };
 
-            playerInput.PlayerActions.PickUp.performed += i => PickUpEvent.Invoke();
+            playerInput.PlayerActions.PickUp.performed += i => PickUpEvent?.Invoke();
 
-            playerInput.PlayerActions.Reload.performed += i => ReloadEvent.Invoke();
+            playerInput.PlayerActions.Reload.performed += i => ReloadEvent?.Invoke();
         }
 
         EnablePlayerControls();
@@ -175,8 +186,6 @@ public class PlayerInputManager : MonoBehaviour
         playerInput.CameraMovement.Disable();
 
         movement = Vector2.zero;
-        Debug.Log("Disable" + verticalInput + " " + horizontalInput);
-
     }
 
     public void EnablePlayerControls()

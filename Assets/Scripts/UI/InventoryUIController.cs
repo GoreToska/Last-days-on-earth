@@ -14,29 +14,28 @@ public class InventoryUIController : MonoBehaviour
 
     private void OnEnable()
     {
+        PlayerInputManager.Instance.OpenInventoryEvent += OnOpenInventory;
+        PlayerInputManager.Instance.CloseInventoryEvent += OnCloseInventory;
+        PlayerInputManager.Instance.AlternativeCloseInventoryEvent+= OnCloseInventory;
         InventoryHolder.OnDinamicInventoryDisplayRequested += DisplayInventory;
     }
 
     private void OnDisable()
     {
+        PlayerInputManager.Instance.OpenInventoryEvent -= OnOpenInventory;
+        PlayerInputManager.Instance.CloseInventoryEvent += OnCloseInventory;
+        PlayerInputManager.Instance.AlternativeCloseInventoryEvent -= OnCloseInventory;
         InventoryHolder.OnDinamicInventoryDisplayRequested -= DisplayInventory;
     }
 
-    void Update() // TODO change inputs
+    private void OnOpenInventory()
     {
-        if (!InventoryPanel.gameObject.activeSelf && Keyboard.current.tabKey.wasPressedThisFrame)
-        {
-            DisplayInventory(new InventorySystem(20));
-            Debug.Log("B");
-            return;
-        }
+        DisplayInventory(new InventorySystem(20));
+    }
 
-        if (InventoryPanel.gameObject.activeSelf && Keyboard.current.escapeKey.wasPressedThisFrame)
-        {
-            CloseInventory();
-            Debug.Log("B2");
-            return;
-        }
+    private void OnCloseInventory()
+    {
+        CloseInventory();
     }
 
     private void DisplayInventory(InventorySystem inventoryToDisplay)

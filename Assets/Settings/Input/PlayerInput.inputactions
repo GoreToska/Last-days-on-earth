@@ -144,6 +144,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "CloseInventory",
+                    "type": "Button",
+                    "id": "6240290a-8fc3-4265-a3cb-0758ecdf4bc4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "PickUp",
                     "type": "Button",
                     "id": "33f5b08c-7b8c-46e1-9cea-8b0fa16da809",
@@ -204,6 +213,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Reload",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c9c838f7-6b77-477a-967b-e1a18d621ce1",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CloseInventory",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -296,6 +316,17 @@
                     "name": "",
                     "id": "a6b16355-8935-415a-a03e-6285caafdc18",
                     "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CloseInventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "189d2f48-b1d2-405b-bfaa-706ccf094b63",
+                    "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

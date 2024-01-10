@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6698439517972926864}
   - component: {fileID: 6690551576270314000}
   - component: {fileID: 1828793770}
-  - component: {fileID: 1828793775}
+  - component: {fileID: 1002208364}
   m_Layer: 0
   m_Name: SM_Item_Ammo_762
   m_TagString: Untagged
@@ -98,7 +98,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0.05931853, z: -0.000000037252903}
---- !u!114 &1828793775
+--- !u!114 &1002208364
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,8 +107,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 6668571378133427106}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 863be1678b03f3c4d80e813d9cf5ec9e, type: 3}
+  m_Script: {fileID: 11500000, guid: a89c8b9c7437c794b81088d724461cfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 53a9b04823e4b044ea02d03dfb1d9d30, type: 2}
-  _count: 5
+  <ItemData>k__BackingField: {fileID: 11400000, guid: b0c57a565f895cd4ba6959cd8225a9bf,
+    type: 2}

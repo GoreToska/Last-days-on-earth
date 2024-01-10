@@ -166,6 +166,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""CloseInventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""6240290a-8fc3-4265-a3cb-0758ecdf4bc4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""PickUp"",
                     ""type"": ""Button"",
                     ""id"": ""33f5b08c-7b8c-46e1-9cea-8b0fa16da809"",
@@ -226,6 +235,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c9c838f7-6b77-477a-967b-e1a18d621ce1"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CloseInventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -324,6 +344,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""CloseInventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""189d2f48-b1d2-405b-bfaa-706ccf094b63"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CloseInventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -341,6 +372,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_PlayerActions = asset.FindActionMap("PlayerActions", throwIfNotFound: true);
         m_PlayerActions_Crouch = m_PlayerActions.FindAction("Crouch", throwIfNotFound: true);
         m_PlayerActions_OpenInventory = m_PlayerActions.FindAction("OpenInventory", throwIfNotFound: true);
+        m_PlayerActions_CloseInventory = m_PlayerActions.FindAction("CloseInventory", throwIfNotFound: true);
         m_PlayerActions_PickUp = m_PlayerActions.FindAction("PickUp", throwIfNotFound: true);
         m_PlayerActions_Reload = m_PlayerActions.FindAction("Reload", throwIfNotFound: true);
         // PlayerCombat
@@ -514,6 +546,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private List<IPlayerActionsActions> m_PlayerActionsActionsCallbackInterfaces = new List<IPlayerActionsActions>();
     private readonly InputAction m_PlayerActions_Crouch;
     private readonly InputAction m_PlayerActions_OpenInventory;
+    private readonly InputAction m_PlayerActions_CloseInventory;
     private readonly InputAction m_PlayerActions_PickUp;
     private readonly InputAction m_PlayerActions_Reload;
     public struct PlayerActionsActions
@@ -522,6 +555,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public PlayerActionsActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Crouch => m_Wrapper.m_PlayerActions_Crouch;
         public InputAction @OpenInventory => m_Wrapper.m_PlayerActions_OpenInventory;
+        public InputAction @CloseInventory => m_Wrapper.m_PlayerActions_CloseInventory;
         public InputAction @PickUp => m_Wrapper.m_PlayerActions_PickUp;
         public InputAction @Reload => m_Wrapper.m_PlayerActions_Reload;
         public InputActionMap Get() { return m_Wrapper.m_PlayerActions; }
@@ -539,6 +573,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @OpenInventory.started += instance.OnOpenInventory;
             @OpenInventory.performed += instance.OnOpenInventory;
             @OpenInventory.canceled += instance.OnOpenInventory;
+            @CloseInventory.started += instance.OnCloseInventory;
+            @CloseInventory.performed += instance.OnCloseInventory;
+            @CloseInventory.canceled += instance.OnCloseInventory;
             @PickUp.started += instance.OnPickUp;
             @PickUp.performed += instance.OnPickUp;
             @PickUp.canceled += instance.OnPickUp;
@@ -555,6 +592,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @OpenInventory.started -= instance.OnOpenInventory;
             @OpenInventory.performed -= instance.OnOpenInventory;
             @OpenInventory.canceled -= instance.OnOpenInventory;
+            @CloseInventory.started -= instance.OnCloseInventory;
+            @CloseInventory.performed -= instance.OnCloseInventory;
+            @CloseInventory.canceled -= instance.OnCloseInventory;
             @PickUp.started -= instance.OnPickUp;
             @PickUp.performed -= instance.OnPickUp;
             @PickUp.canceled -= instance.OnPickUp;
@@ -699,6 +739,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     {
         void OnCrouch(InputAction.CallbackContext context);
         void OnOpenInventory(InputAction.CallbackContext context);
+        void OnCloseInventory(InputAction.CallbackContext context);
         void OnPickUp(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
     }
