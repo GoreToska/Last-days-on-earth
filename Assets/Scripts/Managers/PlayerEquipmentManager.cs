@@ -34,9 +34,9 @@ public class PlayerEquipmentManager : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
 
-        PlayerInputManager.Instance.AttackEvent += TryToPerformAttack;
-        PlayerInputManager.Instance.PickUpEvent += TryToPickUp;
-        PlayerInputManager.Instance.ReloadEvent += TryToPerformReload;
+        PlayerInputManager.AttackEvent += TryToPerformAttack;
+        PlayerInputManager.PickUpEvent += TryToPickUp;
+        PlayerInputManager.ReloadEvent += TryToPerformReload;
     }
 
     private void OnEnable()
@@ -47,9 +47,9 @@ public class PlayerEquipmentManager : MonoBehaviour
 
     private void OnDisable()
     {
-        PlayerInputManager.Instance.AttackEvent -= TryToPerformAttack;
-        PlayerInputManager.Instance.PickUpEvent -= TryToPickUp;
-        PlayerInputManager.Instance.ReloadEvent -= TryToPerformReload;
+        PlayerInputManager.AttackEvent -= TryToPerformAttack;
+        PlayerInputManager.PickUpEvent -= TryToPickUp;
+        PlayerInputManager.ReloadEvent -= TryToPerformReload;
     }
 
     public List<Item> GetItemsToPickUp()

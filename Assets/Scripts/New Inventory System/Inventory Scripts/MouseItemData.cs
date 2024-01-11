@@ -26,7 +26,6 @@ public class MouseItemData : MonoBehaviour
         {
             transform.position = Mouse.current.position.ReadValue();
 
-            Debug.Log(IsPointerOverUIObject());
             if (Mouse.current.leftButton.wasPressedThisFrame && !IsPointerOverUIObject())
             {
                 ClearSlot();

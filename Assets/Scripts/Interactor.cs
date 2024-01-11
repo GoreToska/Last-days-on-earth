@@ -27,12 +27,12 @@ public class Interactor : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerInputManager.Instance.PickUpEvent += InteractWithItems;
+        PlayerInputManager.PickUpEvent += InteractWithItems;
     }
 
     private void OnDisable()
     {
-        PlayerInputManager.Instance.PickUpEvent -= InteractWithItems;
+        PlayerInputManager.PickUpEvent -= InteractWithItems;
     }
 
     private void StartInteraction(IInteractable interactable)

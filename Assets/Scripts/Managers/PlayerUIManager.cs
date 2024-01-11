@@ -38,14 +38,14 @@ public class PlayerUIManager : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerInputManager.Instance.OpenInventoryEvent += OnOpenInventory;
-        PlayerInputManager.Instance.CloseInventoryEvent += OnCloseInventory;
+        PlayerInputManager.OpenInventoryEvent += OnOpenInventory;
+        PlayerInputManager.CloseInventoryEvent += OnCloseInventory;
     }
 
     private void OnDisable()
     {
-        PlayerInputManager.Instance.OpenInventoryEvent -= OnOpenInventory;
-        PlayerInputManager.Instance.CloseInventoryEvent -= OnCloseInventory;
+        PlayerInputManager.OpenInventoryEvent -= OnOpenInventory;
+        PlayerInputManager.CloseInventoryEvent -= OnCloseInventory;
     }
 
     public void SetHP(float value)

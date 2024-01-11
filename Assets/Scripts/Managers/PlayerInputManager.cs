@@ -48,19 +48,19 @@ public class PlayerInputManager : MonoBehaviour, IInputController
     public RaycastHit hitInfo;
 
     public bool isShooting = false;
-    public event UnityAction AttackEvent = delegate { };
+    public static event UnityAction AttackEvent = delegate { };
 
     //  Inventory
-    public event UnityAction OpenInventoryEvent = delegate { };
-    public event UnityAction AlternativeCloseInventoryEvent = delegate { };
-    public event UnityAction CloseInventoryEvent = delegate { };
-    public event UnityAction RotateItem = delegate { };
+    public static event UnityAction OpenInventoryEvent = delegate { };
+    public static event UnityAction AlternativeCloseInventoryEvent = delegate { };
+    public static event UnityAction CloseInventoryEvent = delegate { };
+    public static event UnityAction RotateItem = delegate { };
 
     //  Pickup
-    public event UnityAction PickUpEvent = delegate { };
+    public static event UnityAction PickUpEvent = delegate { };
 
     // reload
-    public event UnityAction ReloadEvent = delegate { };
+    public static event UnityAction ReloadEvent = delegate { };
 
     private void Awake()
     {

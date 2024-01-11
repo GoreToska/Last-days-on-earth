@@ -5,47 +5,57 @@ using UnityEngine.InputSystem;
 
 public class InventoryUIController : MonoBehaviour
 {
-    public DinamicInventoryDisplay InventoryPanel;
+    [SerializeField] private DinamicInventoryDisplay _playerBackpackPanel;
+    [SerializeField] private DinamicInventoryDisplay _chestPanel;
+    [SerializeField] private PlayerInventoryHolder _playerInventory;
 
     private void Awake()
     {
+        CloseChest();
         CloseInventory();
     }
 
     private void OnEnable()
     {
-        PlayerInputManager.Instance.OpenInventoryEvent += OnOpenInventory;
-        PlayerInputManager.Instance.CloseInventoryEvent += OnCloseInventory;
-        PlayerInputManager.Instance.AlternativeCloseInventoryEvent+= OnCloseInventory;
-        InventoryHolder.OnDinamicInventoryDisplayRequested += DisplayInventory;
+        PlayerInventoryHolder.OnPlayerBackpackDisplayRequested += DisplayPlayerBackpack;
+        PlayerInputManager.CloseInventoryEvent += () => { CloseInventory(); CloseChest(); };
+        PlayerInputManager.AlternativeCloseInventoryEvent += () => { CloseInventory(); CloseChest(); };
+        InventoryHolder.OnDinamicInventoryDisplayRequested += DisplayCrateAndBackpack;
     }
 
     private void OnDisable()
     {
-        PlayerInputManager.Instance.OpenInventoryEvent -= OnOpenInventory;
-        PlayerInputManager.Instance.CloseInventoryEvent += OnCloseInventory;
-        PlayerInputManager.Instance.AlternativeCloseInventoryEvent -= OnCloseInventory;
-        InventoryHolder.OnDinamicInventoryDisplayRequested -= DisplayInventory;
-    }
-
-    private void OnOpenInventory()
-    {
-        DisplayInventory(new InventorySystem(20));
-    }
-
-    private void OnCloseInventory()
-    {
-        CloseInventory();
+        PlayerInventoryHolder.OnPlayerBackpackDisplayRequested -= DisplayPlayerBackpack;
+        PlayerInputManager.CloseInventoryEvent -= () => { CloseInventory(); CloseChest(); };
+        PlayerInputManager.AlternativeCloseInventoryEvent -= () => { CloseInventory(); CloseChest(); };
+        InventoryHolder.OnDinamicInventoryDisplayRequested -= DisplayCrateAndBackpack;
     }
 
     private void DisplayInventory(InventorySystem inventoryToDisplay)
     {
-        InventoryPanel.gameObject.SetActive(true);
-        InventoryPanel.RefreshDinamycInventory(inventoryToDisplay);
+        _chestPanel.gameObject.SetActive(true);
+        _chestPanel.RefreshDinamycInventory(inventoryToDisplay);
+    }
+
+    private void DisplayCrateAndBackpack(InventorySystem inventoryToDisplay)
+    {
+        DisplayInventory(inventoryToDisplay);
+        DisplayPlayerBackpack(_playerInventory.SecondaryInventorySystem);
+    }
+
+    private void DisplayPlayerBackpack(InventorySystem inventoryToDisplay)
+    {
+        _playerBackpackPanel.gameObject.SetActive(true);
+        _playerBackpackPanel.RefreshDinamycInventory(inventoryToDisplay);
     }
 
     private void CloseInventory()
     {
-        InventoryPanel.gameObject.SetActive(false);
+        _playerBackpackPanel.gameObject.SetActive(false);
+    }
+
+    private void CloseChest()
+    {
+        _chestPanel.gameObject.SetActive(false);
     }
 }

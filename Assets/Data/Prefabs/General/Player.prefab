@@ -5298,7 +5298,8 @@ GameObject:
   - component: {fileID: 95938485048938442}
   - component: {fileID: 95938485048938443}
   - component: {fileID: 4405351796003079}
-  - component: {fileID: 4405351796003089}
+  - component: {fileID: 4405351796003099}
+  - component: {fileID: 4405351796003109}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -5389,7 +5390,7 @@ CharacterController:
   serializedVersion: 2
   m_Height: 1.8
   m_Radius: 0.4
-  m_SlopeLimit: 45
+  m_SlopeLimit: 30
   m_StepOffset: 0.3
   m_SkinWidth: 0.01
   m_MinMoveDistance: 0.001
@@ -5570,7 +5571,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 532dc35b5f5cdcc4eb5083dd22b1c998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4405351796003089
+--- !u!114 &4405351796003099
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5579,11 +5580,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 5360372287496317087}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92a90ef76d10bc64f9b3f18dd2445504, type: 3}
+  m_Script: {fileID: 11500000, guid: f4c1c7728efa3e846a335a4d4b5f84b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InteractionPoint: {fileID: 5361630504463845421}
+  InteractionLayer:
+    serializedVersion: 2
+    m_Bits: 2048
+  InteractionPointRadius: 1
+--- !u!114 &4405351796003109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5360372287496317087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48b2f749a2f990e4991b857716b86551, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   <InventorySize>k__BackingField: 10
-  <InventorySystem>k__BackingField:
+  <PrimaryInventorySystem>k__BackingField:
+    <InventorySlots>k__BackingField: []
+  _backpackSize: 10
+  _secondaryInventorySystem:
     <InventorySlots>k__BackingField: []
 --- !u!1 &5360388984784684093
 GameObject:

@@ -103,6 +103,7 @@ public class PlayerMovementManager : MonoBehaviour
         {
             playerStatusManager.TakeStaminaDamage(sprintStaminaCost * Time.deltaTime);
             characterController.Move(moveDirection * sprintingSpeed * Time.deltaTime);
+
             return;
         }
 
