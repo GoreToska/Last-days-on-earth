@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3249753350770702132}
   - component: {fileID: 3263060688191857354}
   - component: {fileID: 3263060688191857353}
+  - component: {fileID: 3798794840688712370}
   m_Layer: 11
   m_Name: Supply_crate_01
   m_TagString: Untagged
@@ -113,8 +114,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <InventorySize>k__BackingField: 30
-  <InventorySystem>k__BackingField:
+  <PrimaryInventorySystem>k__BackingField:
     <InventorySlots>k__BackingField: []
+--- !u!114 &3798794840688712370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3264264381183237956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bef53d3ce6743f24eb8d8436e44c7296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: c3f0e58d-965e-4cef-9a0e-7742282f077d
 --- !u!1 &3264626960018326746
 GameObject:
   m_ObjectHideFlags: 0

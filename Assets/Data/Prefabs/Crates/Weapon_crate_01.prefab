@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 8207286302491686774}
   - component: {fileID: 8193313858295133859}
   - component: {fileID: 8193313858295133858}
+  - component: {fileID: 1490144762841338875}
   m_Layer: 11
   m_Name: Weapon_crate_01
   m_TagString: Untagged
@@ -197,5 +198,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <InventorySize>k__BackingField: 20
-  <InventorySystem>k__BackingField:
+  <PrimaryInventorySystem>k__BackingField:
     <InventorySlots>k__BackingField: []
+--- !u!114 &1490144762841338875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8192398771911375704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bef53d3ce6743f24eb8d8436e44c7296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 22ac0e3d-8468-4d1e-9cf3-f550d616f30f

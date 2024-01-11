@@ -5,19 +5,16 @@ using UnityEngine.Events;
 
 public class PlayerInventoryHolder : InventoryHolder
 {
-    [SerializeField] protected int _backpackSize;
-    [SerializeField] protected InventorySystem _secondaryInventorySystem;
-
-    public InventorySystem SecondaryInventorySystem => _secondaryInventorySystem;
-
-    public static UnityAction<InventorySystem> OnPlayerBackpackDisplayRequested;
-
+    public static UnityAction OnPlayerInventoryChanged;
 
     protected override void Awake()
     {
         base.Awake();
+    }
 
-        _secondaryInventorySystem = new InventorySystem(_backpackSize);
+    private void Start()
+    {
+        SaveGameManager.data.PlayerInventory = new InventorySaveData(PrimaryInventorySystem);
     }
 
     private void OnEnable()
@@ -32,7 +29,7 @@ public class PlayerInventoryHolder : InventoryHolder
 
     public void OpenInventory()
     {
-        OnPlayerBackpackDisplayRequested?.Invoke(SecondaryInventorySystem);
+        OnDinamicInventoryDisplayRequested?.Invoke(PrimaryInventorySystem, Offset);
     }
 
     public bool AddToInventory(InventoryItemData data, int amount)
@@ -41,11 +38,17 @@ public class PlayerInventoryHolder : InventoryHolder
         {
             return true;
         }
-        else if (SecondaryInventorySystem.AddToInventory(data, amount))
-        {
-            return true;
-        }
 
         return false;
+    }
+
+    protected override void LoadInventory(SaveData data)
+    {
+        //check the save data for this specific crate inventory, and if it exists, load it 
+        if (data.PlayerInventory.InventorySystem != null)
+        {
+            this.PrimaryInventorySystem = data.PlayerInventory.InventorySystem;
+            OnPlayerInventoryChanged?.Invoke();
+        }
     }
 }
