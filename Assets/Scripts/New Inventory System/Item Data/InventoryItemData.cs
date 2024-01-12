@@ -10,7 +10,8 @@ public class InventoryItemData : ScriptableObject
     [field: SerializeField, TextArea] public string Description { get; private set; }
     [field: SerializeField] public Sprite Icon { get; private set; }
     [field: SerializeField] public int MaxStackSize { get; private set; }
-
+    [field: SerializeField] public int CostValue { get; private set; }
+    [field: SerializeField] public GameObject ItemPrefab { get; private set; }
     // TODO:
     // Weapon type?
     // item type

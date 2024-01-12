@@ -15,7 +15,6 @@ public class ItemPickUp : MonoBehaviour, IInteractable
 
     private void Awake()
     {
-        id = GetComponent<UniqueID>().ID;
         SaveLoad.OnLoadGame += LoadGame;
         itemSaveData = new ItemPickUpSaveData(ItemData, transform.position, transform.rotation);
 
@@ -25,6 +24,7 @@ public class ItemPickUp : MonoBehaviour, IInteractable
 
     private void Start()
     {
+        id = GetComponent<UniqueID>().ID;
         SaveGameManager.data.ActiveItems.Add(id, itemSaveData);
     }
 
