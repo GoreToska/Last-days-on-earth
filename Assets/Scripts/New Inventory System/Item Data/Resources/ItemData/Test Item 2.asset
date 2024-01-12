@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3ea547d79e86a843b47a56fb4b2c822, type: 3}
   m_Name: Test Item 2
   m_EditorClassIdentifier: 
-  ID: -1
+  ID: 2
   <DisplayName>k__BackingField: Test Item 2
   <Description>k__BackingField: "\u0422\u0435\u0441\u0442 \u0430\u0439\u0442\u0430\u043C
     2"
   <Icon>k__BackingField: {fileID: 0}
   <MaxStackSize>k__BackingField: 1
+  <CostValue>k__BackingField: 0
+  <ItemPrefab>k__BackingField: {fileID: 0}

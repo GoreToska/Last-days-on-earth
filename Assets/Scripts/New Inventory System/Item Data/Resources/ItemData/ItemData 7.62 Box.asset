@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3ea547d79e86a843b47a56fb4b2c822, type: 3}
   m_Name: ItemData 7.62 Box
   m_EditorClassIdentifier: 
-  ID: -1
+  ID: 1
   <DisplayName>k__BackingField: "\u041F\u0430\u0442\u0440\u043E\u043D 7.62"
   <Description>k__BackingField: "\u041F\u0430\u0442\u0440\u043E\u043D 7.62x39 \u0434\u043B\u044F
     \u043A\u0440\u0443\u043F\u043D\u043E\u043A\u0430\u043B\u0438\u0431\u0435\u0440\u043D\u044B\u0445

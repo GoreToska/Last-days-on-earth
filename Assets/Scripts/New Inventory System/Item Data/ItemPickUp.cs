@@ -11,7 +11,7 @@ public class ItemPickUp : MonoBehaviour, IInteractable
 
     private SphereCollider collider;
     private string id;
-    [SerializeField] private ItemPickUpSaveData itemSaveData;
+    private ItemPickUpSaveData itemSaveData;
 
     private void Awake()
     {

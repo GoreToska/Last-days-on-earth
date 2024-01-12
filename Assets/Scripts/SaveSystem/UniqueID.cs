@@ -7,7 +7,7 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class UniqueID : MonoBehaviour
 {
-    [ReadOnly][SerializeField] private string _id = Guid.NewGuid().ToString();
+    [ReadOnly][SerializeField] private string _id;
     [SerializeField] private static SerializableDictionary<string, GameObject> idDatabase = new SerializableDictionary<string, GameObject>();
 
     public string ID => _id;
