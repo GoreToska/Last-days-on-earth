@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(SphereCollider), typeof(UniqueID))]
-public class ItemPickUp : MonoBehaviour, IPickUp
+public class ItemPickUp : MonoBehaviour, IInteractable
 {
     [field: SerializeField] public InventoryItemData ItemData { get; protected set; }
+    public UnityAction<IInteractable> OnInteractionComplete { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+
     private SphereCollider collider;
     private string id;
     [SerializeField] private ItemPickUpSaveData itemSaveData;
@@ -27,20 +30,20 @@ public class ItemPickUp : MonoBehaviour, IPickUp
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.root.tag != "Player")
+        if (other.tag != "Player")
             return;
 
-        var inventory = other.transform.root.GetComponent<PlayerInventoryHolder>();
+        var interactor = other.transform.root.GetComponent<Interactor>();
+        interactor.AddToInteractionList(this);
+    }
 
-        if (!inventory)
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag != "Player")
             return;
 
-        if (inventory.AddToInventory(ItemData, 1))
-        {
-            Debug.Log("add");
-            SaveGameManager.data.CollectedItems.Add(id);
-            Destroy(gameObject);
-        }
+        var interactor = other.transform.root.GetComponent<Interactor>();
+        interactor.RemoveFromInteractionList(this);
     }
 
     private void LoadGame(SaveData data)
@@ -57,9 +60,24 @@ public class ItemPickUp : MonoBehaviour, IPickUp
         SaveLoad.OnLoadGame -= LoadGame;
     }
 
-    public void PickUp()
+    public void Interact(Interactor interactor, out bool result, IInputController inputController = null)
     {
-        throw new System.NotImplementedException();
+        if (interactor.Inventory.AddToInventory(ItemData, 1))
+        {
+            SaveGameManager.data.CollectedItems.Add(id);
+            result = true;
+            EndInteraction(interactor);
+
+            return;
+        }
+
+        result = false;
+    }
+
+    public void EndInteraction(Interactor interactor)
+    {
+        interactor.RemoveFromInteractionList(this as IInteractable);
+        UnityEngine.Object.Destroy(this.gameObject);
     }
 }
 

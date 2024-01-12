@@ -40,7 +40,7 @@ public class CrateInventoryHolder : InventoryHolder, IInteractable
         }
     }
 
-    public void EndInteraction()
+    public void EndInteraction(Interactor interactor)
     {
         SetOutline(1f);
         Debug.Log("End Interact");
