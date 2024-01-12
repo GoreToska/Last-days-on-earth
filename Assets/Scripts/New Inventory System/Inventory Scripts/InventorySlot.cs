@@ -1,17 +1,20 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class InventorySlot
+public class InventorySlot : ISerializationCallbackReceiver
 {
-    [field: SerializeField] public InventoryItemData ItemData { get; private set; }
+    [SerializeField] private int _itemID = -1;
+    [field: NonSerialized] public InventoryItemData ItemData { get; private set; }
     [field: SerializeField] public int StackSize { get; private set; }
 
     public InventorySlot(InventoryItemData source, int amount)
     {
         ItemData = source;
         StackSize = amount;
+        _itemID = ItemData.ID;
     }
 
     // Create empty slot
@@ -24,6 +27,7 @@ public class InventorySlot
     {
         ItemData = null;
         StackSize = -1;
+        _itemID = -1;
     }
 
     public void AssignItem(InventorySlot slot)
@@ -35,6 +39,7 @@ public class InventorySlot
         else
         {
             ItemData = slot.ItemData;
+            _itemID = ItemData.ID;
             StackSize = 0;
             AddToStack(slot.StackSize);
         }
@@ -44,6 +49,7 @@ public class InventorySlot
     {
         ItemData = data;
         StackSize = amount;
+        _itemID = ItemData.ID;
     }
 
     public bool SpaceLeftInStack(int amountToAdd, out int amountRemaining)
@@ -83,7 +89,23 @@ public class InventorySlot
         RemoveFromStack(halfStack);
 
         splitStack = new InventorySlot(ItemData, halfStack);
-        
+
         return true;
+    }
+
+    public void OnBeforeSerialize()
+    {
+
+    }
+
+    public void OnAfterDeserialize()
+    {
+        if (_itemID == -1)
+        {
+            return;
+        }
+
+        var db = Resources.Load<Database>("Item Database");
+        ItemData = db.GetItem(_itemID);
     }
 }
