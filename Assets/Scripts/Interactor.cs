@@ -12,11 +12,11 @@ public class Interactor : MonoBehaviour
     public float InteractionPointRadius = 1f;
     private List<IInteractable> _interactables = new List<IInteractable>();
     int CurrentInt = 0;
-    public List<IInteractable> Interactables
-    {
-        get { _interactables.RemoveAll(i => i == null); return _interactables; }
-        set { _interactables.RemoveAll(i => i == null); _interactables = value; }
-    }
+    //public List<IInteractable> Interactables
+    //{
+    //    get { _interactables.RemoveAll(i => i == null); return _interactables; }
+    //    set { _interactables.RemoveAll(i => i == null); _interactables = value; }
+    //}
 
     public bool IsInteracting { get; private set; }
 
@@ -52,23 +52,22 @@ public class Interactor : MonoBehaviour
 
     public void AddToInteractionList(IInteractable interactable)
     {
-        Interactables.Add(interactable);
+        _interactables.Add(interactable);
     }
 
     public void RemoveFromInteractionList(IInteractable interactable)
     {
-        Debug.Log(Interactables.Remove(interactable));
+        _interactables.Remove(interactable);
     }
 
     private void StartInteraction()
     {
-        if (Interactables.Count == 0)
+        if (_interactables.Count == 0)
         {
-            Debug.Log(0);
             return;
         }
 
-        Interactables[CurrentInt].Interact(this, out bool result, PlayerInputManager.Instance);
+        _interactables[CurrentInt].Interact(this, out bool result, PlayerInputManager.Instance);
         IsInteracting = result;
     }
 

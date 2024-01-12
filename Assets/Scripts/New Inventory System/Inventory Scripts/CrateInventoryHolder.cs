@@ -3,16 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(UniqueID))]
+[RequireComponent(typeof(UniqueID), typeof(SphereCollider))]
 public class CrateInventoryHolder : InventoryHolder, IInteractable
 {
     public UnityAction<IInteractable> OnInteractionComplete { get; set; }
 
     private List<MeshRenderer> _meshRenderer = new List<MeshRenderer>();
+    private SphereCollider _sphereCollider;
 
     protected override void Awake()
     {
         base.Awake();
+
+        _sphereCollider = GetComponent<SphereCollider>();
+        _sphereCollider.isTrigger = true;
 
         foreach (var child in transform.GetComponentsInChildren<MeshRenderer>())
         {
@@ -25,6 +29,26 @@ public class CrateInventoryHolder : InventoryHolder, IInteractable
         var crateSaveData = new InventorySaveData(PrimaryInventorySystem, transform.position, transform.rotation);
 
         SaveGameManager.data.CrateDictionary.Add(id, crateSaveData);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag != "Player")
+            return;
+
+        var interactor = other.transform.root.GetComponent<Interactor>();
+        interactor.AddToInteractionList(this);
+        SetOutline(1.03f);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag != "Player")
+            return;
+
+        var interactor = other.transform.root.GetComponent<Interactor>();
+        interactor.RemoveFromInteractionList(this);
+        SetOutline(1f);
     }
 
     public void Interact(Interactor interactor, out bool result, IInputController inputController = null)

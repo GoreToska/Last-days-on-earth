@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 610535679746260639}
   - component: {fileID: 610535679746260624}
   - component: {fileID: 7789847500956640620}
+  - component: {fileID: 6516062313370474282}
   m_Layer: 11
   m_Name: Ammo_crate_03
   m_TagString: Untagged
@@ -200,6 +201,7 @@ MonoBehaviour:
   <InventorySize>k__BackingField: 30
   <PrimaryInventorySystem>k__BackingField:
     <InventorySlots>k__BackingField: []
+  <Offset>k__BackingField: 0
 --- !u!114 &7789847500956640620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,4 +214,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bef53d3ce6743f24eb8d8436e44c7296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _id: ca494b59-8dbd-4945-8d56-469a094af41b
+  _id: 9f2d0c4f-8327-4f08-aaef-af29233a8326
+--- !u!135 &6516062313370474282
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 611866020946821118}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2
+  m_Center: {x: 0, y: 0, z: 0}

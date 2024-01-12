@@ -182,6 +182,7 @@ GameObject:
   - component: {fileID: 5116712052715876057}
   - component: {fileID: 8934226166122856261}
   - component: {fileID: 3928436923947963568}
+  - component: {fileID: 5314400439634624131}
   m_Layer: 11
   m_Name: Medical_crate_01
   m_TagString: Untagged
@@ -285,6 +286,7 @@ MonoBehaviour:
   <InventorySize>k__BackingField: 5
   <PrimaryInventorySystem>k__BackingField:
     <InventorySlots>k__BackingField: []
+  <Offset>k__BackingField: 0
 --- !u!114 &3928436923947963568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,4 +299,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bef53d3ce6743f24eb8d8436e44c7296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _id: 60d6819d-4414-4675-8202-251ead485b34
+  _id: 5f28bf95-4ca7-4ff9-bfca-7d046ac972dd
+--- !u!135 &5314400439634624131
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3292026293027814469}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}

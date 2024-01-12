@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 2966926730910546569}
   - component: {fileID: 4120153286774025798}
   - component: {fileID: 7217658455017408171}
+  - component: {fileID: 4662968529021018923}
   m_Layer: 11
   m_Name: Cloth_crate_01
   m_TagString: Untagged
@@ -200,6 +201,7 @@ MonoBehaviour:
   <InventorySize>k__BackingField: 10
   <PrimaryInventorySystem>k__BackingField:
     <InventorySlots>k__BackingField: []
+  <Offset>k__BackingField: 0
 --- !u!114 &7217658455017408171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,4 +214,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bef53d3ce6743f24eb8d8436e44c7296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _id: 423cce3d-4551-4347-b525-da526f3b561b
+  _id: b4ea95a4-6347-4e80-9e35-080eaa4636d8
+--- !u!135 &4662968529021018923
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2335611082600987852}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}
