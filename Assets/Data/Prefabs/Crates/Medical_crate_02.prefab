@@ -104,6 +104,8 @@ MonoBehaviour:
   <PrimaryInventorySystem>k__BackingField:
     <InventorySlots>k__BackingField: []
   <Offset>k__BackingField: 0
+  _interactableHighlightConfig: {fileID: 11400000, guid: c1eab1ce9b906ec41be5ea27311a0e7f,
+    type: 2}
 --- !u!114 &7172315377196188920
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,7 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bef53d3ce6743f24eb8d8436e44c7296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _id: b3938134-ad55-4d3b-b8cb-407e4f96eb00
+  _id: 5182857e-7cae-4124-8847-a3d34d7fb876
 --- !u!65 &1902932376425504093
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -138,7 +140,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8975287111463933745}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 1

@@ -42,6 +42,8 @@ public class PlayerInputManager : MonoBehaviour, IInputController
     //  Mouse scroll
     private float scroll;
 
+    // Mouse scroll with tab pressed
+    public static event UnityAction<float> ChangeInteractable = delegate { };
     //  Aiming
     private bool isAiming = false;
     [SerializeField] public LayerMask aimMask;
@@ -93,7 +95,13 @@ public class PlayerInputManager : MonoBehaviour, IInputController
             playerInput.PlayerMovement.Movement.performed += i => movement = i.ReadValue<Vector2>();
             playerInput.PlayerMovement.Movement.canceled += i => movement = i.ReadValue<Vector2>();
 
-            playerInput.CameraMovement.Zoom.performed += i => scroll = i.ReadValue<float>();
+            playerInput.CameraMovement.Zoom.performed += i =>
+            {
+                if (!playerInput.PlayerActions.SwitchInteractable.IsInProgress())
+                    scroll = i.ReadValue<float>();
+            };
+
+            playerInput.PlayerActions.SwitchInteractable.performed += i => ChangeInteractable?.Invoke(i.ReadValue<float>());
 
             playerInput.PlayerMovement.Sprint.performed += i => isSprinting = true;
             playerInput.PlayerMovement.Sprint.canceled += i => isSprinting = false;

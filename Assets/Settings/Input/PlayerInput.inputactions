@@ -131,7 +131,7 @@
                     "id": "0acd34a5-fe24-4494-80e1-75fd54f75487",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Tap",
                     "initialStateCheck": false
                 },
                 {
@@ -140,7 +140,7 @@
                     "id": "41457ded-f4b6-44d0-84ae-88a1e0ce071c",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Tap",
                     "initialStateCheck": false
                 },
                 {
@@ -149,7 +149,7 @@
                     "id": "6240290a-8fc3-4265-a3cb-0758ecdf4bc4",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Tap",
                     "initialStateCheck": false
                 },
                 {
@@ -169,6 +169,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "SwitchInteractable",
+                    "type": "Value",
+                    "id": "5b20be3f-1d97-49ea-a893-3314e810324f",
+                    "expectedControlType": "Integer",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -226,6 +235,39 @@
                     "action": "CloseInventory",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "One Modifier",
+                    "id": "ca245dd3-b3eb-4e0b-bf41-18dc50af7bf3",
+                    "path": "OneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchInteractable",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "binding",
+                    "id": "61ff4ad6-8149-4466-8406-711a09cba800",
+                    "path": "<Mouse>/scroll/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchInteractable",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "modifier",
+                    "id": "e1e5de4a-d7da-42de-96e9-1fac71e9124b",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchInteractable",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         },
@@ -296,7 +338,7 @@
                     "id": "9f08e29f-b0e1-480a-9ede-8f3b3a5d6c46",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Tap",
                     "initialStateCheck": false
                 }
             ],

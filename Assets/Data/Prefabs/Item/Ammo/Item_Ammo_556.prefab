@@ -67,6 +67,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 5bb68a94905ffc0418608fc7e572ea42, type: 2}
+  - {fileID: 2100000, guid: 055895bf14b4957489d33976affd1cdf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -113,7 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bef53d3ce6743f24eb8d8436e44c7296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _id: 6bc34dbb-fe3d-41d5-805d-53c959230b16
+  _id: 5b4d591e-d862-441e-bb04-4f3c31b283f4
 --- !u!114 &4508828718574672725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,10 +129,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ItemData>k__BackingField: {fileID: 11400000, guid: 4aea6dc3297f2c346803f0152d3ea2b9,
     type: 2}
-  itemSaveData:
-    ItemData: {fileID: 0}
-    Position: {x: 0, y: 0, z: 0}
-    Rotation: {x: 0, y: 0, z: 0, w: 0}
+  _interactableHighlightConfig: {fileID: 11400000, guid: c1eab1ce9b906ec41be5ea27311a0e7f,
+    type: 2}
 --- !u!65 &1178237271
 BoxCollider:
   m_ObjectHideFlags: 0

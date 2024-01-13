@@ -11,29 +11,10 @@ public class Interactor : MonoBehaviour
     public LayerMask InteractionLayer;
     public float InteractionPointRadius = 1f;
     private List<IInteractable> _interactables = new List<IInteractable>();
+
     int CurrentInt = 0;
-    //public List<IInteractable> Interactables
-    //{
-    //    get { _interactables.RemoveAll(i => i == null); return _interactables; }
-    //    set { _interactables.RemoveAll(i => i == null); _interactables = value; }
-    //}
 
     public bool IsInteracting { get; private set; }
-
-    //private void InteractWithItems()
-    //{
-    //    var colliders = Physics.OverlapSphere(InteractionPoint.position, InteractionPointRadius, InteractionLayer);
-
-    //    for (int i = 0; i < colliders.Length; i++)
-    //    {
-    //        var interactable = colliders[i].GetComponent<IInteractable>();
-
-    //        if (interactable != null)
-    //        {
-    //            StartInteraction(interactable);
-    //        }
-    //    }
-    //}
 
     private void Awake()
     {
@@ -43,21 +24,60 @@ public class Interactor : MonoBehaviour
     private void OnEnable()
     {
         PlayerInputManager.PickUpEvent += StartInteraction;
+        PlayerInputManager.ChangeInteractable += ChangeInteractableNumber;
     }
 
     private void OnDisable()
     {
         PlayerInputManager.PickUpEvent -= StartInteraction;
+        PlayerInputManager.ChangeInteractable -= ChangeInteractableNumber;
     }
 
-    public void AddToInteractionList(IInteractable interactable)
+    public void ChangeInteractableNumber(float value)
+    {
+        if (_interactables.Count == 0)
+            return;
+
+        ClampCurrentInteractableNumber();
+        _interactables[CurrentInt].HighlightInteracable(true);
+
+        value = Mathf.Clamp(value, -1, 1);
+        CurrentInt += (int)value;
+
+        if (CurrentInt < 0)
+        {
+            CurrentInt = _interactables.Count - 1;
+        }
+
+        if (CurrentInt > _interactables.Count - 1)
+        {
+            CurrentInt = 0;
+        }
+
+        _interactables[CurrentInt].HighlightCurrentInteractable(true);
+    }
+
+    public int AddToInteractionList(IInteractable interactable)
     {
         _interactables.Add(interactable);
+        Debug.Log(_interactables.Count);
+        return _interactables.Count;
     }
 
     public void RemoveFromInteractionList(IInteractable interactable)
     {
         _interactables.Remove(interactable);
+        SetNewCurrentHighlight();
+    }
+
+    private void SetNewCurrentHighlight()
+    {
+        ClampCurrentInteractableNumber();
+
+        if (_interactables.Count == 0)
+            return;
+
+        _interactables[CurrentInt].HighlightCurrentInteractable(true);
     }
 
     private void StartInteraction()
@@ -67,8 +87,27 @@ public class Interactor : MonoBehaviour
             return;
         }
 
+        ClampCurrentInteractableNumber();
         _interactables[CurrentInt].Interact(this, out bool result, PlayerInputManager.Instance);
         IsInteracting = result;
+
+        if (_interactables.Count == 0)
+            return;
+
+        SetNewCurrentHighlight();
+    }
+
+    private void ClampCurrentInteractableNumber()
+    {
+        if (CurrentInt < 0)
+        {
+            CurrentInt = 0;
+        }
+
+        if (CurrentInt > _interactables.Count - 1)
+        {
+            CurrentInt = _interactables.Count - 1;
+        }
     }
 
     private void EndInteraction()

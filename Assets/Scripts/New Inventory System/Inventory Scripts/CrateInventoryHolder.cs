@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UIElements;
 
 [RequireComponent(typeof(UniqueID), typeof(SphereCollider))]
 public class CrateInventoryHolder : InventoryHolder, IInteractable
 {
+    [SerializeField] private InteractableHighlightConfig _interactableHighlightConfig;
     public UnityAction<IInteractable> OnInteractionComplete { get; set; }
 
     private List<MeshRenderer> _meshRenderer = new List<MeshRenderer>();
@@ -37,8 +39,15 @@ public class CrateInventoryHolder : InventoryHolder, IInteractable
             return;
 
         var interactor = other.transform.root.GetComponent<Interactor>();
-        interactor.AddToInteractionList(this);
-        SetOutline(1.03f);
+
+        if (interactor.AddToInteractionList(this) == 1)
+        {
+            HighlightCurrentInteractable(true);
+        }
+        else
+        {
+            HighlightInteracable(true);
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -48,14 +57,14 @@ public class CrateInventoryHolder : InventoryHolder, IInteractable
 
         var interactor = other.transform.root.GetComponent<Interactor>();
         interactor.RemoveFromInteractionList(this);
-        SetOutline(1f);
+        HighlightInteracable(false);
     }
 
     public void Interact(Interactor interactor, out bool result, IInputController inputController = null)
     {
         OnDinamicInventoryDisplayRequested?.Invoke(PrimaryInventorySystem, 0); // pass no offset
         result = true;
-        SetOutline(1.03f);
+        //HighlightInteracable(true);
 
         if (inputController != null)
         {
@@ -66,15 +75,44 @@ public class CrateInventoryHolder : InventoryHolder, IInteractable
 
     public void EndInteraction(Interactor interactor)
     {
-        SetOutline(1f);
+        HighlightInteracable(false);
         Debug.Log("End Interact");
     }
 
-    private void SetOutline(float scale)
+    public void HighlightInteracable(bool value)
     {
-        foreach (var renderer in _meshRenderer)
+        if (value)
         {
-            renderer.materials[1].SetFloat("_Scale", scale);
+            foreach (var renderer in _meshRenderer)
+            {
+                renderer.materials[1].SetColor("_Color", _interactableHighlightConfig.Highlight);
+                renderer.materials[1].SetFloat("_Scale", 1.03f);
+            }
+        }
+        else
+        {
+            foreach (var renderer in _meshRenderer)
+            {
+                renderer.materials[1].SetFloat("_Scale", 1f);
+            }
+        }
+    }
+    public void HighlightCurrentInteractable(bool value)
+    {
+        if (value)
+        {
+            foreach (var renderer in _meshRenderer)
+            {
+                renderer.materials[1].SetColor("_Color", _interactableHighlightConfig.ChosedHighlight);
+                renderer.materials[1].SetFloat("_Scale", 1.03f);
+            }
+        }
+        else
+        {
+            foreach (var renderer in _meshRenderer)
+            {
+                renderer.materials[1].SetFloat("_Scale", 1f);
+            }
         }
     }
 
@@ -88,4 +126,6 @@ public class CrateInventoryHolder : InventoryHolder, IInteractable
             this.transform.rotation = crateData.Rotation;
         }
     }
+
+
 }

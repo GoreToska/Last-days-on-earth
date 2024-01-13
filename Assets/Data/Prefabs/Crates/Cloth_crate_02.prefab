@@ -105,6 +105,8 @@ MonoBehaviour:
   <PrimaryInventorySystem>k__BackingField:
     <InventorySlots>k__BackingField: []
   <Offset>k__BackingField: 0
+  _interactableHighlightConfig: {fileID: 11400000, guid: c1eab1ce9b906ec41be5ea27311a0e7f,
+    type: 2}
 --- !u!114 &3684612195100334423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bef53d3ce6743f24eb8d8436e44c7296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _id: d8bd76b9-090b-42f5-a2ca-a9851cd0a0c1
+  _id: 2ff68fc8-edc8-45ee-8506-67b30fe67fbd
 --- !u!65 &8942422902064560780
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -153,7 +153,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""id"": ""0acd34a5-fe24-4494-80e1-75fd54f75487"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Tap"",
                     ""initialStateCheck"": false
                 },
                 {
@@ -162,7 +162,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""id"": ""41457ded-f4b6-44d0-84ae-88a1e0ce071c"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Tap"",
                     ""initialStateCheck"": false
                 },
                 {
@@ -171,7 +171,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""id"": ""6240290a-8fc3-4265-a3cb-0758ecdf4bc4"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Tap"",
                     ""initialStateCheck"": false
                 },
                 {
@@ -191,6 +191,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchInteractable"",
+                    ""type"": ""Value"",
+                    ""id"": ""5b20be3f-1d97-49ea-a893-3314e810324f"",
+                    ""expectedControlType"": ""Integer"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -248,6 +257,39 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""CloseInventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""One Modifier"",
+                    ""id"": ""ca245dd3-b3eb-4e0b-bf41-18dc50af7bf3"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchInteractable"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""61ff4ad6-8149-4466-8406-711a09cba800"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchInteractable"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""e1e5de4a-d7da-42de-96e9-1fac71e9124b"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchInteractable"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -318,7 +360,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""id"": ""9f08e29f-b0e1-480a-9ede-8f3b3a5d6c46"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Tap"",
                     ""initialStateCheck"": false
                 }
             ],
@@ -375,6 +417,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_PlayerActions_CloseInventory = m_PlayerActions.FindAction("CloseInventory", throwIfNotFound: true);
         m_PlayerActions_PickUp = m_PlayerActions.FindAction("PickUp", throwIfNotFound: true);
         m_PlayerActions_Reload = m_PlayerActions.FindAction("Reload", throwIfNotFound: true);
+        m_PlayerActions_SwitchInteractable = m_PlayerActions.FindAction("SwitchInteractable", throwIfNotFound: true);
         // PlayerCombat
         m_PlayerCombat = asset.FindActionMap("PlayerCombat", throwIfNotFound: true);
         m_PlayerCombat_Aim = m_PlayerCombat.FindAction("Aim", throwIfNotFound: true);
@@ -549,6 +592,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerActions_CloseInventory;
     private readonly InputAction m_PlayerActions_PickUp;
     private readonly InputAction m_PlayerActions_Reload;
+    private readonly InputAction m_PlayerActions_SwitchInteractable;
     public struct PlayerActionsActions
     {
         private @PlayerInput m_Wrapper;
@@ -558,6 +602,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @CloseInventory => m_Wrapper.m_PlayerActions_CloseInventory;
         public InputAction @PickUp => m_Wrapper.m_PlayerActions_PickUp;
         public InputAction @Reload => m_Wrapper.m_PlayerActions_Reload;
+        public InputAction @SwitchInteractable => m_Wrapper.m_PlayerActions_SwitchInteractable;
         public InputActionMap Get() { return m_Wrapper.m_PlayerActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -582,6 +627,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Reload.started += instance.OnReload;
             @Reload.performed += instance.OnReload;
             @Reload.canceled += instance.OnReload;
+            @SwitchInteractable.started += instance.OnSwitchInteractable;
+            @SwitchInteractable.performed += instance.OnSwitchInteractable;
+            @SwitchInteractable.canceled += instance.OnSwitchInteractable;
         }
 
         private void UnregisterCallbacks(IPlayerActionsActions instance)
@@ -601,6 +649,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Reload.started -= instance.OnReload;
             @Reload.performed -= instance.OnReload;
             @Reload.canceled -= instance.OnReload;
+            @SwitchInteractable.started -= instance.OnSwitchInteractable;
+            @SwitchInteractable.performed -= instance.OnSwitchInteractable;
+            @SwitchInteractable.canceled -= instance.OnSwitchInteractable;
         }
 
         public void RemoveCallbacks(IPlayerActionsActions instance)
@@ -742,6 +793,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnCloseInventory(InputAction.CallbackContext context);
         void OnPickUp(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
+        void OnSwitchInteractable(InputAction.CallbackContext context);
     }
     public interface IPlayerCombatActions
     {
