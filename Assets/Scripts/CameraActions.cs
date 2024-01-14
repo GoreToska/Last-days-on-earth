@@ -3,13 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.Events;
 
 //  Summary
 //  This script is moving and rotating the camera
 //  Summary
 public class CameraActions : MonoBehaviour
 {
-    public static CameraActions Instance;
     [SerializeField] private List<CinemachineVirtualCamera> _cameras;
 
     [SerializeField] private float lerpSpeed;
@@ -26,15 +26,6 @@ public class CameraActions : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-
         _currentCamera = _cameras[0];
         _currentCameraIndex = 0;
 
@@ -51,6 +42,7 @@ public class CameraActions : MonoBehaviour
         PlayerInputManager.MouseScroll += SetscrollValueValue;
         PlayerInputManager.NextCamera += SetNextCamera;
         PlayerInputManager.PreviousCamera += SetPreviousCamera;
+        PlayerStatusManager.TakeDamageEvent += ImpactShake;
     }
 
     private void OnDisable()
@@ -58,6 +50,7 @@ public class CameraActions : MonoBehaviour
         PlayerInputManager.MouseScroll -= SetscrollValueValue;
         PlayerInputManager.NextCamera -= SetNextCamera;
         PlayerInputManager.PreviousCamera -= SetPreviousCamera;
+        PlayerStatusManager.TakeDamageEvent -= ImpactShake;
     }
 
     private void LateUpdate()

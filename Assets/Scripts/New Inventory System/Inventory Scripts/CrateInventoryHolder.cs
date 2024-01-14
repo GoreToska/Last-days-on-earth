@@ -127,5 +127,5 @@ public class CrateInventoryHolder : InventoryHolder, IInteractable
         }
     }
 
-
+    private MaterialPropertyBlock materialPropertyBlock;
 }

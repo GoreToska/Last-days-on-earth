@@ -15,24 +15,25 @@ public class PlayerStatusManager : CharacterStatusManager
     [SerializeField] private float staminaTimeToRegen = 4f;
     private float staminaRegenTimer = 0f;
 
-    public event UnityAction deathEvent = delegate { };
-    public event UnityAction fatigueEvent = delegate { };
+    public static event UnityAction<float, float> TakeDamageEvent = delegate { };
+    public static event UnityAction DeathEvent = delegate { };
+    public static event UnityAction FatigueEvent = delegate { };
 
     public override void Start()
     {
         SetHP(hp);
         SetStamina(stamina);
 
-        deathEvent += GetComponent<Ragdoll>().EnableRagdoll;
-        deathEvent += PlayerInputManager.Instance.DisableInput;
-        deathEvent += () => GetComponent<CharacterController>().enabled = false;
+        DeathEvent += GetComponent<Ragdoll>().EnableRagdoll;
+        DeathEvent += PlayerInputManager.Instance.DisableInput;
+        DeathEvent += () => GetComponent<CharacterController>().enabled = false;
     }
 
     public override void OnDisable()
     {
-        deathEvent -= GetComponent<Ragdoll>().EnableRagdoll;
-        deathEvent -= PlayerInputManager.Instance.DisableInput;
-        deathEvent += () => GetComponent<CharacterController>().enabled = false;
+        DeathEvent -= GetComponent<Ragdoll>().EnableRagdoll;
+        DeathEvent -= PlayerInputManager.Instance.DisableInput;
+        DeathEvent += () => GetComponent<CharacterController>().enabled = false;
     }
 
     private void Update()
@@ -101,12 +102,12 @@ public class PlayerStatusManager : CharacterStatusManager
 
         //  Update UI
         HUDManager.Instance.UpdateHP(hp);
-        CameraActions.Instance.ImpactShake(cameraShakeDuration, damage / 10);
+        TakeDamageEvent?.Invoke(cameraShakeDuration, damage / 10);
 
         if (hp <= 0)
         {
             hp = 0;
-            deathEvent.Invoke();
+            DeathEvent.Invoke();
             isDead = true;
         }
     }
@@ -116,7 +117,7 @@ public class PlayerStatusManager : CharacterStatusManager
         if (stamina == 0)
         {
             stamina = 0;
-            fatigueEvent.Invoke();
+            FatigueEvent.Invoke();
             Debug.Log("Fatigue");
             return;
         }
