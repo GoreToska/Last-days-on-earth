@@ -40,10 +40,16 @@ public class PlayerInputManager : MonoBehaviour, IInputController
     private bool isCrouching = false;
 
     //  Mouse scroll
+    public static event UnityAction<float> MouseScroll = delegate { };
     private float scroll;
+
+    // Camera changing
+    public static event UnityAction NextCamera = delegate { };
+    public static event UnityAction PreviousCamera = delegate { };
 
     // Mouse scroll with tab pressed
     public static event UnityAction<float> ChangeInteractable = delegate { };
+
     //  Aiming
     private bool isAiming = false;
     [SerializeField] public LayerMask aimMask;
@@ -98,8 +104,14 @@ public class PlayerInputManager : MonoBehaviour, IInputController
             playerInput.CameraMovement.Zoom.performed += i =>
             {
                 if (!playerInput.PlayerActions.SwitchInteractable.IsInProgress())
+                {
                     scroll = i.ReadValue<float>();
+                    MouseScroll?.Invoke(i.ReadValue<float>()); 
+                }
             };
+
+            playerInput.CameraMovement.NextCamera.performed += i => NextCamera?.Invoke();
+            playerInput.CameraMovement.PreviousCamera.performed += i => PreviousCamera?.Invoke();
 
             playerInput.PlayerActions.SwitchInteractable.performed += i => ChangeInteractable?.Invoke(i.ReadValue<float>());
 

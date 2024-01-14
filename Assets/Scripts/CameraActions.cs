@@ -7,11 +7,10 @@ using DG.Tweening;
 //  Summary
 //  This script is moving and rotating the camera
 //  Summary
-[RequireComponent(typeof(CinemachineVirtualCamera))]
 public class CameraActions : MonoBehaviour
 {
     public static CameraActions Instance;
-    private CinemachineVirtualCamera camera;
+    [SerializeField] private List<CinemachineVirtualCamera> _cameras;
 
     [SerializeField] private float lerpSpeed;
     [SerializeField] private float lerpVelocity;
@@ -19,11 +18,15 @@ public class CameraActions : MonoBehaviour
     [SerializeField] private float maxDistance;
     [SerializeField] private float minDistance;
 
+    private CinemachineVirtualCamera _currentCamera;
+    private int _currentCameraIndex;
+
     private float zoomValue;
+    private float scrollValue;
 
     private void Awake()
     {
-        if(Instance == null)
+        if (Instance == null)
         {
             Instance = this;
         }
@@ -32,8 +35,10 @@ public class CameraActions : MonoBehaviour
             Destroy(gameObject);
         }
 
-        camera = GetComponent<CinemachineVirtualCamera>();
-        zoomValue = camera.m_Lens.OrthographicSize;
+        _currentCamera = _cameras[0];
+        _currentCameraIndex = 0;
+
+        zoomValue = _currentCamera.m_Lens.OrthographicSize;
     }
 
     private void Start()
@@ -41,26 +46,78 @@ public class CameraActions : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    private void OnEnable()
+    {
+        PlayerInputManager.MouseScroll += SetscrollValueValue;
+        PlayerInputManager.NextCamera += SetNextCamera;
+        PlayerInputManager.PreviousCamera += SetPreviousCamera;
+    }
+
+    private void OnDisable()
+    {
+        PlayerInputManager.MouseScroll -= SetscrollValueValue;
+        PlayerInputManager.NextCamera -= SetNextCamera;
+        PlayerInputManager.PreviousCamera -= SetPreviousCamera;
+    }
+
     private void LateUpdate()
     {
         Zoom();
     }
 
+    private void SetPreviousCamera()
+    {
+        ChangeCameraIndexValue(1);
+        _cameras[_currentCameraIndex].m_Lens.OrthographicSize = _currentCamera.m_Lens.OrthographicSize;
+        _currentCamera.m_Priority = 0;
+        _currentCamera = _cameras[_currentCameraIndex];
+        _currentCamera.m_Priority = 10;
+    }
+
+    private void SetNextCamera()
+    {
+        ChangeCameraIndexValue(-1);
+        _cameras[_currentCameraIndex].m_Lens.OrthographicSize = _currentCamera.m_Lens.OrthographicSize;
+        _currentCamera.m_Priority = 0;
+        _currentCamera = _cameras[_currentCameraIndex];
+        _currentCamera.m_Priority = 10;
+    }
+
+    private void ChangeCameraIndexValue(int value)
+    {
+        _currentCameraIndex += value;
+
+        if (_currentCameraIndex > _cameras.Count - 1)
+        {
+            _currentCameraIndex = 0;
+        }
+
+        if (_currentCameraIndex < 0)
+        {
+            _currentCameraIndex = _cameras.Count - 1;
+        }
+    }
+
+    private void SetscrollValueValue(float value)
+    {
+        scrollValue = value;
+    }
+
     //  TODO: smooth zoom
     private void Zoom()
     {
-        zoomValue -= Mathf.Clamp(PlayerInputManager.Instance.Scroll, -1f, 1f) * lerpSpeed;
+        zoomValue -= Mathf.Clamp(scrollValue, -1f, 1f) * lerpSpeed;
         zoomValue = Mathf.Clamp(zoomValue, minDistance, maxDistance);
 
-        camera.m_Lens.OrthographicSize = Mathf.SmoothDamp(camera.m_Lens.OrthographicSize, zoomValue, ref lerpVelocity, smoothTime);
+        _currentCamera.m_Lens.OrthographicSize = Mathf.SmoothDamp(_currentCamera.m_Lens.OrthographicSize, zoomValue, ref lerpVelocity, smoothTime);
 
-        if (camera.m_Lens.OrthographicSize >= maxDistance)
+        if (_currentCamera.m_Lens.OrthographicSize >= maxDistance)
         {
-            camera.m_Lens.OrthographicSize = maxDistance;
+            _currentCamera.m_Lens.OrthographicSize = maxDistance;
         }
-        if (camera.m_Lens.OrthographicSize <= minDistance)
+        if (_currentCamera.m_Lens.OrthographicSize <= minDistance)
         {
-            camera.m_Lens.OrthographicSize = minDistance;
+            _currentCamera.m_Lens.OrthographicSize = minDistance;
         }
 
         //camera.m_Lens.OrthographicSize = Mathf.Clamp(camera.m_Lens.OrthographicSize, minDistance, maxDistance);

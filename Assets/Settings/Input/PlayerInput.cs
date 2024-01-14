@@ -127,6 +127,24 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""NextCamera"",
+                    ""type"": ""Button"",
+                    ""id"": ""1e5bfd6a-fd9c-49fd-9da1-a8171c2dec5b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PreviousCamera"",
+                    ""type"": ""Button"",
+                    ""id"": ""ecb91f05-cbd5-456d-9c90-3fa977005f04"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -138,6 +156,28 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ca8cbb7d-f4e4-4b4e-9fd7-146f44dfc50f"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NextCamera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c242ca20-770c-4c19-8c5b-699b8ee64209"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PreviousCamera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -410,6 +450,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         // CameraMovement
         m_CameraMovement = asset.FindActionMap("CameraMovement", throwIfNotFound: true);
         m_CameraMovement_Zoom = m_CameraMovement.FindAction("Zoom", throwIfNotFound: true);
+        m_CameraMovement_NextCamera = m_CameraMovement.FindAction("NextCamera", throwIfNotFound: true);
+        m_CameraMovement_PreviousCamera = m_CameraMovement.FindAction("PreviousCamera", throwIfNotFound: true);
         // PlayerActions
         m_PlayerActions = asset.FindActionMap("PlayerActions", throwIfNotFound: true);
         m_PlayerActions_Crouch = m_PlayerActions.FindAction("Crouch", throwIfNotFound: true);
@@ -542,11 +584,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_CameraMovement;
     private List<ICameraMovementActions> m_CameraMovementActionsCallbackInterfaces = new List<ICameraMovementActions>();
     private readonly InputAction m_CameraMovement_Zoom;
+    private readonly InputAction m_CameraMovement_NextCamera;
+    private readonly InputAction m_CameraMovement_PreviousCamera;
     public struct CameraMovementActions
     {
         private @PlayerInput m_Wrapper;
         public CameraMovementActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Zoom => m_Wrapper.m_CameraMovement_Zoom;
+        public InputAction @NextCamera => m_Wrapper.m_CameraMovement_NextCamera;
+        public InputAction @PreviousCamera => m_Wrapper.m_CameraMovement_PreviousCamera;
         public InputActionMap Get() { return m_Wrapper.m_CameraMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -559,6 +605,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Zoom.started += instance.OnZoom;
             @Zoom.performed += instance.OnZoom;
             @Zoom.canceled += instance.OnZoom;
+            @NextCamera.started += instance.OnNextCamera;
+            @NextCamera.performed += instance.OnNextCamera;
+            @NextCamera.canceled += instance.OnNextCamera;
+            @PreviousCamera.started += instance.OnPreviousCamera;
+            @PreviousCamera.performed += instance.OnPreviousCamera;
+            @PreviousCamera.canceled += instance.OnPreviousCamera;
         }
 
         private void UnregisterCallbacks(ICameraMovementActions instance)
@@ -566,6 +618,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Zoom.started -= instance.OnZoom;
             @Zoom.performed -= instance.OnZoom;
             @Zoom.canceled -= instance.OnZoom;
+            @NextCamera.started -= instance.OnNextCamera;
+            @NextCamera.performed -= instance.OnNextCamera;
+            @NextCamera.canceled -= instance.OnNextCamera;
+            @PreviousCamera.started -= instance.OnPreviousCamera;
+            @PreviousCamera.performed -= instance.OnPreviousCamera;
+            @PreviousCamera.canceled -= instance.OnPreviousCamera;
         }
 
         public void RemoveCallbacks(ICameraMovementActions instance)
@@ -785,6 +843,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     public interface ICameraMovementActions
     {
         void OnZoom(InputAction.CallbackContext context);
+        void OnNextCamera(InputAction.CallbackContext context);
+        void OnPreviousCamera(InputAction.CallbackContext context);
     }
     public interface IPlayerActionsActions
     {
