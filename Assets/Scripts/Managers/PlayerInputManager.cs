@@ -70,6 +70,13 @@ public class PlayerInputManager : MonoBehaviour, IInputController
     // reload
     public static event UnityAction ReloadEvent = delegate { };
 
+    // Slots
+    public static event UnityAction<int> Hotbar1Event = delegate { };
+    public static event UnityAction<int> Hotbar2Event = delegate { };
+    public static event UnityAction<int> Hotbar3Event = delegate { };
+    public static event UnityAction<int> Hotbar4Event = delegate { };
+    public static event UnityAction<int> Hotbar5Event = delegate { };
+
     private void Awake()
     {
         if (Instance == null)
@@ -106,7 +113,7 @@ public class PlayerInputManager : MonoBehaviour, IInputController
                 if (!playerInput.PlayerActions.SwitchInteractable.IsInProgress())
                 {
                     scroll = i.ReadValue<float>();
-                    MouseScroll?.Invoke(i.ReadValue<float>()); 
+                    MouseScroll?.Invoke(i.ReadValue<float>());
                 }
             };
 
@@ -138,6 +145,12 @@ public class PlayerInputManager : MonoBehaviour, IInputController
             playerInput.PlayerActions.PickUp.performed += i => PickUpEvent?.Invoke();
 
             playerInput.PlayerActions.Reload.performed += i => ReloadEvent?.Invoke();
+
+            playerInput.PlayerActions.Hotbar1.performed += i => Hotbar1Event?.Invoke(0);
+            playerInput.PlayerActions.Hotbar2.performed += i => Hotbar2Event?.Invoke(1);
+            playerInput.PlayerActions.Hotbar3.performed += i => Hotbar3Event?.Invoke(2);
+            playerInput.PlayerActions.Hotbar4.performed += i => Hotbar4Event?.Invoke(3);
+            playerInput.PlayerActions.Hotbar5.performed += i => Hotbar5Event?.Invoke(4);
         }
 
         EnablePlayerControls();

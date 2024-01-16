@@ -12,7 +12,13 @@ public class InventoryItemData : ScriptableObject
     [field: SerializeField] public int MaxStackSize { get; private set; }
     [field: SerializeField] public int CostValue { get; private set; }
     [field: SerializeField] public GameObject ItemPrefab { get; private set; }
+    [field: SerializeField] public GameObject ItemModel { get; private set; }
     // TODO:
     // Weapon type?
     // item type
+
+    public void UseItem()
+    {
+        Debug.Log("Using " + DisplayName);
+    }
 }

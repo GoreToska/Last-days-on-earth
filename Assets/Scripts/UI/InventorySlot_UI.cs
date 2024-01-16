@@ -6,6 +6,7 @@ public class InventorySlot_UI : MonoBehaviour
 {
     [SerializeField] private Image _itemImage;
     [SerializeField] private TMP_Text _itemCount;
+    [SerializeField] private GameObject _slotHighlight;
     [field: SerializeField] public InventorySlot AssignedInventorySlot { get; private set; }
     public InventoryDisplay ParentDisplay { get; private set; }
 
@@ -70,5 +71,10 @@ public class InventorySlot_UI : MonoBehaviour
     public void OnUISlotClick()
     {
         ParentDisplay?.SlotClicked(this);
+    }
+
+    public void ToggleHighlight()
+    {
+        _slotHighlight.SetActive(!_slotHighlight.activeInHierarchy);
     }
 }

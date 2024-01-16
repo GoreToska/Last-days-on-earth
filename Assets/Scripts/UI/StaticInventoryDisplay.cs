@@ -5,14 +5,14 @@ using UnityEngine;
 public class StaticInventoryDisplay : InventoryDisplay
 {
     [field: SerializeField] public InventoryHolder InventoryHolder { get; private set; }
-    [field: SerializeField] public InventorySlot_UI[] Slots { get; private set; }
+    [field: SerializeField] public InventorySlot_UI[] Slots { get; protected set; }
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         PlayerInventoryHolder.OnPlayerInventoryChanged += RefreshStaticDisplay;
     }
 
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         PlayerInventoryHolder.OnPlayerInventoryChanged -= RefreshStaticDisplay;
     }
@@ -32,6 +32,7 @@ public class StaticInventoryDisplay : InventoryDisplay
         {
             SlotDictionary.Add(Slots[i], _inventorySystem.InventorySlots[i]);
             Slots[i].Init(_inventorySystem.InventorySlots[i]);
+            _inventorySystem.InventorySlots[i].SlotID = i;
         }
     }
 

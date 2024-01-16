@@ -23,3 +23,5 @@ MonoBehaviour:
   <CostValue>k__BackingField: 0
   <ItemPrefab>k__BackingField: {fileID: 6668571378133427106, guid: 05b20be3a8d259c4285b9a649c3905e3,
     type: 3}
+  <ItemModel>k__BackingField: {fileID: 1693808867211428, guid: 3c04b696e75f45847b55a0268a323a4a,
+    type: 3}

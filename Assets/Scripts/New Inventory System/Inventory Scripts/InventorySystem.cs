@@ -32,6 +32,7 @@ public class InventorySystem
                 {
                     slot.AddToStack(amount);
                     OnInventorySlotChanged?.Invoke(slot);
+                    Debug.Log("Changed");
 
                     return true;
 
@@ -43,6 +44,7 @@ public class InventorySystem
         {
             freeSlot.UpdateInventorySlot(itemToAdd, amount);
             OnInventorySlotChanged?.Invoke(freeSlot);
+            HotbarDisplay.OnHotbarItemAdded?.Invoke(freeSlot);
 
             return true;
         }

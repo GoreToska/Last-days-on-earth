@@ -7,6 +7,8 @@ using UnityEngine;
 public class InventorySlot : ISerializationCallbackReceiver
 {
     [SerializeField] private int _itemID = -1;
+
+    [field: SerializeField] public int SlotID = -1;
     [field: NonSerialized] public InventoryItemData ItemData { get; private set; }
     [field: SerializeField] public int StackSize { get; private set; }
 
