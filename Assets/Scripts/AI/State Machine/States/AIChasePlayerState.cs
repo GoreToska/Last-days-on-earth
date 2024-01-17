@@ -22,7 +22,7 @@ public class AIChasePlayerState : AIState
 
     public void Update(AIZombieAgent agent)
     {
-        if (agent.targetSystem.HasTarget && 
+        if (agent.targetSystem.HasTarget &&
             Vector3.Distance(agent.transform.position, agent.targetSystem.TargetPosition) <= agent.navMeshAgent.stoppingDistance)
         {
             agent.stateMachine.ChangeState(AIStateID.Attack);

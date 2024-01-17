@@ -15,9 +15,10 @@ public class AISensor : MonoBehaviour
     public int scanFrequency = 30;
     public LayerMask targetLayers;
     public LayerMask obstaclesLayer;
+
     public List<GameObject> Objects
     {
-        get { objects.RemoveAll(obj => !obj); return objects; }
+        get { objects.RemoveAll(obj => obj == null); return objects; }
     }
     public List<GameObject> objects = new List<GameObject>();
 
@@ -34,14 +35,6 @@ public class AISensor : MonoBehaviour
 
     private void Update()
     {
-        //scanTimer -= Time.deltaTime;
-
-        //if (scanTimer < 0)
-        //{
-        //    scanTimer += scanInterval;
-        //    Scan();
-        //}
-
         Scan();
     }
 
@@ -55,8 +48,10 @@ public class AISensor : MonoBehaviour
             GameObject obj = colliders[i].gameObject;
             if (IsInside(obj) && !objects.Contains(obj))
             {
-                if(obj.TryGetComponent<CharacterStatusManager>(out var status) && !status.IsDead)
-                objects.Add(obj);
+                if (obj.TryGetComponent<CharacterStatusManager>(out var status) && !status.IsDead)
+                {
+                    objects.Add(obj);
+                }
             }
         }
     }
@@ -81,7 +76,7 @@ public class AISensor : MonoBehaviour
 
         origin.y += height / 2;
         destination.y = origin.y;
-        if(Physics.Linecast(origin, destination, obstaclesLayer))
+        if (Physics.Linecast(origin, destination, obstaclesLayer))
         {
             return false;
         }
@@ -89,18 +84,31 @@ public class AISensor : MonoBehaviour
         return true;
     }
 
-    public int Filter(GameObject[] buffer, string layerName)
+    public int Filter(GameObject[] buffer, string layerName, string layerName2 = null, string layerName3 = null)
     {
-        int layer = LayerMask.NameToLayer(layerName);
+        var layer = LayerMask.NameToLayer(layerName);
+        int layer2 = 0;
+        var layer3 = 0;
+
+        if (layerName2 != null)
+        {
+            layer2 = LayerMask.NameToLayer(layerName2);
+        }
+
+        if (layerName3 != null)
+        {
+            layer3 = LayerMask.NameToLayer(layerName3);
+        }
+
         int count = 0;
         foreach (var obj in Objects)
         {
-            if(obj.layer == layer && obj.TryGetComponent<CharacterStatusManager>(out var status) && !status.IsDead)
+            if ((obj.layer == layer || obj.layer == layer2 || obj.layer == layer3) && obj.TryGetComponent<CharacterStatusManager>(out var status) && !status.IsDead)
             {
                 buffer[count++] = obj;
             }
 
-            if(buffer.Length == count)
+            if (buffer.Length == count)
             {
                 break; // buffer is full
             }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Inventory System/Inventory Item", fileName = "New Item")]
+[CreateAssetMenu(menuName = "Inventory System/Item/Inventory Item", fileName = "New Item")]
 public class InventoryItemData : ScriptableObject
 {
     [field: SerializeField] public int ID = -1;
@@ -17,8 +17,14 @@ public class InventoryItemData : ScriptableObject
     // Weapon type?
     // item type
 
-    public void UseItem()
+    public virtual void UseItem(PlayerEquipment playerEquipment)
     {
         Debug.Log("Using " + DisplayName);
+    }
+
+    public virtual void EquipItem(PlayerEquipment playerEquipment)
+    {
+        //HotbarDisplay.OnUsingCurrentItem += UseItem;
+        Debug.Log("Equipping " + DisplayName);
     }
 }

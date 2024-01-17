@@ -14,7 +14,7 @@ public class AIMemory
     public float scrore;
 }
 
-public class AISensoryMemory 
+public class AISensoryMemory
 {
     public List<AIMemory> memories = new List<AIMemory>();
     GameObject[] characters;
@@ -26,7 +26,7 @@ public class AISensoryMemory
 
     public void UpdateSenses(AISensor sensor)
     {
-        int targets = sensor.Filter(characters, "Character");
+        int targets = sensor.Filter(characters, "Character", "Player", "Raider");
 
         for (int i = 0; i < targets; ++i)
         {

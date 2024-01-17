@@ -7,7 +7,6 @@ public class MeleeWeapon : MainWeapon
     [SerializeField] protected WeaponData weaponData;
     [Header("Prefab of this weapon for dropping it on ground")]
     [SerializeField] public GameObject itemPrefab;
-    public StoredItem storedItem;
 
     public override void PerformAttack()
     {

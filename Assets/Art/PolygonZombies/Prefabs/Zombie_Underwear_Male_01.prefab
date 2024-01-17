@@ -9189,7 +9189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9be43bcb0812a504e9c0ebae12f4625f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialStateID: 2
+  initialStateID: 4
   config: {fileID: 11400000, guid: 553a50df333da904890695ee29dc19ad, type: 2}
   timeToStartRoaming: 5
   roamingRadius: 5
@@ -9247,12 +9247,11 @@ MonoBehaviour:
   scanFrequency: 1
   targetLayers:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 1600
   obstaclesLayer:
     serializedVersion: 2
     m_Bits: 1
-  objects:
-  - {fileID: 0}
+  objects: []
 --- !u!114 &1316148189926809860
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -8,7 +8,7 @@ public class HotbarDisplay : StaticInventoryDisplay
     [field: SerializeField] public int CurrentIndex { get; private set; }
     public static UnityAction<InventoryItemData> OnItemEquip = delegate { };
     public static UnityAction<InventorySlot> OnHotbarItemAdded = delegate { };
-    public static UnityAction<InventorySlot> OnCurrentSlotItemAdded = delegate { };
+    public static UnityAction<InventorySlot> OnCurrentSlotItemChanged = delegate { };
 
     private int _maxIndex = 4;
     private int _minIndex = 0;
@@ -32,7 +32,6 @@ public class HotbarDisplay : StaticInventoryDisplay
         PlayerInputManager.Hotbar3Event += SetIndex;
         PlayerInputManager.Hotbar4Event += SetIndex;
         PlayerInputManager.Hotbar5Event += SetIndex;
-        PlayerInputManager.AttackEvent += UseItem;
 
         if (_inventorySystem == null)
         {
@@ -64,26 +63,16 @@ public class HotbarDisplay : StaticInventoryDisplay
         if (index >= _maxIndex)
             index = _maxIndex;
 
-        Debug.Log($"SetIndex {this.gameObject.name}");
         CurrentIndex = index;
         Slots[CurrentIndex].ToggleHighlight();
         OnItemEquip?.Invoke(Slots[CurrentIndex].AssignedInventorySlot.ItemData);
     }
 
-    private void UseItem()
-    {
-        if (Slots[CurrentIndex].AssignedInventorySlot.ItemData != null)
-        {
-            Slots[CurrentIndex].AssignedInventorySlot.ItemData.UseItem();
-        }
-    }
-
     private void UpdateEquipment(InventorySlot slot)
     {
-        Debug.Log(slot.SlotID + " " + CurrentIndex);
         if (slot.SlotID == CurrentIndex)
         {
-            OnCurrentSlotItemAdded.Invoke(slot);
+            OnCurrentSlotItemChanged.Invoke(slot);
         }
     }
 }

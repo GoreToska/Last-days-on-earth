@@ -9,10 +9,7 @@ public class LightRifleWeapon : RangeWeapon
 
     public override void PerformReload()
     {
-        if (PlayerInventory.Instance.LightRifleAmmoCount > 0 && bullets < weaponData.magazineSize)
-        {
-            PlayerAnimationManager.Instance.PlayRifleReloadAnimation();
-        }
+        
     }
 
     public override void LoadMagazine()
@@ -20,17 +17,7 @@ public class LightRifleWeapon : RangeWeapon
         int ammoToLoad = weaponData.magazineSize - bullets;
 
 
-        if (PlayerInventory.Instance.LightRifleAmmoCount / ammoToLoad >= 1)
-        {
-            PlayerInventory.Instance.SubtractLightRifleAmmo(ammoToLoad);
-            bullets += ammoToLoad;
-        }
-        else
-        {
-            ammoToLoad = PlayerInventory.Instance.LightRifleAmmoCount;
-            PlayerInventory.Instance.SubtractLightRifleAmmo(ammoToLoad);
-            bullets += ammoToLoad;
-        }
+       
 
         base.LoadMagazine();
     }
@@ -38,5 +25,10 @@ public class LightRifleWeapon : RangeWeapon
     public override void SetBulletStatus()
     {
         HUDManager.Instance.UpdateBulletsStatus(bullets);
+    }
+
+    public override void PerformAttack()
+    {
+        throw new System.NotImplementedException();
     }
 }

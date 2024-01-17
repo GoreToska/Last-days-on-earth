@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
-using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
 
-public abstract class RangeWeapon : MainWeapon, IWeapon, IReloadableWeapon
+public abstract class RangeWeapon : MainWeapon
 {
     [Header("Weapon options")]
     [SerializeField] protected WeaponData weaponData;
@@ -18,8 +17,6 @@ public abstract class RangeWeapon : MainWeapon, IWeapon, IReloadableWeapon
 
     protected ParticleSystem particleSystem;
     protected ObjectPool<TrailRenderer> trailRendererPool;
-
-    public StoredItem storedItem;
 
     private float shotTimer = 0f;
     private float currentRecoil = 0f;
@@ -47,16 +44,6 @@ public abstract class RangeWeapon : MainWeapon, IWeapon, IReloadableWeapon
         particleSystem = GetComponentInChildren<ParticleSystem>();
         trailRendererPool = new ObjectPool<TrailRenderer>(CreateTrail);
         recoilStop = weaponData.recoilStopShot * weaponData.recoil;
-    }
-
-    public override void PerformAttack()
-    {
-        if (!PlayerInputManager.Instance.isShooting)
-        {
-            return;
-        }
-
-        StartCoroutine(PerformShot());
     }
 
     protected virtual IEnumerator PerformShot()

@@ -25,7 +25,10 @@ public class ItemPickUp : MonoBehaviour, IInteractable
 
         foreach (var child in transform.GetComponentsInChildren<MeshRenderer>())
         {
-            _meshRenderer.Add(child.GetComponent<MeshRenderer>());
+            if (child.TryGetComponent<MeshRenderer>(out var component))
+            {
+                _meshRenderer.Add(component);
+            }
         }
     }
 

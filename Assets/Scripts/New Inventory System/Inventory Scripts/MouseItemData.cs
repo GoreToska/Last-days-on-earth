@@ -60,6 +60,7 @@ public class MouseItemData : MonoBehaviour
                 else
                 {
                     ClearSlot();
+                    HotbarDisplay.OnCurrentSlotItemChanged.Invoke(AssignedInventorySlot);
                 }
             }
         }
