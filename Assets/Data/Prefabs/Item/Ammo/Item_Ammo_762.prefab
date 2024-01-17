@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 341239321975959982}
   - component: {fileID: 5625832474739898014}
   - component: {fileID: 7498481189964952284}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Item_Ammo_762
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bef53d3ce6743f24eb8d8436e44c7296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _id: 0aa8ecf2-4cb6-466a-978e-bb65a67c5807
+  _id: f1453cfa-7136-490a-ac80-1277737d647c
 --- !u!54 &5625832474739898014
 Rigidbody:
   m_ObjectHideFlags: 0

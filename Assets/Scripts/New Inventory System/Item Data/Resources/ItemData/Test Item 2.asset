@@ -20,3 +20,4 @@ MonoBehaviour:
   <MaxStackSize>k__BackingField: 1
   <CostValue>k__BackingField: 0
   <ItemPrefab>k__BackingField: {fileID: 0}
+  <ItemModel>k__BackingField: {fileID: 0}
