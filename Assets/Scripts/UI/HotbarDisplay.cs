@@ -55,6 +55,9 @@ public class HotbarDisplay : StaticInventoryDisplay
 
     private void SetIndex(int index)
     {
+        if (index == CurrentIndex)
+            return;
+
         Slots[CurrentIndex].ToggleHighlight();
 
         if (index < 0)

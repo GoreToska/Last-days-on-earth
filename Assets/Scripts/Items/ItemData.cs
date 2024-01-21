@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class ItemData : ScriptableObject
 {
-    public int ID;
     [TextArea]
     public string name;
     [TextArea] 

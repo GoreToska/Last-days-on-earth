@@ -5,9 +5,8 @@ using UnityEngine;
 using UnityEngine.Pool;
 
 [CreateAssetMenu(fileName = "Weapon Data", menuName = "Epidemic/Data/Weapon Data")]
-public class WeaponData : ItemData
+public class WeaponData : ScriptableObject
 {
-    [SerializeField] public GameObject weaponModel;
     [SerializeField] public WeaponType weaponType;
     [SerializeField] public AmmoTypes ammoType;
     [SerializeField] public float damage;

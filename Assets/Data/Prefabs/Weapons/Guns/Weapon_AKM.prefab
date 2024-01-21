@@ -188,7 +188,7 @@ MonoBehaviour:
   muzzleFlash: {fileID: 3973132283975187684}
   itemPrefab: {fileID: 2875812395047982583, guid: 281162aed16288c4d8afcb442eb56772,
     type: 3}
-  bullets: 10
+  bullets: 600
 --- !u!1 &2580116869321669320
 GameObject:
   m_ObjectHideFlags: 0

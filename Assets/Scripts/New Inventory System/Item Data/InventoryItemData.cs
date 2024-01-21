@@ -30,7 +30,7 @@ public class InventoryItemData : ScriptableObject
 
     public virtual void UnequipItem(PlayerEquipment playerEquipment)
     {
-        playerEquipment.gameObject.GetComponent<PlayerAnimationManager>().SetDefaultRig();
+        playerEquipment.gameObject.GetComponent<PlayerAnimationManager>().SetWeaponAnimationPattern(WeaponType.None);
         Debug.Log("Unequiping " + DisplayName);
     }
 }

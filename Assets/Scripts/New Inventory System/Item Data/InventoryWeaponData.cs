@@ -17,6 +17,7 @@ public class InventoryWeaponData : InventoryItemData
     public override void UseItem(PlayerEquipment playerEquipment)
     {
         base.UseItem(playerEquipment);
+
         playerEquipment._currentRangeWeapon.PerformShot();
     }
 
