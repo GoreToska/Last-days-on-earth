@@ -59,7 +59,8 @@ public class HeavyRifleWeapon : RangeWeapon, IRangeWeapon
     void IRangeWeapon.PerformShot()
     {
         Debug.Log("Shot!");
-        if (!PlayerInputManager.Instance.isShooting)
+
+        if (!PlayerInputManager.Instance.IsAiming)
         {
             return;
         }

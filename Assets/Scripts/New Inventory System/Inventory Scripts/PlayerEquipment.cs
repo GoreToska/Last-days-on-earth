@@ -57,6 +57,7 @@ public class PlayerEquipment : MonoBehaviour
     {
         if (_currentEquippedItem != null)
         {
+            _currentInventoryItemData.UnequipItem(this);
             Destroy(_currentEquippedItem);
         }
     }

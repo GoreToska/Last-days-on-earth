@@ -25,6 +25,12 @@ public class InventoryItemData : ScriptableObject
     public virtual void EquipItem(PlayerEquipment playerEquipment)
     {
         //HotbarDisplay.OnUsingCurrentItem += UseItem;
-        Debug.Log("Equipping " + DisplayName);
+        Debug.Log("Equiping " + DisplayName);
+    }
+
+    public virtual void UnequipItem(PlayerEquipment playerEquipment)
+    {
+        playerEquipment.gameObject.GetComponent<PlayerAnimationManager>().SetDefaultRig();
+        Debug.Log("Unequiping " + DisplayName);
     }
 }

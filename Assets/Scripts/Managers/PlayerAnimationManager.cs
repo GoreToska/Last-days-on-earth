@@ -27,7 +27,7 @@ public class PlayerAnimationManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        
+
     }
 
     private void Start()
@@ -56,13 +56,13 @@ public class PlayerAnimationManager : MonoBehaviour
         switch (type)
         {
             case WeaponType.Range_Primary:
-                animator.CrossFade("Walk Rifle Blend Tree", 0.1f);
+                animator.CrossFade("Walk Rifle Blend Tree", 0.01f);
                 SetRifleRig();
                 break;
             case WeaponType.Range_Secondary:
                 break;
             case WeaponType.None:
-                animator.CrossFade("Walk Blend Tree", 0.1f);
+                animator.CrossFade("Walk Blend Tree", 0.01f);
                 SetDefaultRig();
                 break;
             case WeaponType.Melee_Primary:
@@ -112,12 +112,12 @@ public class PlayerAnimationManager : MonoBehaviour
         animator.CrossFade("Rifle_Reload_01", 0.1f);
 
         yield return new WaitForSeconds(rifleReloadingAnimation.length - rifleReloadingAnimationOffset);
-        
+
         //PlayerEquipmentManager.Instance.rangeMainWeapon.LoadMagazine();
         PlayerInputManager.Instance.EnableCombatControls();
         SetRifleRig();
 
-        yield return null;
+        yield break;
     }
 
     public void SetRifleRig()

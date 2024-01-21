@@ -12,7 +12,7 @@ public interface IRangeWeapon
 [CreateAssetMenu(menuName = "Inventory System/Item/Inventory Weapon Item", fileName = "New Item")]
 public class InventoryWeaponData : InventoryItemData
 {
-    [SerializeField] private WeaponData weaponData;
+    [SerializeField] private WeaponData _weaponData;
 
     public override void UseItem(PlayerEquipment playerEquipment)
     {
@@ -23,6 +23,13 @@ public class InventoryWeaponData : InventoryItemData
     public override void EquipItem(PlayerEquipment playerEquipment)
     {
         base.EquipItem(playerEquipment);
+
+        playerEquipment.gameObject.GetComponent<PlayerAnimationManager>().SetWeaponAnimationPattern(_weaponData.weaponType);
         playerEquipment._currentRangeWeapon = playerEquipment._currentEquippedItem.GetComponent<IRangeWeapon>();
+    }
+
+    public override void UnequipItem(PlayerEquipment playerEquipment)
+    {
+        base.UnequipItem(playerEquipment);
     }
 }
