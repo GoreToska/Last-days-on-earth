@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public abstract class RangeWeapon : MainWeapon
+public abstract class RangeWeapon : MonoBehaviour, IRangeWeapon
 {
     [Header("Weapon options")]
     [SerializeField] protected WeaponData weaponData;
@@ -32,7 +32,7 @@ public abstract class RangeWeapon : MainWeapon
             if (currentRecoil <= 0f)
                 return;
 
-            currentRecoil -= weaponData.recoil;
+            currentRecoil -= weaponData.Recoil;
             return;
         }
 
@@ -43,12 +43,12 @@ public abstract class RangeWeapon : MainWeapon
     {
         particleSystem = GetComponentInChildren<ParticleSystem>();
         trailRendererPool = new ObjectPool<TrailRenderer>(CreateTrail);
-        recoilStop = weaponData.recoilStopShot * weaponData.recoil;
+        recoilStop = weaponData.RecoilStopShot * weaponData.Recoil;
     }
 
     protected virtual IEnumerator PerformShot()
     {
-        if (weaponData.isAuto)
+        if (weaponData.IsAuto)
         {
             while (PlayerInputManager.Instance.isShooting)
             {
@@ -60,7 +60,7 @@ public abstract class RangeWeapon : MainWeapon
 
                 ShotLogic();
 
-                yield return new WaitForSeconds(60f / weaponData.fireRate);
+                yield return new WaitForSeconds(60f / weaponData.FireRate);
             }
 
             yield break;
@@ -101,16 +101,16 @@ public abstract class RangeWeapon : MainWeapon
 
         if (sphere && hit.collider.tag == "Damagable")
         {
-            hit.collider.GetComponent<HitBox>().GetDamage(weaponData.damage);
+            hit.collider.GetComponent<HitBox>().GetDamage(weaponData.Damage);
             Debug.Log("Damagable");
         }
 
         if (currentRecoil <= recoilStop)
         {
-            currentRecoil += weaponData.recoil;
+            currentRecoil += weaponData.Recoil;
         }
 
-        shotTimer = weaponData.recoilTime;
+        shotTimer = weaponData.RecoilTime;
     }
 
     protected virtual IEnumerator PlayTrail(Vector3 startPoint, Vector3 endPoint, RaycastHit hit)
@@ -150,15 +150,27 @@ public abstract class RangeWeapon : MainWeapon
         trailRendererPool.Release(instance);
     }
 
-    public override void PerformReload()
+    void IRangeWeapon.PerformReload(PlayerInventoryHolder playerInventory, PlayerAnimationManager playerAnimation)
     {
-        Debug.Log("Reload");
+        int ammoToLoad = weaponData.MagazineSize - bullets;
+
+        var actualAmount = playerInventory.RemoveFromInventory(weaponData.AmmoType, ammoToLoad);
+
+        if (actualAmount != 0)
+        {
+            bullets += actualAmount;
+            playerAnimation.PlayReloadAnimation(weaponData.reloadAnimation.name);
+        }
     }
 
-    public virtual void LoadMagazine()
+    void IRangeWeapon.PerformShot()
     {
-        HUDManager.Instance.UpdateBulletsStatus(bullets);
-        Debug.Log("Loaded " + bullets);
+        if (!PlayerInputManager.Instance.IsAiming)
+        {
+            return;
+        }
+
+        StartCoroutine(PerformShot());
     }
 
     protected virtual TrailRenderer CreateTrail()
@@ -176,6 +188,4 @@ public abstract class RangeWeapon : MainWeapon
 
         return trail;
     }
-
-    public abstract void SetBulletStatus();
 }

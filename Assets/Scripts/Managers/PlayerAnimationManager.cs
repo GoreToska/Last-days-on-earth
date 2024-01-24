@@ -92,12 +92,9 @@ public class PlayerAnimationManager : MonoBehaviour
         animator.SetTrigger("RifleHeavyShot");
     }
 
-    public void PlayRifleReloadAnimation()
+    public void PlayReloadAnimation(string animationName)
     {
-        //SetDefaultRig();
-        //animator.Play("Rifle_Reload_01");
-
-        StartCoroutine(PlayRifleReloadAnimationCoroutine());
+        StartCoroutine(PlayRifleReloadAnimationCoroutine(animationName));
     }
 
     public void PlayHeavyAttackAnimation()
@@ -105,11 +102,11 @@ public class PlayerAnimationManager : MonoBehaviour
         animator.Play("Stable Sword Inward Slash (1)");
     }
 
-    private IEnumerator PlayRifleReloadAnimationCoroutine()
+    private IEnumerator PlayRifleReloadAnimationCoroutine(string animationName)
     {
         SetDefaultRig();
         PlayerInputManager.Instance.DisableCombatControls();
-        animator.CrossFade("Rifle_Reload_01", 0.1f);
+        animator.CrossFade(animationName, 0.1f);
 
         yield return new WaitForSeconds(rifleReloadingAnimation.length - rifleReloadingAnimationOffset);
 

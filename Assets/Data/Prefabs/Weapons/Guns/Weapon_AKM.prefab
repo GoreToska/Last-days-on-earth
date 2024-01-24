@@ -109,7 +109,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2579492733345702338}
-  m_LocalRotation: {x: 0.53381217, y: -0.51255065, z: 0.43548745, w: -0.51253015}
+  m_LocalRotation: {x: 0.47346318, y: -0.50917155, z: 0.49386957, w: -0.52217793}
   m_LocalPosition: {x: 0.0243, y: -0.0328, z: -0.0307}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -120,7 +120,7 @@ Transform:
   - {fileID: 7614745045170426336}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -5.784, y: -264.502, z: -87.074}
+  m_LocalEulerAnglesHint: {x: 0.485, y: -271.9, z: -86.339}
 --- !u!33 &2572340140226302000
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -188,7 +188,7 @@ MonoBehaviour:
   muzzleFlash: {fileID: 3973132283975187684}
   itemPrefab: {fileID: 2875812395047982583, guid: 281162aed16288c4d8afcb442eb56772,
     type: 3}
-  bullets: 600
+  bullets: 5
 --- !u!1 &2580116869321669320
 GameObject:
   m_ObjectHideFlags: 0

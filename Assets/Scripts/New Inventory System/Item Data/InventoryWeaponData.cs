@@ -6,7 +6,7 @@ public interface IRangeWeapon
 {
     public void PerformShot();
 
-    public void PerformReload();
+    public void PerformReload(PlayerInventoryHolder playerInventory, PlayerAnimationManager playerAnimationManager);
 }
 
 [CreateAssetMenu(menuName = "Inventory System/Item/Inventory Weapon Item", fileName = "New Item")]
@@ -25,12 +25,14 @@ public class InventoryWeaponData : InventoryItemData
     {
         base.EquipItem(playerEquipment);
 
-        playerEquipment.gameObject.GetComponent<PlayerAnimationManager>().SetWeaponAnimationPattern(_weaponData.weaponType);
+        playerEquipment.gameObject.GetComponent<PlayerAnimationManager>().SetWeaponAnimationPattern(_weaponData.WeaponType);
         playerEquipment._currentRangeWeapon = playerEquipment._currentEquippedItem.GetComponent<IRangeWeapon>();
+        PlayerEquipment.ReloadWeapon += playerEquipment._currentEquippedItem.GetComponent<IRangeWeapon>().PerformReload;
     }
 
     public override void UnequipItem(PlayerEquipment playerEquipment)
     {
+        PlayerEquipment.ReloadWeapon -= playerEquipment._currentEquippedItem.GetComponent<IRangeWeapon>().PerformReload;
         base.UnequipItem(playerEquipment);
     }
 }

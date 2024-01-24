@@ -32,7 +32,6 @@ public class InventorySystem
                 {
                     slot.AddToStack(amount);
                     OnInventorySlotChanged?.Invoke(slot);
-                    Debug.Log("Changed");
 
                     return true;
 

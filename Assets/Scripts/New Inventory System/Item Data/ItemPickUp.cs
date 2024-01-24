@@ -7,10 +7,11 @@ using UnityEngine.Events;
 public class ItemPickUp : MonoBehaviour, IInteractable
 {
     [field: SerializeField] public InventoryItemData ItemData { get; protected set; }
+    [SerializeField] private int _count = 1;
     [SerializeField] private InteractableHighlightConfig _interactableHighlightConfig;
     public UnityAction<IInteractable> OnInteractionComplete { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
-    private List<MeshRenderer> _meshRenderer = new List<MeshRenderer>();
+    private List<MeshRenderer> _meshRenderers = new List<MeshRenderer>();
     private SphereCollider collider;
     private string id;
     private ItemPickUpSaveData itemSaveData;
@@ -27,7 +28,7 @@ public class ItemPickUp : MonoBehaviour, IInteractable
         {
             if (child.TryGetComponent<MeshRenderer>(out var component))
             {
-                _meshRenderer.Add(component);
+                _meshRenderers.Add(component);
             }
         }
     }
@@ -81,7 +82,7 @@ public class ItemPickUp : MonoBehaviour, IInteractable
 
     public void Interact(Interactor interactor, out bool result, IInputController inputController = null)
     {
-        if (interactor.Inventory.AddToInventory(ItemData, 1))
+        if (interactor.Inventory.AddToInventory(ItemData, _count))
         {
             SaveGameManager.data.CollectedItems.Add(id);
             result = true;
@@ -97,7 +98,7 @@ public class ItemPickUp : MonoBehaviour, IInteractable
     {
         if (value)
         {
-            foreach (var renderer in _meshRenderer)
+            foreach (var renderer in _meshRenderers)
             {
                 renderer.materials[1].SetColor("_Color", _interactableHighlightConfig.Highlight);
                 renderer.materials[1].SetFloat("_Scale", 1.03f);
@@ -105,7 +106,7 @@ public class ItemPickUp : MonoBehaviour, IInteractable
         }
         else
         {
-            foreach (var renderer in _meshRenderer)
+            foreach (var renderer in _meshRenderers)
             {
                 renderer.materials[1].SetFloat("_Scale", 1f);
             }
@@ -115,14 +116,14 @@ public class ItemPickUp : MonoBehaviour, IInteractable
     public void EndInteraction(Interactor interactor)
     {
         interactor.RemoveFromInteractionList(this as IInteractable);
-        UnityEngine.Object.Destroy(this.gameObject);
+        Destroy(this.gameObject);
     }
 
     public void HighlightCurrentInteractable(bool value)
     {
         if (value)
         {
-            foreach (var renderer in _meshRenderer)
+            foreach (var renderer in _meshRenderers)
             {
                 renderer.materials[1].SetColor("_Color", _interactableHighlightConfig.ChosedHighlight);
                 renderer.materials[1].SetFloat("_Scale", 1.03f);
@@ -130,7 +131,7 @@ public class ItemPickUp : MonoBehaviour, IInteractable
         }
         else
         {
-            foreach (var renderer in _meshRenderer)
+            foreach (var renderer in _meshRenderers)
             {
                 renderer.materials[1].SetFloat("_Scale", 1f);
             }
