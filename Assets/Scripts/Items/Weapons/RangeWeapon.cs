@@ -10,43 +10,44 @@ public abstract class RangeWeapon : MonoBehaviour, IRangeWeapon
     [SerializeField] protected GameObject burrel;
     [SerializeField] protected ParticleSystem muzzleFlash;
 
-    [Header("Prefab of this weapon for dropping it on ground")]
-    [SerializeField] public GameObject itemPrefab;
+    //[Header("Prefab of this weapon for dropping it on ground")]
+    //[SerializeField] public GameObject itemPrefab;
 
     [SerializeField] protected int bullets = 0;
 
     protected ParticleSystem particleSystem;
     protected ObjectPool<TrailRenderer> trailRendererPool;
 
-    private float shotTimer = 0f;
-    private float currentRecoil = 0f;
-    private float recoilStop;
+    private float _shotTimer = 0f;
+    private float _currentRecoil = 0f;
+    private float _recoilStop;
+    private bool _canShoot = true;
 
     private void Update()
     {
         if (PlayerInputManager.Instance.isShooting)
             return;
 
-        if (shotTimer <= 0f)
+        if (_shotTimer <= 0f)
         {
-            if (currentRecoil <= 0f)
+            if (_currentRecoil <= 0f)
                 return;
 
-            currentRecoil -= weaponData.Recoil;
+            _currentRecoil -= weaponData.Recoil;
             return;
         }
 
-        shotTimer -= Time.deltaTime;
+        _shotTimer -= Time.deltaTime;
     }
 
     protected virtual void Awake()
     {
         particleSystem = GetComponentInChildren<ParticleSystem>();
         trailRendererPool = new ObjectPool<TrailRenderer>(CreateTrail);
-        recoilStop = weaponData.RecoilStopShot * weaponData.Recoil;
+        _recoilStop = weaponData.RecoilStopShot * weaponData.Recoil;
     }
 
-    protected virtual IEnumerator PerformShot()
+    protected virtual IEnumerator ShotCoroutine()
     {
         if (weaponData.IsAuto)
         {
@@ -67,6 +68,9 @@ public abstract class RangeWeapon : MonoBehaviour, IRangeWeapon
         }
         else
         {
+            if (!_canShoot)
+                yield break;
+
             if (bullets == 0)
             {
                 // sound click of empty magazine
@@ -74,8 +78,12 @@ public abstract class RangeWeapon : MonoBehaviour, IRangeWeapon
             }
 
             ShotLogic();
-            PlayerInputManager.Instance.isShooting = false;
-            yield return null;
+
+            _canShoot = false;
+            yield return new WaitForSeconds(60f / weaponData.FireRate);
+            _canShoot = true;
+
+            yield break;
         }
 
     }
@@ -89,9 +97,9 @@ public abstract class RangeWeapon : MonoBehaviour, IRangeWeapon
         Vector3 direction = new Vector3(0, 0, burrel.transform.localPosition.z) * 100f;
 
         Vector3 recoiledPosition = position + new Vector3(
-            Random.Range(-currentRecoil, currentRecoil),
-            Random.Range(-currentRecoil, currentRecoil),
-            Random.Range(-currentRecoil, currentRecoil));
+            Random.Range(-_currentRecoil, _currentRecoil),
+            Random.Range(-_currentRecoil, _currentRecoil),
+            Random.Range(-_currentRecoil, _currentRecoil));
 
         Ray ray = new Ray(burrel.transform.position, recoiledPosition - burrel.transform.position);
         var sphere = Physics.SphereCast(ray, 0.15f, out var hit, Mathf.Infinity, PlayerInputManager.Instance.aimMask);
@@ -105,12 +113,12 @@ public abstract class RangeWeapon : MonoBehaviour, IRangeWeapon
             Debug.Log("Damagable");
         }
 
-        if (currentRecoil <= recoilStop)
+        if (_currentRecoil <= _recoilStop)
         {
-            currentRecoil += weaponData.Recoil;
+            _currentRecoil += weaponData.Recoil;
         }
 
-        shotTimer = weaponData.RecoilTime;
+        _shotTimer = weaponData.RecoilTime;
     }
 
     protected virtual IEnumerator PlayTrail(Vector3 startPoint, Vector3 endPoint, RaycastHit hit)
@@ -170,7 +178,7 @@ public abstract class RangeWeapon : MonoBehaviour, IRangeWeapon
             return;
         }
 
-        StartCoroutine(PerformShot());
+        StartCoroutine(ShotCoroutine());
     }
 
     protected virtual TrailRenderer CreateTrail()

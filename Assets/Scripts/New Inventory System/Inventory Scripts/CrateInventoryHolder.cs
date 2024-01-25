@@ -93,7 +93,7 @@ public class CrateInventoryHolder : InventoryHolder, IInteractable
         {
             foreach (var renderer in _meshRenderer)
             {
-                renderer.materials[1].SetFloat("_Scale", 1f);
+                renderer.materials[1].SetFloat("_Scale", 0f);
             }
         }
     }

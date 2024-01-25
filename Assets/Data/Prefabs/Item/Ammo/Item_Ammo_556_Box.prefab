@@ -114,7 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bef53d3ce6743f24eb8d8436e44c7296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _id: 15569ebc-fe62-43bf-be14-5daa1207122b
+  _id: cb2ffc2a-a450-43cf-88c4-e71b30d3cbd4
 --- !u!114 &4508828718574672725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,8 +127,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a89c8b9c7437c794b81088d724461cfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <ItemData>k__BackingField: {fileID: 11400000, guid: 4aea6dc3297f2c346803f0152d3ea2b9,
+  <ItemData>k__BackingField: {fileID: 11400000, guid: 937fdfb8bc131504db53a6238134d65f,
     type: 2}
+  _count: 30
   _interactableHighlightConfig: {fileID: 11400000, guid: c1eab1ce9b906ec41be5ea27311a0e7f,
     type: 2}
 --- !u!65 &1178237271

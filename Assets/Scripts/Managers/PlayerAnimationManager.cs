@@ -56,13 +56,13 @@ public class PlayerAnimationManager : MonoBehaviour
         switch (type)
         {
             case WeaponType.Range_Primary:
-                animator.CrossFade("Walk Rifle Blend Tree", 0.01f);
+                animator.CrossFade("Walk Rifle Blend Tree", 0f);
                 SetRifleRig();
                 break;
             case WeaponType.Range_Secondary:
                 break;
             case WeaponType.None:
-                animator.CrossFade("Walk Blend Tree", 0.01f);
+                animator.CrossFade("Walk Blend Tree", 0f);
                 SetDefaultRig();
                 break;
             case WeaponType.Melee_Primary:

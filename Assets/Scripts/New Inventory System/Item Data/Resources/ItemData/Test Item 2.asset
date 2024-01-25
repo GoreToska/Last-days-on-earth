@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 2
   <DisplayName>k__BackingField: Test Item 2
-  <Count>k__BackingField: 0
   <Description>k__BackingField: "\u0422\u0435\u0441\u0442 \u0430\u0439\u0442\u0430\u043C
     2"
   <Icon>k__BackingField: {fileID: 0}

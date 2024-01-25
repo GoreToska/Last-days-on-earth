@@ -19,6 +19,11 @@ public class UniqueID : MonoBehaviour
             idDatabase = new SerializableDictionary<string, GameObject>();
         }
 
+        if(_id == string.Empty)
+        {
+            Generate();
+        }
+
         if (idDatabase.ContainsKey(_id))
         {
             Generate();

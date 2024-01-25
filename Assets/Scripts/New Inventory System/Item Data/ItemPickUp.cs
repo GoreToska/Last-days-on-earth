@@ -108,7 +108,7 @@ public class ItemPickUp : MonoBehaviour, IInteractable
         {
             foreach (var renderer in _meshRenderers)
             {
-                renderer.materials[1].SetFloat("_Scale", 1f);
+                renderer.materials[1].SetFloat("_Scale", 0f);
             }
         }
     }

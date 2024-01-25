@@ -21,6 +21,9 @@ public class PlayerEquipment : MonoBehaviour
     private PlayerInventoryHolder _inventoryHolder;
     private PlayerAnimationManager _animationManager;
 
+    public PlayerAnimationManager AnimationManager => _animationManager;
+    private PlayerInventoryHolder InventoryHolder => _inventoryHolder;
+
     private void Awake()
     {
         _inventoryHolder = GetComponent<PlayerInventoryHolder>();

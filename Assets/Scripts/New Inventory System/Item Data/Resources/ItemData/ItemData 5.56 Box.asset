@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 0
   <DisplayName>k__BackingField: "\u041F\u0430\u0442\u0440\u043E\u043D 5.56"
-  <Count>k__BackingField: 0
   <Description>k__BackingField: "\u041F\u0430\u0442\u0440\u043E\u043D 5.56x45 \u0434\u043B\u044F
     \u0448\u0442\u0443\u0440\u043C\u043E\u0432\u044B\u0445 \u0432\u0438\u043D\u0442\u043E\u0432\u043E\u043A
     \u043E\u0431\u0440\u0430\u0437\u0446\u0430 \u041D\u0410\u0422\u041E."
@@ -22,7 +21,7 @@ MonoBehaviour:
     type: 3}
   <MaxStackSize>k__BackingField: 5
   <CostValue>k__BackingField: 0
-  <ItemPrefab>k__BackingField: {fileID: 329687041339665087, guid: 2e3933948e7a6804993e398b34ebf1d6,
+  <ItemPrefab>k__BackingField: {fileID: 4517366076419299371, guid: ce58139fac4be7748814cd46c591a17e,
     type: 3}
   <ItemModel>k__BackingField: {fileID: 1851930539644918, guid: f0fc41b28f2a6a943a204ab9ba84bc87,
     type: 3}

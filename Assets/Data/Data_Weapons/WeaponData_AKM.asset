@@ -16,7 +16,7 @@ MonoBehaviour:
   AmmoType: {fileID: 11400000, guid: 4493f32113425d24988f23472ce2e7c6, type: 2}
   Damage: 45
   FireRate: 600
-  Recoil: 0.05
+  Recoil: 0.07
   RecoilTime: 0.6
   reloadAnimation: {fileID: -203655887218126122, guid: 9e65a8ec216d3b44080464716ee6c056,
     type: 3}

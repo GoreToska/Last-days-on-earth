@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3ea547d79e86a843b47a56fb4b2c822, type: 3}
+  m_Name: ItemData 5.56 Bullet
+  m_EditorClassIdentifier: 
+  ID: 6
+  <DisplayName>k__BackingField: "\u041F\u0430\u0442\u0440\u043E\u043D 5.56"
+  <Description>k__BackingField: "\u041F\u0430\u0442\u0440\u043E\u043D 5.56x45 \u0434\u043B\u044F
+    \u043E\u0440\u0443\u0436\u0438\u044F \u043E\u0431\u0440\u0430\u0437\u0446\u0430
+    \u041D\u0410\u0422\u041E."
+  <Icon>k__BackingField: {fileID: 21300000, guid: ab169ab29d38ea94aa71ea812041e3e7,
+    type: 3}
+  <MaxStackSize>k__BackingField: 60
+  <CostValue>k__BackingField: 10
+  <ItemPrefab>k__BackingField: {fileID: 7306060171345692421, guid: ffc45ff104fbbd24db0cf2b33dd98a56,
+    type: 3}
+  <ItemModel>k__BackingField: {fileID: 0}
