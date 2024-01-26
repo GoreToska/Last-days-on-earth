@@ -26,8 +26,6 @@ public class PlayerAnimationManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-
     }
 
     private void Start()
@@ -60,6 +58,8 @@ public class PlayerAnimationManager : MonoBehaviour
                 SetRifleRig();
                 break;
             case WeaponType.Range_Secondary:
+                animator.CrossFade("Walk Rifle Blend Tree", 0f);
+                //animator.CrossFade("");
                 break;
             case WeaponType.None:
                 animator.CrossFade("Walk Blend Tree", 0f);
@@ -90,6 +90,11 @@ public class PlayerAnimationManager : MonoBehaviour
     public void PlayRifleHeavyShot()
     {
         animator.SetTrigger("RifleHeavyShot");
+    }
+
+    public void PlayPistolMediumShot()
+    {
+        animator.SetTrigger("PistolMediumShot");
     }
 
     public void PlayReloadAnimation(string animationName)

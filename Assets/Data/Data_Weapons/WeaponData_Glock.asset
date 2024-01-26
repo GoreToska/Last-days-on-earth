@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: badacccb6bcb0ba498ba245506d5a14c, type: 3}
+  m_Name: WeaponData_Glock
+  m_EditorClassIdentifier: 
+  WeaponType: 2
+  AmmoType: {fileID: 11400000, guid: f4e53cfaf4a37ae4bbaad694007c616f, type: 2}
+  Damage: 25
+  FireRate: 200
+  Recoil: 0.015
+  RecoilTime: 0.2
+  reloadAnimation: {fileID: -203655887218126122, guid: 9e65a8ec216d3b44080464716ee6c056,
+    type: 3}
+  RecoilStopShot: 8
+  MagazineSize: 17
+  ShotVolumeRadius: 7
+  IsAuto: 0
+  DrawSight: 0
+  trailRenderer: {fileID: 11400000, guid: 802ef637ed22cea458f99beaf4209c1a, type: 2}

@@ -54,7 +54,7 @@ public class MouseItemData : MonoBehaviour
 
                 if (AssignedInventorySlot.StackSize > 1)
                 {
-                    AssignedInventorySlot.RemoveFromStack(-1);
+                    AssignedInventorySlot.RemoveFromStack(1);
                     UpdateMouseSlot();
                 }
                 else

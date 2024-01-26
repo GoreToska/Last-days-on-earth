@@ -11,6 +11,7 @@ using UnityEngine.Events;
 public class CameraActions : MonoBehaviour
 {
     [SerializeField] private List<CinemachineVirtualCamera> _cameras;
+    [SerializeField] private CinemachineBrain _brain;
 
     [SerializeField] private float lerpSpeed;
     [SerializeField] private float lerpVelocity;
@@ -20,6 +21,7 @@ public class CameraActions : MonoBehaviour
 
     private CinemachineVirtualCamera _currentCamera;
     private int _currentCameraIndex;
+    private bool _isInProgress = false;
 
     private float zoomValue;
     private float scrollValue;
@@ -60,6 +62,9 @@ public class CameraActions : MonoBehaviour
 
     private void SetPreviousCamera()
     {
+        if (_brain.IsBlending)
+            return;
+
         ChangeCameraIndexValue(1);
         _cameras[_currentCameraIndex].m_Lens.OrthographicSize = _currentCamera.m_Lens.OrthographicSize;
         _currentCamera.m_Priority = 0;
@@ -69,6 +74,9 @@ public class CameraActions : MonoBehaviour
 
     private void SetNextCamera()
     {
+        if (_brain.IsBlending)
+            return;
+
         ChangeCameraIndexValue(-1);
         _cameras[_currentCameraIndex].m_Lens.OrthographicSize = _currentCamera.m_Lens.OrthographicSize;
         _currentCamera.m_Priority = 0;

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abb2330d92786b1409cda3acf5db3292, type: 3}
+  m_Name: ItemData Glock
+  m_EditorClassIdentifier: 
+  ID: 10
+  <DisplayName>k__BackingField: M1
+  <Description>k__BackingField: "\u0412\u0438\u043D\u0442\u043E\u0432\u043A\u0430
+    \u041C1."
+  <Icon>k__BackingField: {fileID: 21300000, guid: 1ea35ec24302396478d8e695689d7db3,
+    type: 3}
+  <MaxStackSize>k__BackingField: 1
+  <CostValue>k__BackingField: 1000
+  <ItemPrefab>k__BackingField: {fileID: 1081430966951548040, guid: f58364fb5ebb8a24a963dc6eb67200b7,
+    type: 3}
+  <ItemModel>k__BackingField: {fileID: 2711700780172207296, guid: b21bdadc0edd77547a1dcb8d8f219a0e,
+    type: 3}
+  _weaponData: {fileID: 11400000, guid: bcfb8a6c8f691d54aa9df5d9cc56b5e9, type: 2}
