@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: badacccb6bcb0ba498ba245506d5a14c, type: 3}
   m_Name: WeaponData_M1
   m_EditorClassIdentifier: 
-  WeaponType: 2
+  WeaponType: 1
   AmmoType: {fileID: 11400000, guid: f0041f86efa6b9b46b227cbbe295489d, type: 2}
   Damage: 75
   FireRate: 100

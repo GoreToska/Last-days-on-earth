@@ -2611,7 +2611,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a25e42eecc9020c4583e2fb536f245cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageMultiplier: 1.5
+  damageMultiplier: 2
 --- !u!1 &1298467421227164
 GameObject:
   m_ObjectHideFlags: 0
@@ -9247,7 +9247,7 @@ MonoBehaviour:
   scanFrequency: 1
   targetLayers:
     serializedVersion: 2
-    m_Bits: 1600
+    m_Bits: 1088
   obstaclesLayer:
     serializedVersion: 2
     m_Bits: 1

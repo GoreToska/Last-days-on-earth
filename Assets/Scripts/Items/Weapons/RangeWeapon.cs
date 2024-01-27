@@ -99,18 +99,20 @@ public abstract class RangeWeapon : MonoBehaviour, IRangeWeapon
         Vector3 recoiledPosition = position + new Vector3(
             Random.Range(-_currentRecoil, _currentRecoil),
             Random.Range(-_currentRecoil, _currentRecoil),
-            Random.Range(-_currentRecoil, _currentRecoil));
+            0);
 
         Ray ray = new Ray(burrel.transform.position, recoiledPosition - burrel.transform.position);
-        var sphere = Physics.SphereCast(ray, 0.15f, out var hit, Mathf.Infinity, PlayerInputManager.Instance.aimMask);
+        var raycast = Physics.Raycast(ray, out var hit, Mathf.Infinity, PlayerInputManager.Instance.aimMask);
 
         Debug.DrawRay(burrel.transform.position, recoiledPosition - burrel.transform.position, Color.blue, 2);
-        StartCoroutine(PlayTrail(burrel.transform.position, recoiledPosition, hit));
-
-        if (sphere && hit.collider.tag == "Damagable")
+        
+        if(hit.point == Vector3.zero)
         {
-            hit.collider.GetComponent<HitBox>().GetDamage(weaponData.Damage);
-            Debug.Log("Damagable");
+            StartCoroutine(PlayTrail(burrel.transform.position, recoiledPosition, hit));
+        }
+        else
+        {
+            StartCoroutine(PlayTrail(burrel.transform.position, hit.point, hit));
         }
 
         if (_currentRecoil <= _recoilStop)
@@ -149,6 +151,11 @@ public abstract class RangeWeapon : MonoBehaviour, IRangeWeapon
         if (hit.collider != null)
         {
             //  impact
+
+            if(hit.collider.tag == "Damagable")
+            {
+                hit.collider.GetComponent<HitBox>().GetDamage(weaponData.Damage);
+            }
         }
 
         yield return new WaitForSeconds(weaponData.trailRenderer.Duration);
