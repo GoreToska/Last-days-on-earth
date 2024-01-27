@@ -53,8 +53,8 @@ public class AITargetingSystem : MonoBehaviour
 
     private float CalculateScore(AIMemory memory)
     {
-        float distanceScore = Normalize(memory.distance, sensor.distance) * distanceWeight;
-        float angleScore = Normalize(memory.angle, sensor.angle) * angleWeight;
+        float distanceScore = Normalize(memory.distance, sensor.Distance) * distanceWeight;
+        float angleScore = Normalize(memory.angle, sensor.Angle) * angleWeight;
         float ageScore = Normalize(memory.Age, memorySpan) * ageWeight;
 
         return distanceScore + angleScore + ageScore;

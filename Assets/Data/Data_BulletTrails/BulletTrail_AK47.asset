@@ -69,4 +69,4 @@ MonoBehaviour:
     m_NumColorKeys: 2
     m_NumAlphaKeys: 4
   MissDistance: 100
-  SimulationSpeed: 200
+  SimulationSpeed: 100

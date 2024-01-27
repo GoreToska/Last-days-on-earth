@@ -9240,17 +9240,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0cf13eaf29582f4ab6b0342f76e206c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meshColor: {r: 1, g: 0, b: 0, a: 0.21960784}
-  distance: 15
-  angle: 45
-  height: 2
-  scanFrequency: 1
-  targetLayers:
+  _debug: 0
+  MeshColor: {r: 1, g: 0, b: 0, a: 0.6666667}
+  Distance: 10
+  Angle: 30
+  Height: 1
+  ScanFrequency: 30
+  TargetLayers:
     serializedVersion: 2
-    m_Bits: 1088
-  obstaclesLayer:
+    m_Bits: 0
+  ObstaclesLayer:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 0
   objects: []
 --- !u!114 &1316148189926809860
 MonoBehaviour:

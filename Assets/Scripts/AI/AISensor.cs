@@ -6,15 +6,16 @@ using UnityEngine;
 public class AISensor : MonoBehaviour
 {
     [Header("Debug")]
-    public Color meshColor = Color.red;
+    [SerializeField] private bool _debug = true;
+    public Color MeshColor = Color.red;
 
     [Header("Vision Options")]
-    public float distance = 10;
-    public float angle = 30;
-    public float height = 1.0f;
-    public int scanFrequency = 30;
-    public LayerMask targetLayers;
-    public LayerMask obstaclesLayer;
+    public float Distance = 10;
+    public float Angle = 30;
+    public float Height = 1.0f;
+    public int ScanFrequency = 30;
+    public LayerMask TargetLayers;
+    public LayerMask ObstaclesLayer;
 
     public List<GameObject> Objects
     {
@@ -30,7 +31,7 @@ public class AISensor : MonoBehaviour
 
     private void Start()
     {
-        scanInterval = 1.0f / scanFrequency;
+        scanInterval = 1.0f / ScanFrequency;
     }
 
     private void Update()
@@ -40,7 +41,7 @@ public class AISensor : MonoBehaviour
 
     private void Scan()
     {
-        count = Physics.OverlapSphereNonAlloc(transform.position, distance, colliders, targetLayers, QueryTriggerInteraction.Collide);
+        count = Physics.OverlapSphereNonAlloc(transform.position, Distance, colliders, TargetLayers, QueryTriggerInteraction.Collide);
 
         objects.Clear();
         for (int i = 0; i < count; ++i)
@@ -62,21 +63,21 @@ public class AISensor : MonoBehaviour
         Vector3 destination = obj.transform.position;
         Vector3 direction = destination - origin;
 
-        if (direction.y < 0 || direction.y > height)
+        if (direction.y < 0 || direction.y > Height)
         {
             return false;
         }
 
         direction.y = 0;
         float deltaAngle = Vector3.Angle(direction, transform.forward);
-        if (deltaAngle > angle)
+        if (deltaAngle > Angle)
         {
             return false;
         }
 
-        origin.y += height / 2;
+        origin.y += Height / 2;
         destination.y = origin.y;
-        if (Physics.Linecast(origin, destination, obstaclesLayer))
+        if (Physics.Linecast(origin, destination, ObstaclesLayer))
         {
             return false;
         }
@@ -129,12 +130,12 @@ public class AISensor : MonoBehaviour
         int[] triangles = new int[numberOfVertices];
 
         Vector3 bottomCenter = Vector3.zero;
-        Vector3 bottomLeft = Quaternion.Euler(0, -angle, 0) * Vector3.forward * distance;
-        Vector3 bottomRight = Quaternion.Euler(0, angle, 0) * Vector3.forward * distance;
+        Vector3 bottomLeft = Quaternion.Euler(0, -Angle, 0) * Vector3.forward * Distance;
+        Vector3 bottomRight = Quaternion.Euler(0, Angle, 0) * Vector3.forward * Distance;
 
-        Vector3 topCenter = bottomCenter + Vector3.up * height;
-        Vector3 topLeft = bottomLeft + Vector3.up * height;
-        Vector3 topRight = bottomRight + Vector3.up * height;
+        Vector3 topCenter = bottomCenter + Vector3.up * Height;
+        Vector3 topLeft = bottomLeft + Vector3.up * Height;
+        Vector3 topRight = bottomRight + Vector3.up * Height;
 
         int vert = 0;
 
@@ -156,15 +157,15 @@ public class AISensor : MonoBehaviour
         vertices[vert++] = bottomRight;
         vertices[vert++] = bottomCenter;
 
-        float currentAngle = -angle;
-        float deltaAngle = (angle * 2) / segments;
+        float currentAngle = -Angle;
+        float deltaAngle = (Angle * 2) / segments;
         for (int i = 0; i < segments; ++i)
         {
-            bottomLeft = Quaternion.Euler(0, currentAngle, 0) * Vector3.forward * distance;
-            bottomRight = Quaternion.Euler(0, currentAngle + deltaAngle, 0) * Vector3.forward * distance;
+            bottomLeft = Quaternion.Euler(0, currentAngle, 0) * Vector3.forward * Distance;
+            bottomRight = Quaternion.Euler(0, currentAngle + deltaAngle, 0) * Vector3.forward * Distance;
 
-            topLeft = bottomLeft + Vector3.up * height;
-            topRight = bottomRight + Vector3.up * height;
+            topLeft = bottomLeft + Vector3.up * Height;
+            topRight = bottomRight + Vector3.up * Height;
 
             //  far side
             vertices[vert++] = bottomLeft;
@@ -207,13 +208,16 @@ public class AISensor : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        if (!_debug)
+            return;
+
         if (mesh)
         {
-            Gizmos.color = meshColor;
+            Gizmos.color = MeshColor;
             Gizmos.DrawMesh(mesh, transform.position, transform.rotation);
         }
 
-        Gizmos.DrawWireSphere(transform.position, distance);
+        Gizmos.DrawWireSphere(transform.position, Distance);
 
         //Gizmos.color = Color.green;
         //foreach (var obj in Objects)
