@@ -35,7 +35,6 @@ public class ParticlePool : MonoBehaviour
             ObjectPools.Add(Prefab, pool);
         }
 
-
         return pool;
     }
 
