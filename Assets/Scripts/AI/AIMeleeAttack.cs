@@ -4,21 +4,22 @@ using UnityEngine;
 
 public class AIMeleeAttack : MonoBehaviour
 {
-    [SerializeField] private float defaultDamage;
-    private MeleeDamageCollider damageCollider;
+    [SerializeField] private float _defaultDamage;
+    
+    private MeleeDamageCollider _damageCollider;
 
     void Start()
     {
-        damageCollider = GetComponentInChildren<MeleeDamageCollider>();
+        _damageCollider = GetComponentInChildren<MeleeDamageCollider>();
     }
 
     public void PerformMeleeAttack()
     {
-        damageCollider.EnableCollider(defaultDamage);
+        _damageCollider.EnableCollider(_defaultDamage);
     }
 
     public void EndMeleeAttack()
     {
-        damageCollider.DisableCollider();
+        _damageCollider.DisableCollider();
     }
 }

@@ -9145,7 +9145,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 5f05a994fcd91224599db3647385b42f, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -9227,7 +9227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80d17598a0ca37c45a6936d2fe082941, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultDamage: 25
+  _defaultDamage: 25
 --- !u!114 &1629728310067480616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9248,10 +9248,10 @@ MonoBehaviour:
   ScanFrequency: 30
   TargetLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1600
   ObstaclesLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1
   objects: []
 --- !u!114 &1316148189926809860
 MonoBehaviour:

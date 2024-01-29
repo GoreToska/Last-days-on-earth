@@ -94,7 +94,7 @@ public abstract class RangeWeapon : MonoBehaviour, IRangeWeapon
 
         var (success, position) = PlayerInputManager.Instance.GetMousePosition();
 
-        Vector3 direction = new Vector3(0, 0, burrel.transform.localPosition.z) * 100f;
+        //Vector3 direction = new Vector3(0, 0, burrel.transform.localPosition.z) * 100f;
 
         Vector3 recoiledPosition = position + new Vector3(
             Random.Range(-_currentRecoil, _currentRecoil),
@@ -151,8 +151,9 @@ public abstract class RangeWeapon : MonoBehaviour, IRangeWeapon
         if (hit.collider != null)
         {
             //  impact
+            ImpactManager.Instance.HandleImpact(hit.transform.gameObject, hit.point, hit.normal, ImpactType.Shot);
 
-            if(hit.collider.tag == "Damagable")
+            if (hit.collider.tag == "Damagable")
             {
                 hit.collider.GetComponent<HitBox>().GetDamage(weaponData.Damage);
             }

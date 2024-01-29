@@ -12,8 +12,8 @@ public class MeleeDamageCollider : MonoBehaviour
     private float damage;
 
     private List<GameObject> charactersToDamage = new List<GameObject>();
-
     private Collider damageCollider;
+
     void Start()
     {
         damageCollider = GetComponent<Collider>();
@@ -34,22 +34,15 @@ public class MeleeDamageCollider : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (charactersToDamage.Contains(other.transform.root.gameObject))
+        if (charactersToDamage.Contains(other.transform.root.gameObject) || other.transform.root.gameObject.layer == this.transform.root.gameObject.layer)
         {
             return;
         }
 
-        if (other.transform.root.gameObject.layer == LayerMask.NameToLayer(playerMaskName))
+        if (other.transform.root.gameObject.layer == LayerMask.NameToLayer(playerMaskName) || other.transform.root.gameObject.layer != LayerMask.NameToLayer(raiderMaskName))
         {
             AddCharacterToDamageList(other.transform.root.gameObject);
-            other.transform.root.gameObject.GetComponent<PlayerStatusManager>().TakeDamage(damage);
-
-            return;
-        }
-        else if(other.transform.root.gameObject.layer != LayerMask.NameToLayer(raiderMaskName))
-        {
-            AddCharacterToDamageList(other.transform.root.gameObject);
-            // apply damage to raider
+            other.transform.root.gameObject.GetComponent<IDamagable>().TakeDamage(damage);
 
             return;
         }

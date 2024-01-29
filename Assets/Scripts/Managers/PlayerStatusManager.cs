@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class PlayerStatusManager : CharacterStatusManager
+public class PlayerStatusManager : CharacterStatusManager, IDamagable
 {
     [Header("Player status")]
     [SerializeField] private bool isDead = false;
@@ -96,7 +96,7 @@ public class PlayerStatusManager : CharacterStatusManager
         }
     }
 
-    public override void TakeDamage(float damage)
+    public void TakeDamage(float damage)
     {
         hp -= damage;
 

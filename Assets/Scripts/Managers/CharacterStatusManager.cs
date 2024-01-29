@@ -18,7 +18,5 @@ public abstract class CharacterStatusManager : MonoBehaviour
 
     public abstract void RegenStamina(float value);
 
-    public abstract void TakeDamage(float value);
-
     public abstract void TakeStaminaDamage(float value);
 }
