@@ -21,23 +21,23 @@ public class PlayerInputManager : MonoBehaviour, IInputController
 {
     [HideInInspector] public static PlayerInputManager Instance;
 
-    private PlayerInput playerInput;
-    private PlayerStatusManager playerStatusManager;
-    private Camera camera;
+    private PlayerInput _playerInput;
+    private PlayerStatusManager _playerStatusManager;
+    private Camera _camera;
 
-    private Transform crosshair;
+    private Transform _crosshair;
 
     //  Movement
-    private Vector2 movement;
-    private float verticalInput;
-    private float horizontalInput;
-    private float moveAmount;
+    private Vector2 _movement;
+    private float _verticalInput;
+    private float _horizontalInput;
+    private float _moveAmount;
 
     //  Sprint
-    private bool isSprinting = false;
+    private bool _isSprinting = false;
 
     //  Crouch
-    private bool isCrouching = false;
+    private bool _isCrouching = false;
 
     //  Mouse scroll
     public static event UnityAction<float> MouseScroll = delegate { };
@@ -51,11 +51,12 @@ public class PlayerInputManager : MonoBehaviour, IInputController
     public static event UnityAction<float> ChangeInteractable = delegate { };
 
     //  Aiming
-    private bool isAiming = false;
-    [SerializeField] public LayerMask aimMask;
+    private bool _isAiming = false;
+    [field: SerializeField] public LayerMask AimMask { get; private set; }
     public RaycastHit hitInfo;
 
-    public bool isShooting = false;
+    public bool IsShooting = false;
+
     public static event UnityAction AttackEvent = delegate { };
 
     //  Inventory
@@ -93,64 +94,64 @@ public class PlayerInputManager : MonoBehaviour, IInputController
     {
         DontDestroyOnLoad(gameObject);
 
-        camera = Camera.main;
-        crosshair = GameObject.FindGameObjectWithTag("Crosshair").transform;
-        playerStatusManager = GetComponent<PlayerStatusManager>();
+        _camera = Camera.main;
+        _crosshair = GameObject.FindGameObjectWithTag("Crosshair").transform;
+        _playerStatusManager = GetComponent<PlayerStatusManager>();
     }
 
     private void OnEnable()
     {
-        if (playerInput == null)
+        if (_playerInput == null)
         {
-            playerInput = new PlayerInput();
+            _playerInput = new PlayerInput();
 
             //  All the input actions should be evented here
-            playerInput.PlayerMovement.Movement.performed += i => movement = i.ReadValue<Vector2>();
-            playerInput.PlayerMovement.Movement.canceled += i => movement = i.ReadValue<Vector2>();
+            _playerInput.PlayerMovement.Movement.performed += i => _movement = i.ReadValue<Vector2>();
+            _playerInput.PlayerMovement.Movement.canceled += i => _movement = i.ReadValue<Vector2>();
 
-            playerInput.CameraMovement.Zoom.performed += i =>
+            _playerInput.CameraMovement.Zoom.performed += i =>
             {
-                if (!playerInput.PlayerActions.SwitchInteractable.IsInProgress())
+                if (!_playerInput.PlayerActions.SwitchInteractable.IsInProgress())
                 {
                     scroll = i.ReadValue<float>();
                     MouseScroll?.Invoke(i.ReadValue<float>());
                 }
             };
 
-            playerInput.CameraMovement.NextCamera.performed += i => NextCamera?.Invoke();
-            playerInput.CameraMovement.PreviousCamera.performed += i => PreviousCamera?.Invoke();
+            _playerInput.CameraMovement.NextCamera.performed += i => NextCamera?.Invoke();
+            _playerInput.CameraMovement.PreviousCamera.performed += i => PreviousCamera?.Invoke();
 
-            playerInput.PlayerActions.SwitchInteractable.performed += i => ChangeInteractable?.Invoke(i.ReadValue<float>());
+            _playerInput.PlayerActions.SwitchInteractable.performed += i => ChangeInteractable?.Invoke(i.ReadValue<float>());
 
-            playerInput.PlayerMovement.Sprint.performed += i => isSprinting = true;
-            playerInput.PlayerMovement.Sprint.canceled += i => isSprinting = false;
+            _playerInput.PlayerMovement.Sprint.performed += i => _isSprinting = true;
+            _playerInput.PlayerMovement.Sprint.canceled += i => _isSprinting = false;
 
-            playerInput.PlayerActions.Crouch.performed += i => isCrouching = !isCrouching;
+            _playerInput.PlayerActions.Crouch.performed += i => _isCrouching = !_isCrouching;
 
-            playerInput.PlayerCombat.Aim.performed += i => isAiming = !isAiming;
+            _playerInput.PlayerCombat.Aim.performed += i => _isAiming = !_isAiming;
 
-            playerInput.PlayerCombat.Attack.performed += i => isShooting = true;
-            playerInput.PlayerCombat.Attack.canceled += i => isShooting = false;
-            playerInput.PlayerCombat.Attack.performed += i => AttackEvent?.Invoke();
+            _playerInput.PlayerCombat.Attack.performed += i => IsShooting = true;
+            _playerInput.PlayerCombat.Attack.canceled += i => IsShooting = false;
+            _playerInput.PlayerCombat.Attack.performed += i => AttackEvent?.Invoke();
 
-            playerInput.PlayerActions.OpenInventory.performed += i => OpenInventoryEvent?.Invoke();
-            playerInput.PlayerActions.CloseInventory.performed += i => AlternativeCloseInventoryEvent?.Invoke();
-            playerInput.Inventory.CloseInventory.performed += i => CloseInventoryEvent?.Invoke();
-            playerInput.Inventory.Rotate.performed += i => RotateItem?.Invoke();
+            _playerInput.PlayerActions.OpenInventory.performed += i => OpenInventoryEvent?.Invoke();
+            _playerInput.PlayerActions.CloseInventory.performed += i => AlternativeCloseInventoryEvent?.Invoke();
+            _playerInput.Inventory.CloseInventory.performed += i => CloseInventoryEvent?.Invoke();
+            _playerInput.Inventory.Rotate.performed += i => RotateItem?.Invoke();
 
             OpenInventoryEvent += () => { DisablePlayerControls(); EnableInventoryControls(); };
             CloseInventoryEvent += () => { EnablePlayerControls(); DisableInventoryControls(); };
             AlternativeCloseInventoryEvent += () => { EnablePlayerControls(); DisableInventoryControls(); };
 
-            playerInput.PlayerActions.PickUp.performed += i => PickUpEvent?.Invoke();
+            _playerInput.PlayerActions.PickUp.performed += i => PickUpEvent?.Invoke();
 
-            playerInput.PlayerActions.Reload.performed += i => ReloadEvent?.Invoke();
+            _playerInput.PlayerActions.Reload.performed += i => ReloadEvent?.Invoke();
 
-            playerInput.PlayerActions.Hotbar1.performed += i => Hotbar1Event?.Invoke(0);
-            playerInput.PlayerActions.Hotbar2.performed += i => Hotbar2Event?.Invoke(1);
-            playerInput.PlayerActions.Hotbar3.performed += i => Hotbar3Event?.Invoke(2);
-            playerInput.PlayerActions.Hotbar4.performed += i => Hotbar4Event?.Invoke(3);
-            playerInput.PlayerActions.Hotbar5.performed += i => Hotbar5Event?.Invoke(4);
+            _playerInput.PlayerActions.Hotbar1.performed += i => Hotbar1Event?.Invoke(0);
+            _playerInput.PlayerActions.Hotbar2.performed += i => Hotbar2Event?.Invoke(1);
+            _playerInput.PlayerActions.Hotbar3.performed += i => Hotbar3Event?.Invoke(2);
+            _playerInput.PlayerActions.Hotbar4.performed += i => Hotbar4Event?.Invoke(3);
+            _playerInput.PlayerActions.Hotbar5.performed += i => Hotbar5Event?.Invoke(4);
         }
 
         EnablePlayerControls();
@@ -158,7 +159,7 @@ public class PlayerInputManager : MonoBehaviour, IInputController
 
     private void OnDisable()
     {
-        playerInput.Disable();
+        _playerInput.Disable();
     }
 
     private void Update()
@@ -168,29 +169,29 @@ public class PlayerInputManager : MonoBehaviour, IInputController
 
     private void HandleMovementInput()
     {
-        verticalInput = movement.y;
-        horizontalInput = movement.x;
+        _verticalInput = _movement.y;
+        _horizontalInput = _movement.x;
 
         //  absolute movement amount
-        moveAmount = Mathf.Clamp01(Mathf.Abs(verticalInput) + Mathf.Abs(horizontalInput));
+        _moveAmount = Mathf.Clamp01(Mathf.Abs(_verticalInput) + Mathf.Abs(_horizontalInput));
 
-        if (isSprinting && playerStatusManager.stamina > 1)
+        if (_isSprinting && _playerStatusManager.stamina > 1)
         {
-            moveAmount *= 2;
+            _moveAmount *= 2;
         }
         else
         {
-            isSprinting = false;
+            _isSprinting = false;
         }
     }
 
     public (bool success, Vector3 position) GetMousePosition()
     {
-        var ray = camera.ScreenPointToRay(Mouse.current.position.value);
+        var ray = _camera.ScreenPointToRay(Mouse.current.position.value);
 
-        if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity, aimMask))
+        if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity, AimMask))
         {
-            crosshair.transform.position = hitInfo.point;
+            _crosshair.transform.position = hitInfo.point;
             //  If raycact hit something, return true and hit point
             return (success: true, position: hitInfo.point);
         }
@@ -203,64 +204,64 @@ public class PlayerInputManager : MonoBehaviour, IInputController
 
     public void DisableInput()
     {
-        playerInput.Disable();
+        _playerInput.Disable();
     }
 
     public void EnableInput()
     {
-        playerInput.Enable();
+        _playerInput.Enable();
     }
 
     public void DisablePlayerControls()
     {
-        playerInput.PlayerMovement.Disable();
-        playerInput.PlayerCombat.Disable();
-        playerInput.PlayerActions.Disable();
-        playerInput.CameraMovement.Disable();
+        _playerInput.PlayerMovement.Disable();
+        _playerInput.PlayerCombat.Disable();
+        _playerInput.PlayerActions.Disable();
+        _playerInput.CameraMovement.Disable();
 
-        movement = Vector2.zero;
+        _movement = Vector2.zero;
     }
 
     public void EnablePlayerControls()
     {
-        playerInput.PlayerMovement.Enable();
-        playerInput.PlayerCombat.Enable();
-        playerInput.PlayerActions.Enable();
-        playerInput.CameraMovement.Enable();
+        _playerInput.PlayerMovement.Enable();
+        _playerInput.PlayerCombat.Enable();
+        _playerInput.PlayerActions.Enable();
+        _playerInput.CameraMovement.Enable();
     }
 
     public void DisableInventoryControls()
     {
-        playerInput.Inventory.Disable();
+        _playerInput.Inventory.Disable();
     }
 
     public void EnableInventoryControls()
     {
-        playerInput.Inventory.Enable();
+        _playerInput.Inventory.Enable();
     }
 
     public void DisableCombatControls()
     {
-        isAiming = false;
-        playerInput.PlayerCombat.Disable();
+        _isAiming = false;
+        _playerInput.PlayerCombat.Disable();
     }
 
     public void EnableCombatControls()
     {
-        playerInput.PlayerCombat.Enable();
+        _playerInput.PlayerCombat.Enable();
     }
 
-    public float VerticalInput { get { return verticalInput; } }
+    public float VerticalInput { get { return _verticalInput; } }
 
-    public float HorizontalInput { get { return horizontalInput; } }
+    public float HorizontalInput { get { return _horizontalInput; } }
 
-    public float MoveAmount { get { return moveAmount; } }
+    public float MoveAmount { get { return _moveAmount; } }
 
     public float Scroll { get { return scroll; } }
 
-    public bool IsSprinting { get { return isSprinting; } }
+    public bool IsSprinting { get { return _isSprinting; } }
 
-    public bool IsCrouching { get { return isCrouching; } set { isCrouching = value; } }
+    public bool IsCrouching { get { return _isCrouching; } set { _isCrouching = value; } }
 
-    public bool IsAiming { get { return isAiming; } set { isCrouching = value; } }
+    public bool IsAiming { get { return _isAiming; } set { _isCrouching = value; } }
 }

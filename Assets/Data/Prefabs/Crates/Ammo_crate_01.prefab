@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1187199892128834785}
   - component: {fileID: 1157229076265440379}
   - component: {fileID: 1163020426119184017}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: SM_Prop_Ammo_Box_Open_Lid_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 4881859354834576175}
   - component: {fileID: 2115349377448834954}
   - component: {fileID: 7076995076947727850}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: Ammo_crate_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

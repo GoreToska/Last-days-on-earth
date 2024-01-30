@@ -14,5 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <SurfaceTag>k__BackingField: Untagged
   <ImpactType>k__BackingField: 1
-  <EffectPrefab>k__BackingField: {fileID: 3945682340755935007, guid: 415a745d154d60545b9ff3810609eba7,
+  <EffectPrefab>k__BackingField: {fileID: 11728767506910796, guid: 415a745d154d60545b9ff3810609eba7,
     type: 3}
+  <SoundEffect>k__BackingField: {fileID: 8300000, guid: 37cc5c4c34e880e4ea94f0daa8bb4aef,
+    type: 3}
+  MinDistance: 10
+  MaxDistance: 50

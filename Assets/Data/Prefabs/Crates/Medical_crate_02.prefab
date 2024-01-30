@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7172315377196188920}
   - component: {fileID: 1902932376425504093}
   - component: {fileID: 7399292695405874192}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: Medical_crate_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}

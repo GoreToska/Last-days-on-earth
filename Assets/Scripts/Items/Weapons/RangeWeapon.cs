@@ -25,7 +25,7 @@ public abstract class RangeWeapon : MonoBehaviour, IRangeWeapon
 
     private void Update()
     {
-        if (PlayerInputManager.Instance.isShooting)
+        if (PlayerInputManager.Instance.IsShooting)
             return;
 
         if (_shotTimer <= 0f)
@@ -51,7 +51,7 @@ public abstract class RangeWeapon : MonoBehaviour, IRangeWeapon
     {
         if (weaponData.IsAuto)
         {
-            while (PlayerInputManager.Instance.isShooting)
+            while (PlayerInputManager.Instance.IsShooting)
             {
                 if (bullets == 0)
                 {
@@ -102,7 +102,7 @@ public abstract class RangeWeapon : MonoBehaviour, IRangeWeapon
             0);
 
         Ray ray = new Ray(burrel.transform.position, recoiledPosition - burrel.transform.position);
-        var raycast = Physics.Raycast(ray, out var hit, Mathf.Infinity, PlayerInputManager.Instance.aimMask);
+        var raycast = Physics.Raycast(ray, out var hit, Mathf.Infinity, PlayerInputManager.Instance.AimMask);
 
         Debug.DrawRay(burrel.transform.position, recoiledPosition - burrel.transform.position, Color.blue, 2);
         

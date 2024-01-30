@@ -14,5 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <SurfaceTag>k__BackingField: Damagable
   <ImpactType>k__BackingField: 1
-  <EffectPrefab>k__BackingField: {fileID: 7339026094192557487, guid: b369efb4abe69e044890b664115fab9e,
+  <EffectPrefab>k__BackingField: {fileID: -1362168955880465540, guid: b369efb4abe69e044890b664115fab9e,
     type: 3}
+  <SoundEffect>k__BackingField: {fileID: 8300000, guid: cdebbd691d1e7c748955b62cef466831,
+    type: 3}
+  MinDistance: 10
+  MaxDistance: 50

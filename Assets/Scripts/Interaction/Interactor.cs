@@ -7,11 +7,9 @@ using UnityEngine.InputSystem;
 public class Interactor : MonoBehaviour
 {
     public PlayerInventoryHolder Inventory { get; private set; }
-    public Transform InteractionPoint;
     public LayerMask InteractionLayer;
-    public float InteractionPointRadius = 1f;
+   
     private List<IInteractable> _interactables = new List<IInteractable>();
-
     int CurrentInt = 0;
 
     public bool IsInteracting { get; private set; }

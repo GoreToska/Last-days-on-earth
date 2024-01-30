@@ -1,8 +1,7 @@
+using GoreToska;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Pool;
 
 public class ImpactManager : MonoBehaviour
 {
@@ -31,7 +30,8 @@ public class ImpactManager : MonoBehaviour
 
         if (impact == null)
         {
-            PlayEffect(hitPoint, hitNormal,DefaultImpact);
+            PlayEffect(hitPoint, hitNormal, DefaultImpact);
+            Debug.LogWarning("Playing default impact");
         }
         else
         {
@@ -41,15 +41,12 @@ public class ImpactManager : MonoBehaviour
 
     public void PlayEffect(Vector3 hitPoint, Vector3 hitNormal, Impact impact)
     {
-        ParticlePool particlePool = ParticlePool.CreateInstance(impact.EffectPrefab, 10);
-        PoolableParticle instance = particlePool.GetObject(hitPoint + hitNormal * 0.001f, Quaternion.LookRotation(hitNormal));
+        ObjectPool particlePool = ObjectPool.CreateInstance(impact.EffectPrefab, 10);
+        PoolableObject instance = particlePool.GetObject(hitPoint + hitNormal * 0.001f, Quaternion.LookRotation(hitNormal));
         instance.transform.forward = hitNormal;
 
         // randomize rotation
-    }
 
-    private void PlaySound()
-    {
-
+        SFXManager.Instance.PlaySoundEffect(hitPoint, impact.SoundEffect, impact.MinDistance, impact.MaxDistance);
     }
 }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2333886154031424540}
   - component: {fileID: 2311694699988274244}
   - component: {fileID: 2323296561623562834}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: SM_Prop_Luggage_Open_02_Lid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 4120153286774025798}
   - component: {fileID: 7217658455017408171}
   - component: {fileID: 4662968529021018923}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: Cloth_crate_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

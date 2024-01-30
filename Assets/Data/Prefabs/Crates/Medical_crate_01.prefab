@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3294761240342585623}
   - component: {fileID: 3304605725155670875}
   - component: {fileID: 3313087285194530683}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: SM_Prop_Medical_Container_Lid_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 3294859362872690259}
   - component: {fileID: 3301481381386274797}
   - component: {fileID: 3313246875549809841}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: SM_Prop_Medical_Container_Handle_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 8934226166122856261}
   - component: {fileID: 3928436923947963568}
   - component: {fileID: 5314400439634624131}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: Medical_crate_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4427180982569280}
   - component: {fileID: 198107820186352126}
   - component: {fileID: 199095802723491974}
-  - component: {fileID: 7339026094192557487}
+  - component: {fileID: -1362168955880465540}
   m_Layer: 0
   m_Name: FX_BloodSplat_01
   m_TagString: Untagged
@@ -44,7 +44,7 @@ ParticleSystem:
   serializedVersion: 8
   lengthInSec: 0.1
   simulationSpeed: 1
-  stopAction: 0
+  stopAction: 1
   cullingMode: 3
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
@@ -4694,7 +4694,7 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &7339026094192557487
+--- !u!114 &-1362168955880465540
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

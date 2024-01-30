@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3263060688191857353}
   - component: {fileID: 3798794840688712370}
   - component: {fileID: 5956258272343045566}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: Supply_crate_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -157,7 +157,7 @@ GameObject:
   - component: {fileID: 3267873889088199264}
   - component: {fileID: 3259878590376887794}
   - component: {fileID: 3250714082430658738}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: SM_Prop_Crate_Open_Lid_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6279449038929459607}
   - component: {fileID: 9082920560132100544}
   - component: {fileID: 6301481205327887144}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: Rare_crate_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -157,7 +157,7 @@ GameObject:
   - component: {fileID: 6281067572963014136}
   - component: {fileID: 6292194137864942686}
   - component: {fileID: 6300912061516616172}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: SM_Prop_Crate_Open_Lid_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
