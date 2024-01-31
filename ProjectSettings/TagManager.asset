@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Crosshair
   - Damagable
+  - Concrete
   layers:
   - Default
   - TransparentFX

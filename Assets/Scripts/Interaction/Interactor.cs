@@ -8,7 +8,7 @@ public class Interactor : MonoBehaviour
 {
     public PlayerInventoryHolder Inventory { get; private set; }
     public LayerMask InteractionLayer;
-   
+
     private List<IInteractable> _interactables = new List<IInteractable>();
     int CurrentInt = 0;
 
@@ -58,7 +58,7 @@ public class Interactor : MonoBehaviour
     public int AddToInteractionList(IInteractable interactable)
     {
         _interactables.Add(interactable);
-        Debug.Log(_interactables.Count);
+
         return _interactables.Count;
     }
 

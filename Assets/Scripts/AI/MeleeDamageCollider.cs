@@ -39,7 +39,7 @@ public class MeleeDamageCollider : MonoBehaviour
             return;
         }
 
-        if (other.transform.root.gameObject.layer == LayerMask.NameToLayer(playerMaskName) || other.transform.root.gameObject.layer != LayerMask.NameToLayer(raiderMaskName))
+        if (other.transform.root.gameObject.layer == LayerMask.NameToLayer(playerMaskName) || other.transform.root.gameObject.layer == LayerMask.NameToLayer(raiderMaskName))
         {
             AddCharacterToDamageList(other.transform.root.gameObject);
             other.transform.root.gameObject.GetComponent<IDamagable>().TakeDamage(damage);

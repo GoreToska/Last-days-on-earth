@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 464800039}
   - component: {fileID: 464800040}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: TwoHandedMeleeRig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -199,7 +199,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1016996284}
   - component: {fileID: 1016996285}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SecondHandGrabWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5333,6 +5333,7 @@ GameObject:
   - component: {fileID: 4405351796003109}
   - component: {fileID: 4885477210839400635}
   - component: {fileID: 8521988211592539409}
+  - component: {fileID: 5361517959747344685}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -5461,10 +5462,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48cb961ebf26cd54bbc845d1a0ad34c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aimMask:
+  <AimMask>k__BackingField:
     serializedVersion: 2
-    m_Bits: 1881
-  isShooting: 0
+    m_Bits: 4633
+  IsShooting: 0
 --- !u!114 &5361517959888282040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5616,11 +5617,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4c1c7728efa3e846a335a4d4b5f84b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InteractionPoint: {fileID: 5361630504463845421}
   InteractionLayer:
     serializedVersion: 2
-    m_Bits: 2048
-  InteractionPointRadius: 1
+    m_Bits: 6144
 --- !u!114 &4405351796003109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5663,6 +5662,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemSocket: {fileID: 507257779}
+  _currentEquippedItem: {fileID: 0}
+--- !u!114 &5361517959747344685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5360372287496317087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70ce1fa70d9a6d648b35d5374175e6e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!1 &5360388984784684093
 GameObject:
   m_ObjectHideFlags: 0

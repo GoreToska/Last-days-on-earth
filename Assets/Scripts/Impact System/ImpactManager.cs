@@ -7,7 +7,7 @@ public class ImpactManager : MonoBehaviour
 {
     [field: HideInInspector] public static ImpactManager Instance { get; private set; }
 
-    [field: SerializeField] public Impact DefaultImpact { get; private set; }
+    //[field: SerializeField] public Impact DefaultImpact { get; private set; }
 
     [field: SerializeField] public List<Impact> Impacts { get; private set; }
 
@@ -26,12 +26,13 @@ public class ImpactManager : MonoBehaviour
 
     public void HandleImpact(GameObject hitObject, Vector3 hitPoint, Vector3 hitNormal, ImpactType type)
     {
-        var impact = Impacts.Find(i => hitObject.CompareTag(i.SurfaceTag));
+        Debug.Log(hitObject);
+        var impact = Impacts.Find(i => hitObject.CompareTag(i.SurfaceTag) && i.ImpactType == type);
 
         if (impact == null)
         {
-            PlayEffect(hitPoint, hitNormal, DefaultImpact);
-            Debug.LogWarning("Playing default impact");
+            //PlayEffect(hitPoint, hitNormal, DefaultImpact);
+            Debug.LogWarning("No impact");
         }
         else
         {
@@ -47,6 +48,6 @@ public class ImpactManager : MonoBehaviour
 
         // randomize rotation
 
-        SFXManager.Instance.PlaySoundEffect(hitPoint, impact.SoundEffect, impact.MinDistance, impact.MaxDistance);
+        SFXManager.Instance.PlaySoundEffect(hitPoint, impact.SoundEffect, impact.MaxDistance);
     }
 }

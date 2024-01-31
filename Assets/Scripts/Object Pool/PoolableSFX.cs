@@ -23,6 +23,13 @@ namespace GoreToska
             StartCoroutine(DisableOnEndCoroutine(audioClip.length));
         }
 
+        public void SetSound(AudioClip audioClip, int maxDistance)
+        {
+            _audioSource.maxDistance = maxDistance;
+            _audioSource.PlayOneShot(audioClip);
+            StartCoroutine(DisableOnEndCoroutine(audioClip.length));
+        }
+
         public void SetPitch(float pitch)
         {
             _audioSource.pitch = pitch;

@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3b435f9c7c8e92540a8b516f285afbee, type: 3}
-  m_Name: Default Impact
+  m_Name: Concrete Footstep
   m_EditorClassIdentifier: 
-  <SurfaceTag>k__BackingField: Untagged
-  <ImpactType>k__BackingField: 1
-  <EffectPrefab>k__BackingField: {fileID: 11728767506910796, guid: 415a745d154d60545b9ff3810609eba7,
+  <SurfaceTag>k__BackingField: Concrete
+  <ImpactType>k__BackingField: 0
+  <EffectPrefab>k__BackingField: {fileID: 208257655783745914, guid: 2397083e876e5b1408fcc1333f50c082,
     type: 3}
-  <SoundEffect>k__BackingField: {fileID: 8300000, guid: 37cc5c4c34e880e4ea94f0daa8bb4aef,
+  <SoundEffect>k__BackingField: {fileID: 8300000, guid: a841c667dd4c2fc4d8cf7224f502c7f9,
     type: 3}
-  MinDistance: 10
-  MaxDistance: 50
+  MinDistance: 1
+  MaxDistance: 30

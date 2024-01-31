@@ -9037,6 +9037,7 @@ GameObject:
   - component: {fileID: 1517960439}
   - component: {fileID: 1629728310067480616}
   - component: {fileID: 1316148189926809860}
+  - component: {fileID: 1850914074}
   m_Layer: 3
   m_Name: Zombie_Underwear_Male_01
   m_TagString: Damagable
@@ -9129,7 +9130,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1.75
-  m_BaseOffset: -0.025
+  m_BaseOffset: -0.04
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!95 &95791246582969478
@@ -9269,6 +9270,21 @@ MonoBehaviour:
   distanceWeight: 3
   angleWeight: 0.5
   ageWeight: 3
+--- !u!114 &1850914074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1965423065467750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70ce1fa70d9a6d648b35d5374175e6e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!1 &1965466310304604
 GameObject:
   m_ObjectHideFlags: 0
