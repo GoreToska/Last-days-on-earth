@@ -24,8 +24,6 @@ namespace GoreToska
         {
             ObjectPool pool = null;
 
-            Debug.Log(Prefab);
-
             if (ObjectPools.ContainsKey(Prefab))
             {
                 pool = ObjectPools[Prefab];

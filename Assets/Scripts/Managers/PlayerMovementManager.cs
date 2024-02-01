@@ -56,7 +56,6 @@ public class PlayerMovementManager : MonoBehaviour
 
     private void Start()
     {
-        DontDestroyOnLoad(gameObject);
     }
 
     private void Update()

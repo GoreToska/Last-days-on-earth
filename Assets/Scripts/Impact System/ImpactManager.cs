@@ -26,7 +26,6 @@ public class ImpactManager : MonoBehaviour
 
     public void HandleImpact(GameObject hitObject, Vector3 hitPoint, Vector3 hitNormal, ImpactType type)
     {
-        Debug.Log(hitObject);
         var impact = Impacts.Find(i => hitObject.CompareTag(i.SurfaceTag) && i.ImpactType == type);
 
         if (impact == null)

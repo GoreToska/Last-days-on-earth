@@ -38,6 +38,7 @@ public class PlayerInputManager : MonoBehaviour, IInputController
 
     //  Crouch
     private bool _isCrouching = false;
+    public static event UnityAction<bool> ToggleCrouch = delegate { };
 
     //  Mouse scroll
     public static event UnityAction<float> MouseScroll = delegate { };
@@ -127,6 +128,7 @@ public class PlayerInputManager : MonoBehaviour, IInputController
             _playerInput.PlayerMovement.Sprint.canceled += i => _isSprinting = false;
 
             _playerInput.PlayerActions.Crouch.performed += i => _isCrouching = !_isCrouching;
+            _playerInput.PlayerActions.Crouch.performed += i => ToggleCrouch?.Invoke(_isCrouching);
 
             _playerInput.PlayerCombat.Aim.performed += i => _isAiming = !_isAiming;
 
@@ -263,5 +265,5 @@ public class PlayerInputManager : MonoBehaviour, IInputController
 
     public bool IsCrouching { get { return _isCrouching; } set { _isCrouching = value; } }
 
-    public bool IsAiming { get { return _isAiming; } set { _isCrouching = value; } }
+    public bool IsAiming { get { return PlayerEquipment.Instance._currentRangeWeapon != null? _isAiming : false; } set { _isAiming = value; } }
 }

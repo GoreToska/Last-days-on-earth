@@ -14,6 +14,8 @@ public class InventoryRifleData : InventoryItemData
 {
     [SerializeField] private WeaponData _weaponData;
 
+    public WeaponData WeaponData => _weaponData;
+
     public override void UseItem(PlayerEquipment playerEquipment)
     {
         base.UseItem(playerEquipment);

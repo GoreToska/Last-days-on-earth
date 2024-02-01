@@ -16,6 +16,13 @@ public class PlayerAnimationManager : MonoBehaviour
 
     private Animator animator;
 
+    private const string RifleLightShotTrigger = "RifleLightShot";
+    private const string RifleMediumShotTrigger = "RifleMediumShot";
+    private const string RifleHeavyShotTrigger = "RifleHeavyShot";
+    private const string PistolMediumShotTrigger = "PistolMediumShot";
+    private const string RifleWalkTrigger = "RifleWalk";
+    private const string DefaultWalkTrigger = "DefaultWalk";
+
     private void Awake()
     {
         if (Instance == null)
@@ -26,27 +33,46 @@ public class PlayerAnimationManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
-
-    private void Start()
-    {
-        DontDestroyOnLoad(gameObject);
 
         animator = GetComponent<Animator>();
     }
 
+    private void Start()
+    {
+        if (PlayerEquipment.Instance.GetCurrentWeapon() == null)
+        {
+            SetWeaponAnimationPattern(WeaponType.None);
+            return;
+        }
+
+        if (PlayerEquipment.Instance.GetCurrentWeapon())
+            SetWeaponAnimationPattern(PlayerEquipment.Instance.GetCurrentWeapon().WeaponData.WeaponType);
+    }
+
+    private void OnEnable()
+    {
+        PlayerInputManager.ToggleCrouch += CrouchAnimationHandler;
+    }
+
+    private void OnDisable()
+    {
+        PlayerInputManager.ToggleCrouch -= CrouchAnimationHandler;
+    }
+
     private void Update()
     {
+        // change update to events
         UpdateAnimation();
     }
 
     private void UpdateAnimation()
     {
         animator.SetFloat("Speed", PlayerInputManager.Instance.MoveAmount, 0.1f, Time.deltaTime);
-        animator.SetBool("IsCrouching", PlayerInputManager.Instance.IsCrouching);
-        animator.SetBool("IsAiming", PlayerInputManager.Instance.IsAiming);
         animator.SetFloat("HorizontalSpeed", PlayerMovementManager.Instance.HorizontalSpeed, 0.1f, Time.deltaTime);
         animator.SetFloat("VerticalSpeed", PlayerMovementManager.Instance.VerticalSpeed, 0.1f, Time.deltaTime);
+
+        if (PlayerEquipment.Instance._currentRangeWeapon != null)
+            animator.SetBool("IsAiming", PlayerInputManager.Instance.IsAiming);
     }
 
     public void SetWeaponAnimationPattern(WeaponType type)
@@ -54,15 +80,14 @@ public class PlayerAnimationManager : MonoBehaviour
         switch (type)
         {
             case WeaponType.Range_Primary:
-                animator.CrossFade("Walk Rifle Blend Tree", 0f);
+                animator.SetTrigger(RifleWalkTrigger);
                 SetRifleRig();
                 break;
             case WeaponType.Range_Secondary:
-                animator.CrossFade("Walk Rifle Blend Tree", 0f);
-                //animator.CrossFade("");
+                animator.SetTrigger(RifleWalkTrigger);
                 break;
             case WeaponType.None:
-                animator.CrossFade("Walk Blend Tree", 0f);
+                animator.SetTrigger(DefaultWalkTrigger);
                 SetDefaultRig();
                 break;
             case WeaponType.Melee_Primary:
@@ -77,24 +102,41 @@ public class PlayerAnimationManager : MonoBehaviour
         }
     }
 
+    public void CrouchAnimationHandler(bool value)
+    {
+        animator.SetBool("IsCrouching", value);
+
+        if (value)
+        {
+            SetWeaponAnimationPattern(WeaponType.None);
+        }
+        else
+        {
+            if (PlayerEquipment.Instance.GetCurrentWeapon())
+                SetWeaponAnimationPattern(PlayerEquipment.Instance.GetCurrentWeapon().WeaponData.WeaponType);
+            else
+                SetWeaponAnimationPattern(WeaponType.None);
+        }
+    }
+
     public void PlayRifleLightShot()
     {
-        animator.SetTrigger("RifleLightShot");
+        animator.SetTrigger(RifleLightShotTrigger);
     }
 
     public void PlayRifleMediumShot()
     {
-        animator.SetTrigger("RifleMediumShot");
+        animator.SetTrigger(RifleMediumShotTrigger);
     }
 
     public void PlayRifleHeavyShot()
     {
-        animator.SetTrigger("RifleHeavyShot");
+        animator.SetTrigger(RifleHeavyShotTrigger);
     }
 
     public void PlayPistolMediumShot()
     {
-        animator.SetTrigger("PistolMediumShot");
+        animator.SetTrigger(PistolMediumShotTrigger);
     }
 
     public void PlayReloadAnimation(string animationName)
@@ -115,7 +157,6 @@ public class PlayerAnimationManager : MonoBehaviour
 
         yield return new WaitForSeconds(rifleReloadingAnimation.length - rifleReloadingAnimationOffset);
 
-        //PlayerEquipmentManager.Instance.rangeMainWeapon.LoadMagazine();
         PlayerInputManager.Instance.EnableCombatControls();
         SetRifleRig();
 

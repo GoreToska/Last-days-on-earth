@@ -6,6 +6,8 @@ using UnityEngine.Events;
 [RequireComponent(typeof(PlayerInventoryHolder), typeof(PlayerAnimationManager))]
 public class PlayerEquipment : MonoBehaviour
 {
+    [HideInInspector] public static PlayerEquipment Instance;
+
     [SerializeField] private Transform _itemSocket;
 
     public static event UnityAction OnMainWeaponEquipped;
@@ -20,12 +22,20 @@ public class PlayerEquipment : MonoBehaviour
 
     private PlayerInventoryHolder _inventoryHolder;
     private PlayerAnimationManager _animationManager;
-
     public PlayerAnimationManager AnimationManager => _animationManager;
-    private PlayerInventoryHolder InventoryHolder => _inventoryHolder;
+    public PlayerInventoryHolder InventoryHolder => _inventoryHolder;
 
     private void Awake()
     {
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
         _inventoryHolder = GetComponent<PlayerInventoryHolder>();
         _animationManager = GetComponent<PlayerAnimationManager>();
     }
@@ -96,5 +106,16 @@ public class PlayerEquipment : MonoBehaviour
         {
             ClearSlotIten();
         }
+    }
+
+    public InventoryRifleData GetCurrentWeapon()
+    {
+        if(_currentRangeWeapon == null || _currentInventoryItemData == null)
+            return null;
+
+        if(_currentInventoryItemData is InventoryRifleData)
+            return _currentInventoryItemData as InventoryRifleData;
+
+        return null;
     }
 }
