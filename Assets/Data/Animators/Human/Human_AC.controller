@@ -134,7 +134,7 @@ BlendTree:
     m_Motion: {fileID: -203655887218126122, guid: 93e84893161b13d4e9360ebaa4327c91,
       type: 3}
     m_Threshold: 0.625
-    m_Position: {x: -1, y: -1}
+    m_Position: {x: -0.7, y: -0.7}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: Blend
@@ -143,7 +143,7 @@ BlendTree:
     m_Motion: {fileID: -203655887218126122, guid: f2fed2992ebd189419b2f63c58b33dea,
       type: 3}
     m_Threshold: 0.75
-    m_Position: {x: -1, y: 1}
+    m_Position: {x: -0.7, y: 0.7}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: Blend
@@ -152,7 +152,7 @@ BlendTree:
     m_Motion: {fileID: -203655887218126122, guid: 148febad51ec79c45aff87be80a16fa7,
       type: 3}
     m_Threshold: 0.875
-    m_Position: {x: 1, y: -1}
+    m_Position: {x: 0.7, y: -0.7}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: Blend
@@ -161,7 +161,7 @@ BlendTree:
     m_Motion: {fileID: -203655887218126122, guid: e7d963427795aa149a6c0f90786044d6,
       type: 3}
     m_Threshold: 1
-    m_Position: {x: 1, y: 1}
+    m_Position: {x: 0.7, y: 0.7}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: Blend
@@ -723,7 +723,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_ExitTime: 0.75
   m_HasExitTime: 0
@@ -830,7 +830,7 @@ AnimatorStateTransition:
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 1
+  m_CanTransitionToSelf: 0
 --- !u!1102 &-28661353477821429
 AnimatorState:
   serializedVersion: 6
@@ -1459,7 +1459,7 @@ AnimatorStateTransition:
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 1
+  m_CanTransitionToSelf: 0
 --- !u!1102 &5869525275093840428
 AnimatorState:
   serializedVersion: 6
@@ -1772,6 +1772,6 @@ AnimatorStateTransition:
   m_ExitTime: 0.75
   m_HasExitTime: 0
   m_HasFixedDuration: 1
-  m_InterruptionSource: 0
-  m_OrderedInterruption: 1
+  m_InterruptionSource: 2
+  m_OrderedInterruption: 0
   m_CanTransitionToSelf: 0

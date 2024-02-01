@@ -96,8 +96,6 @@ public class PlayerMovementManager : MonoBehaviour
         CalculateMovementAxis();
         CalculateMovementRotation();
 
-        moveDirection.y = Physics.gravity.y / 2;
-
         if (PlayerInputManager.Instance.IsSprinting && playerStatusManager.stamina > 1)
         {
             playerStatusManager.TakeStaminaDamage(sprintStaminaCost * Time.deltaTime);
@@ -106,7 +104,7 @@ public class PlayerMovementManager : MonoBehaviour
             return;
         }
 
-        characterController.Move(moveDirection * movementSpeed * Time.deltaTime);
+        characterController.Move(moveDirection * movementSpeed * Time.deltaTime + new Vector3(0, Physics.gravity.y / 2, 0));
     }
 
     private void CalculateMovementRotation()
@@ -175,7 +173,8 @@ public class PlayerMovementManager : MonoBehaviour
     private void AimMovement()
     {
         CalculateMovementAxis();
-        characterController.Move(moveDirection * aimMovementSpeed * Time.deltaTime);
+
+        characterController.Move(moveDirection * aimMovementSpeed * Time.deltaTime + new Vector3(0, Physics.gravity.y / 2, 0));
     }
 
     public float HorizontalSpeed

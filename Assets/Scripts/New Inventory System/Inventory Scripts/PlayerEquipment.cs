@@ -78,6 +78,7 @@ public class PlayerEquipment : MonoBehaviour
         }
 
         _currentInventoryItemData = itemData;
+
         if (itemData.ItemModel != null)
             _currentEquippedItem = Instantiate(itemData.ItemModel, _itemSocket);
 
@@ -90,6 +91,8 @@ public class PlayerEquipment : MonoBehaviour
         if (_currentEquippedItem != null)
         {
             _currentInventoryItemData.UnequipItem(this);
+            _currentRangeWeapon = null;
+
             Destroy(_currentEquippedItem);
         }
     }

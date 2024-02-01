@@ -53,6 +53,7 @@ public class PlayerInputManager : MonoBehaviour, IInputController
 
     //  Aiming
     private bool _isAiming = false;
+    public static event UnityAction<bool> ToggleAim = delegate { };
     [field: SerializeField] public LayerMask AimMask { get; private set; }
     public RaycastHit hitInfo;
 
@@ -130,7 +131,13 @@ public class PlayerInputManager : MonoBehaviour, IInputController
             _playerInput.PlayerActions.Crouch.performed += i => _isCrouching = !_isCrouching;
             _playerInput.PlayerActions.Crouch.performed += i => ToggleCrouch?.Invoke(_isCrouching);
 
-            _playerInput.PlayerCombat.Aim.performed += i => _isAiming = !_isAiming;
+            _playerInput.PlayerCombat.Aim.performed += i =>
+            {
+                if (PlayerEquipment.Instance.GetCurrentWeapon())
+                    _isAiming = !_isAiming;
+            };
+
+            _playerInput.PlayerCombat.Aim.performed += i => ToggleAim.Invoke(_isAiming);
 
             _playerInput.PlayerCombat.Attack.performed += i => IsShooting = true;
             _playerInput.PlayerCombat.Attack.canceled += i => IsShooting = false;
@@ -265,5 +272,5 @@ public class PlayerInputManager : MonoBehaviour, IInputController
 
     public bool IsCrouching { get { return _isCrouching; } set { _isCrouching = value; } }
 
-    public bool IsAiming { get { return PlayerEquipment.Instance._currentRangeWeapon != null? _isAiming : false; } set { _isAiming = value; } }
+    public bool IsAiming { get { return PlayerEquipment.Instance._currentRangeWeapon != null ? _isAiming : false; } set { _isAiming = value; } }
 }

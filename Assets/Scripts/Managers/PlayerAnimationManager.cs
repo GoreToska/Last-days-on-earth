@@ -52,11 +52,13 @@ public class PlayerAnimationManager : MonoBehaviour
     private void OnEnable()
     {
         PlayerInputManager.ToggleCrouch += CrouchAnimationHandler;
+        PlayerInputManager.ToggleAim += AimAnimationHandler;
     }
 
     private void OnDisable()
     {
         PlayerInputManager.ToggleCrouch -= CrouchAnimationHandler;
+        PlayerInputManager.ToggleAim -= AimAnimationHandler;
     }
 
     private void Update()
@@ -70,9 +72,6 @@ public class PlayerAnimationManager : MonoBehaviour
         animator.SetFloat("Speed", PlayerInputManager.Instance.MoveAmount, 0.1f, Time.deltaTime);
         animator.SetFloat("HorizontalSpeed", PlayerMovementManager.Instance.HorizontalSpeed, 0.1f, Time.deltaTime);
         animator.SetFloat("VerticalSpeed", PlayerMovementManager.Instance.VerticalSpeed, 0.1f, Time.deltaTime);
-
-        if (PlayerEquipment.Instance._currentRangeWeapon != null)
-            animator.SetBool("IsAiming", PlayerInputManager.Instance.IsAiming);
     }
 
     public void SetWeaponAnimationPattern(WeaponType type)
@@ -80,6 +79,7 @@ public class PlayerAnimationManager : MonoBehaviour
         switch (type)
         {
             case WeaponType.Range_Primary:
+                Debug.Log("Set");
                 animator.SetTrigger(RifleWalkTrigger);
                 SetRifleRig();
                 break;
@@ -88,6 +88,8 @@ public class PlayerAnimationManager : MonoBehaviour
                 break;
             case WeaponType.None:
                 animator.SetTrigger(DefaultWalkTrigger);
+                PlayerInputManager.Instance.IsAiming = false;
+                animator.SetBool("IsAiming", false);
                 SetDefaultRig();
                 break;
             case WeaponType.Melee_Primary:
@@ -112,10 +114,31 @@ public class PlayerAnimationManager : MonoBehaviour
         }
         else
         {
-            if (PlayerEquipment.Instance.GetCurrentWeapon())
-                SetWeaponAnimationPattern(PlayerEquipment.Instance.GetCurrentWeapon().WeaponData.WeaponType);
-            else
-                SetWeaponAnimationPattern(WeaponType.None);
+            SetWeaponAnimationPattern();
+        }
+    }
+
+    public void AimAnimationHandler(bool value)
+    {
+        animator.SetBool("IsAiming", value);
+
+        if(value)
+        {
+
+        }
+        else
+        {
+            SetWeaponAnimationPattern();
+        }
+    }
+
+    private void SetWeaponAnimationPattern()
+    {
+        if (PlayerEquipment.Instance.GetCurrentWeapon())
+            SetWeaponAnimationPattern(PlayerEquipment.Instance.GetCurrentWeapon().WeaponData.WeaponType);
+        else
+        {
+            SetWeaponAnimationPattern(WeaponType.None);
         }
     }
 
