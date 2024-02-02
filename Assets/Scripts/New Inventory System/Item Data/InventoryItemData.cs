@@ -19,18 +19,15 @@ public class InventoryItemData : ScriptableObject
 
     public virtual void UseItem(PlayerEquipment playerEquipment)
     {
-        Debug.Log("Using " + DisplayName);
     }
 
     public virtual void EquipItem(PlayerEquipment playerEquipment)
     {
         //HotbarDisplay.OnUsingCurrentItem += UseItem;
-        Debug.Log("Equiping " + DisplayName);
     }
 
     public virtual void UnequipItem(PlayerEquipment playerEquipment)
     {
         playerEquipment.AnimationManager.SetWeaponAnimationPattern(WeaponType.None);
-        Debug.Log("Unequiping " + DisplayName);
     }
 }

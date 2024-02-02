@@ -25,4 +25,5 @@ MonoBehaviour:
   ShotVolumeRadius: 8
   IsAuto: 1
   DrawSight: 0
-  trailRenderer: {fileID: 11400000, guid: 802ef637ed22cea458f99beaf4209c1a, type: 2}
+  TrailRenderer: {fileID: 11400000, guid: 802ef637ed22cea458f99beaf4209c1a, type: 2}
+  WeaponSFXConfig: {fileID: 11400000, guid: 94252aa9e38022e4d86e03ea5f9a6641, type: 2}

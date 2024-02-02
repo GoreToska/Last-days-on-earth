@@ -20,7 +20,7 @@ MonoBehaviour:
     type: 3}
   <MaxStackSize>k__BackingField: 1
   <CostValue>k__BackingField: 1000
-  <ItemPrefab>k__BackingField: {fileID: 5011358159911956695, guid: eab18f9fd1d5db34aa1e2651976e6bd3,
+  <ItemPrefab>k__BackingField: {fileID: 4842498837670342145, guid: eab18f9fd1d5db34aa1e2651976e6bd3,
     type: 3}
   <ItemModel>k__BackingField: {fileID: 2189732824198724802, guid: dabd36086489d024199eba99fe2478e8,
     type: 3}

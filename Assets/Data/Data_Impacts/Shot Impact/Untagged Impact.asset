@@ -19,4 +19,4 @@ MonoBehaviour:
   <SoundEffect>k__BackingField: {fileID: 8300000, guid: 37cc5c4c34e880e4ea94f0daa8bb4aef,
     type: 3}
   MinDistance: 10
-  MaxDistance: 50
+  MaxDistance: 20

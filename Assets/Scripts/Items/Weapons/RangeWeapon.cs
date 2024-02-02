@@ -1,3 +1,4 @@
+using GoreToska;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,9 +10,6 @@ public abstract class RangeWeapon : MonoBehaviour, IRangeWeapon
     [SerializeField] protected WeaponData weaponData;
     [SerializeField] protected GameObject burrel;
     [SerializeField] protected ParticleSystem muzzleFlash;
-
-    //[Header("Prefab of this weapon for dropping it on ground")]
-    //[SerializeField] public GameObject itemPrefab;
 
     [SerializeField] protected int bullets = 0;
 
@@ -92,6 +90,8 @@ public abstract class RangeWeapon : MonoBehaviour, IRangeWeapon
     {
         bullets--;
 
+        SFXManager.Instance.PlaySoundEffect(burrel.transform.position, weaponData.WeaponSFXConfig.ShotSound, weaponData.WeaponSFXConfig.MaxShotSoundDistance);
+
         var (success, position) = PlayerInputManager.Instance.GetMousePosition();
 
         //Vector3 direction = new Vector3(0, 0, burrel.transform.localPosition.z) * 100f;
@@ -104,9 +104,10 @@ public abstract class RangeWeapon : MonoBehaviour, IRangeWeapon
         Ray ray = new Ray(burrel.transform.position, recoiledPosition - burrel.transform.position);
         var raycast = Physics.Raycast(ray, out var hit, Mathf.Infinity, PlayerInputManager.Instance.AimMask);
 
+        //Debug
         Debug.DrawRay(burrel.transform.position, recoiledPosition - burrel.transform.position, Color.blue, 2);
-        
-        if(hit.point == Vector3.zero)
+
+        if (hit.point == Vector3.zero)
         {
             StartCoroutine(PlayTrail(burrel.transform.position, recoiledPosition, hit));
         }
@@ -141,7 +142,7 @@ public abstract class RangeWeapon : MonoBehaviour, IRangeWeapon
         {
             instance.transform.position = Vector3.Lerp(startPoint, endPoint,
                 Mathf.Clamp01(1 - (remainingDistance / distance)));
-            remainingDistance -= weaponData.trailRenderer.SimulationSpeed * Time.deltaTime;
+            remainingDistance -= weaponData.TrailRenderer.SimulationSpeed * Time.deltaTime;
 
             yield return null;
         }
@@ -159,7 +160,7 @@ public abstract class RangeWeapon : MonoBehaviour, IRangeWeapon
             }
         }
 
-        yield return new WaitForSeconds(weaponData.trailRenderer.Duration);
+        yield return new WaitForSeconds(weaponData.TrailRenderer.Duration);
         yield return null;
         instance.emitting = false;
         instance.gameObject.SetActive(false);
@@ -193,11 +194,11 @@ public abstract class RangeWeapon : MonoBehaviour, IRangeWeapon
     {
         GameObject instance = new GameObject("Bullet Trail");
         TrailRenderer trail = instance.AddComponent<TrailRenderer>();
-        trail.colorGradient = weaponData.trailRenderer.Color;
-        trail.material = weaponData.trailRenderer.Material;
-        trail.widthCurve = weaponData.trailRenderer.widthCurve;
-        trail.time = weaponData.trailRenderer.Duration;
-        trail.minVertexDistance = weaponData.trailRenderer.MinVertexDistance;
+        trail.colorGradient = weaponData.TrailRenderer.Color;
+        trail.material = weaponData.TrailRenderer.Material;
+        trail.widthCurve = weaponData.TrailRenderer.widthCurve;
+        trail.time = weaponData.TrailRenderer.Duration;
+        trail.minVertexDistance = weaponData.TrailRenderer.MinVertexDistance;
 
         trail.emitting = false;
         trail.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;

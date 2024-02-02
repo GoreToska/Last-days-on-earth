@@ -25,8 +25,8 @@ namespace GoreToska
 
         public void PlaySoundEffect(Vector3 point, AudioClip audioClip, int minDistance, int maxDistance, bool randomPitch = true)
         {
-            ObjectPool particlePool = ObjectPool.CreateInstance(_sfxPrefab, 50);
-            PoolableSFX instance = particlePool.GetObject(point, Quaternion.identity) as PoolableSFX;
+            ObjectPool pool = ObjectPool.CreateInstance(_sfxPrefab, 10);
+            PoolableSFX instance = pool.GetObject(point, Quaternion.identity) as PoolableSFX;
             instance.SetSound(audioClip, minDistance, maxDistance);
 
             if(randomPitch )
@@ -37,8 +37,8 @@ namespace GoreToska
 
         public void PlaySoundEffect(Vector3 point, AudioClip audioClip, int maxDistance, bool randomPitch = true)
         {
-            ObjectPool particlePool = ObjectPool.CreateInstance(_sfxPrefab, 50);
-            PoolableSFX instance = particlePool.GetObject(point, Quaternion.identity) as PoolableSFX;
+            ObjectPool pool = ObjectPool.CreateInstance(_sfxPrefab, 10);
+            PoolableSFX instance = pool.GetObject(point, Quaternion.identity) as PoolableSFX;
             instance.SetSound(audioClip, maxDistance);
 
             if (randomPitch)

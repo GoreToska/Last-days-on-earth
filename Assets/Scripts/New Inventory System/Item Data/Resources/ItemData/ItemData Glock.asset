@@ -24,4 +24,4 @@ MonoBehaviour:
     type: 3}
   <ItemModel>k__BackingField: {fileID: 2711700780172207296, guid: b21bdadc0edd77547a1dcb8d8f219a0e,
     type: 3}
-  _weaponData: {fileID: 11400000, guid: bcfb8a6c8f691d54aa9df5d9cc56b5e9, type: 2}
+  _weaponData: {fileID: 11400000, guid: ca827844de9852e43a8e7021c324836d, type: 2}

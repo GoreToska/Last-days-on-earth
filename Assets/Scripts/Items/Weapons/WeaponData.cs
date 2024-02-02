@@ -21,7 +21,8 @@ public class WeaponData : ScriptableObject
     [SerializeField] public float ShotVolumeRadius;
     [SerializeField] public bool IsAuto;
     [SerializeField] public bool DrawSight;
-    [SerializeField] public BulletTrailData trailRenderer;
+    [SerializeField] public BulletTrailData TrailRenderer;
+    [SerializeField] public WeaponSFXConfig WeaponSFXConfig;
 }
 
 public enum WeaponType
