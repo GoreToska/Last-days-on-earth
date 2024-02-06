@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 6301481205327887144}
   m_Layer: 12
   m_Name: Rare_crate_01
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,8 +100,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.1769967, y: 0.7060186, z: 0.6920166}
-  m_Center: {x: 0, y: 0.3530093, z: -0.0000012218952}
+  m_Size: {x: 1.1769967, y: 0.51989853, z: 0.6920166}
+  m_Center: {x: 9.563256e-16, y: 0.25994754, z: -0.0000012218952}
 --- !u!114 &6279449038929459607
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 7399292695405874192}
   m_Layer: 12
   m_Name: Medical_crate_02
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
