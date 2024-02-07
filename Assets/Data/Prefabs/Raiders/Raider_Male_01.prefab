@@ -295,7 +295,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialStateID: 2
   config: {fileID: 11400000, guid: 553a50df333da904890695ee29dc19ad, type: 2}
-  timeToStartRoaming: 10
+  timeToStartRoaming: 5
   roamingRadius: 5
   groundMask:
     serializedVersion: 2
@@ -384,7 +384,12 @@ MonoBehaviour:
   LayerNames:
   - Zombie
   - Character
-  objects: []
+  objects:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &7440416442295270320
 MonoBehaviour:
   m_ObjectHideFlags: 0
