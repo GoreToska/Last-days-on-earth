@@ -54,10 +54,6 @@ public class PlayerMovementManager : MonoBehaviour
         camera = Camera.main;
     }
 
-    private void Start()
-    {
-    }
-
     private void Update()
     {
         HandleAllMovement();
@@ -99,7 +95,7 @@ public class PlayerMovementManager : MonoBehaviour
         if (PlayerInputManager.Instance.IsSprinting && playerStatusManager.stamina > 1)
         {
             playerStatusManager.TakeStaminaDamage(sprintStaminaCost * Time.deltaTime);
-            characterController.Move(moveDirection * sprintingSpeed * Time.deltaTime);
+            characterController.Move(moveDirection * sprintingSpeed * Time.deltaTime + new Vector3(0, Physics.gravity.y / 2, 0));
 
             return;
         }

@@ -1,4 +1,7 @@
+using UnityEngine;
+
 public interface IDamagable
 {
-    public void TakeDamage(float damage);
+    public bool IsDead { get; }
+    public void TakeDamage(float damage, GameObject targetCausedDamage);
 }

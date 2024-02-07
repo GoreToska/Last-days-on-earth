@@ -16,21 +16,22 @@ public class AIMemory
 
 public class AISensoryMemory
 {
-    public List<AIMemory> memories = new List<AIMemory>();
-    GameObject[] characters;
+    public List<AIMemory> Memories = new List<AIMemory>();
+    private GameObject[] _characters;
 
     public AISensoryMemory(int maxPlayers)
     {
-        characters = new GameObject[maxPlayers];
+        _characters = new GameObject[maxPlayers];
     }
 
     public void UpdateSenses(AISensor sensor)
     {
-        int targets = sensor.Filter(characters, "Character", "Player", "Raider");
+        //int targets = sensor.Filter(_characters, sensor.LayerNames[0], sensor.LayerNames[1]);
+        int targets = sensor.Filter(_characters);
 
         for (int i = 0; i < targets; ++i)
         {
-            GameObject target = characters[i];
+            GameObject target = _characters[i];
             RefreshMemory(sensor.gameObject, target);
         }
     }
@@ -48,12 +49,12 @@ public class AISensoryMemory
 
     public AIMemory FetchMemory(GameObject gameObject)
     {
-        AIMemory memory = memories.Find(x => x.gameObject == gameObject);
+        AIMemory memory = Memories.Find(x => x.gameObject == gameObject);
 
         if (memory == null)
         {
             memory = new AIMemory();
-            memories.Add(memory);
+            Memories.Add(memory);
         }
 
         return memory;
@@ -61,13 +62,13 @@ public class AISensoryMemory
 
     public void ForgetMemories(float olderThan)
     {
-        memories.RemoveAll(x => x.Age > olderThan);
-        memories.RemoveAll(x => !x.gameObject);
-        memories.RemoveAll(x => !x.gameObject.TryGetComponent<CharacterStatusManager>(out var status) || status.IsDead);
+        Memories.RemoveAll(x => x.Age > olderThan);
+        Memories.RemoveAll(x => !x.gameObject);
+        Memories.RemoveAll(x => !x.gameObject.TryGetComponent<IDamagable>(out var status) || status.IsDead);
     }
 
     public void ForgetTarget(GameObject gameObject)
     {
-        memories.RemoveAll(x => x.gameObject == gameObject);
+        Memories.RemoveAll(x => x.gameObject == gameObject);
     }
 }

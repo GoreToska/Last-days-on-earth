@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class AIDeadState : AIState
 {
-    public void Enter(AIZombieAgent agent)
+    public void Enter(BaseAIAgent agent)
     {
         agent.ragdoll.EnableRagdoll();
     }
 
-    public void Exit(AIZombieAgent agent)
+    public void Exit(BaseAIAgent agent)
     {
     }
 
@@ -18,7 +18,7 @@ public class AIDeadState : AIState
         return AIStateID.Dead;
     }
 
-    public void Update(AIZombieAgent agent)
+    public void Update(BaseAIAgent agent)
     {
     }
 }

@@ -5,11 +5,11 @@ using UnityEngine;
 public class AIIdleState : AIState
 {
     private float timer = 0f;
-    public void Enter(AIZombieAgent agent)
+    public void Enter(BaseAIAgent agent)
     {
     }
 
-    public void Exit(AIZombieAgent agent)
+    public void Exit(BaseAIAgent agent)
     {
         timer = 0f;
     }
@@ -19,7 +19,7 @@ public class AIIdleState : AIState
         return AIStateID.Idle;
     }
 
-    public void Update(AIZombieAgent agent)
+    public void Update(BaseAIAgent agent)
     {
         if (agent.sensor.Objects.Count > 0)
         {

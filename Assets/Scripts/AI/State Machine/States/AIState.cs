@@ -15,9 +15,9 @@ public interface AIState
 {
     AIStateID GetStateID();
 
-    void Enter(AIZombieAgent agent);
+    void Enter(BaseAIAgent agent);
     
-    void Update(AIZombieAgent agent);
+    void Update(BaseAIAgent agent);
 
-    void Exit(AIZombieAgent agent);
+    void Exit(BaseAIAgent agent);
 }

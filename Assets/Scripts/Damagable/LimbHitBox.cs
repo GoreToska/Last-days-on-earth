@@ -5,18 +5,17 @@ using UnityEngine;
 
 public class LimbHitBox : HitBox
 {
-    [SerializeField] private float damageMultiplier = 0.25f;
+    [SerializeField] private float _damageMultiplier = 0.25f;
 
-    private DamagableZombie damagableCharacter;
+    private IDamagable _damagableCharacter;
 
     protected override void Start()
     {
-        damagableCharacter = transform.root.GetComponent<DamagableZombie>();
+        _damagableCharacter = transform.root.GetComponent<IDamagable>();
     }
 
-    public override void GetDamage(float damage)
+    public override void GetDamage(float damage, GameObject d)
     {
-        damagableCharacter.TakeDamage(damage * damageMultiplier);
-        Debug.Log("Limb");
+        _damagableCharacter.TakeDamage(damage * _damageMultiplier, d);
     }
 }

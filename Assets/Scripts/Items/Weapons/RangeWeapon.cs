@@ -156,7 +156,7 @@ public abstract class RangeWeapon : MonoBehaviour, IRangeWeapon
 
             if (hit.collider.tag == "Damagable")
             {
-                hit.collider.GetComponent<HitBox>().GetDamage(weaponData.Damage);
+                hit.collider.GetComponent<HitBox>().GetDamage(weaponData.Damage, transform.root.gameObject);
             }
         }
 

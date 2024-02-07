@@ -96,7 +96,7 @@ public class PlayerStatusManager : CharacterStatusManager, IDamagable
         }
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, GameObject d)
     {
         hp -= damage;
 
@@ -119,6 +119,7 @@ public class PlayerStatusManager : CharacterStatusManager, IDamagable
             stamina = 0;
             FatigueEvent.Invoke();
             Debug.Log("Fatigue");
+
             return;
         }
 

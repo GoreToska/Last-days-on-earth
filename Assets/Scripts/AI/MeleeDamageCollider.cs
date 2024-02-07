@@ -6,43 +6,41 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class MeleeDamageCollider : MonoBehaviour
 {
-    [SerializeField] private string playerMaskName = "Player";
-    [SerializeField] private string raiderMaskName = "Raider";
+    private float _damage;
 
-    private float damage;
+    private List<GameObject> _charactersToDamage = new List<GameObject>();
+    private Collider _damageCollider;
 
-    private List<GameObject> charactersToDamage = new List<GameObject>();
-    private Collider damageCollider;
-
-    void Start()
+    void Awake()
     {
-        damageCollider = GetComponent<Collider>();
-        damageCollider.enabled = false;
+        _damageCollider = GetComponent<Collider>();
+        _damageCollider.enabled = false;
+        _damageCollider.isTrigger = true;
     }
 
     public void EnableCollider(float damage)
     {
-        this.damage = damage;
-        damageCollider.enabled = true;
+        this._damage = damage;
+        _damageCollider.enabled = true;
     }
 
     public void DisableCollider()
     {
-        damageCollider.enabled = false;
-        charactersToDamage.Clear();
+        _damageCollider.enabled = false;
+        _charactersToDamage.Clear();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (charactersToDamage.Contains(other.transform.root.gameObject) || other.transform.root.gameObject.layer == this.transform.root.gameObject.layer)
+        if (_charactersToDamage.Contains(other.transform.root.gameObject) || other.transform.root.gameObject.layer == this.transform.root.gameObject.layer)
         {
             return;
         }
 
-        if (other.transform.root.gameObject.layer == LayerMask.NameToLayer(playerMaskName) || other.transform.root.gameObject.layer == LayerMask.NameToLayer(raiderMaskName))
+        if (other.transform.root.gameObject.TryGetComponent<IDamagable>(out var component))
         {
             AddCharacterToDamageList(other.transform.root.gameObject);
-            other.transform.root.gameObject.GetComponent<IDamagable>().TakeDamage(damage);
+            component.TakeDamage(_damage, this.gameObject);
 
             return;
         }
@@ -50,7 +48,8 @@ public class MeleeDamageCollider : MonoBehaviour
 
     private void AddCharacterToDamageList(GameObject character)
     {
-        charactersToDamage.Add(character);
+        _charactersToDamage.Add(character);
+        ImpactManager.Instance.HandleImpact(character, character.transform.position + Vector3.up, Vector3.forward, ImpactType.Shot);
         // play sfx, impact, effect etc
     }
 }

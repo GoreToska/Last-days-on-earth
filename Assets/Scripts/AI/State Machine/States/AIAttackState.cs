@@ -1,16 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class AIAttackState : AIState
 {
-    public void Enter(AIZombieAgent agent)
+    public void Enter(BaseAIAgent agent)
     {
         Attack(agent);
     }
 
-    public void Exit(AIZombieAgent agent)
+    public void Exit(BaseAIAgent agent)
     {
         agent.isAttacking = false;
         agent.animator.CrossFade("Blend Tree", 0.1f);
@@ -21,7 +20,7 @@ public class AIAttackState : AIState
         return AIStateID.Attack;
     }
 
-    public void Update(AIZombieAgent agent)
+    public void Update(BaseAIAgent agent)
     {
         if (agent.isAttacking)
         {
@@ -34,7 +33,7 @@ public class AIAttackState : AIState
             return;
         }
 
-        if (!agent.targetSystem.Target.TryGetComponent<CharacterStatusManager>(out var status) || status.IsDead)
+        if (!agent.targetSystem.Target.TryGetComponent<IDamagable>(out var status) || status.IsDead)
         {
             agent.targetSystem.ForgetTarget(agent.targetSystem.Target);
             agent.stateMachine.ChangeState(AIStateID.Idle);
@@ -56,10 +55,10 @@ public class AIAttackState : AIState
         }
     }
 
-    private void Attack(AIZombieAgent agent)
+    private void Attack(BaseAIAgent agent)
     {
-        agent.isAttacking = true;
-        agent.navMeshAgent.isStopped = true;
-        agent.animator.CrossFade("Zombie_Light_Attack_01", 0.1f);
+        agent.transform.LookAt(agent.targetSystem.TargetPosition, Vector3.up);
+        var meleeAgent = agent as MeleeAIAgent;
+        meleeAgent.AIAttack.PerformLightMeleeAttack(agent);
     }
 }

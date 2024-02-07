@@ -14,47 +14,54 @@ public class AITargetingSystem : MonoBehaviour
     [Header("How age of memory is affecting for choosing (0 - not affect)")]
     public float ageWeight = 1.0f;
 
-    private AISensoryMemory memory = new AISensoryMemory(10);
-    private AISensor sensor;
-    private AIMemory bestMemory;
+    [SerializeField] private AISensoryMemory _memory = new AISensoryMemory(10);
+    private AISensor _sensor;
+    private AIMemory _bestMemory;
 
-    private void Start()
+    private void Awake()
     {
-        sensor = GetComponent<AISensor>();
+        _sensor = GetComponent<AISensor>();
     }
 
     private void Update()
     {
-        memory.UpdateSenses(sensor);
-        memory.ForgetMemories(memorySpan);
+        _memory.UpdateSenses(_sensor);
+        _memory.ForgetMemories(memorySpan);
 
         EvaluateScores();
     }
 
     public void ForgetTarget(GameObject target)
     {
-        memory.ForgetTarget(target);
+        _memory.ForgetTarget(target);
+    }
+
+    public void AddMemory(GameObject target, float score)
+    {
+        var memory = _memory.FetchMemory(target);
+        _memory.RefreshMemory(this.gameObject, target);
+        memory.scrore = score;
     }
 
     private void EvaluateScores()
     {
-        bestMemory = null;
+        _bestMemory = null;
 
-        foreach (var memory in memory.memories)
+        foreach (var memory in _memory.Memories)
         {
             memory.scrore = CalculateScore(memory);
 
-            if (bestMemory == null || memory.scrore > bestMemory.scrore)
+            if (_bestMemory == null || memory.scrore > _bestMemory.scrore)
             {
-                bestMemory = memory;
+                _bestMemory = memory;
             }
         }
     }
 
     private float CalculateScore(AIMemory memory)
     {
-        float distanceScore = Normalize(memory.distance, sensor.Distance) * distanceWeight;
-        float angleScore = Normalize(memory.angle, sensor.Angle) * angleWeight;
+        float distanceScore = Normalize(memory.distance, _sensor.Distance) * distanceWeight;
+        float angleScore = Normalize(memory.angle, _sensor.Angle) * angleWeight;
         float ageScore = Normalize(memory.Age, memorySpan) * ageWeight;
 
         return distanceScore + angleScore + ageScore;
@@ -68,17 +75,17 @@ public class AITargetingSystem : MonoBehaviour
     private void OnDrawGizmos()
     {
         float maxScore = float.MinValue;
-        foreach (var memory in memory.memories)
+        foreach (var memory in _memory.Memories)
         {
             maxScore = Mathf.Max(maxScore, memory.scrore);
         }
 
-        foreach (var memory in memory.memories)
+        foreach (var memory in _memory.Memories)
         {
             Color color = Color.blue;
             color.a = memory.scrore / maxScore;
 
-            if (memory == bestMemory)
+            if (memory == _bestMemory)
             {
                 color = Color.green;
             }
@@ -93,7 +100,7 @@ public class AITargetingSystem : MonoBehaviour
     {
         get
         {
-            return bestMemory != null;
+            return _bestMemory != null;
         }
     }
 
@@ -101,7 +108,7 @@ public class AITargetingSystem : MonoBehaviour
     {
         get
         {
-            return bestMemory.gameObject;
+            return _bestMemory.gameObject;
         }
     }
 
@@ -109,7 +116,7 @@ public class AITargetingSystem : MonoBehaviour
     {
         get
         {
-            return bestMemory.gameObject.transform.position;
+            return _bestMemory.gameObject.transform.position;
         }
     }
 
@@ -117,7 +124,7 @@ public class AITargetingSystem : MonoBehaviour
     {
         get
         {
-            return bestMemory.Age < 1f;
+            return _bestMemory.Age < 1f;
         }
     }
 
@@ -125,7 +132,7 @@ public class AITargetingSystem : MonoBehaviour
     {
         get
         {
-            return bestMemory.distance;
+            return _bestMemory.distance;
         }
     }
 }

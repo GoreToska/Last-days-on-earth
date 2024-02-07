@@ -1,25 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
-public class DamagableZombie : MonoBehaviour, IDamagable
+[RequireComponent(typeof(BaseAIAgent))]
+public class DamagableZombie : DamagableCharacter, IDamagable
 {
-    [SerializeField] private float HP = 100f;
-    private AIZombieAgent zombieAgent;
-
-    private void Start()
+    protected override void Awake()
     {
-        zombieAgent = GetComponent<AIZombieAgent>();
-    }
-
-    public void TakeDamage(float damage)
-    {
-        HP -= damage;
-
-        if (HP <= 0)
-        {
-            zombieAgent.stateMachine.ChangeState(AIStateID.Dead);
-        }
+        base.Awake();
     }
 }

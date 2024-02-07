@@ -5,12 +5,12 @@ using UnityEngine.AI;
 
 public class AIRoamingState : AIState
 {
-    public void Enter(AIZombieAgent agent)
+    public void Enter(BaseAIAgent agent)
     {
         agent.navMeshAgent.destination = RandomNavmeshLocation(agent.roamingRadius, agent);
     }
 
-    public void Exit(AIZombieAgent agent)
+    public void Exit(BaseAIAgent agent)
     {
     }
 
@@ -19,7 +19,7 @@ public class AIRoamingState : AIState
         return AIStateID.Roaming;
     }
 
-    public void Update(AIZombieAgent agent)
+    public void Update(BaseAIAgent agent)
     {
         if (agent.sensor.Objects.Count > 0)
         {
@@ -32,7 +32,7 @@ public class AIRoamingState : AIState
         }
     }
 
-    public Vector3 RandomNavmeshLocation(float radius, AIZombieAgent agent)
+    public Vector3 RandomNavmeshLocation(float radius, BaseAIAgent agent)
     {
         Vector3 randomDirection = Random.insideUnitSphere * radius;
         randomDirection += agent.transform.position;

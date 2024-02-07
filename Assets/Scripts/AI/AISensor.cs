@@ -16,6 +16,7 @@ public class AISensor : MonoBehaviour
     public int ScanFrequency = 30;
     public LayerMask TargetLayers;
     public LayerMask ObstaclesLayer;
+    public List<string> LayerNames = new List<string>();
 
     public List<GameObject> Objects
     {
@@ -42,19 +43,28 @@ public class AISensor : MonoBehaviour
     private void Scan()
     {
         count = Physics.OverlapSphereNonAlloc(transform.position, Distance, colliders, TargetLayers, QueryTriggerInteraction.Collide);
-
         objects.Clear();
-        for (int i = 0; i < count; ++i)
+
+        if (count == 0)
+            return;
+
+        for (int i = 0; i < count; i++)
         {
-            GameObject obj = colliders[i].gameObject;
-            if (IsInside(obj) && !objects.Contains(obj))
+            GameObject obj = colliders[i].gameObject.transform.root.gameObject;
+
+            if (IsInside(obj) && !Objects.Contains(obj))
             {
-                if (obj.TryGetComponent<CharacterStatusManager>(out var status) && !status.IsDead)
+                if (obj.TryGetComponent<IDamagable>(out var status) && status.IsDead == false)
                 {
                     objects.Add(obj);
                 }
             }
         }
+    }
+
+    public void AddTarget(GameObject target)
+    {
+        objects.Add(target);
     }
 
     public bool IsInside(GameObject obj)
@@ -63,7 +73,7 @@ public class AISensor : MonoBehaviour
         Vector3 destination = obj.transform.position;
         Vector3 direction = destination - origin;
 
-        if (direction.y < 0 || direction.y > Height)
+        if (direction.y < -Height || direction.y > Height)
         {
             return false;
         }
@@ -85,26 +95,40 @@ public class AISensor : MonoBehaviour
         return true;
     }
 
-    public int Filter(GameObject[] buffer, string layerName, string layerName2 = null, string layerName3 = null)
+    public int Filter(GameObject[] buffer, string layerName = null, string layerName2 = null, string layerName3 = null)
     {
-        var layer = LayerMask.NameToLayer(layerName);
-        int layer2 = 0;
-        var layer3 = 0;
+        //var layer = LayerMask.NameToLayer(layerName);
+        //int layer2 = 0;
+        //var layer3 = 0;
 
-        if (layerName2 != null)
-        {
-            layer2 = LayerMask.NameToLayer(layerName2);
-        }
+        //if (layerName2 != null)
+        //{
+        //    layer2 = LayerMask.NameToLayer(layerName2);
+        //}
 
-        if (layerName3 != null)
-        {
-            layer3 = LayerMask.NameToLayer(layerName3);
-        }
+        //if (layerName3 != null)
+        //{
+        //    layer3 = LayerMask.NameToLayer(layerName3);
+        //}
 
         int count = 0;
+
+        //foreach (var obj in Objects)
+        //{
+        //    if ((obj.layer == layer || obj.layer == layer2 || obj.layer == layer3) && obj.TryGetComponent<IDamagable>(out var status) && status.IsDead == false)
+        //    {
+        //        buffer[count++] = obj;
+        //    }
+
+        //    if (buffer.Length == count)
+        //    {
+        //        break; // buffer is full
+        //    }
+        //}
+
         foreach (var obj in Objects)
         {
-            if ((obj.layer == layer || obj.layer == layer2 || obj.layer == layer3) && obj.TryGetComponent<CharacterStatusManager>(out var status) && !status.IsDead)
+            if (obj.TryGetComponent<IDamagable>(out var status) && status.IsDead == false)
             {
                 buffer[count++] = obj;
             }
@@ -218,11 +242,5 @@ public class AISensor : MonoBehaviour
         }
 
         Gizmos.DrawWireSphere(transform.position, Distance);
-
-        //Gizmos.color = Color.green;
-        //foreach (var obj in Objects)
-        //{
-        //    Gizmos.DrawSphere(obj.transform.position, 0.2f);
-        //}
     }
 }
