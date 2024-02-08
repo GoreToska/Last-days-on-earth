@@ -6,6 +6,8 @@ using UnityEngine;
 public class FootstepsHandler : MonoBehaviour
 {
     [SerializeField] private LayerMask _groundLayer;
+    [SerializeField] protected Transform _leftLeg;
+    [SerializeField] protected Transform _rightLeg;
 
     private Animator _animator;
 
@@ -20,11 +22,11 @@ public class FootstepsHandler : MonoBehaviour
 
         if (leg == "Left")
         {
-            startPoint = _animator.GetBoneTransform(HumanBodyBones.LeftLowerLeg).position;
+            startPoint = _leftLeg.position;
         }
         else
         {
-            startPoint = _animator.GetBoneTransform(HumanBodyBones.RightLowerLeg).position;
+            startPoint = _rightLeg.position;
         }
 
         RaycastHit hit;

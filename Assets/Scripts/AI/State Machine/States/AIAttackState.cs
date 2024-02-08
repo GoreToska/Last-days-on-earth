@@ -6,7 +6,7 @@ public class AIAttackState : AIState
 {
     public void Enter(BaseAIAgent agent)
     {
-        Attack(agent);
+        //LightAttack(agent);
     }
 
     public void Exit(BaseAIAgent agent)
@@ -30,6 +30,7 @@ public class AIAttackState : AIState
         if (!agent.targetSystem.HasTarget)
         {
             agent.stateMachine.ChangeState(AIStateID.Idle);
+
             return;
         }
 
@@ -37,6 +38,7 @@ public class AIAttackState : AIState
         {
             agent.targetSystem.ForgetTarget(agent.targetSystem.Target);
             agent.stateMachine.ChangeState(AIStateID.Idle);
+
             return;
         }
 
@@ -46,19 +48,41 @@ public class AIAttackState : AIState
         }
         else
         {
-            //  light attack
-            if (!agent.isAttacking)
+            PerformAttack(agent);
+        }
+    }
+
+    private void PerformAttack(BaseAIAgent agent)
+    {
+        if (!agent.isAttacking)
+        {
+            var a = Random.Range(0, 101);
+            Debug.Log(a);
+
+            if (a >= 50)
             {
-                Attack(agent);
+                LightAttack(agent);
+                return;
+            }
+            else
+            {
+                HeavyAttack(agent);
                 return;
             }
         }
     }
 
-    private void Attack(BaseAIAgent agent)
+    private void LightAttack(BaseAIAgent agent)
     {
         agent.transform.LookAt(agent.targetSystem.TargetPosition, Vector3.up);
         var meleeAgent = agent as MeleeAIAgent;
-        meleeAgent.AIAttack.PerformLightMeleeAttack(agent);
+        meleeAgent.AIAttack.PerformLightMeleeAttack(agent, agent.config.lightDamage);
+    }
+
+    private void HeavyAttack(BaseAIAgent agent)
+    {
+        agent.transform.LookAt(agent.targetSystem.TargetPosition, Vector3.up);
+        var meleeAgent = agent as MeleeAIAgent;
+        meleeAgent.AIAttack.PerformHeavyMeleeAttack(agent, agent.config.heavyDamage);
     }
 }

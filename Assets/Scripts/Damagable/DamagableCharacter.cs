@@ -13,6 +13,7 @@ public class DamagableCharacter : MonoBehaviour
 
     protected Ragdoll _ragdoll;
     protected BaseAIAgent _agent;
+    protected AIMeleeAttack _meleeAttack;
     protected bool _isDead = false;
 
     public bool IsDead { get => _isDead; }
@@ -21,6 +22,11 @@ public class DamagableCharacter : MonoBehaviour
     {
         _agent = GetComponent<BaseAIAgent>();
         _ragdoll = GetComponent<Ragdoll>();
+
+        if(_agent is MeleeAIAgent)
+        {
+            _meleeAttack = GetComponent<AIMeleeAttack>();
+        }
 
         OnTakeDamageEvent += DamageReaction;
     }
@@ -57,6 +63,12 @@ public class DamagableCharacter : MonoBehaviour
             _isDead = true;
             _ragdoll.EnableRagdoll();
             _agent.SetDeadState();
+
+            if(_meleeAttack)
+            {
+                _meleeAttack.EndMeleeAttack();
+            }
+
             return;
         }
     }

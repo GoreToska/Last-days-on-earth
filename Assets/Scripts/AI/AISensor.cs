@@ -10,6 +10,7 @@ public class AISensor : MonoBehaviour
     public Color MeshColor = Color.red;
 
     [Header("Vision Options")]
+    [SerializeField] public Vector3 EyePosition = Vector3.up;
     public float Distance = 10;
     public float Angle = 30;
     public float Height = 1.0f;
@@ -42,7 +43,7 @@ public class AISensor : MonoBehaviour
 
     private void Scan()
     {
-        count = Physics.OverlapSphereNonAlloc(transform.position, Distance, colliders, TargetLayers, QueryTriggerInteraction.Collide);
+        count = Physics.OverlapSphereNonAlloc(transform.position + EyePosition, Distance, colliders, TargetLayers, QueryTriggerInteraction.Collide);
         objects.Clear();
 
         if (count == 0)
@@ -69,7 +70,7 @@ public class AISensor : MonoBehaviour
 
     public bool IsInside(GameObject obj)
     {
-        Vector3 origin = transform.position;
+        Vector3 origin = transform.position + EyePosition;
         Vector3 destination = obj.transform.position;
         Vector3 direction = destination - origin;
 
@@ -78,7 +79,7 @@ public class AISensor : MonoBehaviour
             return false;
         }
 
-        direction.y = 0;
+        direction.y = EyePosition.y;
         float deltaAngle = Vector3.Angle(direction, transform.forward);
         if (deltaAngle > Angle)
         {

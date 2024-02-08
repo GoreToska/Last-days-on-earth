@@ -48,7 +48,7 @@ public class BaseAIAgent : MonoBehaviour
     public void AddTarget(GameObject target, float score)
     {
         Debug.Log($"Adding target {target}");
-        sensor.AddTarget(target);
+        sensor.AddTarget(target.transform.root.gameObject);
         targetSystem.AddMemory(target, score);
     }
 }

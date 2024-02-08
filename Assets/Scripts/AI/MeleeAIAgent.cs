@@ -5,13 +5,13 @@ using UnityEngine.AI;
 
 public class MeleeAIAgent : BaseAIAgent
 {
-    public IAIAttack AIAttack { get; private set; }
+    public IAILightAttack AIAttack { get; private set; }
 
     public override void Awake()
     {
         base.Awake();
 
-        AIAttack = GetComponent<IAIAttack>();
+        AIAttack = GetComponent<IAILightAttack>();
     }
 
     public override void Start()

@@ -6,4 +6,6 @@ using UnityEngine;
 public class AIAgentConfig : ScriptableObject
 {
     public float maxSightDistance = 18f;
+    public float lightDamage = 10;
+    public float heavyDamage = 25;
 }

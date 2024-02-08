@@ -50,13 +50,37 @@ ModelImporter:
       loopBlendPositionY: 1
       loopBlendPositionXZ: 1
       keepOriginalOrientation: 1
-      keepOriginalPositionY: 0
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.2942849
+        functionName: StartMeleeAttack
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 80d17598a0ca37c45a6936d2fe082941,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.38317895
+        functionName: EndMeleeAttack
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 80d17598a0ca37c45a6936d2fe082941,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.61238015
+        functionName: SetAttackToFalse
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 9be43bcb0812a504e9c0ebae12f4625f,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
