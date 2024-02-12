@@ -7,10 +7,6 @@ public class PlayerUIManager : MonoBehaviour
 {
     [HideInInspector] public static PlayerUIManager Instance;
 
-    [Header("UI Windows")]
-    [SerializeField] private UIDocument inventory;
-    [SerializeField] private UIDocument HUD;
-
     [Header("UI Managers")]
     [SerializeField] private InventoryUIController _inventoryUIController;
 
@@ -55,7 +51,7 @@ public class PlayerUIManager : MonoBehaviour
 
     public void SetStamina(float value)
     {
-        //staminaBar.SetStatus(value);
+		_staminaBar.SetStatus(value);
     }
 
     private void OnOpenInventory()

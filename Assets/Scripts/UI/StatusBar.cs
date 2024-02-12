@@ -1,14 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class StatusBar : MonoBehaviour
 {
-    [SerializeField] private Image statusBar;
+	private Slider statusBar;
 
-    public void SetStatus(float value)
-    {
-        statusBar.fillAmount = value / 100f;
-    }
+	private void Awake()
+	{
+		statusBar = GetComponent<Slider>();
+	}
+
+	public void SetStatus(float value)
+	{
+		statusBar.value = value / 100f;
+	}
 }

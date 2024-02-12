@@ -2,16 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static UnityEngine.Rendering.DebugUI;
 
 public class HUDManager : MonoBehaviour
 {
     [HideInInspector] public static HUDManager Instance;
 
-    private VisualElement root;
-    private static VisualElement bulletsStatusContainer;
-    private static Label bulletsStatusLabel;
-    private static ProgressBar hpBar;
-    private static ProgressBar staminaBar;
+	[Header("Status Bars")]
+	[SerializeField] private StatusBar _hpBar;
+	[SerializeField] private StatusBar _staminaBar;
 
     private int currentBullets = 0;
 
@@ -25,8 +24,6 @@ public class HUDManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        Configure();
     }
 
     private void Start()
@@ -34,40 +31,24 @@ public class HUDManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    private void Configure()
-    {
-        root = GetComponentInChildren<UIDocument>().rootVisualElement;
-        bulletsStatusContainer = root.Q<VisualElement>("Ammo_Info_Container");
-        bulletsStatusLabel = bulletsStatusContainer.Q<Label>("Bullets_Status");
-        hpBar = root.Q<VisualElement>("Status_Container").Q<ProgressBar>("Hp_bar");
-        staminaBar = root.Q<VisualElement>("Status_Container").Q<ProgressBar>("Stamina_bar");
-    }
-
-    //public void UpdateBulletsStatus(int currentBullets, int remainingBullets)
-    //{
-    //    var bulletString = currentBullets.ToString() + "/" + remainingBullets.ToString();
-    //    bulletsStatusLabel.text = bulletString;
-    //    this.currentBullets = currentBullets;
-    //}
-
     public void UpdateHP(float newValue)
     {
-        hpBar.value = newValue;
-    }
+		_hpBar.SetStatus(newValue);
+	}
 
-    public void UpdateStamina(float newValue)
+	public void UpdateStamina(float newValue)
     {
-        staminaBar.value = newValue;
-    }
+		_staminaBar.SetStatus(newValue);
+	}
 
-    public void UpdateBulletsStatus(int currentBullets)
+	public void UpdateBulletsStatus(int currentBullets)
     {
         var bulletString = currentBullets.ToString();
-        bulletsStatusLabel.text = bulletString;
+       // bulletsStatusLabel.text = bulletString;
     }
 
     public void BulletsStatusVisibility(Visibility visibility)
     {
-        bulletsStatusContainer.style.visibility = visibility;
+       // bulletsStatusContainer.style.visibility = visibility;
     }
 }
