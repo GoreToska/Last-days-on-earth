@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class AIStateMachine
 {
-    public AIState[] states;
+    public IAIState[] states;
     public BaseAIAgent agent;
     public AIStateID currentStateID;
 
@@ -13,10 +13,10 @@ public class AIStateMachine
     {
         this.agent = agent;
         int numberOfStates = System.Enum.GetNames(typeof(AIStateID)).Length;
-        states = new AIState[numberOfStates];
+        states = new IAIState[numberOfStates];
     }
 
-    public void RegisterState(AIState state)
+    public void RegisterState(IAIState state)
     {
         int index = (int)state.GetStateID();
         states[index] = state;
@@ -27,7 +27,7 @@ public class AIStateMachine
         GetState(currentStateID)?.Update(agent);
     }
 
-    public AIState GetState(AIStateID stateID)
+    public IAIState GetState(AIStateID stateID)
     {
         return states[(int)stateID];
     }

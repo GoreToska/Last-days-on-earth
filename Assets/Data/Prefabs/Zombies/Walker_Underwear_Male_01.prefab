@@ -9188,19 +9188,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9be43bcb0812a504e9c0ebae12f4625f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialStateID: 2
-  config: {fileID: 11400000, guid: 553a50df333da904890695ee29dc19ad, type: 2}
-  timeToStartRoaming: 10
-  roamingRadius: 5
-  groundMask:
+  InitialStateID: 0
+  Config: {fileID: 11400000, guid: 553a50df333da904890695ee29dc19ad, type: 2}
+  TimeToStartRoaming: 5
+  RoamingRadius: 5
+  GroundMask:
     serializedVersion: 2
     m_Bits: 1
-  navMeshAgent: {fileID: 0}
-  ragdoll: {fileID: 0}
-  animator: {fileID: 0}
-  sensor: {fileID: 0}
-  targetSystem: {fileID: 0}
-  isAttacking: 0
+  NavMeshAgent: {fileID: 0}
+  Ragdoll: {fileID: 0}
+  Animator: {fileID: 0}
+  Sensor: {fileID: 0}
+  TargetSystem: {fileID: 0}
+  IsAttacking: 0
 --- !u!114 &587791636
 MonoBehaviour:
   m_ObjectHideFlags: 0

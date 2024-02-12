@@ -19,16 +19,16 @@ public class MeleeAIAgent : BaseAIAgent
         base.Start();
 
         // register all needed states
-        stateMachine.RegisterState(new AIChaseState());
-        stateMachine.RegisterState(new AIIdleState());
-        stateMachine.RegisterState(new AIAttackState());
-        stateMachine.RegisterState(new AIRoamingState());
+        StateMachine.RegisterState(new AIMeleeChaseState());
+        StateMachine.RegisterState(new AIIdleState());
+        StateMachine.RegisterState(new AIMeleeAttackState());
+        StateMachine.RegisterState(new AIRoamingState());
 
-        stateMachine.ChangeState(initialStateID);
+        StateMachine.ChangeState(InitialStateID);
     }
 
     public void SetAttackToFalse()
     {
-        isAttacking = false;
+        IsAttacking = false;
     }
 }

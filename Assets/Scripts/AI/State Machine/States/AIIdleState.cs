@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AIIdleState : AIState
+public class AIIdleState : IAIState
 {
     private float timer = 0f;
     public void Enter(BaseAIAgent agent)
@@ -21,17 +21,17 @@ public class AIIdleState : AIState
 
     public void Update(BaseAIAgent agent)
     {
-        if (agent.sensor.Objects.Count > 0)
+        if (agent.Sensor.Objects.Count > 0)
         {
-            agent.stateMachine.ChangeState(AIStateID.ChasePlayer);
+            agent.StateMachine.ChangeState(AIStateID.ChasePlayer);
             return;
         }
 
         timer += Time.deltaTime;
 
-        if(timer > agent.timeToStartRoaming) 
+        if(timer > agent.TimeToStartRoaming) 
         {
-            agent.stateMachine.ChangeState(AIStateID.Roaming);
+            agent.StateMachine.ChangeState(AIStateID.Roaming);
         }
     }
 }

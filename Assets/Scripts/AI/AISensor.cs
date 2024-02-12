@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static PixelCrushers.DialogueSystem.UnityGUI.GUIProgressBar;
 
 [ExecuteInEditMode]
 public class AISensor : MonoBehaviour
@@ -70,62 +71,47 @@ public class AISensor : MonoBehaviour
 
     public bool IsInside(GameObject obj)
     {
-        Vector3 origin = transform.position + EyePosition;
+        Vector3 origin = transform.position;
         Vector3 destination = obj.transform.position;
         Vector3 direction = destination - origin;
 
-        if (direction.y < -Height || direction.y > Height)
+        if (direction.y < origin.y - Height || direction.y > origin.y + Height)
         {
             return false;
         }
 
         direction.y = EyePosition.y;
         float deltaAngle = Vector3.Angle(direction, transform.forward);
+
         if (deltaAngle > Angle)
         {
             return false;
         }
 
-        origin.y += Height / 2;
+        //origin.y += Height / 2;
         destination.y = origin.y;
+
         if (Physics.Linecast(origin, destination, ObstaclesLayer))
         {
             return false;
         }
 
         return true;
-    }
+	}
 
-    public int Filter(GameObject[] buffer, string layerName = null, string layerName2 = null, string layerName3 = null)
+	public bool IsInSight(GameObject obj)
     {
-        //var layer = LayerMask.NameToLayer(layerName);
-        //int layer2 = 0;
-        //var layer3 = 0;
+		if (Physics.Linecast(this.transform.position, obj.transform.position, ObstaclesLayer))
+		{
+			return false;
+		}
 
-        //if (layerName2 != null)
-        //{
-        //    layer2 = LayerMask.NameToLayer(layerName2);
-        //}
+        return true;
+	}
 
-        //if (layerName3 != null)
-        //{
-        //    layer3 = LayerMask.NameToLayer(layerName3);
-        //}
-
+	public int Filter(GameObject[] buffer, string layerName = null, string layerName2 = null, string layerName3 = null)
+    {
         int count = 0;
-
-        //foreach (var obj in Objects)
-        //{
-        //    if ((obj.layer == layer || obj.layer == layer2 || obj.layer == layer3) && obj.TryGetComponent<IDamagable>(out var status) && status.IsDead == false)
-        //    {
-        //        buffer[count++] = obj;
-        //    }
-
-        //    if (buffer.Length == count)
-        //    {
-        //        break; // buffer is full
-        //    }
-        //}
 
         foreach (var obj in Objects)
         {

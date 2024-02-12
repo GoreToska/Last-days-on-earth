@@ -28,18 +28,18 @@ public class AIMeleeAttack : MonoBehaviour, IAILightAttack
     {
         SetDamage(damage);
 
-        agent.isAttacking = true;
-        agent.navMeshAgent.isStopped = true;
-        agent.animator.SetTrigger("LightAttack");
+        agent.IsAttacking = true;
+        agent.NavMeshAgent.isStopped = true;
+        agent.Animator.SetTrigger("LightAttack");
     }
 
     public void PerformHeavyMeleeAttack(BaseAIAgent agent, float damage = 0)
     {
         SetDamage(damage);
 
-        agent.isAttacking = true;
-        agent.navMeshAgent.isStopped = true;
-        agent.animator.SetTrigger("HeavyAttack");
+        agent.IsAttacking = true;
+        agent.NavMeshAgent.isStopped = true;
+        agent.Animator.SetTrigger("HeavyAttack");
     }
 
     private void SetDamage(float damage = 0)

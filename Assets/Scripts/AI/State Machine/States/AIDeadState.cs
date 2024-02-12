@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AIDeadState : AIState
+public class AIDeadState : IAIState
 {
     public void Enter(BaseAIAgent agent)
     {
-        agent.ragdoll.EnableRagdoll();
+        agent.Ragdoll.EnableRagdoll();
     }
 
     public void Exit(BaseAIAgent agent)

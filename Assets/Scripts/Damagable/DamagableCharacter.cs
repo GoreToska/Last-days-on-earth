@@ -49,7 +49,7 @@ public class DamagableCharacter : MonoBehaviour
     protected virtual void DamageReaction(GameObject from)
     {
         _agent.AddTarget(from, 100);
-        _agent.stateMachine.ChangeState(AIStateID.ChasePlayer);
+        _agent.StateMachine.ChangeState(AIStateID.ChasePlayer);
     }
 
     protected virtual void CalculdateDamage(float damage)
