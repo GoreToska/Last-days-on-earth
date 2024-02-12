@@ -15,6 +15,7 @@ public class AIRangeWeapon : MonoBehaviour, IAIRangeWeapon
 	protected ParticleSystem particleSystem;
 	protected ObjectPool<TrailRenderer> trailRendererPool;
 
+	private float _coolDown = 0;
 	private float _shotTimer = 0f;
 	private float _currentRecoil = 0f;
 	private float _recoilStop;
@@ -71,6 +72,7 @@ public class AIRangeWeapon : MonoBehaviour, IAIRangeWeapon
 				}
 
 				ShotLogic(target);
+				Debug.Log("Wait");
 
 				yield return new WaitForSeconds(60f / weaponData.FireRate);
 			}

@@ -5,8 +5,13 @@ using UnityEngine;
 
 public class AIRangeAttackState : IAIState
 {
+	private RangeAiAgent rangeAgent;
+
 	public void Enter(BaseAIAgent agent)
 	{
+		if(rangeAgent == null)
+			rangeAgent = agent as RangeAiAgent;
+
 		agent.IsAttacking = false;
 		agent.Animator.CrossFade("Blend Tree", 0.1f);
 		agent.NavMeshAgent.isStopped = true;
