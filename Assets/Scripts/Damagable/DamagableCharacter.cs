@@ -64,6 +64,9 @@ public class DamagableCharacter : MonoBehaviour
             _ragdoll.EnableRagdoll();
             _agent.SetDeadState();
 
+            // TODO: move it somewhere else :)
+            Debug.Log("TODO");
+
             if(_meleeAttack)
             {
                 _meleeAttack.EndMeleeAttack();
