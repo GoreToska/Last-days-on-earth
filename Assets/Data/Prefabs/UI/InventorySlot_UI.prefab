@@ -260,7 +260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.33962262, g: 0.33962262, b: 0.33962262, a: 1}
+  m_Color: {r: 0.41509432, g: 0.41509432, b: 0.41509432, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -294,6 +294,7 @@ MonoBehaviour:
   _slotHighlight: {fileID: 1428730350895505050}
   <AssignedInventorySlot>k__BackingField:
     _itemID: -1
+    SlotID: -1
     <StackSize>k__BackingField: -1
 --- !u!1 &4068793503868709308
 GameObject:

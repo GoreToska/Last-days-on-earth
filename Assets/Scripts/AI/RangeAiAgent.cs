@@ -5,6 +5,7 @@ using UnityEngine;
 public class RangeAiAgent : BaseAIAgent
 {
 	public IAIRangeWeapon RangeWeapon;
+	public int AttackInterval = 3;
 
 	public override void Awake()
 	{
@@ -21,6 +22,7 @@ public class RangeAiAgent : BaseAIAgent
 		StateMachine.RegisterState(new AIRangeRoamingState());
 		StateMachine.RegisterState(new AIRangeAttackState());
 		StateMachine.RegisterState(new AIRangeChaseState());
+		StateMachine.RegisterState(new AIReloadState());
 
 		StateMachine.ChangeState(InitialStateID);
 	}

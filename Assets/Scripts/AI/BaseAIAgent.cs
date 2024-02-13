@@ -16,8 +16,10 @@ public class BaseAIAgent : MonoBehaviour
     [HideInInspector] public AISensor Sensor;
     [HideInInspector] public AITargetingSystem TargetSystem;
     [HideInInspector] public bool IsAttacking = false;
+    [HideInInspector] public AIAnimation AIAnimation;
+    [HideInInspector] public DamagableCharacter Status;
 
-    public virtual void Awake()
+	public virtual void Awake()
     {
         StateMachine = new AIStateMachine(this);
         NavMeshAgent = GetComponent<NavMeshAgent>();
@@ -25,7 +27,9 @@ public class BaseAIAgent : MonoBehaviour
         Animator = GetComponent<Animator>();
         TargetSystem = GetComponent<AITargetingSystem>();
         Sensor = GetComponent<AISensor>();
-    }
+        AIAnimation = GetComponent<AIAnimation>();
+		Status = GetComponent<DamagableCharacter>();
+	}
 
     public virtual void Start()
     {

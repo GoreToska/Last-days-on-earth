@@ -57,7 +57,6 @@ public abstract class RangeWeapon : MonoBehaviour, IRangeWeapon
 				}
 
 				ShotLogic();
-				Debug.Log("Shot Logic");
 
 				yield return new WaitForSeconds(60f / weaponData.FireRate);
 			}

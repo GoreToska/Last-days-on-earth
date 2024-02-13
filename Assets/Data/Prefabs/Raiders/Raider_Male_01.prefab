@@ -338,6 +338,8 @@ MonoBehaviour:
   Sensor: {fileID: 0}
   TargetSystem: {fileID: 0}
   IsAttacking: 0
+  AIAnimation: {fileID: 0}
+  Status: {fileID: 0}
 --- !u!114 &7440416442295270314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -418,7 +420,6 @@ MonoBehaviour:
   - Zombie
   - Character
   objects:
-  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -4761,7 +4762,7 @@ SkinnedMeshRenderer:
   m_SortingOrder: 0
   serializedVersion: 2
   m_Quality: 0
-  m_UpdateWhenOffscreen: 0
+  m_UpdateWhenOffscreen: 1
   m_SkinnedMotionVectors: 1
   m_Mesh: {fileID: 4300026, guid: ffdfcb810f2918b4f8fe9f917f07bc78, type: 3}
   m_Bones:

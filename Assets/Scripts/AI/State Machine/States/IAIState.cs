@@ -13,6 +13,7 @@ public enum AIStateID
     RangeAttack = 6,
     RangeIdle = 7,
     RangeRoaming = 8,
+    Reload = 9,
 }
 
 public interface IAIState

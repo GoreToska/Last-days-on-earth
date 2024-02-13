@@ -6,25 +6,30 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent), typeof(Animator))]
 public class AIAnimation : MonoBehaviour
 {
-    private NavMeshAgent navMeshAgent;
-    private Animator animator;
+	private NavMeshAgent _navMeshAgent;
+	private Animator _animator;
 
-    private void Start()
-    {
-        navMeshAgent = GetComponent<NavMeshAgent>();
-        animator = GetComponent<Animator>();
-    }
+	private void Start()
+	{
+		_navMeshAgent = GetComponent<NavMeshAgent>();
+		_animator = GetComponent<Animator>();
+	}
 
-    private void Update()
-    {
-        if (navMeshAgent != null && navMeshAgent.enabled)
-        {
-            animator.SetFloat("Speed", navMeshAgent.velocity.magnitude, 0.2f, Time.deltaTime);
-        }
-    }
+	private void Update()
+	{
+		if (_navMeshAgent != null && _navMeshAgent.enabled)
+		{
+			_animator.SetFloat("Speed", _navMeshAgent.velocity.magnitude, 0.2f, Time.deltaTime);
+		}
+	}
 
-    public void PlayRifleReloadAnimation()
-    {
-        Debug.Log("Reload Rifle");
-    }
+	public void PlayRifleReloadAnimation()
+	{
+		_animator.SetTrigger("RifleReload");
+	}
+
+	public void PlayMediumRifleShot()
+	{
+		_animator.SetTrigger("RIfleMediumShot");
+	}
 }

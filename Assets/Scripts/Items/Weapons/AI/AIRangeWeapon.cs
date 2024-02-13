@@ -12,10 +12,13 @@ public class AIRangeWeapon : MonoBehaviour, IAIRangeWeapon
 	[SerializeField] protected ParticleSystem muzzleFlash;
 	[SerializeField] protected int bullets = 0;
 
+	int IAIRangeWeapon.Bullets { get => bullets; set => bullets = value; }
+
 	protected ParticleSystem particleSystem;
 	protected ObjectPool<TrailRenderer> trailRendererPool;
+	protected DamagableCharacter character;
 
-	private float _coolDown = 0;
+	private float _damage = 10f;
 	private float _shotTimer = 0f;
 	private float _currentRecoil = 0f;
 	private float _recoilStop;
@@ -44,12 +47,14 @@ public class AIRangeWeapon : MonoBehaviour, IAIRangeWeapon
 		particleSystem = GetComponentInChildren<ParticleSystem>();
 		trailRendererPool = new ObjectPool<TrailRenderer>(CreateTrail);
 		_recoilStop = weaponData.RecoilStopShot * weaponData.Recoil;
+		character = transform.root.GetComponent<DamagableCharacter>();
 	}
 
-	public void Attack(GameObject target)
+	public void Attack(GameObject target, AIAnimation animator, float damage = 10)
 	{
 		// TODO: wait some time before shot
-		StartCoroutine(ShotCoroutine(target));
+		_damage = damage;
+		StartCoroutine(ShotCoroutine(target, animator));
 	}
 
 	public void Reload()
@@ -59,11 +64,11 @@ public class AIRangeWeapon : MonoBehaviour, IAIRangeWeapon
 		// play anim
 	}
 
-	protected virtual IEnumerator ShotCoroutine(GameObject target)
+	protected virtual IEnumerator ShotCoroutine(GameObject target, AIAnimation animator)
 	{
 		if (weaponData.IsAuto)
 		{
-			for (int i = 0; i <= 5; i++)
+			for (int i = 0; i < 3; i++)
 			{
 				if (bullets == 0)
 				{
@@ -71,8 +76,13 @@ public class AIRangeWeapon : MonoBehaviour, IAIRangeWeapon
 					yield break;
 				}
 
+				if(character.IsDead)
+				{
+					yield break;
+				}
+
 				ShotLogic(target);
-				Debug.Log("Wait");
+				animator.PlayMediumRifleShot();
 
 				yield return new WaitForSeconds(60f / weaponData.FireRate);
 			}
@@ -104,6 +114,7 @@ public class AIRangeWeapon : MonoBehaviour, IAIRangeWeapon
 	protected virtual void ShotLogic(GameObject target)
 	{
 		bullets--;
+		transform.root.LookAt(target.transform, Vector3.up);
 
 		SFXManager.Instance.PlaySoundEffect(burrel.transform.position, weaponData.WeaponSFXConfig.ShotSound, weaponData.WeaponSFXConfig.MaxShotSoundDistance);
 
@@ -113,14 +124,14 @@ public class AIRangeWeapon : MonoBehaviour, IAIRangeWeapon
 			0);
 
 		Ray ray = new Ray(burrel.transform.position, recoiledPosition - burrel.transform.position);
-		var raycast = Physics.Raycast(ray, out var hit, Mathf.Infinity, PlayerInputManager.Instance.AimMask);
+		var raycast = Physics.Raycast(ray, out var hit, Mathf.Infinity);
 
 		//Debug
 		Debug.DrawRay(burrel.transform.position, recoiledPosition - burrel.transform.position, Color.yellow, 2);
 
 		if (hit.point == Vector3.zero)
 		{
-			StartCoroutine(PlayTrail(burrel.transform.position, recoiledPosition, hit));
+			//StartCoroutine(PlayTrail(burrel.transform.position, recoiledPosition, hit));
 		}
 		else
 		{
@@ -165,13 +176,13 @@ public class AIRangeWeapon : MonoBehaviour, IAIRangeWeapon
 			//  impact
 			ImpactManager.Instance.HandleImpact(hit.transform.gameObject, hit.point, hit.normal, ImpactType.Shot);
 
-			if (hit.collider.tag == "Damagable")
+			if (hit.collider.tag == "Damagable" && hit.transform.gameObject.layer != this.transform.root.gameObject.layer)
 			{
-				hit.collider.GetComponent<HitBox>().GetDamage(weaponData.Damage, transform.root.gameObject);
+				hit.collider.GetComponent<HitBox>().GetDamage(_damage, transform.root.gameObject);
 			}
-			else if (hit.collider.tag == "Player")
+			else if (hit.transform.root.tag == "Player")
 			{
-				hit.collider.GetComponent<IDamagable>().TakeDamage(weaponData.Damage, transform.root.gameObject);
+				hit.transform.root.GetComponent<IDamagable>().TakeDamage(_damage, transform.root.gameObject);
 			}
 		}
 
@@ -198,11 +209,4 @@ public class AIRangeWeapon : MonoBehaviour, IAIRangeWeapon
 
 		return trail;
 	}
-}
-
-public interface IAIRangeWeapon
-{
-	public void Reload();
-
-	public void Attack(GameObject target);
 }
