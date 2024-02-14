@@ -75,6 +75,7 @@ public class PlayerEquipment : MonoBehaviour
 
 		if (itemData == null)
 		{
+			_currentInventoryItemData = null;
 			return;
 		}
 
