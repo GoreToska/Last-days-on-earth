@@ -18,3 +18,17 @@ Current interactable is highlighted by orange outline, all available interactabl
 ![Select Items](ReadMeAssets/Crates_Inventory_01.png)
 
 ![Select Items](ReadMeAssets/Crates_Inventory_02.png)
+
+# Work with your items
+
+![](ReadMeAssets/Work_With_Items.gif)
+
+# Different weapons included
+
+![](ReadMeAssets/Different_Weapons.gif)
+
+# Fight with Zombies and Raiders
+
+![](ReadMeAssets/Fight_Them_01.gif)
+
+![](ReadMeAssets/Fight_Them_02.gif)
