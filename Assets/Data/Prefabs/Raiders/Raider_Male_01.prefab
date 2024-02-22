@@ -325,7 +325,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9be43bcb0812a504e9c0ebae12f4625f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InitialStateID: 0
+  InitialStateID: 2
+  IdleStateID: 2
+  ChaseStateID: 0
   Config: {fileID: 11400000, guid: 8e992cb4fd1aab34d8ae243c5012d731, type: 2}
   TimeToStartRoaming: 5
   RoamingRadius: 5
@@ -419,11 +421,7 @@ MonoBehaviour:
   LayerNames:
   - Zombie
   - Character
-  objects:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  objects: []
 --- !u!114 &7440416442295270320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -438,7 +436,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   memorySpan: 10
   distanceWeight: 0.6666667
-  angleWeight: 0
+  angleWeight: 0.5
   ageWeight: 0.5
 --- !u!114 &7440416442295270321
 MonoBehaviour:

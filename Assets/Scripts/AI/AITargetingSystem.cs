@@ -14,7 +14,7 @@ public class AITargetingSystem : MonoBehaviour
     [Header("How age of memory is affecting for choosing (0 - not affect)")]
     public float ageWeight = 1.0f;
 
-    [SerializeField] private AISensoryMemory _memory = new AISensoryMemory(10);
+    private AISensoryMemory _memory = new AISensoryMemory(10);
     private AISensor _sensor;
     private AIMemory _bestMemory;
 

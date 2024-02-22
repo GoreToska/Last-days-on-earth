@@ -3093,10 +3093,7 @@ MonoBehaviour:
   LayerNames:
   - Zombie
   - Character
-  objects:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  objects: []
 --- !u!114 &3072952313023229853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3143,6 +3140,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InitialStateID: 7
+  IdleStateID: 7
+  ChaseStateID: 5
   Config: {fileID: 11400000, guid: 47d5784ebbea6764c9260616fc53f452, type: 2}
   TimeToStartRoaming: 5
   RoamingRadius: 5

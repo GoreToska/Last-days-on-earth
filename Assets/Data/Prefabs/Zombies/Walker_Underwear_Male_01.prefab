@@ -9188,7 +9188,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9be43bcb0812a504e9c0ebae12f4625f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InitialStateID: 0
+  InitialStateID: 2
+  IdleStateID: 2
+  ChaseStateID: 0
   Config: {fileID: 11400000, guid: 553a50df333da904890695ee29dc19ad, type: 2}
   TimeToStartRoaming: 5
   RoamingRadius: 5
@@ -9271,7 +9273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0666203301eda55478435b0bd0535887, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  memorySpan: 10
+  memorySpan: 15
   distanceWeight: 3
   angleWeight: 0.5
   ageWeight: 3

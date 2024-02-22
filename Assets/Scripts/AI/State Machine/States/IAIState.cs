@@ -14,6 +14,7 @@ public enum AIStateID
     RangeIdle = 7,
     RangeRoaming = 8,
     Reload = 9,
+    GoTo = 10,
 }
 
 public interface IAIState

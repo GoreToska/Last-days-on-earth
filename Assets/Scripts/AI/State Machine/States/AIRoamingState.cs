@@ -5,47 +5,47 @@ using UnityEngine.AI;
 
 public class AIRoamingState : IAIState
 {
-    public void Enter(BaseAIAgent agent)
-    {
-        agent.NavMeshAgent.destination = RandomNavmeshLocation(agent.RoamingRadius, agent);
-    }
+	public void Enter(BaseAIAgent agent)
+	{
+		agent.NavMeshAgent.destination = RandomNavmeshLocation(agent.RoamingRadius, agent);
+	}
 
-    public void Exit(BaseAIAgent agent)
-    {
-    }
+	public void Exit(BaseAIAgent agent)
+	{
+	}
 
-    public AIStateID GetStateID()
-    {
-        return AIStateID.Roaming;
-    }
+	public AIStateID GetStateID()
+	{
+		return AIStateID.Roaming;
+	}
 
-    public void Update(BaseAIAgent agent)
-    {
-        if (agent.Sensor.Objects.Count > 0)
-        {
-            agent.StateMachine.ChangeState(AIStateID.ChasePlayer);
-        }
+	public void Update(BaseAIAgent agent)
+	{
+		if (agent.Sensor.Objects.Count > 0)
+		{
+			agent.StateMachine.ChangeState(AIStateID.ChasePlayer);
+		}
 
-        if (agent.NavMeshAgent.pathStatus == NavMeshPathStatus.PathComplete)
-        {
-            agent.StateMachine.ChangeState(AIStateID.Idle);
-        }
-    }
+		if (agent.NavMeshAgent.pathStatus == NavMeshPathStatus.PathComplete)
+		{
+			agent.StateMachine.ChangeState(AIStateID.Idle);
+		}
+	}
 
-    public Vector3 RandomNavmeshLocation(float radius, BaseAIAgent agent)
-    {
-        Vector3 randomDirection = Random.insideUnitSphere * radius;
-        randomDirection += agent.transform.position;
-        NavMeshHit hit;
-        Vector3 finalPosition = Vector3.zero;
-        
-        if (NavMesh.SamplePosition(randomDirection, out hit, radius, 1))
-        {
-            finalPosition = hit.position;
-        }
+	public Vector3 RandomNavmeshLocation(float radius, BaseAIAgent agent)
+	{
+		Vector3 randomDirection = Random.insideUnitSphere * radius;
+		randomDirection += agent.transform.position;
+		NavMeshHit hit;
+		Vector3 finalPosition = Vector3.zero;
 
-        return finalPosition;
-    }
+		if (NavMesh.SamplePosition(randomDirection, out hit, radius, 1))
+		{
+			finalPosition = hit.position;
+		}
+
+		return finalPosition;
+	}
 }
 
 public class AIRangeRoamingState : IAIState
@@ -53,6 +53,7 @@ public class AIRangeRoamingState : IAIState
 	public void Enter(BaseAIAgent agent)
 	{
 		agent.NavMeshAgent.destination = RandomNavmeshLocation(agent.RoamingRadius, agent);
+		agent.NavMeshAgent.isStopped = false;
 	}
 
 	public void Exit(BaseAIAgent agent)
@@ -66,15 +67,12 @@ public class AIRangeRoamingState : IAIState
 
 	public void Update(BaseAIAgent agent)
 	{
-		if (agent.Sensor.Objects.Count > 0)
+		if (agent.TargetSystem.HasTarget)
 		{
 			agent.StateMachine.ChangeState(AIStateID.RangeChasePlayer);
 		}
 
-		if (agent.NavMeshAgent.pathStatus == NavMeshPathStatus.PathComplete)
-		{
-			agent.StateMachine.ChangeState(AIStateID.RangeIdle);
-		}
+		agent.StateMachine.ChangeState(AIStateID.RangeIdle);
 	}
 
 	public Vector3 RandomNavmeshLocation(float radius, BaseAIAgent agent)

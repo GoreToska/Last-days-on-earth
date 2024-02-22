@@ -5,6 +5,7 @@ public class AIRangeIdleState : IAIState
 	private float timer = 0f;
 	public void Enter(BaseAIAgent agent)
 	{
+		agent.NavMeshAgent.isStopped = true;
 	}
 
 	public void Exit(BaseAIAgent agent)
@@ -19,7 +20,7 @@ public class AIRangeIdleState : IAIState
 
 	public void Update(BaseAIAgent agent)
 	{
-		if (agent.Sensor.Objects.Count > 0)
+		if (agent.Sensor.Objects.Count > 0 || agent.TargetSystem.HasTarget)
 		{
 			agent.StateMachine.ChangeState(AIStateID.RangeChasePlayer);
 			return;

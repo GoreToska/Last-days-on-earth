@@ -8,6 +8,9 @@ public class AIMeleeChaseState : IAIState
 	{
 		agent.NavMeshAgent.isStopped = false;
 		agent.Animator.CrossFade("Blend Tree", 0.1f);
+
+		if (agent.TargetSystem.HasTarget)
+			agent.NavMeshAgent.destination = agent.TargetSystem.TargetPosition;
 	}
 
 	public void Exit(BaseAIAgent agent)
@@ -28,7 +31,7 @@ public class AIMeleeChaseState : IAIState
 		}
 		else
 		{
-			if (!agent.TargetSystem.HasTarget && !agent.NavMeshAgent.pathPending)
+			if (!agent.TargetSystem.HasTarget)
 			{
 				agent.StateMachine.ChangeState(AIStateID.Idle);
 				return;

@@ -5,6 +5,8 @@ using UnityEngine.AI;
 public class BaseAIAgent : MonoBehaviour
 {
 	public AIStateID InitialStateID;
+	public AIStateID IdleStateID;
+	public AIStateID ChaseStateID;
 	public AIAgentConfig Config;
 	public float TimeToStartRoaming = 5f;
 	public float RoamingRadius = 5f;
@@ -51,8 +53,11 @@ public class BaseAIAgent : MonoBehaviour
 
 	public void AddTarget(GameObject target, float score)
 	{
-		Sensor.AddTarget(target.transform.root.gameObject);
+		Sensor.AddTarget(target);
 		TargetSystem.AddMemory(target, score);
+
+		if (StateMachine.currentStateID == IdleStateID)
+			StateMachine.ChangeState(ChaseStateID);
 	}
 
 	private IEnumerator DestroyObject(float time)

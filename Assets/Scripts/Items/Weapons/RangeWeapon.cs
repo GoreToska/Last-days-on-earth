@@ -48,7 +48,7 @@ public abstract class RangeWeapon : MonoBehaviour, IRangeWeapon
 	{
 		if (weaponData.IsAuto)
 		{
-			while (PlayerInputManager.Instance.IsShooting)   
+			while (PlayerInputManager.Instance.IsShooting)
 			{
 				if (bullets == 0)
 				{
@@ -126,6 +126,8 @@ public abstract class RangeWeapon : MonoBehaviour, IRangeWeapon
 	protected virtual IEnumerator PlayTrail(Vector3 startPoint, Vector3 endPoint, RaycastHit hit)
 	{
 		muzzleFlash.Play();
+		NoiseManager.Instance.MakeNouse(weaponData.ShotVolumeRadius, transform.root.gameObject);
+
 		TrailRenderer instance = trailRendererPool.Get();
 		instance.gameObject.SetActive(true);
 		instance.transform.position = startPoint;
