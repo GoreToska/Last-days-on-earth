@@ -20,8 +20,11 @@ public class PlayerEquipment : MonoBehaviour
 	private InventoryItemData _currentInventoryItemData;
 	public IRangeWeapon _currentRangeWeapon;
 
+	public PlayerStatusManager _statusManager;
 	private PlayerInventoryHolder _inventoryHolder;
 	private PlayerAnimationManager _animationManager;
+
+	public PlayerStatusManager StatusManager => _statusManager;
 	public PlayerAnimationManager AnimationManager => _animationManager;
 	public PlayerInventoryHolder InventoryHolder => _inventoryHolder;
 
@@ -36,6 +39,7 @@ public class PlayerEquipment : MonoBehaviour
 			Destroy(gameObject);
 		}
 
+		_statusManager = GetComponent<PlayerStatusManager>();
 		_inventoryHolder = GetComponent<PlayerInventoryHolder>();
 		_animationManager = GetComponent<PlayerAnimationManager>();
 	}
