@@ -8,6 +8,8 @@ TagManager:
   - Damagable
   - Concrete
   - Metal
+  - Grass
+  - Dirt
   layers:
   - Default
   - TransparentFX

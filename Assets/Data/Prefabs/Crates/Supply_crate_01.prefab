@@ -20,7 +20,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &3267402828883270792
 Transform:
@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bef53d3ce6743f24eb8d8436e44c7296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _id: c113cb77-5b15-4522-a4ad-ee48c090885f
+  _id: 2757e3d4-f14b-4a69-9599-64c34f39733a
 --- !u!135 &5956258272343045566
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -162,7 +162,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &3267873889088199264
 Transform:

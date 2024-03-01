@@ -16,7 +16,6 @@ MonoBehaviour:
   <ImpactType>k__BackingField: 1
   <EffectPrefab>k__BackingField: {fileID: 7729525872787019002, guid: 4f703a1da613efc43b08b1d2bdcfd49f,
     type: 3}
-  <SoundEffect>k__BackingField: {fileID: 8300000, guid: 7fe402747d228d34a8e573e18dcd5650,
-    type: 3}
+  <SoundEffects>k__BackingField: []
   MinDistance: 10
   MaxDistance: 16

@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b435f9c7c8e92540a8b516f285afbee, type: 3}
+  m_Name: Dirt Footstep
+  m_EditorClassIdentifier: 
+  <SurfaceTag>k__BackingField: Dirt
+  <ImpactType>k__BackingField: 0
+  <EffectPrefab>k__BackingField: {fileID: 208257655783745914, guid: 2397083e876e5b1408fcc1333f50c082,
+    type: 3}
+  <SoundEffects>k__BackingField:
+  - {fileID: 8300000, guid: e6b34e9e8a8e6d34dad00c427bdcabea, type: 3}
+  - {fileID: 8300000, guid: 1e9c2fc054ad64d48a26c72465cad50c, type: 3}
+  - {fileID: 8300000, guid: 391d6aa2a13309049b4f957e3d0ff21d, type: 3}
+  - {fileID: 8300000, guid: ec79d65bf59277948937af3eed2021ec, type: 3}
+  - {fileID: 8300000, guid: 419062c8a9515fc4383c8c8ff8777128, type: 3}
+  - {fileID: 8300000, guid: 748cb61836fdeba4db674dc1da3734d2, type: 3}
+  - {fileID: 8300000, guid: 2a618502103e2c240963e732f6908b09, type: 3}
+  - {fileID: 8300000, guid: 2b81859fee15f2a45a29c4d495a09ba8, type: 3}
+  MinDistance: 1
+  MaxDistance: 15

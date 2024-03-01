@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b435f9c7c8e92540a8b516f285afbee, type: 3}
+  m_Name: Grass Footstep
+  m_EditorClassIdentifier: 
+  <SurfaceTag>k__BackingField: Grass
+  <ImpactType>k__BackingField: 0
+  <EffectPrefab>k__BackingField: {fileID: 208257655783745914, guid: 2397083e876e5b1408fcc1333f50c082,
+    type: 3}
+  <SoundEffects>k__BackingField:
+  - {fileID: 8300000, guid: 09b3b76d664623246b3d151851071a08, type: 3}
+  - {fileID: 8300000, guid: cd692440ad1825249adaea4a5fc67178, type: 3}
+  - {fileID: 8300000, guid: 6281e5b778477a54d83cb50655412fe4, type: 3}
+  - {fileID: 8300000, guid: a6de3c793b86e9f4ab2bc0587ac2bc9c, type: 3}
+  - {fileID: 8300000, guid: 6ac2759514d20af498b94bffa4116188, type: 3}
+  - {fileID: 8300000, guid: 274f4ce413613e14486aa4957a42c92a, type: 3}
+  - {fileID: 8300000, guid: c411e9ffbc117a849a1517868a21b8b6, type: 3}
+  - {fileID: 8300000, guid: bb3101cdf5c35564d88387c14052d8d5, type: 3}
+  MinDistance: 1
+  MaxDistance: 15

@@ -20,7 +20,7 @@ public class PlayerEquipment : MonoBehaviour
 	private InventoryItemData _currentInventoryItemData;
 	public IRangeWeapon _currentRangeWeapon;
 
-	public PlayerStatusManager _statusManager;
+	private PlayerStatusManager _statusManager;
 	private PlayerInventoryHolder _inventoryHolder;
 	private PlayerAnimationManager _animationManager;
 

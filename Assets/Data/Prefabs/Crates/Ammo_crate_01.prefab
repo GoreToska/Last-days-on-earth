@@ -16,7 +16,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1187199892128834785
 Transform:
@@ -104,7 +104,7 @@ GameObject:
   m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1186974334524697455
 Transform:
@@ -203,7 +203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bef53d3ce6743f24eb8d8436e44c7296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _id: 1b1619f7-6209-42bf-9016-441aa049f4ba
+  _id: 68a4be6d-830c-466f-9e3d-6d7dfb991f2d
 --- !u!65 &2115349377448834954
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -228,5 +228,5 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}

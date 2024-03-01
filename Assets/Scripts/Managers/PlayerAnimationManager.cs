@@ -79,7 +79,6 @@ public class PlayerAnimationManager : MonoBehaviour
         switch (type)
         {
             case WeaponType.Range_Primary:
-                Debug.Log("Set");
                 animator.SetTrigger(RifleWalkTrigger);
                 SetRifleRig();
                 break;

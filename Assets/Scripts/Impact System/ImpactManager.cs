@@ -27,7 +27,6 @@ public class ImpactManager : MonoBehaviour
 
 		if (impact == null)
 		{
-			//PlayEffect(hitPoint, hitNormal, DefaultImpact);
 			Debug.LogWarning("No impact");
 		}
 		else
@@ -44,6 +43,6 @@ public class ImpactManager : MonoBehaviour
 
 		// TODO: randomize rotation
 
-		SFXManager.Instance.PlaySoundEffect(hitPoint, impact.SoundEffect, impact.MaxDistance);
+		SFXManager.Instance.PlaySoundEffect(hitPoint, impact.SoundEffects[Random.Range(0, impact.SoundEffects.Count)], impact.MaxDistance);
 	}
 }

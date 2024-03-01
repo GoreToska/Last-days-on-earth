@@ -26,7 +26,7 @@ public class InventorySystem
     {
         if (ContainsItem(itemToAdd, out List<InventorySlot> itemSlots)) // check if item exists in inventory
         {
-            foreach (var slot in itemSlots)
+			foreach (var slot in itemSlots)
             {
                 if (slot.SpaceLeftInStack(amount))
                 {
@@ -34,7 +34,6 @@ public class InventorySystem
                     OnInventorySlotChanged?.Invoke(slot);
 
                     return true;
-
                 }
             }
         }

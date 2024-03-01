@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using UnityEngine;
 
 public class NoiseManager : MonoBehaviour
@@ -22,9 +23,10 @@ public class NoiseManager : MonoBehaviour
 
 	public void MakeNouse(float radius, GameObject noiseTarget)
 	{
+		Array.Clear(_targets, 0, 20);
 		Physics.OverlapSphereNonAlloc(noiseTarget.transform.position, radius, _targets, _targetLayers);
 		
-		if(_targets.Length == 0)
+		if (_targets[0] == null)
 		{
 			return;
 		}
