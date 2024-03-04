@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
+[RequireComponent(typeof(AudioSource))]
 public abstract class RangeWeapon : MonoBehaviour, IRangeWeapon
 {
 	[Header("Weapon options")]
@@ -14,6 +15,7 @@ public abstract class RangeWeapon : MonoBehaviour, IRangeWeapon
 
 	protected ParticleSystem particleSystem;
 	protected ObjectPool<TrailRenderer> trailRendererPool;
+	protected AudioSource audioSource;
 
 	private float _shotTimer = 0f;
 	private float _currentRecoil = 0f;
@@ -42,6 +44,7 @@ public abstract class RangeWeapon : MonoBehaviour, IRangeWeapon
 		particleSystem = GetComponentInChildren<ParticleSystem>();
 		trailRendererPool = new ObjectPool<TrailRenderer>(CreateTrail);
 		_recoilStop = weaponData.RecoilStopShot * weaponData.Recoil;
+		audioSource = GetComponent<AudioSource>();
 	}
 
 	protected virtual IEnumerator ShotCoroutine()
@@ -183,6 +186,7 @@ public abstract class RangeWeapon : MonoBehaviour, IRangeWeapon
 		{
 			bullets += actualAmount;
 			playerAnimation.PlayReloadAnimation(weaponData.reloadAnimation.name);
+			audioSource.PlayOneShot(weaponData.WeaponSFXConfig.ReloadSound);
 		}
 	}
 

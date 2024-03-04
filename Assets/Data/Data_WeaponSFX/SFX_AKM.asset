@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ShotSound>k__BackingField: {fileID: 8300000, guid: 8290af38e77b6cd4ab526ddad2d9a75e,
     type: 3}
-  <ReloadSound>k__BackingField: {fileID: 8300000, guid: cdebbd691d1e7c748955b62cef466831,
+  <ReloadSound>k__BackingField: {fileID: 8300000, guid: 64e2d85311af59643b1cd1bf71541911,
     type: 3}
   <MaxShotSoundDistance>k__BackingField: 40
   <MaxReloadSoundDistance>k__BackingField: 20

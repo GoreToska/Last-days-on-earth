@@ -9036,6 +9036,8 @@ GameObject:
   - component: {fileID: 1629728310067480616}
   - component: {fileID: 1316148189926809860}
   - component: {fileID: 1850914074}
+  - component: {fileID: 1895349903}
+  - component: {fileID: 1895349902}
   m_Layer: 3
   m_Name: Walker_Underwear_Male_01
   m_TagString: Damagable
@@ -9294,6 +9296,131 @@ MonoBehaviour:
     m_Bits: 1
   _leftLeg: {fileID: 4044652400442154}
   _rightLeg: {fileID: 4475475727557206}
+--- !u!82 &1895349903
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1965423065467750}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 20
+  Pan2D: 0
+  rolloffMode: 2
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &1895349902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1965423065467750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b02e6f12dbd80f044abd40e36967323d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _idleVoice:
+  - {fileID: 8300000, guid: e5f253cb3f3172941b20730bbd28b628, type: 3}
+  - {fileID: 8300000, guid: 36277bb724ecd5c4d871293970362204, type: 3}
+  - {fileID: 8300000, guid: c28061cee4bed074b82926dbf94e42f8, type: 3}
+  - {fileID: 8300000, guid: bc3104947dcd4c244b8b21826beed3ed, type: 3}
+  - {fileID: 8300000, guid: abee6c89e0a8e1741aa60a135bc8809a, type: 3}
+  - {fileID: 8300000, guid: 3bf426377c3d6e94ea92adc104cafba7, type: 3}
+  - {fileID: 8300000, guid: 059ceaf10bc5c0141bf65742f87f8814, type: 3}
+  _agroVoice: []
+  _deadVoice:
+  - {fileID: 8300000, guid: 4f68eaf673c5916468748e35ec25200f, type: 3}
+  - {fileID: 8300000, guid: c4460700891a65f4293df922d4efaa37, type: 3}
+  - {fileID: 8300000, guid: adab35432dd06d94fa08ac3e12a83e0c, type: 3}
+  - {fileID: 8300000, guid: 08517d103c984604db46908035a4a51e, type: 3}
+  - {fileID: 8300000, guid: 921b6217040e40344bf8b8f1a6861c31, type: 3}
+  _painEffectVoice: []
+  _idleVoiceTime: 5
 --- !u!1 &1965466310304604
 GameObject:
   m_ObjectHideFlags: 0

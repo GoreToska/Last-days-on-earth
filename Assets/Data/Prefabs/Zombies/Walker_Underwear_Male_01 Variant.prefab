@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1895349903, guid: 46e3fad9d63edad4e95366d675950f78, type: 3}
+      propertyPath: MaxDistance
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 1347648639405852, guid: 46e3fad9d63edad4e95366d675950f78, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -17,7 +21,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1965423065467750, guid: 46e3fad9d63edad4e95366d675950f78, type: 3}
       propertyPath: m_Name
-      value: Walker_Underwear_Male_01
+      value: Walker_Underwear_Male_01 Variant
       objectReference: {fileID: 0}
     - target: {fileID: 4378302944070100, guid: 46e3fad9d63edad4e95366d675950f78, type: 3}
       propertyPath: m_RootOrder
@@ -25,15 +29,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4378302944070100, guid: 46e3fad9d63edad4e95366d675950f78, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 112.85748
+      value: 4.0853996
       objectReference: {fileID: 0}
     - target: {fileID: 4378302944070100, guid: 46e3fad9d63edad4e95366d675950f78, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.884
       objectReference: {fileID: 0}
     - target: {fileID: 4378302944070100, guid: 46e3fad9d63edad4e95366d675950f78, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.6136208
+      value: 34.044167
       objectReference: {fileID: 0}
     - target: {fileID: 4378302944070100, guid: 46e3fad9d63edad4e95366d675950f78, type: 3}
       propertyPath: m_LocalRotation.w

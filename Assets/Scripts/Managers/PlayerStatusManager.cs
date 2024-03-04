@@ -18,8 +18,9 @@ public class PlayerStatusManager : CharacterStatusManager, IDamagable
     public static event UnityAction<float, float> TakeDamageEvent = delegate { };
     public static event UnityAction DeathEvent = delegate { };
     public static event UnityAction FatigueEvent = delegate { };
+	public event UnityAction OnDeath;
 
-    public override void Start()
+	public override void Start()
     {
         SetHP(hp);
         SetStamina(stamina);

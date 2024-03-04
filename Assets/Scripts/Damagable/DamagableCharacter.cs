@@ -10,6 +10,7 @@ public class DamagableCharacter : MonoBehaviour
 	[SerializeField] protected float _maxHP = 100f;
 	[SerializeField] protected float _hp = 100f;
 
+	public event UnityAction OnDeath;
 	public UnityAction<GameObject> OnTakeDamageEvent;
 
 	protected Ragdoll _ragdoll;
@@ -63,6 +64,9 @@ public class DamagableCharacter : MonoBehaviour
 			_isDead = true;
 			_ragdoll.EnableRagdoll();
 			_agent.SetDeadState();
+			
+			// Move this ^ to event reaction
+			OnDeath.Invoke();
 
 			// TODO: move it somewhere else :)
 			Debug.Log("TODO");
