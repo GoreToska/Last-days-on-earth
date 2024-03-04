@@ -106,7 +106,7 @@ public class InventorySlot : ISerializationCallbackReceiver
         {
             return;
         }
-
+        
         var db = Resources.Load<Database>("Item Database");
         ItemData = db.GetItem(_itemID);
     }
