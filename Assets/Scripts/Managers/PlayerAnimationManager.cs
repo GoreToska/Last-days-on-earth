@@ -69,9 +69,9 @@ public class PlayerAnimationManager : MonoBehaviour
 
     private void UpdateAnimation()
     {
-        animator.SetFloat("Speed", PlayerInputManager.Instance.MoveAmount, 0.1f, Time.deltaTime);
-        animator.SetFloat("HorizontalSpeed", PlayerMovementManager.Instance.HorizontalSpeed, 0.1f, Time.deltaTime);
-        animator.SetFloat("VerticalSpeed", PlayerMovementManager.Instance.VerticalSpeed, 0.1f, Time.deltaTime);
+        animator.SetFloat("Speed", PlayerInputManager.Instance.MoveAmount, 0.05f, Time.deltaTime);
+        animator.SetFloat("HorizontalSpeed", PlayerMovementManager.Instance.HorizontalSpeed, 0.02f, Time.deltaTime);
+        animator.SetFloat("VerticalSpeed", PlayerMovementManager.Instance.VerticalSpeed, 0.02f, Time.deltaTime);
     }
 
     public void SetWeaponAnimationPattern(WeaponType type)
