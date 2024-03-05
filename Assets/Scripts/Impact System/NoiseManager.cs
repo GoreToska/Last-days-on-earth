@@ -33,7 +33,8 @@ public class NoiseManager : MonoBehaviour
 
 		foreach (Collider target in _targets)
 		{
-			Debug.Log(target.transform.root.gameObject);
+			if(target == null) continue;
+
 			if (target.transform.root.TryGetComponent<BaseAIAgent>(out var component))
 			{
 				component.AddTarget(noiseTarget, 100f);

@@ -329,8 +329,8 @@ MonoBehaviour:
   IdleStateID: 2
   ChaseStateID: 0
   Config: {fileID: 11400000, guid: 8e992cb4fd1aab34d8ae243c5012d731, type: 2}
-  TimeToStartRoaming: 5
-  RoamingRadius: 5
+  TimeToStartRoaming: 10
+  RoamingRadius: 3
   GroundMask:
     serializedVersion: 2
     m_Bits: 1

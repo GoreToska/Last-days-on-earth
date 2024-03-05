@@ -66,7 +66,7 @@ public class DamagableCharacter : MonoBehaviour
 			_agent.SetDeadState();
 			
 			// Move this ^ to event reaction
-			OnDeath.Invoke();
+			OnDeath?.Invoke();
 
 			// TODO: move it somewhere else :)
 			Debug.Log("TODO");
