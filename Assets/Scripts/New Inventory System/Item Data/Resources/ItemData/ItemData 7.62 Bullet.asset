@@ -17,7 +17,7 @@ MonoBehaviour:
   <Description>k__BackingField: "\u041F\u0430\u0442\u0440\u043E\u043D 7.62x39 \u0434\u043B\u044F
     \u043A\u0440\u0443\u043F\u043D\u043E\u043A\u0430\u043B\u0438\u0431\u0435\u0440\u043D\u044B\u0445
     \u0432\u0438\u043D\u0442\u043E\u0432\u043E\u043A."
-  <Icon>k__BackingField: {fileID: 21300000, guid: 9a9029abb4c4e2a409c2863c7bd58142,
+  <Icon>k__BackingField: {fileID: 21300000, guid: 28e7a967287ee814290123112f9817f2,
     type: 3}
   <MaxStackSize>k__BackingField: 60
   <CostValue>k__BackingField: 10

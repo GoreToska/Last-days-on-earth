@@ -38,20 +38,14 @@ public class GameSceneManager : MonoBehaviour
 
 	public void LoadScene(int index)
 	{
-		LoadLoadingScene();
-
-		loadingSceneOperation = SceneManager.LoadSceneAsync(index);
+		loadingSceneOperation = SceneManager.LoadSceneAsync(LoadingScene);
+		loadingSceneOperation.completed += i => loadingSceneOperation = SceneManager.LoadSceneAsync(index);
 		//loadingSceneOperation.allowSceneActivation = false;
 	}
 
 	public void EndLoadingAnimation()
 	{
 		loadingSceneOperation.allowSceneActivation = true;
-	}
-
-	public void LoadLoadingScene()
-	{
-		SceneManager.LoadSceneAsync(LoadingScene);
 	}
 
 	public void LoadMainMenuScene()

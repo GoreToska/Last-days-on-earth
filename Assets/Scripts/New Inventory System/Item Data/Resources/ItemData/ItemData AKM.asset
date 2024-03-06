@@ -16,7 +16,7 @@ MonoBehaviour:
   <DisplayName>k__BackingField: "\u0410\u041A\u041C"
   <Description>k__BackingField: "\u0421\u0442\u0430\u0440\u044B\u0439 \u0434\u043E\u0431\u0440\u044B\u0439
     \u0410\u041A\u041C."
-  <Icon>k__BackingField: {fileID: 21300000, guid: 1e2c9ea409eeccf4dbadbcb990d24473,
+  <Icon>k__BackingField: {fileID: 21300000, guid: d3d01a2e918eb3641aaa952471d47583,
     type: 3}
   <MaxStackSize>k__BackingField: 1
   <CostValue>k__BackingField: 1000
