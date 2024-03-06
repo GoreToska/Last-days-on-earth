@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4eff3e6dcd7b0742a1cf98534aa2103, type: 3}
-  m_Name: SFX_AKM
+  m_Name: SFX_M4
   m_EditorClassIdentifier: 
-  <ShotSound>k__BackingField: {fileID: 8300000, guid: 7ad18edfae9096b4db6b8169850699a6,
+  <ShotSound>k__BackingField: {fileID: 8300000, guid: 766b30f151b6b82409526cc2056d2685,
     type: 3}
   <ReloadSound>k__BackingField: {fileID: 8300000, guid: 64e2d85311af59643b1cd1bf71541911,
     type: 3}

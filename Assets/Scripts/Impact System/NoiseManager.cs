@@ -6,7 +6,7 @@ public class NoiseManager : MonoBehaviour
 {
 	[field: HideInInspector] public static NoiseManager Instance { get; private set; }
 	[SerializeField] private LayerMask _targetLayers;
-	private Collider[] _targets = new Collider[20];
+	private Collider[] _targets = new Collider[30];
 
 	private void Awake()
 	{
@@ -23,7 +23,7 @@ public class NoiseManager : MonoBehaviour
 
 	public void MakeNouse(float radius, GameObject noiseTarget)
 	{
-		Array.Clear(_targets, 0, 20);
+		Array.Clear(_targets, 0, _targets.Length);
 		Physics.OverlapSphereNonAlloc(noiseTarget.transform.position, radius, _targets, _targetLayers);
 		
 		if (_targets[0] == null)

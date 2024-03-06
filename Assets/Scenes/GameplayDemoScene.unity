@@ -3193,7 +3193,7 @@ PrefabInstance:
     - target: {fileID: 2942378781045690922, guid: 2fa5192b61995c143b84394625d89923,
         type: 3}
       propertyPath: m_RootOrder
-      value: 29
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 2942378781045690922, guid: 2fa5192b61995c143b84394625d89923,
         type: 3}
@@ -7260,7 +7260,7 @@ PrefabInstance:
     - target: {fileID: 3208894165361880991, guid: 46caff9a7fad9dd438b6e27359df55f4,
         type: 3}
       propertyPath: m_RootOrder
-      value: 20
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 3208894165361880991, guid: 46caff9a7fad9dd438b6e27359df55f4,
         type: 3}
@@ -7310,11 +7310,6 @@ PrefabInstance:
     - target: {fileID: 3208894165361880991, guid: 46caff9a7fad9dd438b6e27359df55f4,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7440416442295270319, guid: 46caff9a7fad9dd438b6e27359df55f4,
-        type: 3}
-      propertyPath: _debug
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -7869,7 +7864,7 @@ PrefabInstance:
     - target: {fileID: 2801480030941918948, guid: 724cfe0fda9a7e44bb7ebc23fb99d933,
         type: 3}
       propertyPath: m_RootOrder
-      value: 27
+      value: 26
       objectReference: {fileID: 0}
     - target: {fileID: 2801480030941918948, guid: 724cfe0fda9a7e44bb7ebc23fb99d933,
         type: 3}
@@ -7925,6 +7920,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Walker_Underwear_Male_01 Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 2803964380150068310, guid: 724cfe0fda9a7e44bb7ebc23fb99d933,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 724cfe0fda9a7e44bb7ebc23fb99d933, type: 3}
@@ -9451,7 +9451,7 @@ PrefabInstance:
     - target: {fileID: 3208894165361880991, guid: 46caff9a7fad9dd438b6e27359df55f4,
         type: 3}
       propertyPath: m_RootOrder
-      value: 18
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 3208894165361880991, guid: 46caff9a7fad9dd438b6e27359df55f4,
         type: 3}
@@ -11071,6 +11071,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7016853731878679088, guid: 4c48b2f32f2b283469b35b35c2a09a41,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 7018296817922784420, guid: 4c48b2f32f2b283469b35b35c2a09a41,
         type: 3}
       propertyPath: m_Name
@@ -11079,7 +11084,7 @@ PrefabInstance:
     - target: {fileID: 7020182389401664434, guid: 4c48b2f32f2b283469b35b35c2a09a41,
         type: 3}
       propertyPath: m_RootOrder
-      value: 19
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 7020182389401664434, guid: 4c48b2f32f2b283469b35b35c2a09a41,
         type: 3}
@@ -17414,7 +17419,7 @@ PrefabInstance:
     - target: {fileID: 2801480030941918948, guid: 724cfe0fda9a7e44bb7ebc23fb99d933,
         type: 3}
       propertyPath: m_RootOrder
-      value: 25
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 2801480030941918948, guid: 724cfe0fda9a7e44bb7ebc23fb99d933,
         type: 3}
@@ -17470,6 +17475,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Walker_Underwear_Male_01 Variant (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2803964380150068310, guid: 724cfe0fda9a7e44bb7ebc23fb99d933,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 724cfe0fda9a7e44bb7ebc23fb99d933, type: 3}
@@ -27901,7 +27911,7 @@ PrefabInstance:
     - target: {fileID: 5978145251247770938, guid: a96eef4c8537d4d48adcbb3c09fff296,
         type: 3}
       propertyPath: m_RootOrder
-      value: 22
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 5978145251247770938, guid: a96eef4c8537d4d48adcbb3c09fff296,
         type: 3}
@@ -27957,6 +27967,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Walker_Underwear_Female_01 Variant (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5980735152498282376, guid: a96eef4c8537d4d48adcbb3c09fff296,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a96eef4c8537d4d48adcbb3c09fff296, type: 3}
@@ -28746,6 +28761,80 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 16402694}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1594583053
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3206850219715094665, guid: 46caff9a7fad9dd438b6e27359df55f4,
+        type: 3}
+      propertyPath: m_Name
+      value: Raider_Male_01 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3208894165361880991, guid: 46caff9a7fad9dd438b6e27359df55f4,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 29
+      objectReference: {fileID: 0}
+    - target: {fileID: 3208894165361880991, guid: 46caff9a7fad9dd438b6e27359df55f4,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 23.43
+      objectReference: {fileID: 0}
+    - target: {fileID: 3208894165361880991, guid: 46caff9a7fad9dd438b6e27359df55f4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 3208894165361880991, guid: 46caff9a7fad9dd438b6e27359df55f4,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 3208894165361880991, guid: 46caff9a7fad9dd438b6e27359df55f4,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.48181483
+      objectReference: {fileID: 0}
+    - target: {fileID: 3208894165361880991, guid: 46caff9a7fad9dd438b6e27359df55f4,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3208894165361880991, guid: 46caff9a7fad9dd438b6e27359df55f4,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.87627304
+      objectReference: {fileID: 0}
+    - target: {fileID: 3208894165361880991, guid: 46caff9a7fad9dd438b6e27359df55f4,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3208894165361880991, guid: 46caff9a7fad9dd438b6e27359df55f4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3208894165361880991, guid: 46caff9a7fad9dd438b6e27359df55f4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -122.392
+      objectReference: {fileID: 0}
+    - target: {fileID: 3208894165361880991, guid: 46caff9a7fad9dd438b6e27359df55f4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7440416442295270319, guid: 46caff9a7fad9dd438b6e27359df55f4,
+        type: 3}
+      propertyPath: _debug
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 46caff9a7fad9dd438b6e27359df55f4, type: 3}
 --- !u!1001 &1596215440
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29071,6 +29160,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5361517959888282042, guid: 82a99d5ac5cfb6947852d3f5dbe751ae,
+        type: 3}
+      propertyPath: <AimMask>k__BackingField.m_Bits
+      value: 29209
       objectReference: {fileID: 0}
     - target: {fileID: 5361517959888282043, guid: 82a99d5ac5cfb6947852d3f5dbe751ae,
         type: 3}
@@ -29906,7 +30000,7 @@ PrefabInstance:
     - target: {fileID: 4852056602793443447, guid: d8ec982405b157c4186a1165242352ec,
         type: 3}
       propertyPath: m_RootOrder
-      value: 24
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 4852056602793443447, guid: d8ec982405b157c4186a1165242352ec,
         type: 3}
@@ -29962,6 +30056,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Walker_Underwear_Male_01 Variant 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853897729107182277, guid: d8ec982405b157c4186a1165242352ec,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d8ec982405b157c4186a1165242352ec, type: 3}
@@ -30350,18 +30449,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1895349903, guid: 46e3fad9d63edad4e95366d675950f78, type: 3}
-      propertyPath: OutputAudioMixerGroup
-      value: 
-      objectReference: {fileID: 4759801184138262009, guid: 17aadd23914f631499b193951901fa8d,
-        type: 2}
     - target: {fileID: 1965423065467750, guid: 46e3fad9d63edad4e95366d675950f78, type: 3}
       propertyPath: m_Name
       value: Walker_Underwear_Male_01
       objectReference: {fileID: 0}
     - target: {fileID: 4378302944070100, guid: 46e3fad9d63edad4e95366d675950f78, type: 3}
       propertyPath: m_RootOrder
-      value: 28
+      value: 27
       objectReference: {fileID: 0}
     - target: {fileID: 4378302944070100, guid: 46e3fad9d63edad4e95366d675950f78, type: 3}
       propertyPath: m_LocalPosition.x
@@ -30836,7 +30930,7 @@ PrefabInstance:
     - target: {fileID: 3208894165361880991, guid: 46caff9a7fad9dd438b6e27359df55f4,
         type: 3}
       propertyPath: m_RootOrder
-      value: 17
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 3208894165361880991, guid: 46caff9a7fad9dd438b6e27359df55f4,
         type: 3}
@@ -30905,7 +30999,7 @@ PrefabInstance:
     - target: {fileID: 3208894165361880991, guid: 46caff9a7fad9dd438b6e27359df55f4,
         type: 3}
       propertyPath: m_RootOrder
-      value: 16
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3208894165361880991, guid: 46caff9a7fad9dd438b6e27359df55f4,
         type: 3}
@@ -32292,9 +32386,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Walker_Underwear_Male_01 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1965423065467750, guid: 46e3fad9d63edad4e95366d675950f78, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4378302944070100, guid: 46e3fad9d63edad4e95366d675950f78, type: 3}
       propertyPath: m_RootOrder
-      value: 23
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 4378302944070100, guid: 46e3fad9d63edad4e95366d675950f78, type: 3}
       propertyPath: m_LocalPosition.x
@@ -35559,10 +35657,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Walker_Underwear_Male_01 (1) Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 7103044229673561701, guid: c7cd5669ced797649a9a124527aeb581,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7105097560657849559, guid: c7cd5669ced797649a9a124527aeb581,
         type: 3}
       propertyPath: m_RootOrder
-      value: 21
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7105097560657849559, guid: c7cd5669ced797649a9a124527aeb581,
         type: 3}
@@ -35622,80 +35725,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2025809188}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1938914084
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3206850219715094665, guid: 46caff9a7fad9dd438b6e27359df55f4,
-        type: 3}
-      propertyPath: m_Name
-      value: Raider_Male_01 (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 3208894165361880991, guid: 46caff9a7fad9dd438b6e27359df55f4,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 3208894165361880991, guid: 46caff9a7fad9dd438b6e27359df55f4,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 23.43
-      objectReference: {fileID: 0}
-    - target: {fileID: 3208894165361880991, guid: 46caff9a7fad9dd438b6e27359df55f4,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.88
-      objectReference: {fileID: 0}
-    - target: {fileID: 3208894165361880991, guid: 46caff9a7fad9dd438b6e27359df55f4,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -5.73
-      objectReference: {fileID: 0}
-    - target: {fileID: 3208894165361880991, guid: 46caff9a7fad9dd438b6e27359df55f4,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.48181483
-      objectReference: {fileID: 0}
-    - target: {fileID: 3208894165361880991, guid: 46caff9a7fad9dd438b6e27359df55f4,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3208894165361880991, guid: 46caff9a7fad9dd438b6e27359df55f4,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.87627304
-      objectReference: {fileID: 0}
-    - target: {fileID: 3208894165361880991, guid: 46caff9a7fad9dd438b6e27359df55f4,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3208894165361880991, guid: 46caff9a7fad9dd438b6e27359df55f4,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3208894165361880991, guid: 46caff9a7fad9dd438b6e27359df55f4,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -122.392
-      objectReference: {fileID: 0}
-    - target: {fileID: 3208894165361880991, guid: 46caff9a7fad9dd438b6e27359df55f4,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7440416442295270319, guid: 46caff9a7fad9dd438b6e27359df55f4,
-        type: 3}
-      propertyPath: _debug
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 46caff9a7fad9dd438b6e27359df55f4, type: 3}
 --- !u!1001 &1942141350
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36395,7 +36424,7 @@ PrefabInstance:
     - target: {fileID: 5978145251247770938, guid: a96eef4c8537d4d48adcbb3c09fff296,
         type: 3}
       propertyPath: m_RootOrder
-      value: 26
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 5978145251247770938, guid: a96eef4c8537d4d48adcbb3c09fff296,
         type: 3}
@@ -36450,12 +36479,17 @@ PrefabInstance:
     - target: {fileID: 5978859895666260577, guid: a96eef4c8537d4d48adcbb3c09fff296,
         type: 3}
       propertyPath: m_Volume
-      value: 0.6
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 5980735152498282376, guid: a96eef4c8537d4d48adcbb3c09fff296,
         type: 3}
       propertyPath: m_Name
       value: Walker_Underwear_Female_01 Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 5980735152498282376, guid: a96eef4c8537d4d48adcbb3c09fff296,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a96eef4c8537d4d48adcbb3c09fff296, type: 3}
@@ -37414,6 +37448,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Noise Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 5854015978446403117, guid: ca5a7203c3720cb49853f5198bcc82e5,
+        type: 3}
+      propertyPath: _targetLayers.m_Bits
+      value: 24576
       objectReference: {fileID: 0}
     - target: {fileID: 5854015978446403118, guid: ca5a7203c3720cb49853f5198bcc82e5,
         type: 3}

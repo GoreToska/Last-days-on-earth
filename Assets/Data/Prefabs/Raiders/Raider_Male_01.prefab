@@ -217,7 +217,7 @@ GameObject:
   - component: {fileID: 7440416442295270319}
   - component: {fileID: 7440416442295270320}
   - component: {fileID: 7440416442295270321}
-  m_Layer: 9
+  m_Layer: 13
   m_Name: Raider_Male_01
   m_TagString: Damagable
   m_Icon: {fileID: 0}
@@ -6317,7 +6317,7 @@ GameObject:
   - component: {fileID: 5595113257825331949}
   - component: {fileID: 5039831111703107106}
   - component: {fileID: 2365477942514669650}
-  m_Layer: 9
+  m_Layer: 13
   m_Name: Hips
   m_TagString: Damagable
   m_Icon: {fileID: 0}

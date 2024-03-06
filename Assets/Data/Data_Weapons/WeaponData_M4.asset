@@ -26,4 +26,4 @@ MonoBehaviour:
   IsAuto: 1
   DrawSight: 0
   TrailRenderer: {fileID: 11400000, guid: 802ef637ed22cea458f99beaf4209c1a, type: 2}
-  WeaponSFXConfig: {fileID: 11400000, guid: 94252aa9e38022e4d86e03ea5f9a6641, type: 2}
+  WeaponSFXConfig: {fileID: 11400000, guid: e85412320edb3a646b1ad2e66fb1fbfa, type: 2}

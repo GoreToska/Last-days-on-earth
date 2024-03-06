@@ -7085,7 +7085,7 @@ GameObject:
   - component: {fileID: 917002710}
   - component: {fileID: 917002709}
   - component: {fileID: 917002711}
-  m_Layer: 3
+  m_Layer: 14
   m_Name: Hips
   m_TagString: Damagable
   m_Icon: {fileID: 0}
@@ -9038,7 +9038,7 @@ GameObject:
   - component: {fileID: 1850914074}
   - component: {fileID: 1895349903}
   - component: {fileID: 1895349902}
-  m_Layer: 3
+  m_Layer: 14
   m_Name: Walker_Underwear_Male_01
   m_TagString: Damagable
   m_Icon: {fileID: 0}
@@ -9305,10 +9305,11 @@ AudioSource:
   m_GameObject: {fileID: 1965423065467750}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 4759801184138262009, guid: 17aadd23914f631499b193951901fa8d,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.6
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0

@@ -34,5 +34,10 @@ namespace GoreToska
         {
             _audioSource.pitch = pitch;
         }
+
+        public void SetVolume(float volume)
+        {
+            _audioSource.volume = volume;
+        }
     }
 }

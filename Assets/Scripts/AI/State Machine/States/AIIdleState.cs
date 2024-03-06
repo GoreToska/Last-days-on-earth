@@ -21,8 +21,9 @@ public class AIIdleState : IAIState
 
     public void Update(BaseAIAgent agent)
     {
-        if (agent.Sensor.Objects.Count > 0)
+        if (agent.Sensor.Objects.Count > 0 || agent.TargetSystem.HasTarget)
         {
+            Debug.Log("Have Target Now");
             agent.StateMachine.ChangeState(AIStateID.ChasePlayer);
             return;
         }

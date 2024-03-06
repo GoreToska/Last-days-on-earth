@@ -116,7 +116,10 @@ public class AIRangeWeapon : MonoBehaviour, IAIRangeWeapon
 		bullets--;
 		transform.root.LookAt(target.transform, Vector3.up);
 
-		SFXManager.Instance.PlaySoundEffect(burrel.transform.position, weaponData.WeaponSFXConfig.ShotSound, weaponData.WeaponSFXConfig.MaxShotSoundDistance);
+		SFXManager.Instance.PlaySoundEffect(burrel.transform.position, 
+			weaponData.WeaponSFXConfig.ShotSound, 
+			weaponData.WeaponSFXConfig.MaxShotSoundDistance, 
+			weaponData.WeaponSFXConfig.Volume);
 
 		Vector3 recoiledPosition = target.transform.position + new Vector3(
 			Random.Range(-_currentRecoil, _currentRecoil),

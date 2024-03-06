@@ -92,7 +92,10 @@ public abstract class RangeWeapon : MonoBehaviour, IRangeWeapon
 	{
 		bullets--;
 
-		SFXManager.Instance.PlaySoundEffect(burrel.transform.position, weaponData.WeaponSFXConfig.ShotSound, weaponData.WeaponSFXConfig.MaxShotSoundDistance);
+		SFXManager.Instance.PlaySoundEffect(burrel.transform.position, 
+			weaponData.WeaponSFXConfig.ShotSound, 
+			weaponData.WeaponSFXConfig.MaxShotSoundDistance, 
+			weaponData.WeaponSFXConfig.Volume);
 
 		var (success, position) = PlayerInputManager.Instance.GetMousePosition();
 

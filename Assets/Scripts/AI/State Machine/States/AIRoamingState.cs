@@ -21,7 +21,7 @@ public class AIRoamingState : IAIState
 
 	public void Update(BaseAIAgent agent)
 	{
-		if (agent.Sensor.Objects.Count > 0)
+		if (agent.Sensor.Objects.Count > 0 || agent.TargetSystem.HasTarget)
 		{
 			agent.StateMachine.ChangeState(AIStateID.ChasePlayer);
 		}
