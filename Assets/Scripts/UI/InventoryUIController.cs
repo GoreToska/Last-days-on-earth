@@ -17,7 +17,6 @@ public class InventoryUIController : MonoBehaviour
 
     private void OnEnable()
     {
-        //PlayerInventoryHolder.OnPlayerInventoryChanged += DisplayPlayerBackpack;
         PlayerInputManager.CloseInventoryEvent += () => { CloseInventory(); CloseChest(); };
         PlayerInputManager.AlternativeCloseInventoryEvent += () => { CloseInventory(); CloseChest(); };
         InventoryHolder.OnDinamicInventoryDisplayRequested += DisplayInventory;
@@ -25,7 +24,6 @@ public class InventoryUIController : MonoBehaviour
 
     private void OnDisable()
     {
-        //PlayerInventoryHolder.OnPlayerInventoryChanged -= DisplayPlayerBackpack;
         PlayerInputManager.CloseInventoryEvent -= () => { CloseInventory(); CloseChest(); };
         PlayerInputManager.AlternativeCloseInventoryEvent -= () => { CloseInventory(); CloseChest(); };
         InventoryHolder.OnDinamicInventoryDisplayRequested -= DisplayInventory;
@@ -58,10 +56,12 @@ public class InventoryUIController : MonoBehaviour
     private void CloseInventory()
     {
         _playerBackpackPanel.gameObject.SetActive(false);
-    }
+		DescriptionManager.Instance.HideDescriptionPanel();
+	}
 
     private void CloseChest()
     {
         _inventoryPanel.gameObject.SetActive(false);
-    }
+		DescriptionManager.Instance.HideDescriptionPanel();
+	}
 }

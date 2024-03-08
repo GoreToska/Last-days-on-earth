@@ -10,6 +10,7 @@ public class DescriptionManager : MonoBehaviour
 	[SerializeField] private RectTransform _descriptionObject;
 	[SerializeField] private TMP_Text _itemName;
 	[SerializeField] private TMP_Text _description;
+	[SerializeField] private Vector2 _offset;
 
 	private float _objectWidth;
 	private float _objectHeight;
@@ -52,7 +53,7 @@ public class DescriptionManager : MonoBehaviour
 
 	private Vector2 SetPosition(Vector2 position)
 	{
-		Vector2 newPosition = position;
+		Vector2 newPosition = position + _offset;
 
 		if (position.x + _objectWidth >= Screen.width)
 		{
