@@ -143,7 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bef53d3ce6743f24eb8d8436e44c7296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _id: 34a43585-0b76-43a5-b828-ed217c25414c
+  _id: a07eb3e0-c778-482f-ba8a-cb7e6e072e2a
 --- !u!114 &2531794579851001820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,6 +158,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ItemData>k__BackingField: {fileID: 11400000, guid: f0041f86efa6b9b46b227cbbe295489d,
     type: 2}
-  _count: 1
+  _count: 20
   _interactableHighlightConfig: {fileID: 11400000, guid: c1eab1ce9b906ec41be5ea27311a0e7f,
     type: 2}

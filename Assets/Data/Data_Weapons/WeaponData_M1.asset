@@ -22,7 +22,7 @@ MonoBehaviour:
     type: 3}
   RecoilStopShot: 5
   MagazineSize: 8
-  ShotVolumeRadius: 12
+  ShotVolumeRadius: 30
   IsAuto: 0
   DrawSight: 0
   TrailRenderer: {fileID: 11400000, guid: 802ef637ed22cea458f99beaf4209c1a, type: 2}
