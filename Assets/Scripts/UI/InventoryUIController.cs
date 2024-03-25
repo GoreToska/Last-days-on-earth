@@ -9,7 +9,7 @@ public class InventoryUIController : MonoBehaviour
     [SerializeField] private DinamicInventoryDisplay _inventoryPanel;
     [SerializeField] private PlayerInventoryHolder _playerInventory;
 
-    private void Awake()
+    private void Start()
     {
         CloseChest();
         CloseInventory();

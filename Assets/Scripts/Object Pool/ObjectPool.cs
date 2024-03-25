@@ -20,6 +20,11 @@ namespace GoreToska
             AvailableObjectsPool = new List<PoolableObject>(Size);
         }
 
+        ~ObjectPool()
+        {
+            ObjectPools.Clear();
+		}
+
         public static ObjectPool CreateInstance(PoolableObject Prefab, int Size)
         {
             ObjectPool pool = null;

@@ -34,11 +34,6 @@ public class CameraActions : MonoBehaviour
         zoomValue = _currentCamera.m_Lens.OrthographicSize;
     }
 
-    private void Start()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
-
     private void OnEnable()
     {
         PlayerInputManager.MouseScroll += SetscrollValueValue;

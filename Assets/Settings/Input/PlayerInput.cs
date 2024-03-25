@@ -285,6 +285,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OpenMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""c4336cd8-b9e2-4d3b-bdf5-2bcdfd100fa1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -430,6 +439,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""Hotbar5"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b242ac07-1d5d-4e44-9980-7d528562dff0"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -539,6 +559,34 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Menu"",
+            ""id"": ""c7413707-0523-49f8-b194-bf3614e38c15"",
+            ""actions"": [
+                {
+                    ""name"": ""CloseMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""690b23cf-24dc-4e0f-9674-0344fdc27d11"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""d56938cf-31d0-4136-8d59-138fe450c365"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CloseMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -565,6 +613,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_PlayerActions_Hotbar3 = m_PlayerActions.FindAction("Hotbar3", throwIfNotFound: true);
         m_PlayerActions_Hotbar4 = m_PlayerActions.FindAction("Hotbar4", throwIfNotFound: true);
         m_PlayerActions_Hotbar5 = m_PlayerActions.FindAction("Hotbar5", throwIfNotFound: true);
+        m_PlayerActions_OpenMenu = m_PlayerActions.FindAction("OpenMenu", throwIfNotFound: true);
         // PlayerCombat
         m_PlayerCombat = asset.FindActionMap("PlayerCombat", throwIfNotFound: true);
         m_PlayerCombat_Aim = m_PlayerCombat.FindAction("Aim", throwIfNotFound: true);
@@ -573,6 +622,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Inventory = asset.FindActionMap("Inventory", throwIfNotFound: true);
         m_Inventory_Rotate = m_Inventory.FindAction("Rotate", throwIfNotFound: true);
         m_Inventory_CloseInventory = m_Inventory.FindAction("CloseInventory", throwIfNotFound: true);
+        // Menu
+        m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
+        m_Menu_CloseMenu = m_Menu.FindAction("CloseMenu", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -761,6 +813,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerActions_Hotbar3;
     private readonly InputAction m_PlayerActions_Hotbar4;
     private readonly InputAction m_PlayerActions_Hotbar5;
+    private readonly InputAction m_PlayerActions_OpenMenu;
     public struct PlayerActionsActions
     {
         private @PlayerInput m_Wrapper;
@@ -776,6 +829,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Hotbar3 => m_Wrapper.m_PlayerActions_Hotbar3;
         public InputAction @Hotbar4 => m_Wrapper.m_PlayerActions_Hotbar4;
         public InputAction @Hotbar5 => m_Wrapper.m_PlayerActions_Hotbar5;
+        public InputAction @OpenMenu => m_Wrapper.m_PlayerActions_OpenMenu;
         public InputActionMap Get() { return m_Wrapper.m_PlayerActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -818,6 +872,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Hotbar5.started += instance.OnHotbar5;
             @Hotbar5.performed += instance.OnHotbar5;
             @Hotbar5.canceled += instance.OnHotbar5;
+            @OpenMenu.started += instance.OnOpenMenu;
+            @OpenMenu.performed += instance.OnOpenMenu;
+            @OpenMenu.canceled += instance.OnOpenMenu;
         }
 
         private void UnregisterCallbacks(IPlayerActionsActions instance)
@@ -855,6 +912,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Hotbar5.started -= instance.OnHotbar5;
             @Hotbar5.performed -= instance.OnHotbar5;
             @Hotbar5.canceled -= instance.OnHotbar5;
+            @OpenMenu.started -= instance.OnOpenMenu;
+            @OpenMenu.performed -= instance.OnOpenMenu;
+            @OpenMenu.canceled -= instance.OnOpenMenu;
         }
 
         public void RemoveCallbacks(IPlayerActionsActions instance)
@@ -980,6 +1040,52 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         }
     }
     public InventoryActions @Inventory => new InventoryActions(this);
+
+    // Menu
+    private readonly InputActionMap m_Menu;
+    private List<IMenuActions> m_MenuActionsCallbackInterfaces = new List<IMenuActions>();
+    private readonly InputAction m_Menu_CloseMenu;
+    public struct MenuActions
+    {
+        private @PlayerInput m_Wrapper;
+        public MenuActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @CloseMenu => m_Wrapper.m_Menu_CloseMenu;
+        public InputActionMap Get() { return m_Wrapper.m_Menu; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MenuActions set) { return set.Get(); }
+        public void AddCallbacks(IMenuActions instance)
+        {
+            if (instance == null || m_Wrapper.m_MenuActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_MenuActionsCallbackInterfaces.Add(instance);
+            @CloseMenu.started += instance.OnCloseMenu;
+            @CloseMenu.performed += instance.OnCloseMenu;
+            @CloseMenu.canceled += instance.OnCloseMenu;
+        }
+
+        private void UnregisterCallbacks(IMenuActions instance)
+        {
+            @CloseMenu.started -= instance.OnCloseMenu;
+            @CloseMenu.performed -= instance.OnCloseMenu;
+            @CloseMenu.canceled -= instance.OnCloseMenu;
+        }
+
+        public void RemoveCallbacks(IMenuActions instance)
+        {
+            if (m_Wrapper.m_MenuActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IMenuActions instance)
+        {
+            foreach (var item in m_Wrapper.m_MenuActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_MenuActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public MenuActions @Menu => new MenuActions(this);
     public interface IPlayerMovementActions
     {
         void OnMovement(InputAction.CallbackContext context);
@@ -1004,6 +1110,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnHotbar3(InputAction.CallbackContext context);
         void OnHotbar4(InputAction.CallbackContext context);
         void OnHotbar5(InputAction.CallbackContext context);
+        void OnOpenMenu(InputAction.CallbackContext context);
     }
     public interface IPlayerCombatActions
     {
@@ -1014,5 +1121,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     {
         void OnRotate(InputAction.CallbackContext context);
         void OnCloseInventory(InputAction.CallbackContext context);
+    }
+    public interface IMenuActions
+    {
+        void OnCloseMenu(InputAction.CallbackContext context);
     }
 }

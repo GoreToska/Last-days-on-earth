@@ -80,6 +80,10 @@ public class PlayerInputManager : MonoBehaviour, IInputController
 	public static event UnityAction<int> Hotbar4Event = delegate { };
 	public static event UnityAction<int> Hotbar5Event = delegate { };
 
+	// Menu
+	public static event UnityAction MenuOpen = delegate { };
+	public static event UnityAction MenuClose = delegate { };
+
 	private void Awake()
 	{
 		if (Instance == null)
@@ -94,7 +98,7 @@ public class PlayerInputManager : MonoBehaviour, IInputController
 
 	private void Start()
 	{
-		DontDestroyOnLoad(gameObject);
+		//DontDestroyOnLoad(gameObject);
 
 		_camera = Camera.main;
 		_crosshair = GameObject.FindGameObjectWithTag("Crosshair").transform;
@@ -161,6 +165,9 @@ public class PlayerInputManager : MonoBehaviour, IInputController
 			_playerInput.PlayerActions.Hotbar3.performed += i => Hotbar3Event?.Invoke(2);
 			_playerInput.PlayerActions.Hotbar4.performed += i => Hotbar4Event?.Invoke(3);
 			_playerInput.PlayerActions.Hotbar5.performed += i => Hotbar5Event?.Invoke(4);
+
+			_playerInput.PlayerActions.OpenMenu.performed += i => MenuOpen?.Invoke();
+			_playerInput.Menu.CloseMenu.performed += i => MenuClose?.Invoke();
 		}
 
 		EnablePlayerControls();
@@ -229,6 +236,16 @@ public class PlayerInputManager : MonoBehaviour, IInputController
 		_playerInput.CameraMovement.Disable();
 
 		_movement = Vector2.zero;
+	}
+
+	public void EnableMenuControls()
+	{
+		_playerInput.Menu.Enable();
+	}
+
+	public void DisableMenuControls()
+	{
+		_playerInput.Menu.Disable();
 	}
 
 	public void EnablePlayerControls()

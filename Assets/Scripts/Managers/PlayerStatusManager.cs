@@ -108,7 +108,7 @@ public class PlayerStatusManager : CharacterStatusManager, IDamagable
         if (hp <= 0)
         {
             hp = 0;
-            DeathEvent.Invoke();
+            DeathEvent?.Invoke();
             isDead = true;
         }
     }
