@@ -6,7 +6,7 @@ public class HeavyMeleeWeapon : MeleeWeapon
 {
     protected override void AttackLogic()
     {
-        PlayerAnimationManager.Instance.PlayHeavyAttackAnimation();
+        playerAnimationManager.PlayHeavyAttackAnimation();
         base.AttackLogic();
     }
 }

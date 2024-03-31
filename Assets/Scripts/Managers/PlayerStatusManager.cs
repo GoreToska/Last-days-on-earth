@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using Zenject;
 
 public class PlayerStatusManager : CharacterStatusManager, IDamagable
 {
@@ -19,6 +20,8 @@ public class PlayerStatusManager : CharacterStatusManager, IDamagable
     public static event UnityAction DeathEvent = delegate { };
     public static event UnityAction FatigueEvent = delegate { };
 	public event UnityAction OnDeath;
+
+    [Inject] private HUDManager _hudManager;
 
 	public override void Start()
     {
@@ -57,7 +60,7 @@ public class PlayerStatusManager : CharacterStatusManager, IDamagable
         }
 
         hp = value;
-        HUDManager.Instance.UpdateHP(hp);
+		_hudManager.UpdateHP(hp);
     }
 
     public override void SetStamina(float value)
@@ -68,15 +71,15 @@ public class PlayerStatusManager : CharacterStatusManager, IDamagable
         }
 
         stamina = value;
-        HUDManager.Instance.UpdateStamina(stamina);
+		_hudManager.UpdateStamina(stamina);
     }
 
     public override void RegenHP(float value)
     {
         hp += value;
 
-        //  Update UI
-        HUDManager.Instance.UpdateHP(hp);
+		//  Update UI
+		_hudManager.UpdateHP(hp);
 
         if (hp >= 100f)
         {
@@ -89,7 +92,7 @@ public class PlayerStatusManager : CharacterStatusManager, IDamagable
         stamina += value;
 
         // update UI
-        HUDManager.Instance.UpdateStamina(stamina);
+        _hudManager.UpdateStamina(stamina);
 
         if (stamina >= 100f)
         {
@@ -102,7 +105,7 @@ public class PlayerStatusManager : CharacterStatusManager, IDamagable
         hp -= damage;
 
         //  Update UI
-        HUDManager.Instance.UpdateHP(hp);
+        _hudManager.UpdateHP(hp);
         TakeDamageEvent?.Invoke(cameraShakeDuration, damage / 10);
 
         if (hp <= 0)
@@ -128,7 +131,7 @@ public class PlayerStatusManager : CharacterStatusManager, IDamagable
         staminaRegenTimer = 0f;
 
         // update UI
-        HUDManager.Instance.UpdateStamina(stamina);
+        _hudManager.UpdateStamina(stamina);
     }
 
     public override bool IsDead { get => isDead; set => isDead = value; }

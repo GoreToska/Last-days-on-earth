@@ -6,7 +6,7 @@ public class LightPistolWeapon : RangeWeapon
 {
     protected override void ShotLogic()
     {
-        PlayerAnimationManager.Instance.PlayPistolMediumShot();
+        playerAnimationManager.PlayPistolMediumShot();
 
         base.ShotLogic();
     }

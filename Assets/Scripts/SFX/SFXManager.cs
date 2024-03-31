@@ -7,22 +7,7 @@ namespace GoreToska
 {
 	public class SFXManager : MonoBehaviour
 	{
-		[HideInInspector] public static SFXManager Instance;
-
 		[SerializeField] private PoolableSFX _sfxPrefab;
-
-		private void Awake()
-		{
-			if (Instance == null)
-			{
-				Instance = this;
-			}
-			else
-			{
-				Debug.LogAssertion("Only one SFXManager can be in this scene.");
-				Destroy(gameObject);
-			}
-		}
 
 		public void PlaySoundEffect(Vector3 point, AudioClip audioClip, int minDistance, int maxDistance, float volume = 1f, bool randomPitch = true)
 		{

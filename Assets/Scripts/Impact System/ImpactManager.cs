@@ -2,24 +2,13 @@ using GoreToska;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class ImpactManager : MonoBehaviour
 {
-	[field: HideInInspector] public static ImpactManager Instance { get; private set; }
 	[field: SerializeField] public List<Impact> Impacts { get; private set; }
 
-	private void Awake()
-	{
-		if (Instance == null)
-		{
-			Instance = this;
-		}
-		else
-		{
-			Debug.Log("Only one ImpactManager can be in this scene.");
-			Destroy(gameObject);
-		}
-	}
+	[Inject] private SFXManager _sfxManager;
 
 	public void HandleImpact(GameObject hitObject, Vector3 hitPoint, Vector3 hitNormal, ImpactType type)
 	{
@@ -43,6 +32,6 @@ public class ImpactManager : MonoBehaviour
 
 		// TODO: randomize rotation
 
-		SFXManager.Instance.PlaySoundEffect(hitPoint, impact.SoundEffects[Random.Range(0, impact.SoundEffects.Count)], impact.MaxDistance);
+		_sfxManager.PlaySoundEffect(hitPoint, impact.SoundEffects[Random.Range(0, impact.SoundEffects.Count)], impact.MaxDistance);
 	}
 }

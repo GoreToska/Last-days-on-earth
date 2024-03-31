@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
+using Zenject;
 
 public class AIRangeWeapon : MonoBehaviour, IAIRangeWeapon
 {
@@ -11,6 +12,9 @@ public class AIRangeWeapon : MonoBehaviour, IAIRangeWeapon
 	[SerializeField] protected GameObject burrel;
 	[SerializeField] protected ParticleSystem muzzleFlash;
 	[SerializeField] protected int bullets = 0;
+
+	[Inject] protected ImpactManager _impactManager;
+	[Inject] protected SFXManager _sfxManager;
 
 	int IAIRangeWeapon.Bullets { get => bullets; set => bullets = value; }
 
@@ -116,7 +120,7 @@ public class AIRangeWeapon : MonoBehaviour, IAIRangeWeapon
 		bullets--;
 		transform.root.LookAt(target.transform, Vector3.up);
 
-		SFXManager.Instance.PlaySoundEffect(burrel.transform.position, 
+		_sfxManager.PlaySoundEffect(burrel.transform.position, 
 			weaponData.WeaponSFXConfig.ShotSound, 
 			weaponData.WeaponSFXConfig.MaxShotSoundDistance, 
 			weaponData.WeaponSFXConfig.Volume);
@@ -177,7 +181,7 @@ public class AIRangeWeapon : MonoBehaviour, IAIRangeWeapon
 		if (hit.collider != null)
 		{
 			//  impact
-			ImpactManager.Instance.HandleImpact(hit.transform.gameObject, hit.point, hit.normal, ImpactType.Shot);
+			_impactManager.HandleImpact(hit.transform.gameObject, hit.point, hit.normal, ImpactType.Shot);
 
 			if (hit.collider.tag == "Damagable" && hit.transform.gameObject.layer != this.transform.root.gameObject.layer)
 			{

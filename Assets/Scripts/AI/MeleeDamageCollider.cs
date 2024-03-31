@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Zenject;
 
 [RequireComponent(typeof(Collider))]
 public class MeleeDamageCollider : MonoBehaviour
 {
-    private float _damage;
+    [Inject] private ImpactManager _impactManager;
+
+	private float _damage;
 
     private List<GameObject> _charactersToDamage = new List<GameObject>();
     private Collider _damageCollider;
@@ -49,7 +52,7 @@ public class MeleeDamageCollider : MonoBehaviour
     private void AddCharacterToDamageList(GameObject character)
     {
         _charactersToDamage.Add(character);
-        ImpactManager.Instance.HandleImpact(character, character.transform.position + Vector3.up, Vector3.forward, ImpactType.Shot);
+		_impactManager.HandleImpact(character, character.transform.position + Vector3.up, Vector3.forward, ImpactType.Shot);
         // play sfx, impact, effect etc
     }
 }

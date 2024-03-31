@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
+using Zenject;
 
 [RequireComponent(typeof(AudioSource))]
 public abstract class RangeWeapon : MonoBehaviour, IRangeWeapon
@@ -12,6 +13,11 @@ public abstract class RangeWeapon : MonoBehaviour, IRangeWeapon
 	[SerializeField] protected GameObject burrel;
 	[SerializeField] protected ParticleSystem muzzleFlash;
 	[SerializeField] protected int bullets = 0;
+
+	protected PlayerAnimationManager playerAnimationManager;
+	protected ImpactManager impactManager;
+	protected NoiseManager noiseManager;
+	protected SFXManager sfxManager;
 
 	protected ParticleSystem particleSystem;
 	protected ObjectPool<TrailRenderer> trailRendererPool;
@@ -45,6 +51,14 @@ public abstract class RangeWeapon : MonoBehaviour, IRangeWeapon
 		trailRendererPool = new ObjectPool<TrailRenderer>(CreateTrail);
 		_recoilStop = weaponData.RecoilStopShot * weaponData.Recoil;
 		audioSource = GetComponent<AudioSource>();
+	}
+
+	public void Construct(PlayerAnimationManager playerAnimationManager, ImpactManager impactManager, NoiseManager noiseManager, SFXManager sFXManager)
+	{
+		this.playerAnimationManager = playerAnimationManager;
+		this.impactManager = impactManager;
+		this.noiseManager = noiseManager;
+		this.sfxManager = sFXManager;
 	}
 
 	protected virtual IEnumerator ShotCoroutine()
@@ -92,9 +106,9 @@ public abstract class RangeWeapon : MonoBehaviour, IRangeWeapon
 	{
 		bullets--;
 
-		SFXManager.Instance.PlaySoundEffect(burrel.transform.position, 
-			weaponData.WeaponSFXConfig.ShotSound, 
-			weaponData.WeaponSFXConfig.MaxShotSoundDistance, 
+		sfxManager.PlaySoundEffect(burrel.transform.position,
+			weaponData.WeaponSFXConfig.ShotSound,
+			weaponData.WeaponSFXConfig.MaxShotSoundDistance,
 			weaponData.WeaponSFXConfig.Volume);
 
 		var (success, position) = PlayerInputManager.Instance.GetMousePosition();
@@ -132,7 +146,7 @@ public abstract class RangeWeapon : MonoBehaviour, IRangeWeapon
 	protected virtual IEnumerator PlayTrail(Vector3 startPoint, Vector3 endPoint, RaycastHit hit)
 	{
 		muzzleFlash.Play();
-		NoiseManager.Instance.MakeNouse(weaponData.ShotVolumeRadius, transform.root.gameObject);
+		noiseManager.MakeNouse(weaponData.ShotVolumeRadius, transform.root.gameObject);
 
 		TrailRenderer instance = trailRendererPool.Get();
 		instance.gameObject.SetActive(true);
@@ -159,7 +173,7 @@ public abstract class RangeWeapon : MonoBehaviour, IRangeWeapon
 		if (hit.collider != null)
 		{
 			//  impact
-			ImpactManager.Instance.HandleImpact(hit.transform.gameObject, hit.point, hit.normal, ImpactType.Shot);
+			impactManager.HandleImpact(hit.transform.gameObject, hit.point, hit.normal, ImpactType.Shot);
 
 			if (hit.collider.tag == "Damagable")
 			{
@@ -218,6 +232,4 @@ public abstract class RangeWeapon : MonoBehaviour, IRangeWeapon
 
 		return trail;
 	}
-
-
 }

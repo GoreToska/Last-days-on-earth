@@ -2,34 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
-using static UnityEngine.Rendering.DebugUI;
 
 public class HUDManager : MonoBehaviour
 {
-    [HideInInspector] public static HUDManager Instance;
-
 	[Header("Status Bars")]
 	[SerializeField] private StatusBar _hpBar;
 	[SerializeField] private StatusBar _staminaBar;
 
     private int currentBullets = 0;
-
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-
-    private void Start()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
 
     public void UpdateHP(float newValue)
     {

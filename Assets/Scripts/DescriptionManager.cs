@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class DescriptionManager : MonoBehaviour
 {
-	[HideInInspector] public static DescriptionManager Instance;
-
 	[SerializeField] private RectTransform _descriptionObject;
 	[SerializeField] private TMP_Text _itemName;
 	[SerializeField] private TMP_Text _description;
@@ -17,13 +15,7 @@ public class DescriptionManager : MonoBehaviour
 
 	private void Awake()
 	{
-		if (Instance == null)
-			Instance = this;
-		else
-			Destroy(gameObject);
-
 		HideDescriptionPanel();
-
 		StoreDescriptionPanelSize();
 	}
 

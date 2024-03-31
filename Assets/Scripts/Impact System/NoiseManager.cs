@@ -4,22 +4,8 @@ using UnityEngine;
 
 public class NoiseManager : MonoBehaviour
 {
-	[field: HideInInspector] public static NoiseManager Instance { get; private set; }
 	[SerializeField] private LayerMask _targetLayers;
 	private Collider[] _targets = new Collider[30];
-
-	private void Awake()
-	{
-		if (Instance == null)
-		{
-			Instance = this;
-		}
-		else
-		{
-			Debug.Log("Only one NoiseManager can be in this scene.");
-			Destroy(gameObject);
-		}
-	}
 
 	public void MakeNouse(float radius, GameObject noiseTarget)
 	{

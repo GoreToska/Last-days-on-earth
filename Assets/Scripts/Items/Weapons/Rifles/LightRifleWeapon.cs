@@ -2,7 +2,7 @@ public class LightRifleWeapon : RangeWeapon
 {
     protected override void ShotLogic()
     {
-        PlayerAnimationManager.Instance.PlayRifleLightShot();
+        playerAnimationManager.PlayRifleLightShot();
 
         base.ShotLogic();
     }

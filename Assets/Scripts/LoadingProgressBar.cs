@@ -1,10 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class LoadingProgressBar : MonoBehaviour
 {
+	[Inject] private GameSceneManager _gameSceneManager;
 	[SerializeField] private Image _progressImage;
 
 	private void Awake()
@@ -14,6 +14,6 @@ public class LoadingProgressBar : MonoBehaviour
 
 	private void Update()
 	{
-		_progressImage.fillAmount = GameSceneManager.Instance.LoadingProgress;
+		_progressImage.fillAmount = _gameSceneManager.LoadingProgress;
 	}
 }

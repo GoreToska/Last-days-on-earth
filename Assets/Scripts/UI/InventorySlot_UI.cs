@@ -2,9 +2,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Zenject;
 
 public class InventorySlot_UI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerMoveHandler, IPointerDownHandler
 {
+	[Inject] private DescriptionManager _descriptionManager;
+
 	[SerializeField] private Image _itemImage;
 	[SerializeField] private TMP_Text _itemCount;
 	[SerializeField] private GameObject _slotHighlight;
@@ -23,6 +26,11 @@ public class InventorySlot_UI : MonoBehaviour, IPointerEnterHandler, IPointerExi
 		_button?.onClick.AddListener(OnUISlotClick);
 
 		ParentDisplay = transform.parent.GetComponent<InventoryDisplay>();
+	}
+
+	public void Construct(DescriptionManager descriptionManager)
+	{
+		_descriptionManager = descriptionManager;
 	}
 
 	public void Init(InventorySlot slot)
@@ -84,7 +92,7 @@ public class InventorySlot_UI : MonoBehaviour, IPointerEnterHandler, IPointerExi
 		if (AssignedInventorySlot.ItemData == null)
 			return;
 
-		DescriptionManager.Instance.ConfigureDescriptionPanel(AssignedInventorySlot.ItemData.DisplayName, AssignedInventorySlot.ItemData.Description, eventData.position);
+		_descriptionManager.ConfigureDescriptionPanel(AssignedInventorySlot.ItemData.DisplayName, AssignedInventorySlot.ItemData.Description, eventData.position);
 	}
 
 	public void OnPointerExit(PointerEventData eventData)
@@ -92,7 +100,7 @@ public class InventorySlot_UI : MonoBehaviour, IPointerEnterHandler, IPointerExi
 		if (AssignedInventorySlot.ItemData == null)
 			return;
 
-		DescriptionManager.Instance.HideDescriptionPanel();
+		_descriptionManager.HideDescriptionPanel();
 	}
 
 	public void OnPointerMove(PointerEventData eventData)
@@ -100,7 +108,7 @@ public class InventorySlot_UI : MonoBehaviour, IPointerEnterHandler, IPointerExi
 		if (AssignedInventorySlot.ItemData == null)
 			return;
 
-		DescriptionManager.Instance.MoveDescriptionPanel(eventData.position);
+		_descriptionManager.MoveDescriptionPanel(eventData.position);
 	}
 
 	public void OnPointerDown(PointerEventData eventData)
@@ -108,6 +116,6 @@ public class InventorySlot_UI : MonoBehaviour, IPointerEnterHandler, IPointerExi
 		if (AssignedInventorySlot.ItemData == null)
 			return;
 
-		DescriptionManager.Instance.HideDescriptionPanel();
+		_descriptionManager.HideDescriptionPanel();
 	}
 }

@@ -7,7 +7,7 @@ public class RifleAnimatorTriggers : StateMachineBehaviour
     //OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        PlayerAnimationManager.Instance.SetDefaultRig();
+        //PlayerAnimationManager.Instance.SetDefaultRig();
         Debug.Log("Animator default rig");
     }
 
@@ -20,7 +20,7 @@ public class RifleAnimatorTriggers : StateMachineBehaviour
     //OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        PlayerAnimationManager.Instance.SetRifleRig();
+        //PlayerAnimationManager.Instance.SetRifleRig();
         Debug.Log("Animator rifle rig");
     }
 

@@ -4,7 +4,7 @@ public class HeavyRifleWeapon : RangeWeapon
 {
     protected override void ShotLogic()
     {
-        PlayerAnimationManager.Instance.PlayRifleMediumShot();
+        playerAnimationManager.PlayRifleMediumShot();
         base.ShotLogic();
     }
 }

@@ -1,20 +1,21 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
+using Zenject;
 
 [RequireComponent(typeof(Animator))]
 public class PlayerAnimationManager : MonoBehaviour
 {
-    [HideInInspector] public static PlayerAnimationManager Instance;
-
-    [SerializeField] private Rig rifleRig;
-    [SerializeField] private Rig twoHandedMeleeRig;
+    [SerializeField] private Rig _rifleRig;
+    [SerializeField] private Rig _twoHandedMeleeRig;
 
     [Header("Animations")]
-    [SerializeField] private AnimationClip rifleReloadingAnimation;
-    [SerializeField] private float rifleReloadingAnimationOffset = 0.75f;
+    [SerializeField] private AnimationClip _rifleReloadingAnimation;
+    [SerializeField] private float _rifleReloadingAnimationOffset = 0.75f;
 
-    private Animator animator;
+    [Inject] private PlayerMovementManager _playerMovementManager;
+
+    private Animator _animator;
 
     private const string RifleLightShotTrigger = "RifleLightShot";
     private const string RifleMediumShotTrigger = "RifleMediumShot";
@@ -25,16 +26,7 @@ public class PlayerAnimationManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-
-        animator = GetComponent<Animator>();
+        _animator = GetComponent<Animator>();
     }
 
     private void Start()
@@ -69,9 +61,9 @@ public class PlayerAnimationManager : MonoBehaviour
 
     private void UpdateAnimation()
     {
-        animator.SetFloat("Speed", PlayerInputManager.Instance.MoveAmount, 0.05f, Time.deltaTime);
-        animator.SetFloat("HorizontalSpeed", PlayerMovementManager.Instance.HorizontalSpeed, 0.02f, Time.deltaTime);
-        animator.SetFloat("VerticalSpeed", PlayerMovementManager.Instance.VerticalSpeed, 0.02f, Time.deltaTime);
+        _animator.SetFloat("Speed", PlayerInputManager.Instance.MoveAmount, 0.05f, Time.deltaTime);
+        _animator.SetFloat("HorizontalSpeed", _playerMovementManager.HorizontalSpeed, 0.02f, Time.deltaTime);
+        _animator.SetFloat("VerticalSpeed", _playerMovementManager.VerticalSpeed, 0.02f, Time.deltaTime);
     }
 
     public void SetWeaponAnimationPattern(WeaponType type)
@@ -79,16 +71,16 @@ public class PlayerAnimationManager : MonoBehaviour
         switch (type)
         {
             case WeaponType.Range_Primary:
-                animator.SetTrigger(RifleWalkTrigger);
+                _animator.SetTrigger(RifleWalkTrigger);
                 SetRifleRig();
                 break;
             case WeaponType.Range_Secondary:
-                animator.SetTrigger(RifleWalkTrigger);
+                _animator.SetTrigger(RifleWalkTrigger);
                 break;
             case WeaponType.None:
-                animator.SetTrigger(DefaultWalkTrigger);
+                _animator.SetTrigger(DefaultWalkTrigger);
                 PlayerInputManager.Instance.IsAiming = false;
-                animator.SetBool("IsAiming", false);
+                _animator.SetBool("IsAiming", false);
                 SetDefaultRig();
                 break;
             case WeaponType.Melee_Primary:
@@ -105,7 +97,7 @@ public class PlayerAnimationManager : MonoBehaviour
 
     public void CrouchAnimationHandler(bool value)
     {
-        animator.SetBool("IsCrouching", value);
+        _animator.SetBool("IsCrouching", value);
 
         if (value)
         {
@@ -119,7 +111,7 @@ public class PlayerAnimationManager : MonoBehaviour
 
     public void AimAnimationHandler(bool value)
     {
-        animator.SetBool("IsAiming", value);
+        _animator.SetBool("IsAiming", value);
 
         if(value)
         {
@@ -143,22 +135,22 @@ public class PlayerAnimationManager : MonoBehaviour
 
     public void PlayRifleLightShot()
     {
-        animator.SetTrigger(RifleLightShotTrigger);
+        _animator.SetTrigger(RifleLightShotTrigger);
     }
 
     public void PlayRifleMediumShot()
     {
-        animator.SetTrigger(RifleMediumShotTrigger);
+        _animator.SetTrigger(RifleMediumShotTrigger);
     }
 
     public void PlayRifleHeavyShot()
     {
-        animator.SetTrigger(RifleHeavyShotTrigger);
+        _animator.SetTrigger(RifleHeavyShotTrigger);
     }
 
     public void PlayPistolMediumShot()
     {
-        animator.SetTrigger(PistolMediumShotTrigger);
+        _animator.SetTrigger(PistolMediumShotTrigger);
     }
 
     public void PlayReloadAnimation(string animationName)
@@ -168,16 +160,16 @@ public class PlayerAnimationManager : MonoBehaviour
 
     public void PlayHeavyAttackAnimation()
     {
-        animator.Play("Stable Sword Inward Slash (1)");
+        _animator.Play("Stable Sword Inward Slash (1)");
     }
 
     private IEnumerator PlayRifleReloadAnimationCoroutine(string animationName)
     {
         SetDefaultRig();
         PlayerInputManager.Instance.DisableCombatControls();
-        animator.CrossFade(animationName, 0.1f);
+        _animator.CrossFade(animationName, 0.1f);
 
-        yield return new WaitForSeconds(rifleReloadingAnimation.length - rifleReloadingAnimationOffset);
+        yield return new WaitForSeconds(_rifleReloadingAnimation.length - _rifleReloadingAnimationOffset);
 
         PlayerInputManager.Instance.EnableCombatControls();
         SetRifleRig();
@@ -189,7 +181,7 @@ public class PlayerAnimationManager : MonoBehaviour
     {
         // other rigs too
         SetDefaultRig();
-        rifleRig.weight = 1f;
+        _rifleRig.weight = 1f;
     }
 
     public void SetTwoHandedMeleeRig()
@@ -201,7 +193,7 @@ public class PlayerAnimationManager : MonoBehaviour
     public void SetDefaultRig()
     {
         // other rigs too
-        twoHandedMeleeRig.weight = 0f;
-        rifleRig.weight = 0f;
+        _twoHandedMeleeRig.weight = 0f;
+        _rifleRig.weight = 0f;
     }
 }

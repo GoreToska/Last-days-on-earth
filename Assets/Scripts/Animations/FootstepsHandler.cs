@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 [RequireComponent(typeof(Animator))]
 public class FootstepsHandler : MonoBehaviour
@@ -9,12 +10,7 @@ public class FootstepsHandler : MonoBehaviour
     [SerializeField] protected Transform _leftLeg;
     [SerializeField] protected Transform _rightLeg;
 
-    private Animator _animator;
-
-    private void Awake()
-    {
-        _animator = GetComponent<Animator>();
-    }
+    [Inject] private ImpactManager _impactManager;
 
     public void PlayStepSound(string leg)
     {
@@ -34,7 +30,7 @@ public class FootstepsHandler : MonoBehaviour
         Debug.DrawLine(startPoint, startPoint + Vector3.down, Color.red, 2f);
         if (Physics.Linecast(startPoint, startPoint + Vector3.down, out hit, _groundLayer))
         {
-            ImpactManager.Instance.HandleImpact(hit.collider.gameObject, hit.point, hit.normal, ImpactType.Footstep);
+			_impactManager.HandleImpact(hit.collider.gameObject, hit.point, hit.normal, ImpactType.Footstep);
         }
     }
 }

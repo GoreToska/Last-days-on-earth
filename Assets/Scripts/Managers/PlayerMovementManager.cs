@@ -13,8 +13,6 @@ using PixelCrushers;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovementManager : MonoBehaviour
 {
-    [HideInInspector] public static PlayerMovementManager Instance;
-
     private CharacterController characterController;
     private Camera camera;
     private PlayerInputManager inputManager;
@@ -39,15 +37,6 @@ public class PlayerMovementManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-
         characterController = GetComponent<CharacterController>();
         inputManager = GetComponent<PlayerInputManager>();
         playerStatusManager = GetComponent<PlayerStatusManager>();

@@ -5446,7 +5446,7 @@ MonoBehaviour:
   aimMovementSpeed: 1.5
   aimRotationSpeed: 720
   aimRig: {fileID: 830465335}
-  aimSmoothTime: 0.12
+  aimSmoothTime: 0.1
 --- !u!114 &5361517959888282042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5461,7 +5461,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <AimMask>k__BackingField:
     serializedVersion: 2
-    m_Bits: 4633
+    m_Bits: 29209
   IsShooting: 0
 --- !u!114 &5361517959888282040
 MonoBehaviour:
@@ -5475,11 +5475,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20360dc0faae957429348bb3b3ed3941, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rifleRig: {fileID: 1290189565}
-  twoHandedMeleeRig: {fileID: 464800040}
-  rifleReloadingAnimation: {fileID: -203655887218126122, guid: 9e65a8ec216d3b44080464716ee6c056,
-    type: 3}
-  rifleReloadingAnimationOffset: 0.8
+  _rifleRig: {fileID: 1290189565}
+  _twoHandedMeleeRig: {fileID: 464800040}
+  _rifleReloadingAnimation: {fileID: 0}
+  _rifleReloadingAnimationOffset: 0.75
 --- !u!114 &95938485048938441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5632,6 +5631,7 @@ MonoBehaviour:
   <InventorySize>k__BackingField: 25
   <PrimaryInventorySystem>k__BackingField:
     <InventorySlots>k__BackingField: []
+  PreparedItems: []
   <Offset>k__BackingField: 5
 --- !u!114 &4885477210839400635
 MonoBehaviour:

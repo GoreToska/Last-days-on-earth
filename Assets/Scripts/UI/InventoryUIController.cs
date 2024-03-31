@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Zenject;
 
 public class InventoryUIController : MonoBehaviour
 {
@@ -9,7 +10,9 @@ public class InventoryUIController : MonoBehaviour
     [SerializeField] private DinamicInventoryDisplay _inventoryPanel;
     [SerializeField] private PlayerInventoryHolder _playerInventory;
 
-    private void Start()
+    [Inject] private DescriptionManager _descriptionManager;
+
+	private void Start()
     {
         CloseChest();
         CloseInventory();
@@ -56,12 +59,12 @@ public class InventoryUIController : MonoBehaviour
     private void CloseInventory()
     {
         _playerBackpackPanel.gameObject.SetActive(false);
-		DescriptionManager.Instance.HideDescriptionPanel();
+		_descriptionManager.HideDescriptionPanel();
 	}
 
     private void CloseChest()
     {
         _inventoryPanel.gameObject.SetActive(false);
-		DescriptionManager.Instance.HideDescriptionPanel();
+		_descriptionManager.HideDescriptionPanel();
 	}
 }

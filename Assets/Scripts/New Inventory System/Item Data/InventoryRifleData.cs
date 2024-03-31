@@ -25,6 +25,13 @@ public class InventoryRifleData : InventoryItemData
 	{
 		base.EquipItem(playerEquipment);
 
+		playerEquipment._currentEquippedItem.GetComponent<RangeWeapon>()
+			.Construct(
+			GameServicesInstaller.Instance.PlayerAnimationManager,
+			GameServicesInstaller.Instance.ImpactManager,
+			GameServicesInstaller.Instance.NoiseManager,
+			GameServicesInstaller.Instance.SFXManager);
+
 		playerEquipment.AnimationManager.SetWeaponAnimationPattern(_weaponData.WeaponType);
 		playerEquipment._currentRangeWeapon = playerEquipment._currentEquippedItem.GetComponent<IRangeWeapon>();
 		PlayerEquipment.ReloadWeapon += playerEquipment._currentRangeWeapon.PerformReload;

@@ -86,7 +86,9 @@ public class PlayerEquipment : MonoBehaviour
 		_currentInventoryItemData = itemData;
 
 		if (itemData.ItemModel != null)
+		{
 			_currentEquippedItem = Instantiate(itemData.ItemModel, _itemSocket);
+		}
 
 		// get the IAttackingItem
 		itemData.EquipItem(this);

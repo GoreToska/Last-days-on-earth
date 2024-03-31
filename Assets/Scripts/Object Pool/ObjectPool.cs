@@ -5,89 +5,89 @@ using UnityEngine;
 namespace GoreToska
 {
 
-    public class ObjectPool : MonoBehaviour
-    {
-        private GameObject Parent;
-        private PoolableObject Prefab;
-        private int Size;
-        private List<PoolableObject> AvailableObjectsPool;
-        private static Dictionary<PoolableObject, ObjectPool> ObjectPools = new Dictionary<PoolableObject, ObjectPool>();
+	public class ObjectPool : MonoBehaviour
+	{
+		private GameObject Parent;
+		private PoolableObject Prefab;
+		private int Size;
+		private List<PoolableObject> AvailableObjectsPool;
+		private static Dictionary<PoolableObject, ObjectPool> ObjectPools = new Dictionary<PoolableObject, ObjectPool>();
 
-        private ObjectPool(PoolableObject Prefab, int Size)
-        {
-            this.Prefab = Prefab;
-            this.Size = Size;
-            AvailableObjectsPool = new List<PoolableObject>(Size);
-        }
-
-        ~ObjectPool()
-        {
-            ObjectPools.Clear();
+		ObjectPool(PoolableObject Prefab, int Size)
+		{
+			this.Prefab = Prefab;
+			this.Size = Size;
+			AvailableObjectsPool = new List<PoolableObject>(Size);
 		}
 
-        public static ObjectPool CreateInstance(PoolableObject Prefab, int Size)
-        {
-            ObjectPool pool = null;
+		~ObjectPool()
+		{
+			ObjectPools.Clear();
+		}
 
-            if (ObjectPools.ContainsKey(Prefab))
-            {
-                pool = ObjectPools[Prefab];
-            }
-            else
-            {
-                pool = new ObjectPool(Prefab, Size);
+		public static ObjectPool CreateInstance(PoolableObject Prefab, int Size)
+		{
+			ObjectPool pool = null;
 
-                pool.Parent = new GameObject(Prefab + " Pool");
-                pool.CreateObjects();
+			if (ObjectPools.ContainsKey(Prefab))
+			{
+				pool = ObjectPools[Prefab];
+			}
+			else
+			{
+				pool = new ObjectPool(Prefab, Size);
 
-                ObjectPools.Add(Prefab, pool);
-            }
+				pool.Parent = new GameObject(Prefab + " Pool");
+				pool.CreateObjects();
 
-            return pool;
-        }
+				ObjectPools.Add(Prefab, pool);
+			}
 
-        private void CreateObjects()
-        {
-            for (int i = 0; i < Size; i++)
-            {
-                CreateObject();
-            }
-        }
+			return pool;
+		}
 
-        private void CreateObject()
-        {
-            PoolableObject poolableObject = GameObject.Instantiate(Prefab, Vector3.zero, Quaternion.identity, Parent.transform);
-            poolableObject.Parent = this;
-            poolableObject.gameObject.SetActive(false); // PoolableObject handles re-adding the object to the AvailableObjects
-        }
+		private void CreateObjects()
+		{
+			for (int i = 0; i < Size; i++)
+			{
+				CreateObject();
+			}
+		}
 
-        public PoolableObject GetObject(Vector3 Position, Quaternion Rotation)
-        {
-            if (AvailableObjectsPool.Count == 0) // auto expand pool size if out of objects
-            {
-                CreateObject();
-            }
+		private void CreateObject()
+		{
+			PoolableObject poolableObject = GameObject.Instantiate(Prefab, Vector3.zero, Quaternion.identity, Parent.transform);
+			poolableObject.Parent = this;
+			poolableObject.gameObject.SetActive(false); // PoolableObject handles re-adding the object to the AvailableObjects
+		}
 
-            PoolableObject instance = AvailableObjectsPool[0];
+		public PoolableObject GetObject(Vector3 Position, Quaternion Rotation)
+		{
+			if (AvailableObjectsPool.Count == 0) // auto expand pool size if out of objects
+			{
+				CreateObject();
+			}
 
-            AvailableObjectsPool.RemoveAt(0);
+			PoolableObject instance = AvailableObjectsPool[0];
 
-            instance.transform.position = Position;
-            instance.transform.rotation = Rotation;
+			AvailableObjectsPool.RemoveAt(0);
 
-            instance.gameObject.SetActive(true);
+			instance.transform.position = Position;
+			instance.transform.rotation = Rotation;
 
-            return instance;
-        }
+			instance.gameObject.SetActive(true);
 
-        public PoolableObject GetObject()
-        {
-            return GetObject(Vector3.zero, Quaternion.identity);
-        }
+			return instance;
+		}
 
-        public void ReturnObjectToPool(PoolableObject Object)
-        {
-            AvailableObjectsPool.Add(Object);
-        }
-    }
+		public PoolableObject GetObject()
+		{
+			return GetObject(Vector3.zero, Quaternion.identity);
+		}
+
+		public void ReturnObjectToPool(PoolableObject Object)
+		{
+			AvailableObjectsPool.Add(Object);
+		}
+	}
 }
