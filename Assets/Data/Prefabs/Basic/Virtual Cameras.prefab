@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8345876524292909813}
   m_LocalRotation: {x: -0.15792732, y: 0.83351755, z: -0.43390185, w: -0.30337554}
-  m_LocalPosition: {x: -73.31, y: 1, z: 2.04}
+  m_LocalPosition: {x: -90.507, y: 1, z: 24.43}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -56,7 +56,7 @@ MonoBehaviour:
   m_Lens:
     FieldOfView: 44.8
     OrthographicSize: 6
-    NearClipPlane: -150
+    NearClipPlane: -170
     FarClipPlane: 100
     Dutch: 0
     ModeOverride: 0
@@ -96,7 +96,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8345876524345953589}
   m_LocalRotation: {x: 0.19514337, y: 0.80390483, z: -0.41848636, w: 0.37486696}
-  m_LocalPosition: {x: -82.11, y: 1, z: 0.8399999}
+  m_LocalPosition: {x: -99.307, y: 1, z: 23.23}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Lens:
     FieldOfView: 44.8
     OrthographicSize: 6
-    NearClipPlane: -150
+    NearClipPlane: -170
     FarClipPlane: 100
     Dutch: 0
     ModeOverride: 0
@@ -494,7 +494,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8345876525356813989}
   m_LocalRotation: {x: -0.41848633, y: 0.37486717, z: -0.19514349, w: -0.8039048}
-  m_LocalPosition: {x: -72.11, y: 1, z: -6.76}
+  m_LocalPosition: {x: -89.307, y: 1, z: 15.63}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -525,7 +525,7 @@ MonoBehaviour:
   m_Lens:
     FieldOfView: 44.8
     OrthographicSize: 6
-    NearClipPlane: -150
+    NearClipPlane: -170
     FarClipPlane: 100
     Dutch: 0
     ModeOverride: 0
@@ -565,7 +565,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8345876525414410441}
   m_LocalRotation: {x: 0.43390185, y: 0.30337554, z: -0.15792732, w: 0.83351755}
-  m_LocalPosition: {x: -80.91, y: 1, z: -7.96}
+  m_LocalPosition: {x: -98.107, y: 1, z: 14.429999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -596,7 +596,7 @@ MonoBehaviour:
   m_Lens:
     FieldOfView: 44.8
     OrthographicSize: 6
-    NearClipPlane: -150
+    NearClipPlane: -170
     FarClipPlane: 100
     Dutch: 0
     ModeOverride: 0

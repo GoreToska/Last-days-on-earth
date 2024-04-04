@@ -37,7 +37,7 @@ public class PlayerStatusManager : CharacterStatusManager, IDamagable
     {
         DeathEvent -= GetComponent<Ragdoll>().EnableRagdoll;
         DeathEvent -= PlayerInputManager.Instance.DisableInput;
-        DeathEvent += () => GetComponent<CharacterController>().enabled = false;
+        DeathEvent -= () => GetComponent<CharacterController>().enabled = false;
     }
 
     private void Update()

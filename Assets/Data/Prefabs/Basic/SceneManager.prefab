@@ -44,6 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec9730fb182454a4b8c84f65ba4a3e30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <LoadingScene>k__BackingField: 0
-  <MainMenuScene>k__BackingField: 1
+  <LoadingScene>k__BackingField: 1
+  <MainMenuScene>k__BackingField: 0
   <GameplayScene>k__BackingField: 2

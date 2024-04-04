@@ -11727,6 +11727,11 @@ PrefabInstance:
       propertyPath: m_LookAt
       value: 
       objectReference: {fileID: 1623470942}
+    - target: {fileID: 8345876524292909819, guid: d4af75e42c852a149ae5f02531739eb2,
+        type: 3}
+      propertyPath: m_Lens.NearClipPlane
+      value: -170
+      objectReference: {fileID: 0}
     - target: {fileID: 8345876524345953594, guid: d4af75e42c852a149ae5f02531739eb2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11747,6 +11752,11 @@ PrefabInstance:
       propertyPath: m_LookAt
       value: 
       objectReference: {fileID: 1623470942}
+    - target: {fileID: 8345876524345953595, guid: d4af75e42c852a149ae5f02531739eb2,
+        type: 3}
+      propertyPath: m_Lens.NearClipPlane
+      value: -170
+      objectReference: {fileID: 0}
     - target: {fileID: 8345876524854739960, guid: d4af75e42c852a149ae5f02531739eb2,
         type: 3}
       propertyPath: _brain
@@ -11832,6 +11842,11 @@ PrefabInstance:
       propertyPath: m_LookAt
       value: 
       objectReference: {fileID: 1623470942}
+    - target: {fileID: 8345876525356813995, guid: d4af75e42c852a149ae5f02531739eb2,
+        type: 3}
+      propertyPath: m_Lens.NearClipPlane
+      value: -170
+      objectReference: {fileID: 0}
     - target: {fileID: 8345876525414410446, guid: d4af75e42c852a149ae5f02531739eb2,
         type: 3}
       propertyPath: m_Follow
@@ -11842,6 +11857,11 @@ PrefabInstance:
       propertyPath: m_LookAt
       value: 
       objectReference: {fileID: 1623470942}
+    - target: {fileID: 8345876525414410446, guid: d4af75e42c852a149ae5f02531739eb2,
+        type: 3}
+      propertyPath: m_Lens.NearClipPlane
+      value: -170
+      objectReference: {fileID: 0}
     - target: {fileID: 8345876525414410447, guid: d4af75e42c852a149ae5f02531739eb2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -21803,7 +21823,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 562525648, guid: 81ac0ba56d055114a804af46580fc769, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 195.395
       objectReference: {fileID: 0}
     - target: {fileID: 562525648, guid: 81ac0ba56d055114a804af46580fc769, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -33471,7 +33491,7 @@ PrefabInstance:
     - target: {fileID: 7157883472247661047, guid: d54b658103419114f812975f8f90f1df,
         type: 3}
       propertyPath: near clip plane
-      value: -150
+      value: -170
       objectReference: {fileID: 0}
     - target: {fileID: 7157883472247661050, guid: d54b658103419114f812975f8f90f1df,
         type: 3}
