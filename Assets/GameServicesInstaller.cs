@@ -13,6 +13,7 @@ public class GameServicesInstaller : MonoInstaller
 	[SerializeField] private SFXManager _sfxManager;
 	[SerializeField] private HUDManager _hudManager;
 	[SerializeField] private DescriptionManager _descriptionManager;
+	[SerializeField] private HotbarDisplay _hotbarDisplay;
 
 	private void Awake()
 	{
@@ -42,6 +43,7 @@ public class GameServicesInstaller : MonoInstaller
 		//UI
 		Container.BindInstance(_hudManager).AsSingle().NonLazy();
 		Container.BindInstance(_descriptionManager).AsSingle().NonLazy();
+		Container.BindInstance(_hotbarDisplay).AsSingle().NonLazy();
 	}
 
 	public PlayerMovementManager PlayerMovementManager { get { return _playerMovement; } }
@@ -51,4 +53,5 @@ public class GameServicesInstaller : MonoInstaller
 	public SFXManager SFXManager { get { return _sfxManager; } }
 	public HUDManager HUDManager { get { return _hudManager; } }
 	public DescriptionManager DescriptionManager { get { return _descriptionManager; } }
+	public HotbarDisplay HotbarDisplay { get { return _hotbarDisplay; } }
 }

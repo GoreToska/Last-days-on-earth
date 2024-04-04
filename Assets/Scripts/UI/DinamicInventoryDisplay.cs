@@ -29,7 +29,7 @@ public class DinamicInventoryDisplay : InventoryDisplay
 		for (int i = offset; i < inventoryToDisplay.InventorySize; i++)
 		{
 			var uiSlot = Instantiate(_slotPrefab, transform);
-			uiSlot.Construct(GameServicesInstaller.Instance.DescriptionManager);
+			uiSlot.Construct(GameServicesInstaller.Instance.DescriptionManager, GameServicesInstaller.Instance.HotbarDisplay);
 
 			_slotDictionary.Add(uiSlot, inventoryToDisplay.InventorySlots[i]);
 			uiSlot.Init(inventoryToDisplay.InventorySlots[i]);

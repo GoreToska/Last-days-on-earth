@@ -9,6 +9,7 @@ public class HotbarDisplay : StaticInventoryDisplay
     public static UnityAction<InventoryItemData> OnItemEquip = delegate { };
     public static UnityAction<InventorySlot> OnHotbarItemAdded = delegate { };
     public static UnityAction<InventorySlot> OnCurrentSlotItemChanged = delegate { };
+    public static UnityAction OnSlotCleared = delegate { };
 
     private int _maxIndex = 4;
     private int _minIndex = 0;
@@ -71,11 +72,19 @@ public class HotbarDisplay : StaticInventoryDisplay
         OnItemEquip?.Invoke(Slots[CurrentIndex].AssignedInventorySlot.ItemData);
     }
 
-    private void UpdateEquipment(InventorySlot slot)
+    public void UpdateEquipment(InventorySlot slot)
     {
         if (slot.SlotID == CurrentIndex)
         {
-            OnCurrentSlotItemChanged.Invoke(slot);
+			OnCurrentSlotItemChanged?.Invoke(slot);
         }
     }
+
+    public void ClearEquipmentSlot(InventorySlot slot)
+    {
+		if (slot.SlotID == CurrentIndex)
+        {
+			OnSlotCleared?.Invoke();
+		}
+	}
 }

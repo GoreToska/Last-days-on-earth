@@ -29,9 +29,10 @@ public class InventoryItemData : ScriptableObject
 
     public virtual void UnequipItem(PlayerEquipment playerEquipment)
     {
-    }
+		playerEquipment.AnimationManager.SetWeaponAnimationPattern(WeaponType.None);
+	}
 
-    public virtual void SetAnimationPattern(PlayerEquipment playerEquipment)
+	public virtual void SetAnimationPattern(PlayerEquipment playerEquipment)
     {
         playerEquipment.AnimationManager.SetWeaponAnimationPattern(WeaponType.None);
     }

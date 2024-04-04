@@ -27,7 +27,7 @@ public class InventorySlot : ISerializationCallbackReceiver
 
     public void ClearSlot()
     {
-        ItemData = null;
+		ItemData = null;
         StackSize = -1;
         _itemID = -1;
     }

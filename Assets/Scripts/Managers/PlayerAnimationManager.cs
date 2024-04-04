@@ -84,8 +84,8 @@ public class PlayerAnimationManager : MonoBehaviour
 				PlayerInputManager.Instance.IsAiming = false;
 				_animator.SetBool("IsAiming", false);
 				SetDefaultRig();
+				_animator.ResetTrigger(RifleWalkTrigger);
 				_animator.SetTrigger(DefaultWalkTrigger);
-				Debug.Log("Trigger");
 				break;
 			case WeaponType.Melee_Primary:
 				//animator.CrossFade("Walk Rifle Blend Tree", 0.1f);

@@ -21803,7 +21803,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 562525648, guid: 81ac0ba56d055114a804af46580fc769, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 195.395
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 562525648, guid: 81ac0ba56d055114a804af46580fc769, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -25333,6 +25333,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a1f6391313114f4ab30c313efb97ae8, type: 3}
+--- !u!114 &1411357881 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2654430141479505419, guid: 81ac0ba56d055114a804af46580fc769,
+    type: 3}
+  m_PrefabInstance: {fileID: 1260421509}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc164fb16a639bb4ca3048b747e89707, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1411510013
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -40526,6 +40538,11 @@ PrefabInstance:
       propertyPath: _noiseManager
       value: 
       objectReference: {fileID: 2023935713}
+    - target: {fileID: 3392585953937951438, guid: ea91eb3b9e108f4448b58096fa64309c,
+        type: 3}
+      propertyPath: _hotbarDisplay
+      value: 
+      objectReference: {fileID: 1411357881}
     - target: {fileID: 3392585953937951438, guid: ea91eb3b9e108f4448b58096fa64309c,
         type: 3}
       propertyPath: _impactManager

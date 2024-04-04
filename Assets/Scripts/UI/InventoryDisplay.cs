@@ -4,10 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using Zenject;
 
 public abstract class InventoryDisplay : MonoBehaviour
 {
     [SerializeField] private MouseItemData _mouseInventoryItem;
+
+    [Inject] private HotbarDisplay _hotbarDisplay;
 
     protected InventorySystem _inventorySystem;
     protected Dictionary<InventorySlot_UI, InventorySlot> _slotDictionary;
@@ -50,7 +53,9 @@ public abstract class InventoryDisplay : MonoBehaviour
             {
                 // clicked slot has an item and mouse doesn't have an item - pick up item
                 _mouseInventoryItem.UpdateMouseSlot(clickedUISlot.AssignedInventorySlot);
-                clickedUISlot.ClearSlot();
+                _hotbarDisplay.ClearEquipmentSlot(clickedUISlot.AssignedInventorySlot);
+				clickedUISlot.ClearSlot();
+
                 return;
             }
         }
@@ -60,8 +65,9 @@ public abstract class InventoryDisplay : MonoBehaviour
         {
             clickedUISlot.AssignedInventorySlot.AssignItem(_mouseInventoryItem.AssignedInventorySlot);
             clickedUISlot.UpdateUISlot();
+            _hotbarDisplay.UpdateEquipment(clickedUISlot.AssignedInventorySlot);
 
-            _mouseInventoryItem.ClearSlot();
+			_mouseInventoryItem.ClearSlot();
         }
 
         // both have an item - decide what to do

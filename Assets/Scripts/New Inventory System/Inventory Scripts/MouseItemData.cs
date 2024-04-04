@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using Zenject;
 
 public class MouseItemData : MonoBehaviour
 {
@@ -15,7 +16,10 @@ public class MouseItemData : MonoBehaviour
     [SerializeField] private float _minThrowPower;
     [SerializeField] private float _maxThrowPower;
 
-    public Image ItemSprite;
+    [Inject] private PlayerMovementManager _movementManager;
+    [Inject] private HotbarDisplay _hotbarDisplay;
+
+	public Image ItemSprite;
     public TMP_Text ItemCount;
     public InventorySlot AssignedInventorySlot;
 
@@ -28,7 +32,7 @@ public class MouseItemData : MonoBehaviour
         ItemCount.text = "";
 
         //  TODO: get it from somewere else (zenject mb)
-        _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        _playerTransform = _movementManager.transform;
         if (_playerTransform == null)
         {
             Debug.LogWarning("Player cant be found.");
@@ -60,8 +64,7 @@ public class MouseItemData : MonoBehaviour
                 else
                 {
                     ClearSlot();
-                    HotbarDisplay.OnCurrentSlotItemChanged.Invoke(AssignedInventorySlot);
-                }
+				}
             }
         }
     }
@@ -77,6 +80,7 @@ public class MouseItemData : MonoBehaviour
     public void UpdateMouseSlot(InventorySlot slot)
     {
         AssignedInventorySlot.AssignItem(slot);
+        AssignedInventorySlot.SlotID = slot.SlotID;
         UpdateMouseSlot();
     }
 

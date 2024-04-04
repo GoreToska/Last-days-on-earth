@@ -50,6 +50,7 @@ public class PlayerEquipment : MonoBehaviour
 		HotbarDisplay.OnCurrentSlotItemChanged += UpdateEquipment;
 		PlayerInputManager.AttackEvent += UseItem;
 		PlayerInputManager.ReloadEvent += Reload;
+		HotbarDisplay.OnSlotCleared += ClearEquipmentSlot;
 	}
 
 	private void OnDisable()
@@ -76,7 +77,7 @@ public class PlayerEquipment : MonoBehaviour
 
 	private void EquipSlotItem(InventoryItemData itemData)
 	{
-		ClearSlotIten();
+		ClearSlotItem();
 
 		if (itemData == null)
 		{
@@ -97,8 +98,9 @@ public class PlayerEquipment : MonoBehaviour
 		itemData.EquipItem(this);
 	}
 
-	private void ClearSlotIten()
+	private void ClearSlotItem()
 	{
+		Debug.Log("Clear slot");
 		if (_currentEquippedItem != null)
 		{
 			_currentInventoryItemData.UnequipItem(this);
@@ -117,7 +119,7 @@ public class PlayerEquipment : MonoBehaviour
 		}
 		else
 		{
-			ClearSlotIten();
+			ClearSlotItem();
 		}
 	}
 
@@ -130,5 +132,10 @@ public class PlayerEquipment : MonoBehaviour
 			return _currentInventoryItemData as InventoryRifleData;
 
 		return null;
+	}
+
+	public void ClearEquipmentSlot()
+	{
+		ClearSlotItem();
 	}
 }

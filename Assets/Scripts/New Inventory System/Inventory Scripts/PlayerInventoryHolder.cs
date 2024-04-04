@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Zenject;
 
 public class PlayerInventoryHolder : InventoryHolder
 {
+    [Inject] private HotbarDisplay _hotbarDisplay;
+
     public static UnityAction OnPlayerInventoryChanged;
 
     protected override void Awake()
@@ -49,9 +52,9 @@ public class PlayerInventoryHolder : InventoryHolder
             if (slot.ItemData != item)
                 continue;
 
-            var actualAmount = 0;
+			int actualAmount;
 
-            if (slot.StackSize > amount)
+			if (slot.StackSize > amount)
             {
                 actualAmount = amount;
                 slot.RemoveFromStack(actualAmount);
@@ -60,7 +63,7 @@ public class PlayerInventoryHolder : InventoryHolder
             {
                 actualAmount = slot.StackSize;
                 slot.RemoveFromStack(actualAmount);
-                slot.ClearSlot();
+				slot.ClearSlot();
             }
 
             OnPlayerInventoryChanged?.Invoke();
