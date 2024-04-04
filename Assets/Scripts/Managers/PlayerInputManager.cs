@@ -98,8 +98,6 @@ public class PlayerInputManager : MonoBehaviour, IInputController
 
 	private void Start()
 	{
-		//DontDestroyOnLoad(gameObject);
-
 		_camera = Camera.main;
 		_crosshair = GameObject.FindGameObjectWithTag("Crosshair").transform;
 		_playerStatusManager = GetComponent<PlayerStatusManager>();
@@ -141,7 +139,11 @@ public class PlayerInputManager : MonoBehaviour, IInputController
 					_isAiming = !_isAiming;
 			};
 
-			_playerInput.PlayerCombat.Aim.performed += i => ToggleAim.Invoke(_isAiming);
+			_playerInput.PlayerCombat.Aim.performed += i =>
+			{
+				if (PlayerEquipment.Instance.GetCurrentWeapon())
+					ToggleAim.Invoke(_isAiming);
+			};
 
 			_playerInput.PlayerCombat.Attack.performed += i => IsShooting = true;
 			_playerInput.PlayerCombat.Attack.canceled += i => IsShooting = false;

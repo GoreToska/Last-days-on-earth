@@ -21,7 +21,10 @@ public class InventoryMedicineData : InventoryItemData
 	public override void EquipItem(PlayerEquipment playerEquipment)
 	{
 		base.EquipItem(playerEquipment);
+	}
 
+	public override void SetAnimationPattern(PlayerEquipment playerEquipment)
+	{
 		playerEquipment.AnimationManager.SetWeaponAnimationPattern(WeaponType.None);
 	}
 }

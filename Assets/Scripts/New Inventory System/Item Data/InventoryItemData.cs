@@ -24,9 +24,14 @@ public class InventoryItemData : ScriptableObject
     public virtual void EquipItem(PlayerEquipment playerEquipment)
     {
         //HotbarDisplay.OnUsingCurrentItem += UseItem;
-    }
+        SetAnimationPattern(playerEquipment);
+	}
 
     public virtual void UnequipItem(PlayerEquipment playerEquipment)
+    {
+    }
+
+    public virtual void SetAnimationPattern(PlayerEquipment playerEquipment)
     {
         playerEquipment.AnimationManager.SetWeaponAnimationPattern(WeaponType.None);
     }

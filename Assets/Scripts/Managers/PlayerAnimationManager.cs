@@ -6,194 +6,200 @@ using Zenject;
 [RequireComponent(typeof(Animator))]
 public class PlayerAnimationManager : MonoBehaviour
 {
-    [SerializeField] private Rig _rifleRig;
-    [SerializeField] private Rig _twoHandedMeleeRig;
+	[SerializeField] private Rig _rifleRig;
+	[SerializeField] private Rig _twoHandedMeleeRig;
 
-    [Header("Animations")]
-    [SerializeField] private AnimationClip _rifleReloadingAnimation;
-    [SerializeField] private float _rifleReloadingAnimationOffset = 0.75f;
+	[Header("Animations")]
+	[SerializeField] private AnimationClip _rifleReloadingAnimation;
+	[SerializeField] private float _rifleReloadingAnimationOffset = 0.75f;
 
-    [Inject] private PlayerMovementManager _playerMovementManager;
+	[Inject] private PlayerMovementManager _playerMovementManager;
 
-    private Animator _animator;
+	private Animator _animator;
 
-    private const string RifleLightShotTrigger = "RifleLightShot";
-    private const string RifleMediumShotTrigger = "RifleMediumShot";
-    private const string RifleHeavyShotTrigger = "RifleHeavyShot";
-    private const string PistolMediumShotTrigger = "PistolMediumShot";
-    private const string RifleWalkTrigger = "RifleWalk";
-    private const string DefaultWalkTrigger = "DefaultWalk";
+	private const string RifleLightShotTrigger = "RifleLightShot";
+	private const string RifleMediumShotTrigger = "RifleMediumShot";
+	private const string RifleHeavyShotTrigger = "RifleHeavyShot";
+	private const string PistolMediumShotTrigger = "PistolMediumShot";
+	private const string RifleWalkTrigger = "RifleWalk";
+	private const string DefaultWalkTrigger = "DefaultWalk";
 
-    private void Awake()
-    {
-        _animator = GetComponent<Animator>();
-    }
+	public Rig RifleRig => _rifleRig;
 
-    private void Start()
-    {
-        if (PlayerEquipment.Instance.GetCurrentWeapon() == null)
-        {
-            SetWeaponAnimationPattern(WeaponType.None);
-            return;
-        }
+	private void Awake()
+	{
+		_animator = GetComponent<Animator>();
+	}
 
-        if (PlayerEquipment.Instance.GetCurrentWeapon())
-            SetWeaponAnimationPattern(PlayerEquipment.Instance.GetCurrentWeapon().WeaponData.WeaponType);
-    }
+	private void Start()
+	{
+		if (PlayerEquipment.Instance.GetCurrentWeapon() == null)
+		{
+			SetWeaponAnimationPattern(WeaponType.None);
+			return;
+		}
 
-    private void OnEnable()
-    {
-        PlayerInputManager.ToggleCrouch += CrouchAnimationHandler;
-        PlayerInputManager.ToggleAim += AimAnimationHandler;
-    }
+		if (PlayerEquipment.Instance.GetCurrentWeapon())
+			SetWeaponAnimationPattern(PlayerEquipment.Instance.GetCurrentWeapon().WeaponData.WeaponType);
+	}
 
-    private void OnDisable()
-    {
-        PlayerInputManager.ToggleCrouch -= CrouchAnimationHandler;
-        PlayerInputManager.ToggleAim -= AimAnimationHandler;
-    }
+	private void OnEnable()
+	{
+		PlayerInputManager.ToggleCrouch += CrouchAnimationHandler;
+		PlayerInputManager.ToggleAim += AimAnimationHandler;
+	}
 
-    private void Update()
-    {
-        // change update to events
-        UpdateAnimation();
-    }
+	private void OnDisable()
+	{
+		PlayerInputManager.ToggleCrouch -= CrouchAnimationHandler;
+		PlayerInputManager.ToggleAim -= AimAnimationHandler;
+	}
 
-    private void UpdateAnimation()
-    {
-        _animator.SetFloat("Speed", PlayerInputManager.Instance.MoveAmount, 0.05f, Time.deltaTime);
-        _animator.SetFloat("HorizontalSpeed", _playerMovementManager.HorizontalSpeed, 0.02f, Time.deltaTime);
-        _animator.SetFloat("VerticalSpeed", _playerMovementManager.VerticalSpeed, 0.02f, Time.deltaTime);
-    }
+	private void Update()
+	{
+		// change update to events
+		UpdateAnimation();
+	}
 
-    public void SetWeaponAnimationPattern(WeaponType type)
-    {
-        switch (type)
-        {
-            case WeaponType.Range_Primary:
-                _animator.SetTrigger(RifleWalkTrigger);
-                SetRifleRig();
-                break;
-            case WeaponType.Range_Secondary:
-                _animator.SetTrigger(RifleWalkTrigger);
-                break;
-            case WeaponType.None:
-                _animator.SetTrigger(DefaultWalkTrigger);
-                PlayerInputManager.Instance.IsAiming = false;
-                _animator.SetBool("IsAiming", false);
-                SetDefaultRig();
-                break;
-            case WeaponType.Melee_Primary:
-                //animator.CrossFade("Walk Rifle Blend Tree", 0.1f);
-                SetTwoHandedMeleeRig();
-                //animator.CrossFade("Melee_2hand_Idle_01", 0.1f);
-                break;
-            case WeaponType.Melee_Secondary:
-                break;
-            default:
-                break;
-        }
-    }
+	private void UpdateAnimation()
+	{
+		_animator.SetFloat("Speed", PlayerInputManager.Instance.MoveAmount, 0.05f, Time.deltaTime);
+		_animator.SetFloat("HorizontalSpeed", _playerMovementManager.HorizontalSpeed, 0.02f, Time.deltaTime);
+		_animator.SetFloat("VerticalSpeed", _playerMovementManager.VerticalSpeed, 0.02f, Time.deltaTime);
+	}
 
-    public void CrouchAnimationHandler(bool value)
-    {
-        _animator.SetBool("IsCrouching", value);
+	public void SetWeaponAnimationPattern(WeaponType type)
+	{
+		switch (type)
+		{
+			case WeaponType.Range_Primary:
+				SetRifleRig();
+				_animator.ResetTrigger(DefaultWalkTrigger);
+				_animator.SetTrigger(RifleWalkTrigger);
+				break;
+			case WeaponType.Range_Secondary:
+				_animator.SetTrigger(RifleWalkTrigger);
+				break;
+			case WeaponType.None:
+				PlayerInputManager.Instance.IsAiming = false;
+				_animator.SetBool("IsAiming", false);
+				SetDefaultRig();
+				_animator.SetTrigger(DefaultWalkTrigger);
+				Debug.Log("Trigger");
+				break;
+			case WeaponType.Melee_Primary:
+				//animator.CrossFade("Walk Rifle Blend Tree", 0.1f);
+				SetTwoHandedMeleeRig();
+				//animator.CrossFade("Melee_2hand_Idle_01", 0.1f);
+				break;
+			case WeaponType.Melee_Secondary:
+				break;
+			default:
+				break;
+		}
+	}
 
-        if (value)
-        {
-            SetWeaponAnimationPattern(WeaponType.None);
-        }
-        else
-        {
-            SetWeaponAnimationPattern();
-        }
-    }
+	public void CrouchAnimationHandler(bool value)
+	{
+		_animator.SetBool("IsCrouching", value);
 
-    public void AimAnimationHandler(bool value)
-    {
-        _animator.SetBool("IsAiming", value);
+		if (value)
+		{
+			SetWeaponAnimationPattern(WeaponType.None);
+		}
+		else
+		{
+			SetWeaponAnimationPattern();
+		}
+	}
 
-        if(value)
-        {
+	public void AimAnimationHandler(bool value)
+	{
+		_animator.SetBool("IsAiming", value);
 
-        }
-        else
-        {
-            SetWeaponAnimationPattern();
-        }
-    }
+		if (value)
+		{
 
-    private void SetWeaponAnimationPattern()
-    {
-        if (PlayerEquipment.Instance.GetCurrentWeapon())
-            SetWeaponAnimationPattern(PlayerEquipment.Instance.GetCurrentWeapon().WeaponData.WeaponType);
-        else
-        {
-            SetWeaponAnimationPattern(WeaponType.None);
-        }
-    }
+		}
+		else
+		{
+			SetWeaponAnimationPattern();
+		}
+	}
 
-    public void PlayRifleLightShot()
-    {
-        _animator.SetTrigger(RifleLightShotTrigger);
-    }
+	private void SetWeaponAnimationPattern()
+	{
+		if (PlayerEquipment.Instance.GetCurrentWeapon())
+			SetWeaponAnimationPattern(PlayerEquipment.Instance.GetCurrentWeapon().WeaponData.WeaponType);
+		else
+		{
+			SetWeaponAnimationPattern(WeaponType.None);
+		}
+	}
 
-    public void PlayRifleMediumShot()
-    {
-        _animator.SetTrigger(RifleMediumShotTrigger);
-    }
+	public void PlayRifleLightShot()
+	{
+		_animator.SetTrigger(RifleLightShotTrigger);
+	}
 
-    public void PlayRifleHeavyShot()
-    {
-        _animator.SetTrigger(RifleHeavyShotTrigger);
-    }
+	public void PlayRifleMediumShot()
+	{
+		_animator.SetTrigger(RifleMediumShotTrigger);
+	}
 
-    public void PlayPistolMediumShot()
-    {
-        _animator.SetTrigger(PistolMediumShotTrigger);
-    }
+	public void PlayRifleHeavyShot()
+	{
+		_animator.SetTrigger(RifleHeavyShotTrigger);
+	}
 
-    public void PlayReloadAnimation(string animationName)
-    {
-        StartCoroutine(PlayRifleReloadAnimationCoroutine(animationName));
-    }
+	public void PlayPistolMediumShot()
+	{
+		_animator.SetTrigger(PistolMediumShotTrigger);
+	}
 
-    public void PlayHeavyAttackAnimation()
-    {
-        _animator.Play("Stable Sword Inward Slash (1)");
-    }
+	public void PlayReloadAnimation(string animationName)
+	{
+		StartCoroutine(PlayRifleReloadAnimationCoroutine(animationName));
+	}
 
-    private IEnumerator PlayRifleReloadAnimationCoroutine(string animationName)
-    {
-        SetDefaultRig();
-        PlayerInputManager.Instance.DisableCombatControls();
-        _animator.CrossFade(animationName, 0.1f);
+	public void PlayHeavyAttackAnimation()
+	{
+		_animator.Play("Stable Sword Inward Slash (1)");
+	}
 
-        yield return new WaitForSeconds(_rifleReloadingAnimation.length - _rifleReloadingAnimationOffset);
+	private IEnumerator PlayRifleReloadAnimationCoroutine(string animationName)
+	{
+		SetDefaultRig();
+		PlayerInputManager.Instance.DisableCombatControls();
+		_animator.CrossFade(animationName, 0.1f);
 
-        PlayerInputManager.Instance.EnableCombatControls();
-        SetRifleRig();
+		yield return new WaitForSeconds(_rifleReloadingAnimation.length - _rifleReloadingAnimationOffset);
 
-        yield break;
-    }
+		PlayerInputManager.Instance.EnableCombatControls();
+		SetRifleRig();
 
-    public void SetRifleRig()
-    {
-        // other rigs too
-        SetDefaultRig();
-        _rifleRig.weight = 1f;
-    }
+		yield break;
+	}
 
-    public void SetTwoHandedMeleeRig()
-    {
-        SetDefaultRig();
-        //twoHandedMeleeRig.weight = 1f;
-    }
+	public void SetRifleRig()
+	{
+		// other rigs too
+		//SetDefaultRig();
+		Debug.Log("Rifle Animation");
+		_twoHandedMeleeRig.weight = 0f;
+		_rifleRig.weight = 1f;
+	}
 
-    public void SetDefaultRig()
-    {
-        // other rigs too
-        _twoHandedMeleeRig.weight = 0f;
-        _rifleRig.weight = 0f;
-    }
+	public void SetTwoHandedMeleeRig()
+	{
+		//SetDefaultRig();
+		//twoHandedMeleeRig.weight = 1f;
+	}
+
+	public void SetDefaultRig()
+	{
+		// other rigs too
+		_twoHandedMeleeRig.weight = 0f;
+		_rifleRig.weight = 0f;
+	}
 }

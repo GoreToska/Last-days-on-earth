@@ -23,8 +23,6 @@ public class InventoryRifleData : InventoryItemData
 
 	public override void EquipItem(PlayerEquipment playerEquipment)
 	{
-		base.EquipItem(playerEquipment);
-
 		playerEquipment._currentEquippedItem.GetComponent<RangeWeapon>()
 			.Construct(
 			GameServicesInstaller.Instance.PlayerAnimationManager,
@@ -32,10 +30,10 @@ public class InventoryRifleData : InventoryItemData
 			GameServicesInstaller.Instance.NoiseManager,
 			GameServicesInstaller.Instance.SFXManager);
 
-		playerEquipment.AnimationManager.SetWeaponAnimationPattern(_weaponData.WeaponType);
 		playerEquipment._currentRangeWeapon = playerEquipment._currentEquippedItem.GetComponent<IRangeWeapon>();
 		PlayerEquipment.ReloadWeapon += playerEquipment._currentRangeWeapon.PerformReload;
 
+		base.EquipItem(playerEquipment);
 	}
 
 	public override void UnequipItem(PlayerEquipment playerEquipment)
@@ -43,5 +41,10 @@ public class InventoryRifleData : InventoryItemData
 		base.UnequipItem(playerEquipment);
 
 		PlayerEquipment.ReloadWeapon -= playerEquipment._currentRangeWeapon.PerformReload;
+	}
+
+	public override void SetAnimationPattern(PlayerEquipment playerEquipment)
+	{
+		playerEquipment.AnimationManager.SetWeaponAnimationPattern(_weaponData.WeaponType);
 	}
 }

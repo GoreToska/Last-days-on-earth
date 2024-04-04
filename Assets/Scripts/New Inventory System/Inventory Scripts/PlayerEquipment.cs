@@ -57,6 +57,7 @@ public class PlayerEquipment : MonoBehaviour
 		HotbarDisplay.OnItemEquip -= EquipSlotItem;
 		HotbarDisplay.OnCurrentSlotItemChanged -= UpdateEquipment;
 		PlayerInputManager.AttackEvent -= UseItem;
+		PlayerInputManager.ReloadEvent -= Reload;
 	}
 
 	private void UseItem()
@@ -80,6 +81,8 @@ public class PlayerEquipment : MonoBehaviour
 		if (itemData == null)
 		{
 			_currentInventoryItemData = null;
+			_animationManager.SetWeaponAnimationPattern(WeaponType.None);
+
 			return;
 		}
 
@@ -102,16 +105,15 @@ public class PlayerEquipment : MonoBehaviour
 			_currentRangeWeapon = null;
 
 			Destroy(_currentEquippedItem);
+			_currentInventoryItemData = null;
 		}
 	}
 
 	private void UpdateEquipment(InventorySlot slot)
 	{
-
 		if (slot.ItemData != null)
 		{
 			EquipSlotItem(slot.ItemData);
-
 		}
 		else
 		{
