@@ -201,9 +201,17 @@ MonoBehaviour:
   <InventorySize>k__BackingField: 20
   <PrimaryInventorySystem>k__BackingField:
     <InventorySlots>k__BackingField: []
+  PreparedItems:
+  - <Item>k__BackingField: {fileID: 11400000, guid: ed667d31f823c0342bf39cb35d169c8a,
+      type: 2}
+    <Count>k__BackingField: 1
+  - <Item>k__BackingField: {fileID: 11400000, guid: 12b2aa25b7cf9ff4ebe5910bdac99857,
+      type: 2}
+    <Count>k__BackingField: 1
   <Offset>k__BackingField: 0
   _interactableHighlightConfig: {fileID: 11400000, guid: c1eab1ce9b906ec41be5ea27311a0e7f,
     type: 2}
+  _name: "\u041E\u0440\u0443\u0436\u0435\u0439\u043D\u044B\u0439 \u044F\u0449\u0438\u043A"
 --- !u!114 &1490144762841338875
 MonoBehaviour:
   m_ObjectHideFlags: 0

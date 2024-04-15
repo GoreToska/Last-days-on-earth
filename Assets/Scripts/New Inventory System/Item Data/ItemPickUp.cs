@@ -46,14 +46,7 @@ public class ItemPickUp : MonoBehaviour, IInteractable
 
         var interactor = other.transform.root.GetComponent<Interactor>();
 
-        if (interactor.AddToInteractionList(this) == 1)
-        {
-            HighlightCurrentInteractable(true);
-        }
-        else
-        {
-            HighlightInteracable(true);
-        }
+        interactor.AddToInteractionList(this);
     }
 
     private void OnTriggerExit(Collider other)
@@ -63,7 +56,6 @@ public class ItemPickUp : MonoBehaviour, IInteractable
 
         var interactor = other.transform.root.GetComponent<Interactor>();
         interactor.RemoveFromInteractionList(this);
-        HighlightInteracable(false);
     }
 
     private void LoadGame(SaveData data)
@@ -137,6 +129,16 @@ public class ItemPickUp : MonoBehaviour, IInteractable
             }
         }
     }
+
+	public Transform GetTransform()
+	{
+		return transform;
+	}
+
+	public string GetName()
+	{
+        return ItemData.DisplayName;
+	}
 }
 
 public interface IPickUp

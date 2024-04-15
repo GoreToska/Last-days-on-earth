@@ -3,20 +3,16 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class DescriptionManager : MonoBehaviour
+public class InventoryItemDescriptionManager : MonoBehaviour
 {
 	[SerializeField] private RectTransform _descriptionObject;
 	[SerializeField] private TMP_Text _itemName;
 	[SerializeField] private TMP_Text _description;
 	[SerializeField] private Vector2 _offset;
 
-	private float _objectWidth;
-	private float _objectHeight;
-
 	private void Awake()
 	{
 		HideDescriptionPanel();
-		StoreDescriptionPanelSize();
 	}
 
 	public void ConfigureDescriptionPanel(string itemName, string description, Vector2 position)
@@ -45,27 +41,20 @@ public class DescriptionManager : MonoBehaviour
 
 	private Vector2 SetPosition(Vector2 position)
 	{
-		Vector2 newPosition = position + _offset;
+		Vector2 newPosition = position + _offset * _descriptionObject.lossyScale;
 
-		if (position.x + _objectWidth >= Screen.width)
+		if (newPosition.x + _descriptionObject.rect.width * _descriptionObject.lossyScale.x >= Screen.width)
 		{
-			Debug.Log("Width");
-			newPosition.x -= _objectWidth;
+			newPosition.x -= (_descriptionObject.rect.width + _offset.x) * _descriptionObject.lossyScale.x;
 			// object is too close to the right side of the screen
 		}
 
-		if (position.y - _objectHeight <= 0)
+		if (newPosition.y - _descriptionObject.rect.height * _descriptionObject.lossyScale.y <= 0)
 		{
 			// object is too close to the bottom side of the screen
-			newPosition.y += _objectHeight;
+			newPosition.y += (_descriptionObject.rect.height - _offset.y) * _descriptionObject.lossyScale.y;
 		}
 
 		return newPosition;
-	}
-
-	private void StoreDescriptionPanelSize()
-	{
-		_objectWidth = _descriptionObject.rect.width;
-		_objectHeight = _descriptionObject.rect.height;
 	}
 }

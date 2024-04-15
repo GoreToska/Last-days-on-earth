@@ -65,7 +65,6 @@ public class PlayerEquipment : MonoBehaviour
 	{
 		if (_currentInventoryItemData != null)
 		{
-			Debug.Log("Use");
 			_currentInventoryItemData.UseItem(this);
 		}
 	}
@@ -100,12 +99,10 @@ public class PlayerEquipment : MonoBehaviour
 
 	private void ClearSlotItem()
 	{
-		Debug.Log("Clear slot");
 		if (_currentEquippedItem != null)
 		{
 			_currentInventoryItemData.UnequipItem(this);
 			_currentRangeWeapon = null;
-
 			Destroy(_currentEquippedItem);
 			_currentInventoryItemData = null;
 		}

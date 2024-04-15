@@ -13,4 +13,8 @@ public interface IInteractable
     public void HighlightInteracable(bool value);
 
     public void HighlightCurrentInteractable(bool value);
+
+    public Transform GetTransform();
+
+    public string GetName();
 }

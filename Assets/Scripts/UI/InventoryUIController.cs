@@ -10,7 +10,7 @@ public class InventoryUIController : MonoBehaviour
     [SerializeField] private DinamicInventoryDisplay _inventoryPanel;
     [SerializeField] private PlayerInventoryHolder _playerInventory;
 
-    [Inject] private DescriptionManager _descriptionManager;
+    [Inject] private InventoryItemDescriptionManager _descriptionManager;
 
 	private void Start()
     {

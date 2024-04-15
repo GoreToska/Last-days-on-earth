@@ -12,12 +12,16 @@ public class GameServicesInstaller : MonoInstaller
 	[SerializeField] private NoiseManager _noiseManager;
 	[SerializeField] private SFXManager _sfxManager;
 	[SerializeField] private HUDManager _hudManager;
-	[SerializeField] private DescriptionManager _descriptionManager;
+	[SerializeField] private InventoryItemDescriptionManager _descriptionManager;
 	[SerializeField] private HotbarDisplay _hotbarDisplay;
+	[SerializeField] private InteractablesPromptManager _itemsPromptManager;
 
 	private void Awake()
 	{
-		Instance = this;
+		if (Instance == null)
+			Instance = this;
+		else
+			Destroy(gameObject);
 	}
 
 	private void OnDestroy()
@@ -44,6 +48,7 @@ public class GameServicesInstaller : MonoInstaller
 		Container.BindInstance(_hudManager).AsSingle().NonLazy();
 		Container.BindInstance(_descriptionManager).AsSingle().NonLazy();
 		Container.BindInstance(_hotbarDisplay).AsSingle().NonLazy();
+		Container.BindInstance(_itemsPromptManager).AsSingle().NonLazy();
 	}
 
 	public PlayerMovementManager PlayerMovementManager { get { return _playerMovement; } }
@@ -52,6 +57,7 @@ public class GameServicesInstaller : MonoInstaller
 	public NoiseManager NoiseManager { get { return _noiseManager; } }
 	public SFXManager SFXManager { get { return _sfxManager; } }
 	public HUDManager HUDManager { get { return _hudManager; } }
-	public DescriptionManager DescriptionManager { get { return _descriptionManager; } }
+	public InventoryItemDescriptionManager DescriptionManager { get { return _descriptionManager; } }
 	public HotbarDisplay HotbarDisplay { get { return _hotbarDisplay; } }
+	public InteractablesPromptManager ItemsPromptManager { get { return _itemsPromptManager; } }
 }

@@ -117,11 +117,7 @@ public class PlayerAnimationManager : MonoBehaviour
 	{
 		_animator.SetBool("IsAiming", value);
 
-		if (value)
-		{
-
-		}
-		else
+		if (!value)
 		{
 			SetWeaponAnimationPattern();
 		}
@@ -183,9 +179,6 @@ public class PlayerAnimationManager : MonoBehaviour
 
 	public void SetRifleRig()
 	{
-		// other rigs too
-		//SetDefaultRig();
-		Debug.Log("Rifle Animation");
 		_twoHandedMeleeRig.weight = 0f;
 		_rifleRig.weight = 1f;
 	}
@@ -198,7 +191,6 @@ public class PlayerAnimationManager : MonoBehaviour
 
 	public void SetDefaultRig()
 	{
-		// other rigs too
 		_twoHandedMeleeRig.weight = 0f;
 		_rifleRig.weight = 0f;
 	}

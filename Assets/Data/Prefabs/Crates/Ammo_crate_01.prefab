@@ -188,9 +188,17 @@ MonoBehaviour:
   <InventorySize>k__BackingField: 5
   <PrimaryInventorySystem>k__BackingField:
     <InventorySlots>k__BackingField: []
+  PreparedItems:
+  - <Item>k__BackingField: {fileID: 11400000, guid: 4493f32113425d24988f23472ce2e7c6,
+      type: 2}
+    <Count>k__BackingField: 16
+  - <Item>k__BackingField: {fileID: 11400000, guid: f0041f86efa6b9b46b227cbbe295489d,
+      type: 2}
+    <Count>k__BackingField: 55
   <Offset>k__BackingField: 0
   _interactableHighlightConfig: {fileID: 11400000, guid: c1eab1ce9b906ec41be5ea27311a0e7f,
     type: 2}
+  _name: "\u041A\u043E\u043D\u0442\u0435\u0439\u043D\u0435\u0440 \u0441 \u043F\u0430\u0442\u0440\u043E\u043D\u0430\u043C\u0438"
 --- !u!114 &4881859354834576175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,7 +211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bef53d3ce6743f24eb8d8436e44c7296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _id: 68a4be6d-830c-466f-9e3d-6d7dfb991f2d
+  _id: 86cf5e73-733e-4537-9e89-9abb7428aec7
 --- !u!65 &2115349377448834954
 BoxCollider:
   m_ObjectHideFlags: 0

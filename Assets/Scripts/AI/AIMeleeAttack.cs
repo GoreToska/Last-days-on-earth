@@ -11,7 +11,6 @@ public class AIMeleeAttack : MonoBehaviour, IAILightAttack
     void Start()
     {
         _damageCollider = GetComponentInChildren<MeleeDamageCollider>();
-        Debug.Log(_damageCollider);
     }
 
     public void StartMeleeAttack()

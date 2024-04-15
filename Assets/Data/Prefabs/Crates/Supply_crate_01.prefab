@@ -117,9 +117,11 @@ MonoBehaviour:
   <InventorySize>k__BackingField: 30
   <PrimaryInventorySystem>k__BackingField:
     <InventorySlots>k__BackingField: []
+  PreparedItems: []
   <Offset>k__BackingField: 0
   _interactableHighlightConfig: {fileID: 11400000, guid: c1eab1ce9b906ec41be5ea27311a0e7f,
     type: 2}
+  _name: "\u0414\u0435\u0440\u0435\u0432\u044F\u043D\u043D\u044B\u0439 \u044F\u0449\u0438\u043A"
 --- !u!114 &3798794840688712370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,7 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bef53d3ce6743f24eb8d8436e44c7296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _id: 2757e3d4-f14b-4a69-9599-64c34f39733a
+  _id: dcb40891-401c-458a-b6bd-33a78e10d8a9
 --- !u!135 &5956258272343045566
 SphereCollider:
   m_ObjectHideFlags: 0

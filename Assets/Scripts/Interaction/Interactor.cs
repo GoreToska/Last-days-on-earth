@@ -3,114 +3,139 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using Zenject;
 
 public class Interactor : MonoBehaviour
 {
-    public PlayerInventoryHolder Inventory { get; private set; }
-    public LayerMask InteractionLayer;
+	[Inject] private InteractablesPromptManager _promptManager;
 
-    private List<IInteractable> _interactables = new List<IInteractable>();
-    int CurrentInt = 0;
+	public PlayerInventoryHolder Inventory { get; private set; }
+	public LayerMask InteractionLayer;
 
-    public bool IsInteracting { get; private set; }
+	private List<IInteractable> _interactables = new List<IInteractable>();
+	private int _currentInteractableNumber = 0;
+	private IInteractable _currentInteractable;
 
-    private void Awake()
-    {
-        Inventory = GetComponent<PlayerInventoryHolder>();
-    }
+	public bool IsInteracting { get; private set; }
 
-    private void OnEnable()
-    {
-        PlayerInputManager.PickUpEvent += StartInteraction;
-        PlayerInputManager.ChangeInteractable += ChangeInteractableNumber;
-    }
+	private void Awake()
+	{
+		Inventory = GetComponent<PlayerInventoryHolder>();
+	}
 
-    private void OnDisable()
-    {
-        PlayerInputManager.PickUpEvent -= StartInteraction;
-        PlayerInputManager.ChangeInteractable -= ChangeInteractableNumber;
-    }
+	private void OnEnable()
+	{
+		PlayerInputManager.PickUpEvent += StartInteraction;
+		PlayerInputManager.ChangeInteractable += ChangeInteractableNumber;
+	}
 
-    public void ChangeInteractableNumber(float value)
-    {
-        if (_interactables.Count == 0)
-            return;
+	private void OnDisable()
+	{
+		PlayerInputManager.PickUpEvent -= StartInteraction;
+		PlayerInputManager.ChangeInteractable -= ChangeInteractableNumber;
+	}
 
-        ClampCurrentInteractableNumber();
-        _interactables[CurrentInt].HighlightInteracable(true);
+	public void ChangeInteractableNumber(float value)
+	{
+		if (_interactables.Count == 0)
+			return;
 
-        value = Mathf.Clamp(value, -1, 1);
-        CurrentInt += (int)value;
+		if (_currentInteractable != null)
+			_currentInteractable.HighlightInteracable(true);
 
-        if (CurrentInt < 0)
-        {
-            CurrentInt = _interactables.Count - 1;
-        }
+		ClampCurrentInteractableNumber();
 
-        if (CurrentInt > _interactables.Count - 1)
-        {
-            CurrentInt = 0;
-        }
 
-        _interactables[CurrentInt].HighlightCurrentInteractable(true);
-    }
+		value = Mathf.Clamp(value, -1, 1);
+		_currentInteractableNumber += (int)value;
 
-    public int AddToInteractionList(IInteractable interactable)
-    {
-        _interactables.Add(interactable);
+		if (_currentInteractableNumber < 0)
+		{
+			_currentInteractableNumber = _interactables.Count - 1;
+		}
 
-        return _interactables.Count;
-    }
+		if (_currentInteractableNumber > _interactables.Count - 1)
+		{
+			_currentInteractableNumber = 0;
+		}
 
-    public void RemoveFromInteractionList(IInteractable interactable)
-    {
-        _interactables.Remove(interactable);
-        SetNewCurrentHighlight();
-    }
+		_currentInteractable = _interactables[_currentInteractableNumber];
+		_promptManager.ShowPrompt(_currentInteractable.GetTransform(), _currentInteractable.GetName());
+		_currentInteractable.HighlightCurrentInteractable(true);
+	}
 
-    private void SetNewCurrentHighlight()
-    {
-        ClampCurrentInteractableNumber();
+	public int AddToInteractionList(IInteractable interactable)
+	{
+		_interactables.Add(interactable);
 
-        if (_interactables.Count == 0)
-            return;
+		if (_interactables.Count == 1)
+		{
+			interactable.HighlightCurrentInteractable(true);
+			_promptManager.ShowPrompt(interactable.GetTransform(), interactable.GetName());
+		}
+		else
+		{
+			interactable.HighlightInteracable(true);
+		}
 
-        _interactables[CurrentInt].HighlightCurrentInteractable(true);
-    }
+		return _interactables.Count;
+	}
 
-    private void StartInteraction()
-    {
-        if (_interactables.Count == 0)
-        {
-            return;
-        }
+	public void RemoveFromInteractionList(IInteractable interactable)
+	{
+		_interactables.Remove(interactable);
+		interactable.HighlightInteracable(false);
+		_promptManager.HidePrompt();
 
-        ClampCurrentInteractableNumber();
-        _interactables[CurrentInt].Interact(this, out bool result, PlayerInputManager.Instance);
-        IsInteracting = result;
+		SetNewCurrentHighlight();
+	}
 
-        if (_interactables.Count == 0)
-            return;
+	private void SetNewCurrentHighlight()
+	{
+		ClampCurrentInteractableNumber();
 
-        SetNewCurrentHighlight();
-    }
+		if (_interactables.Count == 0)
+			return;
 
-    private void ClampCurrentInteractableNumber()
-    {
-        if (CurrentInt < 0)
-        {
-            CurrentInt = 0;
-        }
+		_interactables[_currentInteractableNumber].HighlightCurrentInteractable(true);
+		_promptManager.ShowPrompt(_interactables[_currentInteractableNumber].GetTransform(), _interactables[_currentInteractableNumber].GetName());
+	}
 
-        if (CurrentInt > _interactables.Count - 1)
-        {
-            CurrentInt = _interactables.Count - 1;
-        }
-    }
+	private void StartInteraction()
+	{
+		if (_interactables.Count == 0)
+		{
+			return;
+		}
 
-    private void EndInteraction()
-    {
-        _interactables.RemoveAt(0);
-        IsInteracting = false;
-    }
+		ClampCurrentInteractableNumber();
+		_interactables[_currentInteractableNumber].Interact(this, out bool result, PlayerInputManager.Instance);
+		IsInteracting = result;
+
+		if (_interactables.Count == 0)
+			return;
+
+		SetNewCurrentHighlight();
+	}
+
+	private void ClampCurrentInteractableNumber()
+	{
+		if (_currentInteractableNumber < 0)
+		{
+			_currentInteractableNumber = 0;
+		}
+
+		if (_currentInteractableNumber > _interactables.Count - 1)
+		{
+			_currentInteractableNumber = _interactables.Count - 1;
+		}
+
+		_currentInteractable = _interactables[_currentInteractableNumber];
+	}
+
+	private void EndInteraction()
+	{
+		_interactables.RemoveAt(0);
+		IsInteracting = false;
+	}
 }

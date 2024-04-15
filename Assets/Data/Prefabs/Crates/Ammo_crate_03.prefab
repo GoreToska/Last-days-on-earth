@@ -201,9 +201,26 @@ MonoBehaviour:
   <InventorySize>k__BackingField: 30
   <PrimaryInventorySystem>k__BackingField:
     <InventorySlots>k__BackingField: []
+  PreparedItems:
+  - <Item>k__BackingField: {fileID: 11400000, guid: 4493f32113425d24988f23472ce2e7c6,
+      type: 2}
+    <Count>k__BackingField: 35
+  - <Item>k__BackingField: {fileID: 11400000, guid: 4493f32113425d24988f23472ce2e7c6,
+      type: 2}
+    <Count>k__BackingField: 20
+  - <Item>k__BackingField: {fileID: 11400000, guid: 4493f32113425d24988f23472ce2e7c6,
+      type: 2}
+    <Count>k__BackingField: 60
+  - <Item>k__BackingField: {fileID: 11400000, guid: 937fdfb8bc131504db53a6238134d65f,
+      type: 2}
+    <Count>k__BackingField: 55
+  - <Item>k__BackingField: {fileID: 11400000, guid: 937fdfb8bc131504db53a6238134d65f,
+      type: 2}
+    <Count>k__BackingField: 23
   <Offset>k__BackingField: 0
   _interactableHighlightConfig: {fileID: 11400000, guid: c1eab1ce9b906ec41be5ea27311a0e7f,
     type: 2}
+  _name: "\u042F\u0449\u0438\u043A \u0441 \u0431\u043E\u0435\u043F\u0440\u0438\u043F\u0430\u0441\u0430\u043C\u0438"
 --- !u!114 &7789847500956640620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,7 +233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bef53d3ce6743f24eb8d8436e44c7296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _id: 829b3d69-f448-4c1f-99ba-9c3fff72e1dd
+  _id: 6e8f053b-4f28-46b0-be99-501fb2edeec5
 --- !u!135 &6516062313370474282
 SphereCollider:
   m_ObjectHideFlags: 0

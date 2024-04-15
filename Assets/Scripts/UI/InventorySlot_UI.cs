@@ -6,7 +6,7 @@ using Zenject;
 
 public class InventorySlot_UI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerMoveHandler, IPointerDownHandler
 {
-	[Inject] private DescriptionManager _descriptionManager;
+	[Inject] private InventoryItemDescriptionManager _descriptionManager;
 	[Inject] private HotbarDisplay _hotbarDisplay;
 
 	[SerializeField] private Image _itemImage;
@@ -29,7 +29,7 @@ public class InventorySlot_UI : MonoBehaviour, IPointerEnterHandler, IPointerExi
 		ParentDisplay = transform.parent.GetComponent<InventoryDisplay>();
 	}
 
-	public void Construct(DescriptionManager descriptionManager, HotbarDisplay hotbarDisplay)
+	public void Construct(InventoryItemDescriptionManager descriptionManager, HotbarDisplay hotbarDisplay)
 	{
 		_descriptionManager = descriptionManager;
 		_hotbarDisplay = hotbarDisplay;

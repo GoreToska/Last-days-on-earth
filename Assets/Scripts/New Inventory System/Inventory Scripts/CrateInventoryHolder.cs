@@ -8,6 +8,8 @@ using UnityEngine.UIElements;
 public class CrateInventoryHolder : InventoryHolder, IInteractable
 {
 	[SerializeField] private InteractableHighlightConfig _interactableHighlightConfig;
+	[SerializeField] private string _name;
+
 	public UnityAction<IInteractable> OnInteractionComplete { get; set; }
 
 	private List<MeshRenderer> _meshRenderer = new List<MeshRenderer>();
@@ -40,14 +42,7 @@ public class CrateInventoryHolder : InventoryHolder, IInteractable
 
 		var interactor = other.transform.root.GetComponent<Interactor>();
 
-		if (interactor.AddToInteractionList(this) == 1)
-		{
-			HighlightCurrentInteractable(true);
-		}
-		else
-		{
-			HighlightInteracable(true);
-		}
+		interactor.AddToInteractionList(this);
 	}
 
 	private void OnTriggerExit(Collider other)
@@ -57,14 +52,12 @@ public class CrateInventoryHolder : InventoryHolder, IInteractable
 
 		var interactor = other.transform.root.GetComponent<Interactor>();
 		interactor.RemoveFromInteractionList(this);
-		HighlightInteracable(false);
 	}
 
 	public void Interact(Interactor interactor, out bool result, IInputController inputController = null)
 	{
 		OnDinamicInventoryDisplayRequested?.Invoke(PrimaryInventorySystem, 0); // pass no offset
 		result = true;
-		//HighlightInteracable(true);
 
 		if (inputController != null)
 		{
@@ -125,6 +118,16 @@ public class CrateInventoryHolder : InventoryHolder, IInteractable
 			this.transform.position = crateData.Position;
 			this.transform.rotation = crateData.Rotation;
 		}
+	}
+
+	public Transform GetTransform()
+	{
+		return transform;
+	}
+
+	public string GetName()
+	{
+		return _name;
 	}
 
 	private MaterialPropertyBlock materialPropertyBlock;
