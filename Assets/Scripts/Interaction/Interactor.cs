@@ -134,8 +134,6 @@ public class Interactor : MonoBehaviour
 			_currentInteractableNumber = _interactables.Count - 1;
 		}
 
-		Debug.Log($"{_currentInteractableNumber}, {_interactables.Count}");
-
 		_currentInteractable = _interactables.Count > 0 ? _currentInteractable = _interactables[_currentInteractableNumber] : null;
 	}
 }
