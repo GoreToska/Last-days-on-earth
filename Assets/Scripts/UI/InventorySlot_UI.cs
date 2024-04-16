@@ -29,12 +29,6 @@ public class InventorySlot_UI : MonoBehaviour, IPointerEnterHandler, IPointerExi
 		ParentDisplay = transform.parent.GetComponent<InventoryDisplay>();
 	}
 
-	public void Construct(InventoryItemDescriptionManager descriptionManager, HotbarDisplay hotbarDisplay)
-	{
-		_descriptionManager = descriptionManager;
-		_hotbarDisplay = hotbarDisplay;
-	}
-
 	public void Init(InventorySlot slot)
 	{
 		AssignedInventorySlot = slot;

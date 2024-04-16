@@ -97,8 +97,12 @@ public class Interactor : MonoBehaviour
 		if (_interactables.Count == 0)
 			return;
 
-		_interactables[_currentInteractableNumber].HighlightCurrentInteractable(true);
-		_promptManager.ShowPrompt(_interactables[_currentInteractableNumber].GetTransform(), _interactables[_currentInteractableNumber].GetName());
+		if (_currentInteractable != null)
+		{
+			_currentInteractable.HighlightCurrentInteractable(true);
+			//_interactables[_currentInteractableNumber].HighlightCurrentInteractable(true);
+			_promptManager.ShowPrompt(_currentInteractable.GetTransform(), _currentInteractable.GetName());
+		}
 	}
 
 	private void StartInteraction()
@@ -109,7 +113,7 @@ public class Interactor : MonoBehaviour
 		}
 
 		ClampCurrentInteractableNumber();
-		_interactables[_currentInteractableNumber].Interact(this, out bool result, PlayerInputManager.Instance);
+		_currentInteractable.Interact(this, out bool result, PlayerInputManager.Instance);
 		IsInteracting = result;
 
 		if (_interactables.Count == 0)
@@ -125,17 +129,13 @@ public class Interactor : MonoBehaviour
 			_currentInteractableNumber = 0;
 		}
 
-		if (_currentInteractableNumber > _interactables.Count - 1)
+		if (_currentInteractableNumber >= _interactables.Count)
 		{
 			_currentInteractableNumber = _interactables.Count - 1;
 		}
 
-		_currentInteractable = _interactables[_currentInteractableNumber];
-	}
+		Debug.Log($"{_currentInteractableNumber}, {_interactables.Count}");
 
-	private void EndInteraction()
-	{
-		_interactables.RemoveAt(0);
-		IsInteracting = false;
+		_currentInteractable = _interactables.Count > 0 ? _currentInteractable = _interactables[_currentInteractableNumber] : null;
 	}
 }

@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Zenject;
 
 public class DinamicInventoryDisplay : InventoryDisplay
 {
 	[SerializeField] protected InventorySlot_UI _slotPrefab;
+	[Inject] private DiContainer _container;
 
 	protected override void Start()
 	{
@@ -28,9 +30,7 @@ public class DinamicInventoryDisplay : InventoryDisplay
 
 		for (int i = offset; i < inventoryToDisplay.InventorySize; i++)
 		{
-			var uiSlot = Instantiate(_slotPrefab, transform);
-			uiSlot.Construct(GameServicesInstaller.Instance.DescriptionManager, GameServicesInstaller.Instance.HotbarDisplay);
-
+			var uiSlot = _container.InstantiatePrefab(_slotPrefab, transform).GetComponent<InventorySlot_UI>();
 			_slotDictionary.Add(uiSlot, inventoryToDisplay.InventorySlots[i]);
 			uiSlot.Init(inventoryToDisplay.InventorySlots[i]);
 			uiSlot.UpdateUISlot();

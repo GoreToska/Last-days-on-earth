@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Zenject;
 
 [RequireComponent(typeof(PlayerInventoryHolder), typeof(PlayerAnimationManager))]
 public class PlayerEquipment : MonoBehaviour
@@ -9,6 +10,8 @@ public class PlayerEquipment : MonoBehaviour
 	[HideInInspector] public static PlayerEquipment Instance;
 
 	[SerializeField] private Transform _itemSocket;
+
+	[Inject] private DiContainer _container;
 
 	public static event UnityAction OnMainWeaponEquipped;
 	public static event UnityAction OnSecondaryWeaponEquipped;
@@ -90,7 +93,7 @@ public class PlayerEquipment : MonoBehaviour
 
 		if (itemData.ItemModel != null)
 		{
-			_currentEquippedItem = Instantiate(itemData.ItemModel, _itemSocket);
+			_currentEquippedItem = _container.InstantiatePrefab(itemData.ItemModel, _itemSocket);
 		}
 
 		// get the IAttackingItem

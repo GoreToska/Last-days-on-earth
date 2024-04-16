@@ -23,12 +23,12 @@ public class InventoryRifleData : InventoryItemData
 
 	public override void EquipItem(PlayerEquipment playerEquipment)
 	{
-		playerEquipment._currentEquippedItem.GetComponent<RangeWeapon>()
-			.Construct(
-			GameServicesInstaller.Instance.PlayerAnimationManager,
-			GameServicesInstaller.Instance.ImpactManager,
-			GameServicesInstaller.Instance.NoiseManager,
-			GameServicesInstaller.Instance.SFXManager);
+		//playerEquipment._currentEquippedItem.GetComponent<RangeWeapon>()
+		//	.Construct(
+		//	GameServicesInstaller.Instance.PlayerAnimationManager,
+		//	GameServicesInstaller.Instance.ImpactManager,
+		//	GameServicesInstaller.Instance.NoiseManager,
+		//	GameServicesInstaller.Instance.SFXManager);
 
 		playerEquipment._currentRangeWeapon = playerEquipment._currentEquippedItem.GetComponent<IRangeWeapon>();
 		PlayerEquipment.ReloadWeapon += playerEquipment._currentRangeWeapon.PerformReload;

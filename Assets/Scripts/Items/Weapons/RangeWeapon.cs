@@ -14,10 +14,10 @@ public abstract class RangeWeapon : MonoBehaviour, IRangeWeapon
 	[SerializeField] protected ParticleSystem muzzleFlash;
 	[SerializeField] protected int bullets = 0;
 
-	protected PlayerAnimationManager playerAnimationManager;
-	protected ImpactManager impactManager;
-	protected NoiseManager noiseManager;
-	protected SFXManager sfxManager;
+	[Inject] protected PlayerAnimationManager playerAnimationManager;
+	[Inject] protected ImpactManager impactManager;
+	[Inject] protected NoiseManager noiseManager;
+	[Inject] protected SFXManager sfxManager;
 
 	protected ParticleSystem particleSystem;
 	protected ObjectPool<TrailRenderer> trailRendererPool;
@@ -51,14 +51,6 @@ public abstract class RangeWeapon : MonoBehaviour, IRangeWeapon
 		trailRendererPool = new ObjectPool<TrailRenderer>(CreateTrail);
 		_recoilStop = weaponData.RecoilStopShot * weaponData.Recoil;
 		audioSource = GetComponent<AudioSource>();
-	}
-
-	public void Construct(PlayerAnimationManager playerAnimationManager, ImpactManager impactManager, NoiseManager noiseManager, SFXManager sFXManager)
-	{
-		this.playerAnimationManager = playerAnimationManager;
-		this.impactManager = impactManager;
-		this.noiseManager = noiseManager;
-		this.sfxManager = sFXManager;
 	}
 
 	protected virtual IEnumerator ShotCoroutine()
