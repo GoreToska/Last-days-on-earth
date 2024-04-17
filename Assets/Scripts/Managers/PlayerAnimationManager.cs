@@ -26,6 +26,8 @@ public class PlayerAnimationManager : MonoBehaviour
 
 	public Rig RifleRig => _rifleRig;
 
+	private Coroutine _animationCoroutine;
+
 	private void Awake()
 	{
 		_animator = GetComponent<Animator>();
@@ -153,9 +155,11 @@ public class PlayerAnimationManager : MonoBehaviour
 		_animator.SetTrigger(PistolMediumShotTrigger);
 	}
 
-	public void PlayReloadAnimation(string animationName)
+	public void PlayReloadAnimation01()
 	{
-		StartCoroutine(PlayRifleReloadAnimationCoroutine(animationName));
+		SetDefaultRig();
+		PlayerInputManager.Instance.DisableCombatControls();
+		_animator.CrossFade(_rifleReloadingAnimation.name, 0.1f);
 	}
 
 	public void PlayHeavyAttackAnimation()
@@ -163,24 +167,13 @@ public class PlayerAnimationManager : MonoBehaviour
 		_animator.Play("Stable Sword Inward Slash (1)");
 	}
 
-	private IEnumerator PlayRifleReloadAnimationCoroutine(string animationName)
-	{
-		SetDefaultRig();
-		PlayerInputManager.Instance.DisableCombatControls();
-		_animator.CrossFade(animationName, 0.1f);
-
-		yield return new WaitForSeconds(_rifleReloadingAnimation.length - _rifleReloadingAnimationOffset);
-
-		PlayerInputManager.Instance.EnableCombatControls();
-		SetRifleRig();
-
-		yield break;
-	}
-
 	public void SetRifleRig()
 	{
+		if (_animationCoroutine != null)
+			_animationCoroutine = null;
+
+		_animationCoroutine = StartCoroutine(ChangeRigWeight(_rifleRig, 1, 0.2f));
 		_twoHandedMeleeRig.weight = 0f;
-		_rifleRig.weight = 1f;
 	}
 
 	public void SetTwoHandedMeleeRig()
@@ -191,7 +184,25 @@ public class PlayerAnimationManager : MonoBehaviour
 
 	public void SetDefaultRig()
 	{
+		if (_animationCoroutine != null)
+			StopCoroutine(_animationCoroutine);
+
 		_twoHandedMeleeRig.weight = 0f;
 		_rifleRig.weight = 0f;
+	}
+
+	public IEnumerator ChangeRigWeight(Rig rig, float endValue, float time)
+	{
+		while (!Mathf.Approximately(rig.weight, endValue))
+		{
+			rig.weight = Mathf.SmoothStep(rig.weight, endValue, time);
+			Debug.Log(rig.weight);
+
+			yield return null;
+		}
+
+		rig.weight = endValue;
+		_animationCoroutine = null;
+		yield break;
 	}
 }

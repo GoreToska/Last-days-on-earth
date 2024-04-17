@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 2564997885568907068}
   - component: {fileID: 4058779978080920016}
   - component: {fileID: 2116790374803793330}
+  - component: {fileID: 8832899463556243723}
   m_Layer: 0
   m_Name: Weapon_AKM
   m_TagString: Untagged
@@ -285,6 +286,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8832899463556243723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2579492733345702338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02bedd7e99ddee041ae4bf0c45e3d018, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weaponData: {fileID: 11400000, guid: 00ac4c289b4958943b8e5950d7585b57, type: 2}
 --- !u!1 &2580116869321669320
 GameObject:
   m_ObjectHideFlags: 0

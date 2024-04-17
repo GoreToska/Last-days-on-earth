@@ -138,4 +138,19 @@ public class PlayerEquipment : MonoBehaviour
 	{
 		ClearSlotItem();
 	}
+
+	public void PlayMagazineOutSFX()
+	{
+		_currentEquippedItem.GetComponent<WeaponActionSFX>().PlayMagazineOutSFX();
+	}
+
+	public void PlayMagazineInSFX()
+	{
+		_currentEquippedItem.GetComponent<WeaponActionSFX>().PlayMagazineInSFX();
+	}
+
+	public void PlayChamberSFX()
+	{
+		_currentEquippedItem.GetComponent<WeaponActionSFX>().PlayChamberSFX();
+	}
 }

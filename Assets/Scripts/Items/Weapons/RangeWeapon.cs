@@ -194,9 +194,13 @@ public abstract class RangeWeapon : MonoBehaviour, IRangeWeapon
 		if (actualAmount != 0)
 		{
 			bullets += actualAmount;
-			playerAnimation.PlayReloadAnimation(weaponData.reloadAnimation.name);
-			audioSource.PlayOneShot(weaponData.WeaponSFXConfig.ReloadSound);
+			PerformReloadAnimation(playerAnimation);
 		}
+	}
+
+	protected void PerformReloadAnimation(PlayerAnimationManager playerAnimation)
+	{
+		playerAnimation.PlayReloadAnimation01();
 	}
 
 	void IRangeWeapon.PerformShot()

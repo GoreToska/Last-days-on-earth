@@ -66,17 +66,18 @@ public class Interactor : MonoBehaviour
 
 	public int AddToInteractionList(IInteractable interactable)
 	{
-		_interactables.Add(interactable);
-
-		if (_interactables.Count == 1)
+		if (_interactables.Count == 0)
 		{
-			interactable.HighlightCurrentInteractable(true);
+			_currentInteractable = interactable;
+			_currentInteractable.HighlightCurrentInteractable(true);
 			_promptManager.ShowPrompt(interactable.GetTransform(), interactable.GetName());
 		}
 		else
 		{
 			interactable.HighlightInteracable(true);
 		}
+
+		_interactables.Add(interactable);
 
 		return _interactables.Count;
 	}
@@ -129,11 +130,13 @@ public class Interactor : MonoBehaviour
 			_currentInteractableNumber = 0;
 		}
 
-		if (_currentInteractableNumber >= _interactables.Count)
+		if (_currentInteractableNumber > _interactables.Count - 1)
 		{
+			Debug.Log($"{_currentInteractableNumber}, {_interactables.Count - 1}");
 			_currentInteractableNumber = _interactables.Count - 1;
 		}
 
+		_currentInteractable.HighlightInteracable(true);
 		_currentInteractable = _interactables.Count > 0 ? _currentInteractable = _interactables[_currentInteractableNumber] : null;
 	}
 }

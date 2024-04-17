@@ -6891,6 +6891,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1262908196}
     m_Modifications:
+    - target: {fileID: 482233918, guid: 281162aed16288c4d8afcb442eb56772, type: 3}
+      propertyPath: _count
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2873430999201611825, guid: 281162aed16288c4d8afcb442eb56772,
         type: 3}
       propertyPath: m_RootOrder
@@ -29268,6 +29272,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1290189565, guid: 82a99d5ac5cfb6947852d3f5dbe751ae, type: 3}
+      propertyPath: m_Weight
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1706642988, guid: 82a99d5ac5cfb6947852d3f5dbe751ae, type: 3}
       propertyPath: m_Data.m_SourceObjects.m_Item0.transform
       value: 

@@ -14,7 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ShotSound>k__BackingField: {fileID: 8300000, guid: daff6a394b6408146a2b9aec45419982,
     type: 3}
-  <ReloadSound>k__BackingField: {fileID: 8300000, guid: 64e2d85311af59643b1cd1bf71541911,
+  <MagazineOutSound>k__BackingField: {fileID: 8300000, guid: e4fa8c956cf1c1f4d825f76e1d74ba7c,
+    type: 3}
+  <MagazineInSound>k__BackingField: {fileID: 8300000, guid: 0a8af177a30f55042af80bdfa4198261,
+    type: 3}
+  <ChamberSound>k__BackingField: {fileID: 8300000, guid: 54e3533509819af489dc6998c3970090,
+    type: 3}
+  <EmptySound>k__BackingField: {fileID: 8300000, guid: 1e7e28613e33ad448a561a82fb9b34bd,
     type: 3}
   <MaxShotSoundDistance>k__BackingField: 40
   <MaxReloadSoundDistance>k__BackingField: 20

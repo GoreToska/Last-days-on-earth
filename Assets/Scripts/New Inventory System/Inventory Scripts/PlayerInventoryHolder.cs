@@ -2,12 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using Zenject;
 
 public class PlayerInventoryHolder : InventoryHolder
 {
-    [Inject] private HotbarDisplay _hotbarDisplay;
-
     public static UnityAction OnPlayerInventoryChanged;
 
     protected override void Awake()

@@ -37,7 +37,7 @@ ModelImporter:
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
-      lastFrame: 99
+      lastFrame: 75
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -48,20 +48,60 @@ ModelImporter:
       loopBlend: 0
       loopBlendOrientation: 1
       loopBlendPositionY: 1
-      loopBlendPositionXZ: 0
+      loopBlendPositionXZ: 1
       keepOriginalOrientation: 1
       keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 1
+      keepOriginalPositionXZ: 0
       heightFromFeet: 0
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.20385288
+        functionName: PlayMagazineOutSFX
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 38995a010607ca84db848d784717c801,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.40706718
+        functionName: SetRifleRig
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 20360dc0faae957429348bb3b3ed3941,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.90835255
+        functionName: EnableCombatControls
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 48cb961ebf26cd54bbc845d1a0ad34c2,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.65226775
+        functionName: PlayMagazineInSFX
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 38995a010607ca84db848d784717c801,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.8214542
+        functionName: PlayChamberSFX
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 38995a010607ca84db848d784717c801,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
-    isReadable: 0
+    isReadable: 1
   meshes:
     lODScreenPercentages: []
     globalScale: 1
