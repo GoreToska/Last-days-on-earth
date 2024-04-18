@@ -5,6 +5,8 @@ public interface IRangeWeapon
 	public void PerformShot();
 
 	public void PerformReload(PlayerInventoryHolder playerInventory, PlayerAnimationManager playerAnimationManager);
+
+	public bool IsReloading { get; set; }
 }
 
 [CreateAssetMenu(menuName = "Inventory System/Item/Inventory Weapon Item", fileName = "New Item")]

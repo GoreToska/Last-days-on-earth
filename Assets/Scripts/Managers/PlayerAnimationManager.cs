@@ -205,4 +205,9 @@ public class PlayerAnimationManager : MonoBehaviour
 		_animationCoroutine = null;
 		yield break;
 	}
+
+	public void EndReloading()
+	{
+		PlayerEquipment.Instance._currentRangeWeapon.IsReloading = false;
+	}
 }

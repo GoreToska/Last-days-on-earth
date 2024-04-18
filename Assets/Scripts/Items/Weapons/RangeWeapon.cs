@@ -27,6 +27,9 @@ public abstract class RangeWeapon : MonoBehaviour, IRangeWeapon
 	private float _currentRecoil = 0f;
 	private float _recoilStop;
 	private bool _canShoot = true;
+	private bool _isReloading = false;
+
+	public bool IsReloading { get => _isReloading; set => _isReloading = value; }
 
 	private void Update()
 	{
@@ -104,8 +107,6 @@ public abstract class RangeWeapon : MonoBehaviour, IRangeWeapon
 			weaponData.WeaponSFXConfig.Volume);
 
 		var (success, position) = PlayerInputManager.Instance.GetMousePosition();
-
-		//Vector3 direction = new Vector3(0, 0, burrel.transform.localPosition.z) * 100f;
 
 		Vector3 recoiledPosition = position + new Vector3(
 			Random.Range(-_currentRecoil, _currentRecoil),
@@ -187,12 +188,14 @@ public abstract class RangeWeapon : MonoBehaviour, IRangeWeapon
 
 	void IRangeWeapon.PerformReload(PlayerInventoryHolder playerInventory, PlayerAnimationManager playerAnimation)
 	{
-		int ammoToLoad = weaponData.MagazineSize - bullets;
+		if(IsReloading) return;
 
+		int ammoToLoad = weaponData.MagazineSize - bullets;
 		var actualAmount = playerInventory.RemoveFromInventory(weaponData.AmmoType, ammoToLoad);
 
 		if (actualAmount != 0)
 		{
+			IsReloading = true;
 			bullets += actualAmount;
 			PerformReloadAnimation(playerAnimation);
 		}
